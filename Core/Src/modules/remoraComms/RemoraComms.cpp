@@ -20,25 +20,6 @@ void RemoraComms::init()
 
     if(this->spiHandle.Instance == SPI1)
     {
-        printf("Initialising SPI1 slave\n");
-
-		// Initializes the peripherals clock
-		PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SPI1;
-		PeriphClkInitStruct.PLL2.PLL2M = 2;
-		PeriphClkInitStruct.PLL2.PLL2N = 12;
-		PeriphClkInitStruct.PLL2.PLL2P = 1;
-		PeriphClkInitStruct.PLL2.PLL2Q = 10;
-		PeriphClkInitStruct.PLL2.PLL2R = 2;
-		PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_3;
-		PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOMEDIUM;
-		PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
-		PeriphClkInitStruct.Spi123ClockSelection = RCC_SPI123CLKSOURCE_PLL2;
-
-		HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-
-		// Peripheral clock enable
-		__HAL_RCC_SPI1_CLK_ENABLE();
-
 		printf("Initialising GPIO for SPI\n");
 
 	    __HAL_RCC_GPIOA_CLK_ENABLE();
@@ -55,6 +36,28 @@ void RemoraComms::init()
 	    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
 	    GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
 	    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+        printf("Initialising SPI1 slave\n");
+
+		// Initializes the peripherals clock
+        /*
+		PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_SPI1;
+		PeriphClkInitStruct.PLL2.PLL2M = 2;
+		PeriphClkInitStruct.PLL2.PLL2N = 12;
+		PeriphClkInitStruct.PLL2.PLL2P = 1;
+		PeriphClkInitStruct.PLL2.PLL2Q = 10;
+		PeriphClkInitStruct.PLL2.PLL2R = 2;
+		PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_3;
+		PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOMEDIUM;
+		PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
+		PeriphClkInitStruct.Spi123ClockSelection = RCC_SPI123CLKSOURCE_PLL2;
+
+		HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+		*/
+
+		// Peripheral clock enable
+		__HAL_RCC_SPI1_CLK_ENABLE();
+
 
         this->spiHandle.Init.Mode           = SPI_MODE_SLAVE;
         this->spiHandle.Init.Direction      = SPI_DIRECTION_2LINES;
@@ -134,6 +137,8 @@ void RemoraComms::init()
 void RemoraComms::start()
 {
     this->ptrTxData->header = PRU_DATA;
+    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->ptrTxData->txBuffer) & ~(uint32_t)0x1F), SPI_BUFF_SIZE+32);
+    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->spiRxBuffer.rxBuffer) & ~(uint32_t)0x1F), SPI_BUFF_SIZE+32);
     HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)this->ptrTxData->txBuffer, (uint8_t *)this->spiRxBuffer.rxBuffer, SPI_BUFF_SIZE);
 }
 
@@ -183,6 +188,8 @@ void RemoraComms::handleInterrupt()
 		// reset SPI somehow
 	}
 
+    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->ptrTxData->txBuffer) & ~(uint32_t)0x1F), SPI_BUFF_SIZE+32);
+    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->spiRxBuffer.rxBuffer) & ~(uint32_t)0x1F), SPI_BUFF_SIZE+32);
 	HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)this->ptrTxData->txBuffer, (uint8_t *)this->spiRxBuffer.rxBuffer, SPI_BUFF_SIZE);
 }
 

@@ -84,7 +84,7 @@ UART_HandleTypeDef huart1;
         OBJECTS etc
 ************************************************************************/
 
-RemoraComms comms(ptrRxData, ptrTxData, SPI1);
+RemoraComms* comms = new RemoraComms(ptrRxData, ptrTxData, SPI1);
 
 
 
@@ -198,8 +198,8 @@ void setup()
     printf("\n2. Setting up SPI DMA and threads\n");
 
      // initialise the Remora comms
-    comms.init();
-    //comms.start();
+    comms->init();
+    comms->start();
 }
 
 
