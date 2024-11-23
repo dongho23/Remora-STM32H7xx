@@ -21,6 +21,9 @@ class Interrupt
 
 		// wrapper functions to ISR_Handler()
 		static void EXTI4_Wrapper();
+        static void TIM2_Wrapper();
+        static void TIM3_Wrapper();
+        static void TIM4_Wrapper();
 
 		virtual void ISR_Handler(void) = 0;
 

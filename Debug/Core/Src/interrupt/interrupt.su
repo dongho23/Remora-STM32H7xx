@@ -1,3 +1,6 @@
 ../Core/Src/interrupt/interrupt.cpp:9:1:Interrupt::Interrupt()	16	static
 ../Core/Src/interrupt/interrupt.cpp:14:6:static void Interrupt::Register(int, Interrupt*)	16	static
 ../Core/Src/interrupt/interrupt.cpp:20:6:static void Interrupt::EXTI4_Wrapper()	8	static
+../Core/Src/interrupt/interrupt.cpp:25:6:static void Interrupt::TIM2_Wrapper()	8	static
+../Core/Src/interrupt/interrupt.cpp:30:6:static void Interrupt::TIM3_Wrapper()	8	static
+../Core/Src/interrupt/interrupt.cpp:35:6:static void Interrupt::TIM4_Wrapper()	8	static

@@ -35,7 +35,7 @@ void RemoraComms::init()
         HAL_NVIC_EnableIRQ(this->irq);
 
 
-        printf("Initialising SPI1 slave\n");
+        printf("	Initialising SPI1 slave\n");
 
         this->spiHandle.Init.Mode           		= SPI_MODE_SLAVE;
         this->spiHandle.Init.Direction      		= SPI_DIRECTION_2LINES;
@@ -63,7 +63,7 @@ void RemoraComms::init()
     	// Peripheral clock enable
     	__HAL_RCC_SPI1_CLK_ENABLE();
 
-		printf("Initialising GPIO for SPI\n");
+		printf("	Initialising GPIO for SPI\n");
 
 	    __HAL_RCC_GPIOA_CLK_ENABLE();
 	    /**SPI1 GPIO Configuration
@@ -80,7 +80,7 @@ void RemoraComms::init()
 	    GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
 	    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-        printf("Initialising DMA for SPI\n");
+        printf("	Initialising DMA for SPI\n");
 
         this->hdma_spi_rx.Instance 					= DMA1_Stream1;
         this->hdma_spi_rx.Init.Request 				= DMA_REQUEST_SPI1_RX;
@@ -161,6 +161,25 @@ void RemoraComms::handleInterrupt()
     HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)this->ptrTxData->txBuffer, (uint8_t *)this->spiRxBuffer.rxBuffer, SPI_BUFF_SIZE);
 }
 
+bool RemoraComms::getStatus(void)
+{
+    return this->SPIdata;
+}
+
+void RemoraComms::setStatus(bool status)
+{
+    this->SPIdata = status;
+}
+
+bool RemoraComms::getError(void)
+{
+    return this->SPIdataError;
+}
+
+void RemoraComms::setError(bool error)
+{
+    this->SPIdataError = error;
+}
 
 void RemoraComms::update()
 {

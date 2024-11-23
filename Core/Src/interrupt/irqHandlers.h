@@ -13,31 +13,35 @@ extern "C" {
 	}
 
 
-/*
-	void TIM1_BRK_TIM9_IRQHandler()
+	void TIM2_IRQHandler()
 	{
-	  if(TIM9->SR & TIM_SR_UIF) // if UIF flag is set
+	  if(TIM2->SR & TIM_SR_UIF) // if UIF flag is set
 	  {
-		TIM9->SR &= ~TIM_SR_UIF; // clear UIF flag
+		TIM2->SR &= ~TIM_SR_UIF; // clear UIF flag
 
-		Interrupt::TIM9_Wrapper();
+		Interrupt::TIM2_Wrapper();
 	  }
 	}
 
-	void TIM1_UP_TIM10_IRQHandler()
-	{
-	  if(TIM10->SR & TIM_SR_UIF) // if UIF flag is set
-	  {
-		TIM10->SR &= ~TIM_SR_UIF; // clear UIF flag
 
-		Interrupt::TIM10_Wrapper();
+	void TIM3_IRQHandler()
+	{
+	  if(TIM3->SR & TIM_SR_UIF) // if UIF flag is set
+	  {
+		TIM3->SR &= ~TIM_SR_UIF; // clear UIF flag
+
+		Interrupt::TIM3_Wrapper();
 	  }
 	}
 
-	void DMA2_Stream2_IRQHandler(void)
+	void TIM4_IRQHandler()
 	{
-		Interrupt::DMA2_Stream2_Wrapper();
+	  if(TIM4->SR & TIM_SR_UIF) // if UIF flag is set
+	  {
+		TIM4->SR &= ~TIM_SR_UIF; // clear UIF flag
+
+		Interrupt::TIM4_Wrapper();
+	  }
 	}
-*/
 }
 

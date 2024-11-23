@@ -38,10 +38,12 @@ CPP_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Core/Src/drivers/pin \
 Core/Src/interrupt \
 Core/Src \
 Core/Src/modules \
 Core/Src/modules/remoraComms \
+Core/Src/thread \
 Core/Startup \
 Drivers/STM32H7xx_HAL_Driver/Src \
 FATFS/App \

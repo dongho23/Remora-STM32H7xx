@@ -2,6 +2,10 @@
 ../Core/Src/modules/remoraComms/RemoraComms.cpp:17:6:void RemoraComms::init()	2
 ../Core/Src/modules/remoraComms/RemoraComms.cpp:115:6:void RemoraComms::start()	5
 ../Core/Src/modules/remoraComms/RemoraComms.cpp:124:6:virtual void RemoraComms::handleInterrupt()	9
-../Core/Src/modules/remoraComms/RemoraComms.cpp:165:6:virtual void RemoraComms::update()	1
+../Core/Src/modules/remoraComms/RemoraComms.cpp:164:6:bool RemoraComms::getStatus()	1
+../Core/Src/modules/remoraComms/RemoraComms.cpp:169:6:void RemoraComms::setStatus(bool)	1
+../Core/Src/modules/remoraComms/RemoraComms.cpp:174:6:bool RemoraComms::getError()	1
+../Core/Src/modules/remoraComms/RemoraComms.cpp:179:6:void RemoraComms::setError(bool)	1
+../Core/Src/modules/remoraComms/RemoraComms.cpp:184:6:virtual void RemoraComms::update()	1
 ../Core/Src/modules/remoraComms/../remoraComms/RemoraComms.h:12:7:RemoraComms::~RemoraComms()	1
 ../Core/Src/modules/remoraComms/../remoraComms/RemoraComms.h:12:7:virtual RemoraComms::~RemoraComms()	1

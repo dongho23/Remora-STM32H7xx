@@ -37,26 +37,49 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 // libraries
 #include "lib/ArduinoJson6/ArduinoJson.h"
 
-// threads
+// drivers
+#include "drivers/pin/pin.h"
+
+// interrupts
 #include "interrupt/irqHandlers.h"
 #include "interrupt/interrupt.h"
+
+// threads
+#include "thread/pruThread.h"
+#include "thread/createThreads.h"
 
 // modules
 #include "modules/remoraComms/RemoraComms.h"
 
-// JSONconfig file stuff
-std::string strJson;
-DynamicJsonDocument doc(JSON_BUFF_SIZE);
-JsonObject thread;
-JsonObject module;
 
 /***********************************************************************
 *                STRUCTURES AND GLOBAL VARIABLES                       *
 ************************************************************************/
 
-// boolean
-bool configError = false;
+// state machine
+enum State {
+    ST_SETUP = 0,
+    ST_START,
+    ST_IDLE,
+    ST_RUNNING,
+    ST_STOP,
+    ST_RESET,
+    ST_WDRESET
+};
 
+uint8_t resetCnt;
+uint32_t base_freq = PRU_BASEFREQ;
+uint32_t servo_freq = PRU_SERVOFREQ;
+
+// boolean
+volatile bool PRUreset;
+bool configError = false;
+bool threadsRunning = false;
+
+// pointers to objects with global scope
+pruThread* servoThread;
+pruThread* baseThread;
+pruThread* commsThread;
 
 // unions for RX and TX data
 __attribute__((aligned(32))) volatile rxData_t rxData;
@@ -75,9 +98,12 @@ volatile float*   	ptrProcessVariable[VARIABLES];
 volatile uint16_t* 	ptrInputs;
 volatile uint16_t* 	ptrOutputs;
 
+// JSONconfig file stuff
+std::string strJson;
+DynamicJsonDocument doc(JSON_BUFF_SIZE);
+JsonObject thread;
+JsonObject module;
 
-SD_HandleTypeDef hsd1;
-UART_HandleTypeDef huart1;
 
 /***********************************************************************
         OBJECTS etc
@@ -86,6 +112,13 @@ UART_HandleTypeDef huart1;
 RemoraComms* comms = new RemoraComms(ptrRxData, ptrTxData, SPI1);
 
 
+
+/***********************************************************************
+        PLATFORM SPECIFIC
+************************************************************************/
+
+SD_HandleTypeDef hsd1;
+UART_HandleTypeDef huart1;
 
 void SystemClock_Config(void);
 void PeriphCommonClock_Config(void);
@@ -157,6 +190,15 @@ void readJsonConfig()
     }
 }
 
+void setup()
+{
+    printf("\n2. Setting up SPI DMA and threads\n");
+
+     // initialise the Remora comms
+    comms->init();
+    comms->start();
+}
+
 
 void deserialiseJSON()
 {
@@ -191,13 +233,33 @@ void deserialiseJSON()
     }
 }
 
-void setup()
+void configThreads()
 {
-    printf("\n2. Setting up SPI DMA and threads\n");
+    if (configError) return;
 
-     // initialise the Remora comms
-    comms->init();
-    comms->start();
+    printf("\n4. Configuring threads\n");
+
+    JsonArray Threads = doc["Threads"];
+
+    // create objects from JSON data
+    for (JsonArray::iterator it=Threads.begin(); it!=Threads.end(); ++it)
+    {
+        thread = *it;
+
+        const char* configor = thread["Thread"];
+        uint32_t    freq = thread["Frequency"];
+
+        if (!strcmp(configor,"Base"))
+        {
+            base_freq = freq;
+            printf("	Setting BASE thread frequency to %lu\n", base_freq);
+        }
+        else if (!strcmp(configor,"Servo"))
+        {
+            servo_freq = freq;
+            printf("	Setting SERVO thread frequency to %lu\n", servo_freq);
+        }
+    }
 }
 
 
@@ -208,8 +270,8 @@ int main(void)
 	HAL_Init();
 	SystemClock_Config();
 	PeriphCommonClock_Config();
-	SCB_EnableICache();
-	SCB_EnableDCache();
+	//SCB_EnableICache();
+	//SCB_EnableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
@@ -219,17 +281,164 @@ int main(void)
 	MX_SDMMC1_SD_Init();		// uncomment #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in sd_diskio.c
 	MX_FATFS_Init();
 
+
+	enum State currentState;
+	enum State prevState;
+
+    comms->setStatus(false);
+    comms->setError(false);
+	currentState = ST_SETUP;
+	prevState = ST_RESET;
+
 	printf("\nRemora version %d.%d.%d for %s starting\n\n", MAJOR_VERSION, MINOR_VERSION, PATCH, BOARD);
-
-	readJsonConfig();	// FatFS fales to work if chche is enabled
-	deserialiseJSON();
-
-
-
-	setup();
 
 	while (1)
 	{
+		switch(currentState){
+			          case ST_SETUP:
+			              // do setup tasks
+			              if (currentState != prevState)
+			              {
+			                  printf("\n## Entering SETUP state\n\n");
+			              }
+			              prevState = currentState;
+
+			              readJsonConfig();
+			              setup();
+			              deserialiseJSON();
+			              configThreads();
+			              createThreads();
+			              //debugThreadHigh();
+			              //loadModules();
+			              //debugThreadLow();
+
+			              currentState = ST_START;
+			              break;
+
+			          case ST_START:
+			              // do start tasks
+			              if (currentState != prevState)
+			              {
+			                  printf("\n## Entering START state\n");
+			              }
+			              prevState = currentState;
+
+			              if (!threadsRunning)
+			              {
+			                  // Start the threads
+			                  printf("\nStarting the BASE thread\n");
+			                  baseThread->startThread();
+
+			                  printf("\nStarting the SERVO thread\n");
+			                  servoThread->startThread();
+
+			                  threadsRunning = true;
+			              }
+
+			              currentState = ST_IDLE;
+
+			              break;
+
+
+			          case ST_IDLE:
+			              // do something when idle
+			              if (currentState != prevState)
+			              {
+			                  printf("\n## Entering IDLE state\n");
+			              }
+			              prevState = currentState;
+
+			              //wait for data before changing to running state
+			              if (comms->getStatus())
+			              {
+			                  currentState = ST_RUNNING;
+			              }
+
+			              break;
+
+			          case ST_RUNNING:
+			              // do running tasks
+			              if (currentState != prevState)
+			              {
+			                  printf("\n## Entering RUNNING state\n");
+			              }
+			              prevState = currentState;
+
+
+			              // check to see if there there has been SPI errors
+			              if (comms->getError())
+			              {
+			                  printf("Communication data error\n");
+			                  comms->setError(false);
+			              }
+
+			              if (comms->getStatus())
+			              {
+			                  // SPI data received by DMA
+			                  resetCnt = 0;
+			                  comms->setStatus(false);
+			              }
+			              else
+			              {
+			                  // no data received by DMA
+			                  resetCnt++;
+			              }
+
+			              if (resetCnt > SPI_ERR_MAX)
+			              {
+			                  // reset threshold reached, reset the PRU
+			                  printf("   Communication data error limit reached, resetting\n");
+			                  resetCnt = 0;
+			                  currentState = ST_RESET;
+			              }
+
+			              if (PRUreset)
+			              {
+			                  currentState = ST_WDRESET;
+			              }
+
+			              break;
+
+			          case ST_STOP:
+			              // do stop tasks
+			              if (currentState != prevState)
+			              {
+			                  printf("\n## Entering STOP state\n");
+			              }
+			              prevState = currentState;
+
+
+			              currentState = ST_STOP;
+			              break;
+
+			          case ST_RESET:
+			              // do reset tasks
+			              if (currentState != prevState)
+			              {
+			                  printf("\n## Entering RESET state\n");
+			              }
+			              prevState = currentState;
+
+			              // set all of the rxData buffer to 0
+			              // rxData.rxBuffer is volatile so need to do this the long way. memset cannot be used for volatile
+			              printf("   Resetting rxBuffer\n");
+			              {
+			            	  SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)rxData.rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
+			                  int n = sizeof(rxData.rxBuffer);
+			                  while(n-- > 0)
+			                  {
+			                      rxData.rxBuffer[n] = 0;
+			                  }
+			              }
+
+			              currentState = ST_IDLE;
+			              break;
+
+			          case ST_WDRESET:
+			        	  // force a reset
+			        	  HAL_NVIC_SystemReset();
+			              break;
+			  }
 
 	}
 }

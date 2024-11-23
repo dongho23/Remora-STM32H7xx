@@ -1,4 +1,5 @@
-Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
+Core/Src/thread/timer.o: ../Core/Src/thread/timer.cpp \
+ ../Core/Src/thread/../interrupt/interrupt.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
@@ -35,27 +36,9 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
- ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
- ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h \
- ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
- ../Middlewares/Third_Party/FatFs/src/diskio.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../Core/Inc/configuration.h ../Core/Inc/remora.h \
- ../Core/Src/lib/ArduinoJson6/ArduinoJson.h \
- ../Core/Src/lib/ArduinoJson6/ArduinoJson.hpp \
- ../Core/Src/drivers/pin/pin.h ../Core/Src/interrupt/irqHandlers.h \
- ../Core/Src/interrupt/interrupt.h ../Core/Src/interrupt/interrupt.h \
- ../Core/Src/thread/pruThread.h ../Core/Src/thread/timer.h \
- ../Core/Src/thread/createThreads.h ../Core/Inc/extern.h \
- ../Core/Inc/configuration.h ../Core/Inc/remora.h \
- ../Core/Inc/../Src/thread/pruThread.h \
- ../Core/Src/modules/remoraComms/RemoraComms.h \
- ../Core/Src/modules/remoraComms/../../modules/module.h \
- ../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h \
- ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h \
- ../Core/Src/modules/remoraComms/../../modules/module.h
-../Core/Inc/main.h:
+ ../Core/Src/thread/timerInterrupt.h ../Core/Src/thread/timer.h \
+ ../Core/Src/thread/pruThread.h
+../Core/Src/thread/../interrupt/interrupt.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
@@ -92,33 +75,6 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../FATFS/App/fatfs.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../Middlewares/Third_Party/FatFs/src/integer.h:
-../FATFS/Target/ffconf.h:
-../FATFS/Target/bsp_driver_sd.h:
-../FATFS/Target/fatfs_platform.h:
-../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
-../Middlewares/Third_Party/FatFs/src/diskio.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../FATFS/Target/sd_diskio.h:
-../Core/Inc/configuration.h:
-../Core/Inc/remora.h:
-../Core/Src/lib/ArduinoJson6/ArduinoJson.h:
-../Core/Src/lib/ArduinoJson6/ArduinoJson.hpp:
-../Core/Src/drivers/pin/pin.h:
-../Core/Src/interrupt/irqHandlers.h:
-../Core/Src/interrupt/interrupt.h:
-../Core/Src/interrupt/interrupt.h:
-../Core/Src/thread/pruThread.h:
+../Core/Src/thread/timerInterrupt.h:
 ../Core/Src/thread/timer.h:
-../Core/Src/thread/createThreads.h:
-../Core/Inc/extern.h:
-../Core/Inc/configuration.h:
-../Core/Inc/remora.h:
-../Core/Inc/../Src/thread/pruThread.h:
-../Core/Src/modules/remoraComms/RemoraComms.h:
-../Core/Src/modules/remoraComms/../../modules/module.h:
-../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h:
-../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h:
-../Core/Src/modules/remoraComms/../../modules/module.h:
+../Core/Src/thread/pruThread.h:
