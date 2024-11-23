@@ -110,22 +110,6 @@ void RemoraComms::init()
         HAL_DMA_Init(&this->hdma_spi_tx);
         __HAL_LINKDMA(&this->spiHandle, hdmatx, this->hdma_spi_tx);
     }
-
-	// Interrupt pin is the NSS pin
-    // Configure GPIO pin : PA_4
-/*
-    GPIO_InitStruct = {0};
-    __HAL_RCC_GPIOC_CLK_ENABLE();
-
-    GPIO_InitStruct.Pin = GPIO_PIN_4;
-    GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
-    GPIO_InitStruct.Pull = GPIO_NOPULL;
-    HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-    interruptPtr = new ModuleInterrupt(this->irq, this);
-	HAL_NVIC_SetPriority(this->irq, 5, 0);
-    HAL_NVIC_EnableIRQ(this->irq);
-*/
 }
 
 void RemoraComms::start()
@@ -139,8 +123,6 @@ void RemoraComms::start()
 
 void RemoraComms::handleInterrupt()
 {
-	//printf("RemoraComms interrupt\n");
-
     SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->ptrTxData->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
 	SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)this->spiRxBuffer.rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
 

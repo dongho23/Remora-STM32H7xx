@@ -17,7 +17,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#define BOARD 			"SKR3"
+#define BOARD 			"STM32H7xx"
 #define MAJOR_VERSION 	0
 #define MINOR_VERSION	1
 #define PATCH			0
@@ -79,7 +79,6 @@ volatile uint16_t* 	ptrOutputs;
 SD_HandleTypeDef hsd1;
 UART_HandleTypeDef huart1;
 
-
 /***********************************************************************
         OBJECTS etc
 ************************************************************************/
@@ -135,7 +134,7 @@ void readJsonConfig()
 			int32_t length = f_size(&SDFile);
 			printf("	JSON config file lenght = %2ld\n", length);
 
-			char rtext[length];
+			__attribute__((aligned(32))) char rtext[length];
 			if(f_read(&SDFile, rtext, length, (UINT *)&bytesread) != FR_OK)
 			{
 				printf("	JSON config file read FAILURE\n");
@@ -209,13 +208,15 @@ int main(void)
 	HAL_Init();
 	SystemClock_Config();
 	PeriphCommonClock_Config();
+	SCB_EnableICache();
+	SCB_EnableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
 
 	MX_GPIO_Init(); // used for SD card detect
 	MX_USART1_UART_Init();
-	MX_SDMMC1_SD_Init();
+	MX_SDMMC1_SD_Init();		// uncomment #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in sd_diskio.c
 	MX_FATFS_Init();
 
 	printf("\nRemora version %d.%d.%d for %s starting\n\n", MAJOR_VERSION, MINOR_VERSION, PATCH, BOARD);
@@ -223,8 +224,7 @@ int main(void)
 	readJsonConfig();	// FatFS fales to work if chche is enabled
 	deserialiseJSON();
 
-	SCB_EnableICache();
-	SCB_EnableDCache();
+
 
 	setup();
 

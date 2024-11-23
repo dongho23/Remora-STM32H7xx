@@ -50,11 +50,11 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/EscapeSequence.hpp:21:15:static char ArduinoJson6101_110::EscapeSequence::unescapeChar(char)	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/EscapeSequence.hpp:31:22:static const char* ArduinoJson6101_110::EscapeSequence::escapeTable(bool)	16	static
 ../Core/Src/interrupt/irqHandlers.h:5:7:void EXTI4_IRQHandler()	8	static
-../Core/Src/main.cpp:102:6:int __io_putchar(int)	16	static
-../Core/Src/main.cpp:111:6:void readJsonConfig()	80	dynamic
-../Core/Src/main.cpp:162:6:void deserialiseJSON()	24	static
-../Core/Src/main.cpp:195:6:void setup()	8	static
-../Core/Src/main.cpp:205:5:int main()	32	static,ignoring_inline_asm
+../Core/Src/main.cpp:101:6:int __io_putchar(int)	16	static
+../Core/Src/main.cpp:110:6:void readJsonConfig()	104	dynamic
+../Core/Src/main.cpp:161:6:void deserialiseJSON()	24	static
+../Core/Src/main.cpp:194:6:void setup()	8	static
+../Core/Src/main.cpp:204:5:int main()	32	static,ignoring_inline_asm
 ../Core/Src/main.cpp:241:6:void SystemClock_Config()	128	static
 ../Core/Src/main.cpp:308:6:void PeriphCommonClock_Config()	200	static
 ../Core/Src/main.cpp:337:13:void MX_SDMMC1_SD_Init()	8	static
