@@ -31,6 +31,7 @@
 
 // SPI configuration
 #define SPI_BUFF_SIZE 		64            	// Size of SPI recieve buffer - same as HAL component, 64
+#define BUFFER_ALIGNED_SIZE (((SPI_BUFF_SIZE+31)/32)*32)
 
 
 #endif

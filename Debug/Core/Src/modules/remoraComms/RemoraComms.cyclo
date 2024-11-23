@@ -1,7 +1,7 @@
 ../Core/Src/modules/remoraComms/RemoraComms.cpp:4:1:RemoraComms::RemoraComms(volatile rxData_t*, volatile txData_t*, SPI_TypeDef*)	1
 ../Core/Src/modules/remoraComms/RemoraComms.cpp:16:6:void RemoraComms::init()	2
-../Core/Src/modules/remoraComms/RemoraComms.cpp:137:6:void RemoraComms::start()	5
-../Core/Src/modules/remoraComms/RemoraComms.cpp:146:6:virtual void RemoraComms::handleInterrupt()	9
-../Core/Src/modules/remoraComms/RemoraComms.cpp:197:6:virtual void RemoraComms::update()	1
+../Core/Src/modules/remoraComms/RemoraComms.cpp:114:6:void RemoraComms::start()	5
+../Core/Src/modules/remoraComms/RemoraComms.cpp:123:6:virtual void RemoraComms::handleInterrupt()	9
+../Core/Src/modules/remoraComms/RemoraComms.cpp:166:6:virtual void RemoraComms::update()	1
 ../Core/Src/modules/remoraComms/../remoraComms/RemoraComms.h:12:7:RemoraComms::~RemoraComms()	1
 ../Core/Src/modules/remoraComms/../remoraComms/RemoraComms.h:12:7:virtual RemoraComms::~RemoraComms()	1

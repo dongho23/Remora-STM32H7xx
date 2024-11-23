@@ -50,16 +50,18 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/EscapeSequence.hpp:21:15:static char ArduinoJson6101_110::EscapeSequence::unescapeChar(char)	3
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/EscapeSequence.hpp:31:22:static const char* ArduinoJson6101_110::EscapeSequence::escapeTable(bool)	2
 ../Core/Src/interrupt/irqHandlers.h:5:7:void EXTI4_IRQHandler()	2
-../Core/Src/main.cpp:103:6:int __io_putchar(int)	1
-../Core/Src/main.cpp:112:6:void readJsonConfig()	5
-../Core/Src/main.cpp:163:6:void deserialiseJSON()	5
-../Core/Src/main.cpp:196:6:void setup()	1
-../Core/Src/main.cpp:206:5:int main()	2
-../Core/Src/main.cpp:234:6:void SystemClock_Config()	5
-../Core/Src/main.cpp:303:13:void MX_SDMMC1_SD_Init()	2
-../Core/Src/main.cpp:333:13:void MX_USART1_UART_Init()	5
-../Core/Src/main.cpp:381:13:void MX_GPIO_Init()	1
-../Core/Src/main.cpp:407:6:void Error_Handler()	1
+../Core/Src/main.cpp:102:6:int __io_putchar(int)	1
+../Core/Src/main.cpp:111:6:void readJsonConfig()	5
+../Core/Src/main.cpp:162:6:void deserialiseJSON()	5
+../Core/Src/main.cpp:195:6:void setup()	1
+../Core/Src/main.cpp:205:5:int main()	5
+../Core/Src/main.cpp:243:6:void SystemClock_Config()	5
+../Core/Src/main.cpp:310:6:void PeriphCommonClock_Config()	2
+../Core/Src/main.cpp:339:13:void MX_SDMMC1_SD_Init()	2
+../Core/Src/main.cpp:369:13:void MX_USART1_UART_Init()	5
+../Core/Src/main.cpp:417:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:439:6:void MPU_Config()	1
+../Core/Src/main.cpp:471:6:void Error_Handler()	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/../Polyfills/gsl/not_null.hpp:18:5:T ArduinoJson6101_110::not_null<T>::get() const [with T = const char*]	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/MemoryPool.hpp:90:6:T* ArduinoJson6101_110::MemoryPool::allocRight() [with T = ArduinoJson6101_110::VariantSlot]	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/../Polyfills/gsl/not_null.hpp:28:13:ArduinoJson6101_110::not_null<T> ArduinoJson6101_110::make_not_null(T) [with T = const char*]	1
@@ -104,9 +106,9 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/FloatTraits.hpp:45:12:static T ArduinoJson6101_110::FloatTraits<T, 8>::positiveBinaryPowerOfTen(int) [with T = double]	3
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/FloatTraits.hpp:60:12:static T ArduinoJson6101_110::FloatTraits<T, 8>::negativeBinaryPowerOfTen(int) [with T = double]	3
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/../Polyfills/alias_cast.hpp:23:3:T ArduinoJson6101_110::alias_cast(F) [with T = double; F = long long unsigned int]	1
-../Core/Src/main.cpp:419:1:void __static_initialization_and_destruction_0(int, int)	5
+../Core/Src/main.cpp:483:1:void __static_initialization_and_destruction_0(int, int)	5
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:55:3:ArduinoJson6101_110::BasicJsonDocument<TAllocator>::~BasicJsonDocument() [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:84:8:void ArduinoJson6101_110::BasicJsonDocument<TAllocator>::freePool() [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:22:8:void ArduinoJson6101_110::AllocatorOwner<TAllocator>::deallocate(void*) [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	1
-../Core/Src/main.cpp:419:1:cpp)	1
-../Core/Src/main.cpp:419:1:cpp)	1
+../Core/Src/main.cpp:483:1:cpp)	1
+../Core/Src/main.cpp:483:1:cpp)	1
