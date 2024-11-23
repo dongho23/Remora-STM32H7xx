@@ -9,7 +9,8 @@ RemoraComms::RemoraComms(volatile rxData_t* ptrRxData, volatile txData_t* ptrTxD
     this->spiHandle.Instance = this->spiType;
     this->irq = EXTI4_IRQn;
 
-
+    // the constructor is called before any DMA and cache setup
+    // don't do stuff here
 }
 
 
@@ -19,6 +20,21 @@ void RemoraComms::init()
 
     if(this->spiHandle.Instance == SPI1)
     {
+    	// Interrupt pin is the NSS pin
+        // Configure GPIO pin : PA_4
+
+        __HAL_RCC_GPIOC_CLK_ENABLE();
+
+        GPIO_InitStruct.Pin = GPIO_PIN_4;
+        GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+        GPIO_InitStruct.Pull = GPIO_NOPULL;
+        HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+        interruptPtr = new ModuleInterrupt(this->irq, this);
+    	HAL_NVIC_SetPriority(this->irq, 5, 0);
+        HAL_NVIC_EnableIRQ(this->irq);
+
+
         printf("Initialising SPI1 slave\n");
 
         this->spiHandle.Init.Mode           		= SPI_MODE_SLAVE;
@@ -56,6 +72,7 @@ void RemoraComms::init()
 	    PA6     ------> SPI1_MISO
 	    PA7     ------> SPI1_MOSI
 	    */
+    	GPIO_InitStruct = {0};
 	    GPIO_InitStruct.Pin = GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7;
 	    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 	    GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -124,6 +141,7 @@ void RemoraComms::handleInterrupt()
 {
 	//printf("RemoraComms interrupt\n");
 
+    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->ptrTxData->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
 	SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)this->spiRxBuffer.rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
 
 	switch (this->spiRxBuffer.header)
@@ -158,8 +176,7 @@ void RemoraComms::handleInterrupt()
 		// reset SPI somehow
 	}
 
-    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->ptrTxData->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
-	HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)this->ptrTxData->txBuffer, (uint8_t *)this->spiRxBuffer.rxBuffer, SPI_BUFF_SIZE);
+    HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)this->ptrTxData->txBuffer, (uint8_t *)this->spiRxBuffer.rxBuffer, SPI_BUFF_SIZE);
 }
 
 

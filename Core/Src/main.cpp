@@ -218,12 +218,10 @@ int main(void)
 	MX_SDMMC1_SD_Init();
 	MX_FATFS_Init();
 
-
 	printf("\nRemora version %d.%d.%d for %s starting\n\n", MAJOR_VERSION, MINOR_VERSION, PATCH, BOARD);
 
 	readJsonConfig();	// FatFS fales to work if chche is enabled
 	deserialiseJSON();
-
 
 	SCB_EnableICache();
 	SCB_EnableDCache();

@@ -1,7 +1,7 @@
 ../Core/Src/modules/remoraComms/RemoraComms.cpp:4:1:RemoraComms::RemoraComms(volatile rxData_t*, volatile txData_t*, SPI_TypeDef*)	24	static
-../Core/Src/modules/remoraComms/RemoraComms.cpp:16:6:void RemoraComms::init()	48	static
-../Core/Src/modules/remoraComms/RemoraComms.cpp:114:6:void RemoraComms::start()	48	static,ignoring_inline_asm
-../Core/Src/modules/remoraComms/RemoraComms.cpp:123:6:virtual void RemoraComms::handleInterrupt()	56	static,ignoring_inline_asm
-../Core/Src/modules/remoraComms/RemoraComms.cpp:166:6:virtual void RemoraComms::update()	16	static
+../Core/Src/modules/remoraComms/RemoraComms.cpp:17:6:void RemoraComms::init()	56	static
+../Core/Src/modules/remoraComms/RemoraComms.cpp:131:6:void RemoraComms::start()	48	static,ignoring_inline_asm
+../Core/Src/modules/remoraComms/RemoraComms.cpp:140:6:virtual void RemoraComms::handleInterrupt()	56	static,ignoring_inline_asm
+../Core/Src/modules/remoraComms/RemoraComms.cpp:183:6:virtual void RemoraComms::update()	16	static
 ../Core/Src/modules/remoraComms/../remoraComms/RemoraComms.h:12:7:RemoraComms::~RemoraComms()	16	static
 ../Core/Src/modules/remoraComms/../remoraComms/RemoraComms.h:12:7:virtual RemoraComms::~RemoraComms()	16	static
