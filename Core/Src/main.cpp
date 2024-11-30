@@ -81,13 +81,17 @@ pruThread* servoThread;
 pruThread* baseThread;
 pruThread* commsThread;
 
+RxPingPongBuffer rxPingPongBuffer;
+TxPingPongBuffer txPingPongBuffer;
+
 // unions for RX and TX data
-__attribute__((aligned(32))) volatile rxData_t rxData;
-__attribute__((aligned(32))) volatile txData_t txData;
+__attribute__((aligned(32))) volatile rxData_t rxData;	// TODO: remove
+__attribute__((aligned(32))) volatile txData_t txData;	// TODO: remove
 
 // pointers to data
-volatile rxData_t*  ptrRxData = &rxData;
-volatile txData_t*  ptrTxData = &txData;
+rxData_t* pruRxData;
+volatile rxData_t*  ptrRxData = &rxData;	// TODO: remove
+volatile txData_t*  ptrTxData = &txData;	// TODO: remove
 volatile int32_t* 	ptrTxHeader;
 volatile bool*    	ptrPRUreset;
 volatile int32_t* 	ptrJointFreqCmd[JOINTS];
@@ -270,8 +274,12 @@ int main(void)
 	HAL_Init();
 	SystemClock_Config();
 	PeriphCommonClock_Config();
-	//SCB_EnableICache();
-	//SCB_EnableDCache();
+
+	// Enable caches
+	SCB_InvalidateICache();
+	SCB_EnableICache();
+	SCB_InvalidateDCache();
+	SCB_EnableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
@@ -282,13 +290,18 @@ int main(void)
 	MX_FATFS_Init();
 
 
+	txPingPongBuffer.txBuffers[0].header = PRU_DATA;
+	txPingPongBuffer.txBuffers[1].header = PRU_DATA;
+
 	enum State currentState;
 	enum State prevState;
 
-    comms->setStatus(false);
-    comms->setError(false);
 	currentState = ST_SETUP;
 	prevState = ST_RESET;
+
+    comms->setStatus(false);
+    comms->setError(false);
+    resetCnt = 0;
 
 	printf("\nRemora version %d.%d.%d for %s starting\n\n", MAJOR_VERSION, MINOR_VERSION, PATCH, BOARD);
 
@@ -421,13 +434,16 @@ int main(void)
 
 			              // set all of the rxData buffer to 0
 			              // rxData.rxBuffer is volatile so need to do this the long way. memset cannot be used for volatile
+
+			              pruRxData = getCurrentRxBuffer(&rxPingPongBuffer);
+
 			              printf("   Resetting rxBuffer\n");
 			              {
-			            	  SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)rxData.rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
-			                  int n = sizeof(rxData.rxBuffer);
+			            	  SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)pruRxData->rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
+			                  int n = sizeof(pruRxData->rxBuffer);
 			                  while(n-- > 0)
 			                  {
-			                      rxData.rxBuffer[n] = 0;
+			                      pruRxData->rxBuffer[n] = 0;
 			                  }
 			              }
 
@@ -442,6 +458,41 @@ int main(void)
 
 	}
 }
+
+
+
+void initRxPingPongBuffer(RxPingPongBuffer* buffer) {
+    buffer->currentRxBuffer = 0;
+}
+
+void initTxPingPongBuffer(TxPingPongBuffer* buffer) {
+    buffer->currentTxBuffer = 0;
+}
+
+void swapRxBuffers(RxPingPongBuffer* buffer) {
+    buffer->currentRxBuffer = 1 - buffer->currentRxBuffer;
+}
+
+void swapTxBuffers(TxPingPongBuffer* buffer) {
+    buffer->currentTxBuffer = 1 - buffer->currentTxBuffer;
+}
+
+rxData_t* getCurrentRxBuffer(RxPingPongBuffer* buffer) {
+    return &buffer->rxBuffers[buffer->currentRxBuffer];
+}
+
+txData_t* getCurrentTxBuffer(TxPingPongBuffer* buffer) {
+    return &buffer->txBuffers[buffer->currentTxBuffer];
+}
+
+rxData_t* getAltRxBuffer(RxPingPongBuffer* buffer) {
+    return &buffer->rxBuffers[1 - buffer->currentRxBuffer];
+}
+
+txData_t* getAltTxBuffer(TxPingPongBuffer* buffer) {
+    return &buffer->txBuffers[1 - buffer->currentTxBuffer];
+}
+
 
 /**
   * @brief System Clock Configuration

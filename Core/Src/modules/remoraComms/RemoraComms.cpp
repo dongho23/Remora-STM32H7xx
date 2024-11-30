@@ -1,13 +1,17 @@
 #include "../remoraComms/RemoraComms.h"
 #include <cstdio>
 
+
 RemoraComms::RemoraComms(volatile rxData_t* ptrRxData, volatile txData_t* ptrTxData, SPI_TypeDef* spiType) :
     ptrRxData(ptrRxData),
     ptrTxData(ptrTxData),
     spiType(spiType)
 {
     this->spiHandle.Instance = this->spiType;
-    this->irq = EXTI4_IRQn;
+    //this->irq = EXTI4_IRQn;
+
+    this->irqDMAtx = DMA1_Stream0_IRQn;
+    this->irqDMArx = DMA1_Stream1_IRQn;
 
     // the constructor is called before any DMA and cache setup
     // don't do stuff here
@@ -29,10 +33,6 @@ void RemoraComms::init()
         GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
         GPIO_InitStruct.Pull = GPIO_NOPULL;
         HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-        interruptPtr = new ModuleInterrupt(this->irq, this);
-    	HAL_NVIC_SetPriority(this->irq, 5, 0);
-        HAL_NVIC_EnableIRQ(this->irq);
 
 
         printf("	Initialising SPI1 slave\n");
@@ -89,12 +89,17 @@ void RemoraComms::init()
         this->hdma_spi_rx.Init.MemInc 				= DMA_MINC_ENABLE;
         this->hdma_spi_rx.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_BYTE;
         this->hdma_spi_rx.Init.MemDataAlignment 	= DMA_MDATAALIGN_BYTE;
-        this->hdma_spi_rx.Init.Mode 				= DMA_CIRCULAR;
+        //this->hdma_spi_rx.Init.Mode 				= DMA_CIRCULAR;
+        this->hdma_spi_rx.Init.Mode 				= DMA_NORMAL;
         this->hdma_spi_rx.Init.Priority 			= DMA_PRIORITY_LOW;
         this->hdma_spi_rx.Init.FIFOMode 			= DMA_FIFOMODE_DISABLE;
 
         HAL_DMA_Init(&this->hdma_spi_rx);
         __HAL_LINKDMA(&this->spiHandle, hdmarx, this->hdma_spi_rx);
+
+        dmaRxInterrupt = new ModuleInterrupt(this->irqDMArx, this, static_cast<void (Module::*)()>(&RemoraComms::handleRxInterrupt));
+    	HAL_NVIC_SetPriority(this->irqDMArx, 5, 0);
+        HAL_NVIC_EnableIRQ(this->irqDMArx);
 
         this->hdma_spi_tx.Instance 					= DMA1_Stream0;
         this->hdma_spi_tx.Init.Request 				= DMA_REQUEST_SPI1_TX;
@@ -103,63 +108,178 @@ void RemoraComms::init()
         this->hdma_spi_tx.Init.MemInc 				= DMA_MINC_ENABLE;
         this->hdma_spi_tx.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_BYTE;
         this->hdma_spi_tx.Init.MemDataAlignment 	= DMA_MDATAALIGN_BYTE;
-        this->hdma_spi_tx.Init.Mode 				= DMA_CIRCULAR;
+        //this->hdma_spi_tx.Init.Mode 				= DMA_CIRCULAR;
+        this->hdma_spi_tx.Init.Mode 				= DMA_NORMAL;
         this->hdma_spi_tx.Init.Priority 			= DMA_PRIORITY_LOW;
         this->hdma_spi_tx.Init.FIFOMode 			= DMA_FIFOMODE_DISABLE;
 
         HAL_DMA_Init(&this->hdma_spi_tx);
         __HAL_LINKDMA(&this->spiHandle, hdmatx, this->hdma_spi_tx);
+
+        dmaTxInterrupt = new ModuleInterrupt(this->irqDMAtx, this, static_cast<void (Module::*)()>(&RemoraComms::handleTxInterrupt));
+        HAL_NVIC_SetPriority(this->irqDMAtx, 4, 0);	// TX needs to be a higher priority than RX
+        HAL_NVIC_EnableIRQ(this->irqDMAtx);
     }
 }
 
 void RemoraComms::start()
 {
-    this->ptrTxData->header = PRU_DATA;
-    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->ptrTxData->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
-    SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)this->spiRxBuffer.rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
-    HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)this->ptrTxData->txBuffer, (uint8_t *)this->spiRxBuffer.rxBuffer, SPI_BUFF_SIZE);
+    // Prepare the header in each Tx buffer
+    // Current buffer: used by Remora modules
+	txBuffer = getCurrentTxBuffer(&txPingPongBuffer);
+    txBuffer->header = PRU_DATA;
+    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)txBuffer->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
+
+    // Alternate buffer: used by DMA comms
+    txBuffer = getAltTxBuffer(&txPingPongBuffer);
+    txBuffer->header = PRU_DATA;
+    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)txBuffer->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
+
+    rxBuffer = getAltRxBuffer(&rxPingPongBuffer);
+    SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)rxBuffer->rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
+
+    HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)txBuffer->txBuffer, (uint8_t *)rxBuffer->rxBuffer, SPI_BUFF_SIZE);
 }
 
 
+void RemoraComms::swapBuffers()
+{
+    __disable_irq();
+    swapTxBuffers(&txPingPongBuffer);
+    __enable_irq();
+    rxBuffer = getAltRxBuffer(&rxPingPongBuffer);
+    txBuffer = getAltTxBuffer(&txPingPongBuffer);
+    SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)rxBuffer->rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
+    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)txBuffer->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
+}
+
+void RemoraComms::handleRxInterrupt()
+{
+	HAL_DMA_IRQHandler(&this->hdma_spi_rx);
+	HAL_NVIC_EnableIRQ(this->irqDMArx);
+}
+
+
+void RemoraComms::handleTxInterrupt()
+{
+	// Handle the DMA interrupt
+	HAL_DMA_IRQHandler(&this->hdma_spi_tx);
+
+	/*
+    if (HAL_DMA_GetState(this->spiHandle.hdmatx) != HAL_DMA_STATE_READY)
+    {
+        // DMA is still busy, wait or handle error
+        // You could return here or implement a timeout mechanism.
+    	printf("DMA busy\n");
+        return;
+    }
+    */
+
+    // Get alternative buffers
+    rxBuffer = getAltRxBuffer(&rxPingPongBuffer);
+    txBuffer = getAltTxBuffer(&txPingPongBuffer);
+
+    // Define aligned buffer addresses for DCache operations
+    uint32_t* alignedRxBuffer = (uint32_t*)(((uint32_t)rxBuffer->rxBuffer) & ~(uint32_t)0x1F);
+    uint32_t* alignedTxBuffer = (uint32_t*)(((uint32_t)txBuffer->txBuffer) & ~(uint32_t)0x1F);
+
+    // Invalidate the DCache for the received buffer
+    SCB_InvalidateDCache_by_Addr(alignedRxBuffer, BUFFER_ALIGNED_SIZE);
+
+    // Handle different PRU header values
+    switch (rxBuffer->header)
+    {
+        case PRU_READ:
+            // Data is good, no buffer swap needed
+        	printf("r\n");
+            this->SPIdata = true;
+            break;
+
+        case PRU_WRITE:
+            // Good data, swap the RX buffer
+        	this->swapBuffers();
+            printf("w\n");
+            this->SPIdata = true;
+            break;
+
+        default:
+            // Invalid data, increment reject count
+        	printf("e\n");
+            this->rejectCnt++;
+            if (this->rejectCnt > 5)
+            {
+                this->SPIdataError = true;
+            }
+            break;
+    }
+
+    // If needed, clean the TX buffer's DCache and swap it
+    if (rxBuffer->header != PRU_READ)
+    {
+        SCB_CleanDCache_by_Addr(alignedTxBuffer, BUFFER_ALIGNED_SIZE);
+        this->swapBuffers();
+    }
+
+
+    // Stop the DMA transfer
+    HAL_DMA_Abort(this->spiHandle.hdmarx);
+    HAL_DMA_Abort(this->spiHandle.hdmatx);
+
+    // enable DMA interrupt
+    HAL_NVIC_EnableIRQ(this->irqDMArx);
+
+    // Start SPI communication (DMA transfer)
+    HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)txBuffer->txBuffer, (uint8_t *)rxBuffer->rxBuffer, SPI_BUFF_SIZE);
+}
+
+
+/*
 void RemoraComms::handleInterrupt()
 {
-    SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)this->ptrTxData->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
-	SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)this->spiRxBuffer.rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
+    rxBuffer = getAltRxBuffer(&rxPingPongBuffer);
+    txBuffer = getAltTxBuffer(&txPingPongBuffer);
 
-	switch (this->spiRxBuffer.header)
-	{
-	  case PRU_READ:
-		this->SPIdata = true;
-		this->rejectCnt = 0;
-		// READ so do nothing with the received data
-		break;
+    SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)rxBuffer->rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
 
-	  case PRU_WRITE:
-		this->SPIdata = true;
-		this->rejectCnt = 0;
 
-		// ensure an atomic access to the rxBuffer
-		// disable thread interrupts
+    if (rxBuffer->header == PRU_READ)
+    {
+    	// good data, don't swap buffers
+    	this->SPIdata = true;
+    }
+    else
+    {
+    	// swap tx DMA buffers
+        SCB_CleanDCache_by_Addr((uint32_t*)(((uint32_t)txBuffer->txBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
 		__disable_irq();
-		for (int i = 0; i < SPI_BUFF_SIZE; i++)
-		{
-			this->ptrRxData->rxBuffer[i] = this->spiRxBuffer.rxBuffer[i];
-		}
-		// re-enable thread interrupts
+		swapTxBuffers(&txPingPongBuffer);
 		__enable_irq();
-		break;
+    }
 
-	  default:
+    if(rxBuffer->header == PRU_WRITE)
+	{
+		// good data, swap rx DMA buffers
+		__disable_irq();
+		swapRxBuffers(&rxPingPongBuffer);
+		__enable_irq();
+    	this->SPIdata = true;
+	}
+
+    if(rxBuffer->header != PRU_READ && rxBuffer->header != PRU_WRITE)
+    {
 		this->rejectCnt++;
 		if (this->rejectCnt > 5)
 		{
 			this->SPIdataError = true;
 		}
-		// reset SPI somehow
-	}
+    }
 
-    HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)this->ptrTxData->txBuffer, (uint8_t *)this->spiRxBuffer.rxBuffer, SPI_BUFF_SIZE);
+    rxBuffer = getAltRxBuffer(&rxPingPongBuffer);
+    txBuffer = getAltTxBuffer(&txPingPongBuffer);
+
+    HAL_SPI_TransmitReceive_DMA(&this->spiHandle, (uint8_t *)txBuffer->txBuffer, (uint8_t *)rxBuffer->rxBuffer, SPI_BUFF_SIZE);
 }
+*/
 
 bool RemoraComms::getStatus(void)
 {

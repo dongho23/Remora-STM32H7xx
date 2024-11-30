@@ -37,4 +37,17 @@ extern volatile float*     ptrProcessVariable[VARIABLES];
 extern volatile uint16_t*  ptrInputs;
 extern volatile uint16_t*  ptrOutputs;
 
+// ping pong buffers
+extern RxPingPongBuffer rxPingPongBuffer;
+extern TxPingPongBuffer txPingPongBuffer;
+
+extern void initRxPingPongBuffer(RxPingPongBuffer* buffer);
+extern void initTxPingPongBuffer(TxPingPongBuffer* buffer);
+extern void swapRxBuffers(RxPingPongBuffer* buffer);
+extern void swapTxBuffers(TxPingPongBuffer* buffer);
+extern rxData_t* getCurrentRxBuffer(RxPingPongBuffer* buffer);
+extern txData_t* getCurrentTxBuffer(TxPingPongBuffer* buffer);
+extern rxData_t* getAltRxBuffer(RxPingPongBuffer* buffer);
+extern txData_t* getAltTxBuffer(TxPingPongBuffer* buffer);
+
 #endif

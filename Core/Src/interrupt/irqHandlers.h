@@ -12,6 +12,18 @@ extern "C" {
 		}
 	}
 
+	void DMA1_Stream0_IRQHandler()
+	{
+		// DMA interrupt management in the moduelInterrupt handleInterrupt() routine
+		Interrupt::DMA1_Stream0_Wrapper();
+	}
+
+	void DMA1_Stream1_IRQHandler()
+	{
+		// DMA interrupt management in the moduelInterrupt handleInterrupt() routine
+		Interrupt::DMA1_Stream1_Wrapper();
+	}
+
 
 	void TIM2_IRQHandler()
 	{

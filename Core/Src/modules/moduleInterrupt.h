@@ -11,11 +11,14 @@ class ModuleInterrupt : public Interrupt
 {
 	private:
 	    
-		Module* InterruptOwnerPtr;
+		Module* InterruptOwnerPtr;                                // Pointer to the owning module
+		void (Module::*InterruptHandler)();                       // Member function pointer for the ISR
+
 	
 	public:
 
-		ModuleInterrupt(int interruptNumber, Module* ownerptr);
+		//ModuleInterrupt(int interruptNumber, Module* ownerptr);
+		ModuleInterrupt(IRQn_Type interruptNumber, Module* ownerptr, void (Module::*handler)());
     
 		void ISR_Handler(void);
 };

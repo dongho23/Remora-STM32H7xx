@@ -43,5 +43,18 @@ typedef union
 extern volatile txData_t txData;
 
 
+typedef struct {
+    rxData_t rxBuffers[2]; // Two buffers for rxData_t
+    int currentRxBuffer;   // Index of the current rxData_t buffer
+} __attribute__((aligned(32))) RxPingPongBuffer;
+
+
+typedef struct {
+    txData_t txBuffers[2]; // Two buffers for txData_t
+    int currentTxBuffer;   // Index of the current txData_t buffer
+} __attribute__((aligned(32))) TxPingPongBuffer;
+
+
+
 #pragma pack(pop)
 #endif

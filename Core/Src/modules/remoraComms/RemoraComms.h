@@ -2,9 +2,11 @@
 #define REMORASPI_H
 
 #include "stm32h7xx_hal.h"
+#include "stm32h7xx_hal_dma.h"
 
 #include "configuration.h"
 #include "remora.h"
+#include "extern.h"
 #include "../../modules/module.h"
 #include "../../modules/moduleinterrupt.h"
 
@@ -19,13 +21,17 @@ class RemoraComms : public Module
     	volatile txData_t*  ptrTxData;
         SPI_TypeDef*        spiType;
 
-		ModuleInterrupt*	interruptPtr;
-		IRQn_Type			irq;
+        rxData_t* 			rxBuffer;
+        txData_t* 			txBuffer;
+
+		ModuleInterrupt*	dmaTxInterrupt;
+		ModuleInterrupt*	dmaRxInterrupt;
+		IRQn_Type			irqDMArx;
+		IRQn_Type			irqDMAtx;
 
         SPI_HandleTypeDef   spiHandle;
         DMA_HandleTypeDef   hdma_spi_tx;
         DMA_HandleTypeDef   hdma_spi_rx;
-        DMA_HandleTypeDef   hdma_memtomem_dma2_stream1;
         HAL_StatusTypeDef   status;
 
         rxData_t            spiRxBuffer;
@@ -37,14 +43,18 @@ class RemoraComms : public Module
         //InterruptIn         slaveSelect;
         //bool                sharedSPI;
 
-        void processPacket(void);
+        //void processPacket(void);
 
     public:
 
         //RemoraComms(volatile rxData_t*, volatile txData_t*, SPI_TypeDef*, PinName);
         RemoraComms(volatile rxData_t*, volatile txData_t*, SPI_TypeDef*);
 		virtual void update(void);
-		void handleInterrupt(void);
+
+		void handleRxInterrupt(void);
+		void handleTxInterrupt(void);
+
+		void swapBuffers(void);
 
         void init(void);
         void start(void);
