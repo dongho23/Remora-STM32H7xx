@@ -290,8 +290,8 @@ int main(void)
 	MX_FATFS_Init();
 
 
-	txPingPongBuffer.txBuffers[0].header = PRU_DATA;
-	txPingPongBuffer.txBuffers[1].header = PRU_DATA;
+	//txPingPongBuffer.txBuffers[0].header = PRU_DATA;
+	//txPingPongBuffer.txBuffers[1].header = PRU_DATA;
 
 	enum State currentState;
 	enum State prevState;

@@ -24,8 +24,10 @@ class RemoraComms : public Module
         rxData_t* 			rxBuffer;
         txData_t* 			txBuffer;
 
-		ModuleInterrupt*	dmaTxInterrupt;
+		ModuleInterrupt*	NssInterrupt;
+        ModuleInterrupt*	dmaTxInterrupt;
 		ModuleInterrupt*	dmaRxInterrupt;
+		IRQn_Type			irqNss;
 		IRQn_Type			irqDMArx;
 		IRQn_Type			irqDMAtx;
 
@@ -36,6 +38,8 @@ class RemoraComms : public Module
 
         rxData_t            spiRxBuffer;
         uint8_t             rejectCnt;
+        bool				dmaRx;
+        bool				dmaTx;
         bool                SPIdata;
         bool                SPIdataError;
 
@@ -53,6 +57,7 @@ class RemoraComms : public Module
 
 		void handleRxInterrupt(void);
 		void handleTxInterrupt(void);
+		void handleNssInterrupt(void);
 
 		void swapBuffers(void);
 
