@@ -6,6 +6,7 @@
 "./Core/Src/syscalls.o"
 "./Core/Src/sysmem.o"
 "./Core/Src/system_stm32h7xx.o"
+"./Core/Src/modules/debug/debug.o"
 "./Core/Src/modules/module.o"
 "./Core/Src/modules/moduleInterrupt.o"
 "./Core/Src/modules/remoraComms/RemoraComms.o"

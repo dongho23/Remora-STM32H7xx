@@ -45,7 +45,8 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../interrupt/interrupt.h \
- ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../drivers/pin/pin.h
 ../Core/Src/modules/remoraComms/../remoraComms/RemoraComms.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -96,3 +97,4 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../drivers/pin/pin.h:

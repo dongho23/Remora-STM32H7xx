@@ -11,11 +11,16 @@
 #include "../../modules/moduleinterrupt.h"
 
 
+#include "../../drivers/pin/pin.h"
+
 class RemoraComms : public Module
 {
 	friend class ModuleInterrupt;
 
     private:
+
+		Pin*				pin1;
+		Pin*				pin2;
 
 		volatile rxData_t*  ptrRxData;
     	volatile txData_t*  ptrTxData;
@@ -35,6 +40,8 @@ class RemoraComms : public Module
         DMA_HandleTypeDef   hdma_spi_tx;
         DMA_HandleTypeDef   hdma_spi_rx;
         HAL_StatusTypeDef   status;
+
+        uint8_t				dmaStatus;
 
         rxData_t            spiRxBuffer;
         uint8_t             rejectCnt;

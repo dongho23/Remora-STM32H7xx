@@ -50,6 +50,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 // modules
 #include "modules/remoraComms/RemoraComms.h"
+#include "modules/debug/debug.h"
 
 
 /***********************************************************************
@@ -81,8 +82,12 @@ pruThread* servoThread;
 pruThread* baseThread;
 pruThread* commsThread;
 
+//__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;
+//__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;
+
 RxPingPongBuffer rxPingPongBuffer;
 TxPingPongBuffer txPingPongBuffer;
+
 
 // unions for RX and TX data
 __attribute__((aligned(32))) volatile rxData_t rxData;	// TODO: remove
@@ -198,7 +203,7 @@ void setup()
 {
     printf("\n2. Setting up SPI DMA and threads\n");
 
-     // initialise the Remora comms
+    // initialise the Remora comms
     comms->init();
     comms->start();
 }
@@ -267,6 +272,31 @@ void configThreads()
 }
 
 
+void debugThreadHigh()
+{
+    Module* debugOnB = new Debug("PE_11", 1);
+    baseThread->registerModule(debugOnB);
+
+    Module* debugOnS = new Debug("PE_12", 1);
+    servoThread->registerModule(debugOnS);
+
+    //Module* debugOnC = new Debug("PE_6", 1);
+    //commsThread->registerModule(debugOnC);
+}
+
+void debugThreadLow()
+{
+    Module* debugOffB = new Debug("PE_11", 0);
+    baseThread->registerModule(debugOffB);
+
+    Module* debugOffS = new Debug("PE_12", 0);
+    servoThread->registerModule(debugOffS);
+
+    //commsThread->startThread();
+    //Module* debugOffC = new Debug("PE_6", 0);
+    //commsThread->registerModule(debugOffC);
+}
+
 int main(void)
 {
 	MPU_Config();
@@ -276,17 +306,18 @@ int main(void)
 	PeriphCommonClock_Config();
 
 	// Enable caches
-	SCB_InvalidateICache();
-	SCB_EnableICache();
-	SCB_InvalidateDCache();
-	SCB_EnableDCache();
+	//SCB_InvalidateICache();
+	//SCB_EnableICache();
+	//SCB_InvalidateDCache();
+	//SCB_EnableDCache();
+	//SCB_DisableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
 
 	MX_GPIO_Init(); // used for SD card detect
 	MX_USART1_UART_Init();
-	MX_SDMMC1_SD_Init();		// uncomment #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in sd_diskio.c
+	MX_SDMMC1_SD_Init();		// uncomment #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in FATFT/Target/sd_diskio.c
 	MX_FATFS_Init();
 
 
@@ -455,7 +486,7 @@ int main(void)
 			        	  HAL_NVIC_SystemReset();
 			              break;
 			  }
-
+		HAL_Delay(100);
 	}
 }
 
@@ -716,6 +747,23 @@ void MPU_Config(void)
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Configure the MPU attributes as Device not cacheable
+     for DMA buffers */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x30000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_256B;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
   /* Enables the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 

@@ -1,4 +1,5 @@
 ../Drivers/CMSIS/Include/core_cm7.h:2032:22:void __NVIC_SetPriority(IRQn_Type, uint32_t)	16	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\arm-none-eabi\thumb\v7e-m+dp\hard\bits\c++config.h:516:3:constexpr bool std::__is_constant_evaluated()	4	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/../Variant/../Collection/CollectionData.hpp:45:16:ArduinoJson6101_110::VariantSlot* ArduinoJson6101_110::CollectionData::head() const	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/VariantSlot.hpp:33:16:ArduinoJson6101_110::VariantData* ArduinoJson6101_110::VariantSlot::data()	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/VariantSlot.hpp:41:16:ArduinoJson6101_110::VariantSlot* ArduinoJson6101_110::VariantSlot::next()	16	static
@@ -19,6 +20,7 @@
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/ConstRamStringAdapter.hpp:14:3:ArduinoJson6101_110::ConstRamStringAdapter::ConstRamStringAdapter(const char*)	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/ConstRamStringAdapter.hpp:16:8:bool ArduinoJson6101_110::ConstRamStringAdapter::equals(const char*) const	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/ConstRamStringAdapter.hpp:48:30:ArduinoJson6101_110::ConstRamStringAdapter ArduinoJson6101_110::adaptString(const char*)	24	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\char_traits.h:393:7:static constexpr std::size_t std::char_traits<char>::length(const char_type*)	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/VariantData.hpp:69:19:ArduinoJson6101_110::CollectionData* ArduinoJson6101_110::VariantData::asArray()	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/VariantData.hpp:77:19:ArduinoJson6101_110::CollectionData* ArduinoJson6101_110::VariantData::asObject()	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/VariantData.hpp:137:8:bool ArduinoJson6101_110::VariantData::isArray() const	16	static
@@ -75,29 +77,32 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/interrupt/irqHandlers.h:39:7:void TIM3_IRQHandler()	8	static
 ../Core/Src/interrupt/irqHandlers.h:49:7:void TIM4_IRQHandler()	8	static
 ../Core/Src/thread/createThreads.h:4:6:void createThreads()	16	static
-../Core/Src/main.cpp:138:6:int __io_putchar(int)	16	static
-../Core/Src/main.cpp:147:6:void readJsonConfig()	104	dynamic
-../Core/Src/main.cpp:197:6:void setup()	8	static
-../Core/Src/main.cpp:207:6:void deserialiseJSON()	24	static
-../Core/Src/main.cpp:240:6:void configThreads()	256	static
-../Core/Src/main.cpp:270:5:int main()	72	static,ignoring_inline_asm
-../Core/Src/main.cpp:464:6:void initRxPingPongBuffer(RxPingPongBuffer*)	16	static
-../Core/Src/main.cpp:468:6:void initTxPingPongBuffer(TxPingPongBuffer*)	16	static
-../Core/Src/main.cpp:472:6:void swapRxBuffers(RxPingPongBuffer*)	16	static
-../Core/Src/main.cpp:476:6:void swapTxBuffers(TxPingPongBuffer*)	16	static
-../Core/Src/main.cpp:480:11:rxData_t* getCurrentRxBuffer(RxPingPongBuffer*)	16	static
-../Core/Src/main.cpp:484:11:txData_t* getCurrentTxBuffer(TxPingPongBuffer*)	16	static
-../Core/Src/main.cpp:488:11:rxData_t* getAltRxBuffer(RxPingPongBuffer*)	16	static
-../Core/Src/main.cpp:492:11:txData_t* getAltTxBuffer(TxPingPongBuffer*)	16	static
-../Core/Src/main.cpp:501:6:void SystemClock_Config()	128	static
-../Core/Src/main.cpp:568:6:void PeriphCommonClock_Config()	200	static
-../Core/Src/main.cpp:597:13:void MX_SDMMC1_SD_Init()	8	static
-../Core/Src/main.cpp:627:13:void MX_USART1_UART_Init()	8	static
-../Core/Src/main.cpp:675:13:void MX_GPIO_Init()	48	static
-../Core/Src/main.cpp:697:6:void MPU_Config()	24	static
-../Core/Src/main.cpp:729:6:void Error_Handler()	8	static,ignoring_inline_asm
+../Core/Src/main.cpp:143:6:int __io_putchar(int)	16	static
+../Core/Src/main.cpp:152:6:void readJsonConfig()	104	dynamic
+../Core/Src/main.cpp:202:6:void setup()	8	static
+../Core/Src/main.cpp:212:6:void deserialiseJSON()	24	static
+../Core/Src/main.cpp:245:6:void configThreads()	256	static
+../Core/Src/main.cpp:275:6:void debugThreadHigh()	80	static
+../Core/Src/main.cpp:287:6:void debugThreadLow()	80	static
+../Core/Src/main.cpp:300:5:int main()	48	static,ignoring_inline_asm
+../Core/Src/main.cpp:495:6:void initRxPingPongBuffer(RxPingPongBuffer*)	16	static
+../Core/Src/main.cpp:499:6:void initTxPingPongBuffer(TxPingPongBuffer*)	16	static
+../Core/Src/main.cpp:503:6:void swapRxBuffers(RxPingPongBuffer*)	16	static
+../Core/Src/main.cpp:507:6:void swapTxBuffers(TxPingPongBuffer*)	16	static
+../Core/Src/main.cpp:511:11:rxData_t* getCurrentRxBuffer(RxPingPongBuffer*)	16	static
+../Core/Src/main.cpp:515:11:txData_t* getCurrentTxBuffer(TxPingPongBuffer*)	16	static
+../Core/Src/main.cpp:519:11:rxData_t* getAltRxBuffer(RxPingPongBuffer*)	16	static
+../Core/Src/main.cpp:523:11:txData_t* getAltTxBuffer(TxPingPongBuffer*)	16	static
+../Core/Src/main.cpp:532:6:void SystemClock_Config()	128	static
+../Core/Src/main.cpp:599:6:void PeriphCommonClock_Config()	200	static
+../Core/Src/main.cpp:628:13:void MX_SDMMC1_SD_Init()	8	static
+../Core/Src/main.cpp:658:13:void MX_USART1_UART_Init()	8	static
+../Core/Src/main.cpp:706:13:void MX_GPIO_Init()	48	static
+../Core/Src/main.cpp:728:6:void MPU_Config()	24	static
+../Core/Src/main.cpp:777:6:void Error_Handler()	8	static,ignoring_inline_asm
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/../Polyfills/gsl/not_null.hpp:18:5:T ArduinoJson6101_110::not_null<T>::get() const [with T = const char*]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/MemoryPool.hpp:90:6:T* ArduinoJson6101_110::MemoryPool::allocRight() [with T = ArduinoJson6101_110::VariantSlot]	16	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\char_traits.h:182:5:static constexpr std::size_t __gnu_cxx::char_traits<_CharT>::length(const char_type*) [with _CharT = char]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/../Polyfills/gsl/not_null.hpp:28:13:ArduinoJson6101_110::not_null<T> ArduinoJson6101_110::make_not_null(T) [with T = const char*]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/VariantRef.hpp:116:3:ArduinoJson6101_110::VariantRefBase<TData>::VariantRefBase(TData*) [with TData = ArduinoJson6101_110::VariantData]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/ArrayRef.hpp:52:3:ArduinoJson6101_110::ArrayRefBase<TData>::ArrayRefBase(TData*) [with TData = ArduinoJson6101_110::CollectionData]	16	static
@@ -106,6 +111,11 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:33:12:ArduinoJson6101_110::BasicJsonDocument<TAllocator>::BasicJsonDocument(size_t, TAllocator) [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	56	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\basic_string.h:3497:5:std::__cxx11::basic_string<_CharT, _Traits, _Allocator> std::operator+(const __cxx11::basic_string<_CharT, _Traits, _Allocator>&, _CharT) [with _CharT = char; _Traits = char_traits<char>; _Alloc = allocator<char>]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/JsonDeserializer.hpp:396:22:ArduinoJson6101_110::DeserializationError ArduinoJson6101_110::deserializeJson(JsonDocument&, TInput*, NestingLimit) [with TInput = const char]	24	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\basic_string.h:642:7:std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::basic_string(const _CharT*, const _Alloc&) [with <template-parameter-2-1> = std::allocator<char>; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	40	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\char_traits.h:121:7:static constexpr bool __gnu_cxx::char_traits<_CharT>::eq(const char_type&, const char_type&) [with _CharT = char]	16	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\basic_string.tcc:235:13:std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::_M_construct(_InIterator, _InIterator, std::forward_iterator_tag)::_Guard::_Guard(std::__cxx11::basic_string<_CharT, _Traits, _Alloc>*) [with _InIterator = const char*; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	16	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\basic_string.tcc:238:4:std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::_M_construct(_InIterator, _InIterator, std::forward_iterator_tag)::_Guard::~_Guard() [with _InIterator = const char*; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	16	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\basic_string.tcc:217:7:void std::__cxx11::basic_string<_CharT, _Traits, _Alloc>::_M_construct(_InIterator, _InIterator, std::forward_iterator_tag) [with _FwdIterator = const char*; _CharT = char; _Traits = std::char_traits<char>; _Alloc = std::allocator<char>]	40	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/../Polyfills/gsl/not_null.hpp:14:12:ArduinoJson6101_110::not_null<T>::not_null(T) [with T = const char*]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Collection/CollectionImpl.hpp:92:21:ArduinoJson6101_110::VariantSlot* ArduinoJson6101_110::CollectionData::getSlot(TAdaptedString) const [with TAdaptedString = ArduinoJson6101_110::ConstRamStringAdapter]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:73:14:ArduinoJson6101_110::MemoryPool ArduinoJson6101_110::BasicJsonDocument<TAllocator>::allocPool(size_t) [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	32	static
@@ -115,11 +125,14 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Operators/VariantCasts.hpp:20:16:const TImpl* ArduinoJson6101_110::VariantCasts<TImpl>::impl() const [with TImpl = ArduinoJson6101_110::VariantRef]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Operators/../Object/ObjectShortcuts.hpp:70:18:const TObject* ArduinoJson6101_110::ObjectShortcuts<TObject>::impl() const [with TObject = ArduinoJson6101_110::ObjectRef]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Operators/VariantCasts.hpp:20:16:const TImpl* ArduinoJson6101_110::VariantCasts<TImpl>::impl() const [with TImpl = ArduinoJson6101_110::MemberProxy<const ArduinoJson6101_110::ObjectRef&, const char*>]	16	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\stl_iterator_base_funcs.h:147:5:constexpr typename std::iterator_traits< <template-parameter-1-1> >::difference_type std::distance(_InputIterator, _InputIterator) [with _InputIterator = const char*]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:18:9:void* ArduinoJson6101_110::AllocatorOwner<TAllocator>::allocate(size_t) [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/../Deserialization/CharPointerReader.hpp:44:32:ArduinoJson6101_110::UnsafeCharPointerReader ArduinoJson6101_110::makeReader(TChar*) [with TChar = const char]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/../Deserialization/../StringStorage/StringStorage.hpp:38:38:typename ArduinoJson6101_110::StringStorage<TChar*>::type ArduinoJson6101_110::makeStringStorage(MemoryPool&, TChar*) [with TChar = const char]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/../Deserialization/deserialize.hpp:20:33:TDeserializer<TReader, TWriter> ArduinoJson6101_110::makeDeserializer(MemoryPool&, TReader, TWriter, uint8_t) [with TDeserializer = JsonDeserializer; TReader = UnsafeCharPointerReader; TWriter = StringCopier]	32	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/JsonDeserializer.hpp:30:24:ArduinoJson6101_110::DeserializationError ArduinoJson6101_110::JsonDeserializer<TReader, TStringStorage>::parse(ArduinoJson6101_110::VariantData&) [with TReader = ArduinoJson6101_110::UnsafeCharPointerReader; TStringStorage = ArduinoJson6101_110::StringCopier]	32	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\stl_iterator_base_types.h:238:5:constexpr typename std::iterator_traits< <template-parameter-1-1> >::iterator_category std::__iterator_category(const _Iter&) [with _Iter = const char*]	16	static
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\stl_iterator_base_funcs.h:99:5:constexpr typename std::iterator_traits< <template-parameter-1-1> >::difference_type std::__distance(_RandomAccessIterator, _RandomAccessIterator, random_access_iterator_tag) [with _RandomAccessIterator = const char*]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/../Deserialization/../StringStorage/StringStorage.hpp:16:15:static ArduinoJson6101_110::StringStorage<TInput, Enable>::type ArduinoJson6101_110::StringStorage<TInput, Enable>::create(ArduinoJson6101_110::MemoryPool&, TInput&) [with TInput = const char*; Enable = void]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/JsonDeserializer.hpp:23:3:ArduinoJson6101_110::JsonDeserializer<TReader, TStringStorage>::JsonDeserializer(ArduinoJson6101_110::MemoryPool&, TReader, TStringStorage, uint8_t) [with TReader = ArduinoJson6101_110::UnsafeCharPointerReader; TStringStorage = ArduinoJson6101_110::StringCopier]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Json/JsonDeserializer.hpp:321:24:ArduinoJson6101_110::DeserializationError ArduinoJson6101_110::JsonDeserializer<TReader, TStringStorage>::skipSpacesAndComments() [with TReader = ArduinoJson6101_110::UnsafeCharPointerReader; TStringStorage = ArduinoJson6101_110::StringCopier]	40	static
@@ -162,9 +175,9 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/FloatTraits.hpp:45:12:static T ArduinoJson6101_110::FloatTraits<T, 8>::positiveBinaryPowerOfTen(int) [with T = double]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/FloatTraits.hpp:60:12:static T ArduinoJson6101_110::FloatTraits<T, 8>::negativeBinaryPowerOfTen(int) [with T = double]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/../Polyfills/alias_cast.hpp:23:3:T ArduinoJson6101_110::alias_cast(F) [with T = double; F = long long unsigned int]	24	static
-../Core/Src/main.cpp:741:1:void __static_initialization_and_destruction_0(int, int)	24	static
+../Core/Src/main.cpp:789:1:void __static_initialization_and_destruction_0(int, int)	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:55:3:ArduinoJson6101_110::BasicJsonDocument<TAllocator>::~BasicJsonDocument() [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	16	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:84:8:void ArduinoJson6101_110::BasicJsonDocument<TAllocator>::freePool() [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	24	static
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:22:8:void ArduinoJson6101_110::AllocatorOwner<TAllocator>::deallocate(void*) [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	16	static
-../Core/Src/main.cpp:741:1:cpp)	8	static
-../Core/Src/main.cpp:741:1:cpp)	8	static
+../Core/Src/main.cpp:789:1:cpp)	8	static
+../Core/Src/main.cpp:789:1:cpp)	8	static

@@ -6,7 +6,7 @@
 
 #define TIM_PSC 1
 #define APB1CLK SystemCoreClock/2
-#define APB2CLK SystemCoreClock
+#define APB2CLK SystemCoreClock/2
 
 class TimerInterrupt; // forward declaration
 class pruThread; // forward declaration

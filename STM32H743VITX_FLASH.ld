@@ -162,6 +162,14 @@ SECTIONS
     . = ALIGN(8);
   } >RAM_D1
 
+
+/* DMA buffers */
+   .dma_buffers (NOLOAD) : {
+    . = ABSOLUTE(0x30000000);
+    *(.DmaSection) 
+  } >RAM_D2 AT> ROM
+
+
   /* Remove information from the standard libraries */
   /DISCARD/ :
   {
