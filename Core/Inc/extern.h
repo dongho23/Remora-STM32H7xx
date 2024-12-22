@@ -45,6 +45,8 @@ extern void initRxPingPongBuffer(RxPingPongBuffer* buffer);
 extern void initTxPingPongBuffer(TxPingPongBuffer* buffer);
 extern void swapRxBuffers(RxPingPongBuffer* buffer);
 extern void swapTxBuffers(TxPingPongBuffer* buffer);
+extern int getCurrentRxBufferIndex(RxPingPongBuffer* buffer);
+extern int getCurrentTxBufferIndex(TxPingPongBuffer* buffer);
 extern rxData_t* getCurrentRxBuffer(RxPingPongBuffer* buffer);
 extern txData_t* getCurrentTxBuffer(TxPingPongBuffer* buffer);
 extern rxData_t* getAltRxBuffer(RxPingPongBuffer* buffer);

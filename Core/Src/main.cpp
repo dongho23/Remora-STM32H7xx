@@ -82,21 +82,18 @@ pruThread* servoThread;
 pruThread* baseThread;
 pruThread* commsThread;
 
-//__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;
-//__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;
-
-RxPingPongBuffer rxPingPongBuffer;
-TxPingPongBuffer txPingPongBuffer;
+__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;
+__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;	// double buffer not used, but maybe needed in the future
 
 
 // unions for RX and TX data
-__attribute__((aligned(32))) volatile rxData_t rxData;	// TODO: remove
-__attribute__((aligned(32))) volatile txData_t txData;	// TODO: remove
+//__attribute__((aligned(32))) volatile rxData_t rxData;	// TODO: remove
+//__attribute__((aligned(32))) volatile txData_t txData;	// TODO: remove
 
 // pointers to data
 rxData_t* pruRxData;
-volatile rxData_t*  ptrRxData = &rxData;	// TODO: remove
-volatile txData_t*  ptrTxData = &txData;	// TODO: remove
+//volatile rxData_t*  ptrRxData = &rxData;	// TODO: remove
+//volatile txData_t*  ptrTxData = &txData;	// TODO: remove
 volatile int32_t* 	ptrTxHeader;
 volatile bool*    	ptrPRUreset;
 volatile int32_t* 	ptrJointFreqCmd[JOINTS];
@@ -118,7 +115,7 @@ JsonObject module;
         OBJECTS etc
 ************************************************************************/
 
-RemoraComms* comms = new RemoraComms(ptrRxData, ptrTxData, SPI1);
+RemoraComms* comms = new RemoraComms(SPI1);
 
 
 
@@ -306,23 +303,33 @@ int main(void)
 	PeriphCommonClock_Config();
 
 	// Enable caches
-	//SCB_InvalidateICache();
-	//SCB_EnableICache();
-	//SCB_InvalidateDCache();
-	//SCB_EnableDCache();
-	//SCB_DisableDCache();
+	SCB_InvalidateICache();
+	SCB_EnableICache();
+	SCB_InvalidateDCache();
+	SCB_EnableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
 
-	MX_GPIO_Init(); // used for SD card detect
+	MX_GPIO_Init(); 			// used for SD card detect
 	MX_USART1_UART_Init();
-	MX_SDMMC1_SD_Init();		// uncomment #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in FATFT/Target/sd_diskio.c
+	MX_SDMMC1_SD_Init();		// uncomment line 62 #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in FATFT/Target/sd_diskio.c
 	MX_FATFS_Init();
 
 
-	//txPingPongBuffer.txBuffers[0].header = PRU_DATA;
-	//txPingPongBuffer.txBuffers[1].header = PRU_DATA;
+	// prepare DMA buffers
+	int n = sizeof(txPingPongBuffer.txBuffers[0].txBuffer);
+	while(n-- > 0)
+	{
+		txPingPongBuffer.txBuffers[0].txBuffer[n] = 0;
+		txPingPongBuffer.txBuffers[1].txBuffer[n] = 0;
+		rxPingPongBuffer.rxBuffers[0].rxBuffer[n] = 0;
+		rxPingPongBuffer.rxBuffers[1].rxBuffer[n] = 0;
+	}
+
+	txPingPongBuffer.txBuffers[0].header = PRU_DATA;
+	txPingPongBuffer.txBuffers[1].header = PRU_DATA;
+
 
 	enum State currentState;
 	enum State prevState;
@@ -395,6 +402,8 @@ int main(void)
 			              //wait for data before changing to running state
 			              if (comms->getStatus())
 			              {
+				          	  txPingPongBuffer.txBuffers[0].header =  PRU_DATA;
+				          	  txPingPongBuffer.txBuffers[1].header =  PRU_DATA;
 			                  currentState = ST_RUNNING;
 			              }
 
@@ -470,13 +479,14 @@ int main(void)
 
 			              printf("   Resetting rxBuffer\n");
 			              {
-			            	  SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)pruRxData->rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
-			                  int n = sizeof(pruRxData->rxBuffer);
-			                  while(n-- > 0)
-			                  {
-			                      pruRxData->rxBuffer[n] = 0;
-			                  }
+							  int n = sizeof(pruRxData->rxBuffer);
+							  while(n-- > 0)
+							  {
+								  pruRxData->rxBuffer[n] = 0;
+							  }
 			              }
+			              txPingPongBuffer.txBuffers[0].header = 0;
+			              txPingPongBuffer.txBuffers[1].header = 0;
 
 			              currentState = ST_IDLE;
 			              break;
@@ -506,6 +516,16 @@ void swapRxBuffers(RxPingPongBuffer* buffer) {
 
 void swapTxBuffers(TxPingPongBuffer* buffer) {
     buffer->currentTxBuffer = 1 - buffer->currentTxBuffer;
+}
+
+int getCurrentRxBufferIndex(RxPingPongBuffer* buffer)
+{
+	return buffer->currentRxBuffer;
+}
+
+int getCurrentTxBufferIndex(TxPingPongBuffer* buffer)
+{
+	return buffer->currentTxBuffer;
 }
 
 rxData_t* getCurrentRxBuffer(RxPingPongBuffer* buffer) {
