@@ -41,6 +41,7 @@ SUBDIRS := \
 Core/Src/drivers/pin \
 Core/Src/interrupt \
 Core/Src \
+Core/Src/modules/debug \
 Core/Src/modules \
 Core/Src/modules/remoraComms \
 Core/Src/thread \

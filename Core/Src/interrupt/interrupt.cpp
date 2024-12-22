@@ -22,6 +22,17 @@ void Interrupt::EXTI4_Wrapper(void)
 	ISRVectorTable[EXTI4_IRQn]->ISR_Handler();
 }
 
+void Interrupt::DMA1_Stream0_Wrapper(void)
+{
+	ISRVectorTable[DMA1_Stream0_IRQn]->ISR_Handler();
+}
+
+void Interrupt::DMA1_Stream1_Wrapper(void)
+{
+	ISRVectorTable[DMA1_Stream1_IRQn]->ISR_Handler();
+}
+
+
 void Interrupt::TIM2_Wrapper(void)
 {
 	ISRVectorTable[TIM2_IRQn]->ISR_Handler();

@@ -50,6 +50,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 // modules
 #include "modules/remoraComms/RemoraComms.h"
+#include "modules/debug/debug.h"
 
 
 /***********************************************************************
@@ -81,13 +82,18 @@ pruThread* servoThread;
 pruThread* baseThread;
 pruThread* commsThread;
 
+__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;
+__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;	// double buffer not used, but maybe needed in the future
+
+
 // unions for RX and TX data
-__attribute__((aligned(32))) volatile rxData_t rxData;
-__attribute__((aligned(32))) volatile txData_t txData;
+//__attribute__((aligned(32))) volatile rxData_t rxData;	// TODO: remove
+//__attribute__((aligned(32))) volatile txData_t txData;	// TODO: remove
 
 // pointers to data
-volatile rxData_t*  ptrRxData = &rxData;
-volatile txData_t*  ptrTxData = &txData;
+rxData_t* pruRxData;
+//volatile rxData_t*  ptrRxData = &rxData;	// TODO: remove
+//volatile txData_t*  ptrTxData = &txData;	// TODO: remove
 volatile int32_t* 	ptrTxHeader;
 volatile bool*    	ptrPRUreset;
 volatile int32_t* 	ptrJointFreqCmd[JOINTS];
@@ -109,7 +115,7 @@ JsonObject module;
         OBJECTS etc
 ************************************************************************/
 
-RemoraComms* comms = new RemoraComms(ptrRxData, ptrTxData, SPI1);
+RemoraComms* comms = new RemoraComms(SPI1);
 
 
 
@@ -194,7 +200,7 @@ void setup()
 {
     printf("\n2. Setting up SPI DMA and threads\n");
 
-     // initialise the Remora comms
+    // initialise the Remora comms
     comms->init();
     comms->start();
 }
@@ -263,6 +269,31 @@ void configThreads()
 }
 
 
+void debugThreadHigh()
+{
+    Module* debugOnB = new Debug("PE_11", 1);
+    baseThread->registerModule(debugOnB);
+
+    Module* debugOnS = new Debug("PE_12", 1);
+    servoThread->registerModule(debugOnS);
+
+    //Module* debugOnC = new Debug("PE_6", 1);
+    //commsThread->registerModule(debugOnC);
+}
+
+void debugThreadLow()
+{
+    Module* debugOffB = new Debug("PE_11", 0);
+    baseThread->registerModule(debugOffB);
+
+    Module* debugOffS = new Debug("PE_12", 0);
+    servoThread->registerModule(debugOffS);
+
+    //commsThread->startThread();
+    //Module* debugOffC = new Debug("PE_6", 0);
+    //commsThread->registerModule(debugOffC);
+}
+
 int main(void)
 {
 	MPU_Config();
@@ -270,25 +301,45 @@ int main(void)
 	HAL_Init();
 	SystemClock_Config();
 	PeriphCommonClock_Config();
-	//SCB_EnableICache();
-	//SCB_EnableDCache();
+
+	// Enable caches
+	SCB_InvalidateICache();
+	SCB_EnableICache();
+	SCB_InvalidateDCache();
+	SCB_EnableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
 
-	MX_GPIO_Init(); // used for SD card detect
+	MX_GPIO_Init(); 			// used for SD card detect
 	MX_USART1_UART_Init();
-	MX_SDMMC1_SD_Init();		// uncomment #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in sd_diskio.c
+	MX_SDMMC1_SD_Init();		// uncomment line 62 #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in FATFT/Target/sd_diskio.c
 	MX_FATFS_Init();
+
+
+	// prepare DMA buffers
+	int n = sizeof(txPingPongBuffer.txBuffers[0].txBuffer);
+	while(n-- > 0)
+	{
+		txPingPongBuffer.txBuffers[0].txBuffer[n] = 0;
+		txPingPongBuffer.txBuffers[1].txBuffer[n] = 0;
+		rxPingPongBuffer.rxBuffers[0].rxBuffer[n] = 0;
+		rxPingPongBuffer.rxBuffers[1].rxBuffer[n] = 0;
+	}
+
+	txPingPongBuffer.txBuffers[0].header = PRU_DATA;
+	txPingPongBuffer.txBuffers[1].header = PRU_DATA;
 
 
 	enum State currentState;
 	enum State prevState;
 
-    comms->setStatus(false);
-    comms->setError(false);
 	currentState = ST_SETUP;
 	prevState = ST_RESET;
+
+    comms->setStatus(false);
+    comms->setError(false);
+    resetCnt = 0;
 
 	printf("\nRemora version %d.%d.%d for %s starting\n\n", MAJOR_VERSION, MINOR_VERSION, PATCH, BOARD);
 
@@ -351,6 +402,8 @@ int main(void)
 			              //wait for data before changing to running state
 			              if (comms->getStatus())
 			              {
+				          	  txPingPongBuffer.txBuffers[0].header =  PRU_DATA;
+				          	  txPingPongBuffer.txBuffers[1].header =  PRU_DATA;
 			                  currentState = ST_RUNNING;
 			              }
 
@@ -421,15 +474,19 @@ int main(void)
 
 			              // set all of the rxData buffer to 0
 			              // rxData.rxBuffer is volatile so need to do this the long way. memset cannot be used for volatile
+
+			              pruRxData = getCurrentRxBuffer(&rxPingPongBuffer);
+
 			              printf("   Resetting rxBuffer\n");
 			              {
-			            	  SCB_InvalidateDCache_by_Addr((uint32_t*)(((uint32_t)rxData.rxBuffer) & ~(uint32_t)0x1F), BUFFER_ALIGNED_SIZE);
-			                  int n = sizeof(rxData.rxBuffer);
-			                  while(n-- > 0)
-			                  {
-			                      rxData.rxBuffer[n] = 0;
-			                  }
+							  int n = sizeof(pruRxData->rxBuffer);
+							  while(n-- > 0)
+							  {
+								  pruRxData->rxBuffer[n] = 0;
+							  }
 			              }
+			              txPingPongBuffer.txBuffers[0].header = 0;
+			              txPingPongBuffer.txBuffers[1].header = 0;
 
 			              currentState = ST_IDLE;
 			              break;
@@ -439,9 +496,54 @@ int main(void)
 			        	  HAL_NVIC_SystemReset();
 			              break;
 			  }
-
+		HAL_Delay(100);
 	}
 }
+
+
+
+void initRxPingPongBuffer(RxPingPongBuffer* buffer) {
+    buffer->currentRxBuffer = 0;
+}
+
+void initTxPingPongBuffer(TxPingPongBuffer* buffer) {
+    buffer->currentTxBuffer = 0;
+}
+
+void swapRxBuffers(RxPingPongBuffer* buffer) {
+    buffer->currentRxBuffer = 1 - buffer->currentRxBuffer;
+}
+
+void swapTxBuffers(TxPingPongBuffer* buffer) {
+    buffer->currentTxBuffer = 1 - buffer->currentTxBuffer;
+}
+
+int getCurrentRxBufferIndex(RxPingPongBuffer* buffer)
+{
+	return buffer->currentRxBuffer;
+}
+
+int getCurrentTxBufferIndex(TxPingPongBuffer* buffer)
+{
+	return buffer->currentTxBuffer;
+}
+
+rxData_t* getCurrentRxBuffer(RxPingPongBuffer* buffer) {
+    return &buffer->rxBuffers[buffer->currentRxBuffer];
+}
+
+txData_t* getCurrentTxBuffer(TxPingPongBuffer* buffer) {
+    return &buffer->txBuffers[buffer->currentTxBuffer];
+}
+
+rxData_t* getAltRxBuffer(RxPingPongBuffer* buffer) {
+    return &buffer->rxBuffers[1 - buffer->currentRxBuffer];
+}
+
+txData_t* getAltTxBuffer(TxPingPongBuffer* buffer) {
+    return &buffer->txBuffers[1 - buffer->currentTxBuffer];
+}
+
 
 /**
   * @brief System Clock Configuration
@@ -665,6 +767,23 @@ void MPU_Config(void)
   MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
 
   HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
+  /* Configure the MPU attributes as Device not cacheable
+     for DMA buffers */
+  MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+  MPU_InitStruct.BaseAddress = 0x30000000;
+  MPU_InitStruct.Size = MPU_REGION_SIZE_256B;
+  MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+  MPU_InitStruct.IsBufferable = MPU_ACCESS_BUFFERABLE;
+  MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+  MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+  MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+  MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+  MPU_InitStruct.SubRegionDisable = 0x00;
+  MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE;
+
+  HAL_MPU_ConfigRegion(&MPU_InitStruct);
+
   /* Enables the MPU */
   HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
 
