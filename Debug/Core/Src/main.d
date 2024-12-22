@@ -55,7 +55,6 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h \
  ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h \
  ../Core/Src/modules/remoraComms/../../modules/module.h \
- ../Core/Src/modules/remoraComms/../../drivers/pin/pin.h \
  ../Core/Src/modules/debug/debug.h \
  ../Core/Src/modules/debug/../../modules/module.h \
  ../Core/Src/modules/debug/../../drivers/pin/pin.h
@@ -126,7 +125,6 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h:
 ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/modules/remoraComms/../../modules/module.h:
-../Core/Src/modules/remoraComms/../../drivers/pin/pin.h:
 ../Core/Src/modules/debug/debug.h:
 ../Core/Src/modules/debug/../../modules/module.h:
 ../Core/Src/modules/debug/../../drivers/pin/pin.h:

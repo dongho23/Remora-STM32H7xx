@@ -11,8 +11,6 @@
 #include "../../modules/moduleinterrupt.h"
 
 
-#include "../../drivers/pin/pin.h"
-
 typedef struct
 {
   __IO uint32_t ISR;   /*!< DMA interrupt status register */
@@ -20,17 +18,12 @@ typedef struct
   __IO uint32_t IFCR;  /*!< DMA interrupt flag clear register */
 } DMA_Base_Registers;
 
+
 class RemoraComms : public Module
 {
 	friend class ModuleInterrupt;
 
     private:
-
-		Pin*				pin1;
-		Pin*				pin2;
-
-		//volatile rxData_t*  ptrRxData;
-    	//volatile txData_t*  ptrTxData;
 
         SPI_TypeDef*        spiType;
 
@@ -66,19 +59,20 @@ class RemoraComms : public Module
         //InterruptIn         slaveSelect;
         //bool                sharedSPI;
 
+		HAL_StatusTypeDef startMultiBufferDMASPI(uint8_t*, uint8_t*, uint8_t*, uint8_t*, uint16_t);
+		int getActiveDMAbuffer(DMA_HandleTypeDef*);
+		HAL_StatusTypeDef changeDMAAddress(DMA_HandleTypeDef*, uint32_t, int);
+
+		int DMA_IRQHandler(DMA_HandleTypeDef *);
+		void handleRxInterrupt(void);
+		void handleTxInterrupt(void);
+		void handleNssInterrupt(void);
+
+
     public:
 
         RemoraComms(SPI_TypeDef*);
 		virtual void update(void);
-
-		HAL_StatusTypeDef startMultiBufferDMASPI(uint8_t*, uint8_t*, uint8_t*, uint8_t*, uint16_t);
-		HAL_StatusTypeDef changeDMAAddress(DMA_HandleTypeDef*, uint32_t, int);
-		int getActiveDMAbuffer(DMA_HandleTypeDef*);
-		int DMA_IRQHandler(DMA_HandleTypeDef *);
-
-		void handleRxInterrupt(void);
-		void handleTxInterrupt(void);
-		void handleNssInterrupt(void);
 
         void init(void);
         void start(void);
