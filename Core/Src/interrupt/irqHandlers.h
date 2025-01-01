@@ -4,7 +4,7 @@ extern "C" {
 
 	void EXTI4_IRQHandler()
 	{
-		// Chip select pin is PC_4 (EXTI4 PIN 4)
+		// Chip select pin is PA_4 (EXTI4 PIN 4)
 		if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_4) != RESET)
 		{
 		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_4);

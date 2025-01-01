@@ -10,6 +10,8 @@
 #include "../../modules/module.h"
 #include "../../modules/moduleinterrupt.h"
 
+#include "../../drivers/pin/pin.h"
+
 
 typedef struct
 {
@@ -25,10 +27,15 @@ class RemoraComms : public Module
 
     private:
 
+		Pin					*pin1, *pin2, *pin3, *pin4;		// debugging pins
+
         SPI_TypeDef*        spiType;
 
-        rxData_t* 			rxBuffer;
         txData_t* 			txBuffer;
+        rxData_t* 			rxBuffer[2];
+        uint32_t			rxBufferAddress[2];			// array of RX buffer addresses
+        uint8_t				RXbufferIdx;
+        uint8_t				nextRXbufferIdx;
 
 		ModuleInterrupt*	NssInterrupt;
         ModuleInterrupt*	dmaTxInterrupt;
@@ -44,9 +51,15 @@ class RemoraComms : public Module
 
         uint8_t				interruptType;
         uint8_t				dmaStatus;
-        uint32_t			address;
-        uint8_t				memory;
-        bool				swapRx;
+        uint8_t				RxDMAmemoryIdx;
+        uint8_t				RXnextDMAmemoryIdx;
+
+        //uint8_t				rxDMAbuffer;
+
+        uint32_t			RxDMAaddress[2];
+
+        uint32_t			RxCount;
+        bool				swapRX;
 
         rxData_t            spiRxBuffer;
         uint8_t             rejectCnt;
@@ -60,7 +73,7 @@ class RemoraComms : public Module
         //bool                sharedSPI;
 
 		HAL_StatusTypeDef startMultiBufferDMASPI(uint8_t*, uint8_t*, uint8_t*, uint8_t*, uint16_t);
-		int getActiveDMAbuffer(DMA_HandleTypeDef*);
+		int getActiveDMAmemory(DMA_HandleTypeDef*);
 		HAL_StatusTypeDef changeDMAAddress(DMA_HandleTypeDef*, uint32_t, int);
 
 		int DMA_IRQHandler(DMA_HandleTypeDef *);

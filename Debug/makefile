@@ -16,6 +16,7 @@ RM := rm -rf
 -include Drivers/STM32H7xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/thread/subdir.mk
+-include Core/Src/modules/stepgen/subdir.mk
 -include Core/Src/modules/remoraComms/subdir.mk
 -include Core/Src/modules/debug/subdir.mk
 -include Core/Src/modules/subdir.mk

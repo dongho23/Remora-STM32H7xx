@@ -49,8 +49,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "thread/createThreads.h"
 
 // modules
-#include "modules/remoraComms/RemoraComms.h"
 #include "modules/debug/debug.h"
+#include "modules/remoraComms/RemoraComms.h"
+#include "modules/stepgen/stepgen.h"
 
 
 /***********************************************************************
@@ -188,7 +189,7 @@ void readJsonConfig()
 			    }
 
 			    // Remove comments from next line to print out the JSON config file
-			    printf("\n%s\n", strJson.c_str());
+			    //printf("\n%s\n", strJson.c_str());
 			}
 
 			f_close(&SDFile);
@@ -269,6 +270,100 @@ void configThreads()
 }
 
 
+void loadModules()
+{
+    if (configError) return;
+
+    printf("\n5. Loading modules\n");
+
+    // SPI communication monitoring
+    //servoThread->registerModule(comms);
+
+    JsonArray Modules = doc["Modules"];
+
+    // create objects from json data
+    for (JsonArray::iterator it=Modules.begin(); it!=Modules.end(); ++it)
+    {
+        module = *it;
+
+        const char* thread = module["Thread"];
+        const char* type = module["Type"];
+
+        if (!strcmp(thread,"Base"))
+        {
+            printf("\nBase thread object\n");
+
+            if (!strcmp(type,"Stepgen"))
+            {
+                createStepgen();
+            }
+            else if (!strcmp(type,"Encoder"))
+            {
+                //createEncoder();
+            }
+            else if (!strcmp(type,"RCServo"))
+            {
+                //createRCServo();
+            }
+        }
+        else if (!strcmp(thread,"Servo"))
+        {
+            printf("\nServo thread object\n");
+
+            if (!strcmp(type, "eStop"))
+            {
+                //createEStop();
+            }
+            else if (!strcmp(type, "Reset Pin"))
+            {
+                //createResetPin();
+            }
+            else if (!strcmp(type, "Blink"))
+            {
+                //createBlink();
+            }
+            else if (!strcmp(type,"Digital Pin"))
+            {
+                //createDigitalPin();
+            }
+            else if (!strcmp(type,"PWM"))
+            {
+                //createPWM();
+            }
+            else if (!strcmp(type,"Temperature"))
+            {
+                //createTemperature();
+            }
+            else if (!strcmp(type,"Switch"))
+            {
+                //createSwitch();
+            }
+            else if (!strcmp(type,"QEI"))
+            {
+                //createQEI();
+            }
+        }
+        else if (!strcmp(thread,"On load"))
+        {
+            printf("\nOn load - run once module\n");
+
+            if (!strcmp(type,"Motor Power"))
+            {
+                //createMotorPower();
+            }
+            else if (!strcmp(type,"TMC2208"))
+            {
+                //createTMC2208();
+            }
+            else if (!strcmp(type,"TMC2209"))
+            {
+                //createTMC2209();
+            }
+        }
+    }
+}
+
+
 void debugThreadHigh()
 {
     Module* debugOnB = new Debug("PE_11", 1);
@@ -303,10 +398,10 @@ int main(void)
 	PeriphCommonClock_Config();
 
 	// Enable caches
-	SCB_InvalidateICache();
-	SCB_EnableICache();
-	SCB_InvalidateDCache();
-	SCB_EnableDCache();
+	//SCB_InvalidateICache();
+	//SCB_EnableICache();
+	//SCB_InvalidateDCache();
+	//SCB_EnableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
@@ -329,7 +424,6 @@ int main(void)
 
 	txPingPongBuffer.txBuffers[0].header = PRU_DATA;
 	txPingPongBuffer.txBuffers[1].header = PRU_DATA;
-
 
 	enum State currentState;
 	enum State prevState;
@@ -360,7 +454,7 @@ int main(void)
 			              configThreads();
 			              createThreads();
 			              //debugThreadHigh();
-			              //loadModules();
+			              loadModules();
 			              //debugThreadLow();
 
 			              currentState = ST_START;
@@ -377,11 +471,11 @@ int main(void)
 			              if (!threadsRunning)
 			              {
 			                  // Start the threads
-			                  printf("\nStarting the BASE thread\n");
-			                  baseThread->startThread();
-
 			                  printf("\nStarting the SERVO thread\n");
 			                  servoThread->startThread();
+
+			                  printf("\nStarting the BASE thread\n");
+			                  baseThread->startThread();
 
 			                  threadsRunning = true;
 			              }
@@ -399,11 +493,12 @@ int main(void)
 			              }
 			              prevState = currentState;
 
+				          txPingPongBuffer.txBuffers[0].header =  PRU_DATA;
+				          txPingPongBuffer.txBuffers[1].header =  PRU_DATA;
+
 			              //wait for data before changing to running state
 			              if (comms->getStatus())
 			              {
-				          	  txPingPongBuffer.txBuffers[0].header =  PRU_DATA;
-				          	  txPingPongBuffer.txBuffers[1].header =  PRU_DATA;
 			                  currentState = ST_RUNNING;
 			              }
 
@@ -473,7 +568,6 @@ int main(void)
 			              prevState = currentState;
 
 			              // set all of the rxData buffer to 0
-			              // rxData.rxBuffer is volatile so need to do this the long way. memset cannot be used for volatile
 
 			              pruRxData = getCurrentRxBuffer(&rxPingPongBuffer);
 
@@ -518,6 +612,17 @@ void swapTxBuffers(TxPingPongBuffer* buffer) {
     buffer->currentTxBuffer = 1 - buffer->currentTxBuffer;
 }
 
+void setCurrentRxBufferIndex(RxPingPongBuffer* buffer, int index)
+{
+	buffer->currentRxBuffer = index;
+}
+
+void setCurrentTxBufferIndex(TxPingPongBuffer* buffer, int index)
+{
+	buffer->currentTxBuffer = index;
+}
+
+
 int getCurrentRxBufferIndex(RxPingPongBuffer* buffer)
 {
 	return buffer->currentRxBuffer;
@@ -526,6 +631,11 @@ int getCurrentRxBufferIndex(RxPingPongBuffer* buffer)
 int getCurrentTxBufferIndex(TxPingPongBuffer* buffer)
 {
 	return buffer->currentTxBuffer;
+}
+
+rxData_t* getRxBuffer(RxPingPongBuffer* buffer, int index)
+{
+    return &buffer->rxBuffers[index];
 }
 
 rxData_t* getCurrentRxBuffer(RxPingPongBuffer* buffer) {

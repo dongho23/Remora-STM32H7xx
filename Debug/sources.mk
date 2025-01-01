@@ -44,6 +44,7 @@ Core/Src \
 Core/Src/modules/debug \
 Core/Src/modules \
 Core/Src/modules/remoraComms \
+Core/Src/modules/stepgen \
 Core/Src/thread \
 Core/Startup \
 Drivers/STM32H7xx_HAL_Driver/Src \

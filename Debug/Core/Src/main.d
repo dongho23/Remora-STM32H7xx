@@ -49,15 +49,18 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/thread/pruThread.h ../Core/Src/thread/timer.h \
  ../Core/Src/thread/createThreads.h ../Core/Inc/extern.h \
  ../Core/Inc/configuration.h ../Core/Inc/remora.h \
- ../Core/Inc/../Src/thread/pruThread.h \
+ ../Core/Inc/../Src/thread/pruThread.h ../Core/Src/modules/debug/debug.h \
+ ../Core/Src/modules/debug/../../modules/module.h \
+ ../Core/Src/modules/debug/../../drivers/pin/pin.h \
  ../Core/Src/modules/remoraComms/RemoraComms.h \
  ../Core/Src/modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h \
  ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h \
  ../Core/Src/modules/remoraComms/../../modules/module.h \
- ../Core/Src/modules/debug/debug.h \
- ../Core/Src/modules/debug/../../modules/module.h \
- ../Core/Src/modules/debug/../../drivers/pin/pin.h
+ ../Core/Src/modules/remoraComms/../../drivers/pin/pin.h \
+ ../Core/Src/modules/stepgen/stepgen.h \
+ ../Core/Src/modules/stepgen/../../modules/module.h \
+ ../Core/Src/modules/stepgen/../../drivers/pin/pin.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -120,11 +123,15 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Inc/configuration.h:
 ../Core/Inc/remora.h:
 ../Core/Inc/../Src/thread/pruThread.h:
+../Core/Src/modules/debug/debug.h:
+../Core/Src/modules/debug/../../modules/module.h:
+../Core/Src/modules/debug/../../drivers/pin/pin.h:
 ../Core/Src/modules/remoraComms/RemoraComms.h:
 ../Core/Src/modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h:
 ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/modules/remoraComms/../../modules/module.h:
-../Core/Src/modules/debug/debug.h:
-../Core/Src/modules/debug/../../modules/module.h:
-../Core/Src/modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/remoraComms/../../drivers/pin/pin.h:
+../Core/Src/modules/stepgen/stepgen.h:
+../Core/Src/modules/stepgen/../../modules/module.h:
+../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
