@@ -35,10 +35,7 @@ class Stepgen : public Module
     float   frequencyScale;		  	  		// frequency scale
   	int32_t	DDSaddValue;		  	    	// DDS accumulator add vdd value
 
-
     Pin *enablePin, *stepPin, *directionPin;
-
-    Pin *pin;
 
     void makePulses();
     void stopPulses();

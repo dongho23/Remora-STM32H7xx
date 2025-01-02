@@ -85,27 +85,14 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/main.cpp:276:6:void loadModules()	19
 ../Core/Src/main.cpp:370:6:void debugThreadHigh()	1
 ../Core/Src/main.cpp:382:6:void debugThreadLow()	1
-../Core/Src/main.cpp:395:5:int main()	21
-../Core/Src/main.cpp:580:6:void initRxPingPongBuffer(RxPingPongBuffer*)	1
-../Core/Src/main.cpp:584:6:void initTxPingPongBuffer(TxPingPongBuffer*)	1
-../Core/Src/main.cpp:588:6:void swapRxBuffers(RxPingPongBuffer*)	1
-../Core/Src/main.cpp:592:6:void swapTxBuffers(TxPingPongBuffer*)	1
-../Core/Src/main.cpp:596:6:void setCurrentRxBufferIndex(RxPingPongBuffer*, int)	1
-../Core/Src/main.cpp:601:6:void setCurrentTxBufferIndex(TxPingPongBuffer*, int)	1
-../Core/Src/main.cpp:607:5:int getCurrentRxBufferIndex(RxPingPongBuffer*)	1
-../Core/Src/main.cpp:612:5:int getCurrentTxBufferIndex(TxPingPongBuffer*)	1
-../Core/Src/main.cpp:617:11:rxData_t* getRxBuffer(RxPingPongBuffer*, int)	1
-../Core/Src/main.cpp:622:11:rxData_t* getCurrentRxBuffer(RxPingPongBuffer*)	1
-../Core/Src/main.cpp:626:11:txData_t* getCurrentTxBuffer(TxPingPongBuffer*)	1
-../Core/Src/main.cpp:630:11:rxData_t* getAltRxBuffer(RxPingPongBuffer*)	1
-../Core/Src/main.cpp:634:11:txData_t* getAltTxBuffer(TxPingPongBuffer*)	1
-../Core/Src/main.cpp:643:6:void SystemClock_Config()	5
-../Core/Src/main.cpp:710:6:void PeriphCommonClock_Config()	2
-../Core/Src/main.cpp:739:13:void MX_SDMMC1_SD_Init()	2
-../Core/Src/main.cpp:769:13:void MX_USART1_UART_Init()	5
-../Core/Src/main.cpp:817:13:void MX_GPIO_Init()	1
-../Core/Src/main.cpp:839:6:void MPU_Config()	1
-../Core/Src/main.cpp:888:6:void Error_Handler()	1
+../Core/Src/main.cpp:395:5:int main()	27
+../Core/Src/main.cpp:644:6:void SystemClock_Config()	5
+../Core/Src/main.cpp:711:6:void PeriphCommonClock_Config()	2
+../Core/Src/main.cpp:740:13:void MX_SDMMC1_SD_Init()	2
+../Core/Src/main.cpp:770:13:void MX_USART1_UART_Init()	5
+../Core/Src/main.cpp:818:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:840:6:void MPU_Config()	1
+../Core/Src/main.cpp:889:6:void Error_Handler()	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/../Variant/../Polyfills/gsl/not_null.hpp:18:5:T ArduinoJson6101_110::not_null<T>::get() const [with T = const char*]	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Misc/../Strings/../Memory/MemoryPool.hpp:90:6:T* ArduinoJson6101_110::MemoryPool::allocRight() [with T = ArduinoJson6101_110::VariantSlot]	1
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\char_traits.h:182:5:static constexpr std::size_t __gnu_cxx::char_traits<_CharT>::length(const char_type*) [with _CharT = char]	2
@@ -181,9 +168,9 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/FloatTraits.hpp:45:12:static T ArduinoJson6101_110::FloatTraits<T, 8>::positiveBinaryPowerOfTen(int) [with T = double]	3
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/FloatTraits.hpp:60:12:static T ArduinoJson6101_110::FloatTraits<T, 8>::negativeBinaryPowerOfTen(int) [with T = double]	3
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Array/../Variant/../Numbers/../Polyfills/alias_cast.hpp:23:3:T ArduinoJson6101_110::alias_cast(F) [with T = double; F = long long unsigned int]	1
-../Core/Src/main.cpp:900:1:void __static_initialization_and_destruction_0(int, int)	5
+../Core/Src/main.cpp:901:1:void __static_initialization_and_destruction_0(int, int)	5
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:55:3:ArduinoJson6101_110::BasicJsonDocument<TAllocator>::~BasicJsonDocument() [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:84:8:void ArduinoJson6101_110::BasicJsonDocument<TAllocator>::freePool() [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	1
 ../Core/Src/lib/ArduinoJson6/ArduinoJson/Document/BasicJsonDocument.hpp:22:8:void ArduinoJson6101_110::AllocatorOwner<TAllocator>::deallocate(void*) [with TAllocator = ArduinoJson6101_110::DefaultAllocator]	1
-../Core/Src/main.cpp:900:1:cpp)	1
-../Core/Src/main.cpp:900:1:cpp)	1
+../Core/Src/main.cpp:901:1:cpp)	1
+../Core/Src/main.cpp:901:1:cpp)	1

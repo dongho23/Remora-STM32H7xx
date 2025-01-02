@@ -1,7 +1,7 @@
 
 /*
 Remora firmware for LinuxCNC
-Copyright (C) 2022  Scott Alford (aka scotta)
+Copyright (C) 2025  Scott Alford (aka scotta)
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License version 2
@@ -83,14 +83,14 @@ pruThread* servoThread;
 pruThread* baseThread;
 pruThread* commsThread;
 
-__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;	// TODO remove
-__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;	// TODO remove
+//__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;	// TODO remove
+//__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;	// TODO remove
 
 
 // unions for TX and RX data
-__attribute__((aligned(32))) volatile txData_t txData;
-__attribute__((aligned(32))) volatile rxData_t rxData;
-__attribute__((aligned(32))) volatile DMA_RxBuffer_t rxDMABuffer;	// DMA SPI double buffers
+__attribute__((section(".DmaSection"))) volatile txData_t txData;
+__attribute__((section(".DmaSection"))) volatile rxData_t rxData;
+__attribute__((section(".DmaSection"))) volatile DMA_RxBuffer_t rxDMABuffer;	// DMA SPI double buffers
 
 // pointers to data
 //rxData_t* pruRxData;
@@ -369,10 +369,10 @@ void loadModules()
 
 void debugThreadHigh()
 {
-    Module* debugOnB = new Debug("PE_11", 1);
+    Module* debugOnB = new Debug("PE_9", 1);
     baseThread->registerModule(debugOnB);
 
-    Module* debugOnS = new Debug("PE_12", 1);
+    Module* debugOnS = new Debug("PE_10", 1);
     servoThread->registerModule(debugOnS);
 
     //Module* debugOnC = new Debug("PE_6", 1);
@@ -381,10 +381,10 @@ void debugThreadHigh()
 
 void debugThreadLow()
 {
-    Module* debugOffB = new Debug("PE_11", 0);
+    Module* debugOffB = new Debug("PE_9", 0);
     baseThread->registerModule(debugOffB);
 
-    Module* debugOffS = new Debug("PE_12", 0);
+    Module* debugOffS = new Debug("PE_10", 0);
     servoThread->registerModule(debugOffS);
 
     //commsThread->startThread();
@@ -401,10 +401,10 @@ int main(void)
 	PeriphCommonClock_Config();
 
 	// Enable caches
-	//SCB_InvalidateICache();
-	//SCB_EnableICache();
-	//SCB_InvalidateDCache();
-	//SCB_EnableDCache();
+	SCB_InvalidateICache();
+	SCB_EnableICache();
+	SCB_InvalidateDCache();
+	SCB_EnableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
@@ -442,9 +442,9 @@ int main(void)
 			              deserialiseJSON();
 			              configThreads();
 			              createThreads();
-			              //debugThreadHigh();
+			              debugThreadHigh();
 			              loadModules();
-			              //debugThreadLow();
+			              debugThreadLow();
 
 			              currentState = ST_START;
 			              break;
@@ -575,7 +575,7 @@ int main(void)
 	}
 }
 
-
+/*
 
 void initRxPingPongBuffer(RxPingPongBuffer* buffer) {
     buffer->currentRxBuffer = 0;
@@ -634,6 +634,7 @@ rxData_t* getAltRxBuffer(RxPingPongBuffer* buffer) {
 txData_t* getAltTxBuffer(TxPingPongBuffer* buffer) {
     return &buffer->txBuffers[1 - buffer->currentTxBuffer];
 }
+*/
 
 
 /**

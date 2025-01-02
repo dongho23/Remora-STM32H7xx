@@ -176,6 +176,8 @@ void RemoraComms::start()
 	HAL_NVIC_SetPriority(this->irqDMAtx, SPI_DMA_TX_IRQ_PRIORITY, 0);  // TX needs to be a higher priority than RX
 	HAL_NVIC_EnableIRQ(this->irqDMAtx);
 
+	memset((void*)this->ptrTxData->txBuffer, 0, sizeof(this->ptrTxData->txBuffer));
+	memset((void*)this->ptrRxData->rxBuffer, 0, sizeof(this->ptrRxData->rxBuffer));
 	this->ptrTxData->header = PRU_DATA;
 
 	this->dmaStatus = this->startMultiBufferDMASPI(

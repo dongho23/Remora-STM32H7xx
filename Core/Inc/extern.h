@@ -23,10 +23,13 @@ extern pruThread* commsThread;
 // unions for RX and TX data
 extern volatile rxData_t rxData;
 extern volatile txData_t txData;
+extern volatile DMA_RxBuffer_t rxDMABuffer;
 
 // pointers to data
 extern volatile rxData_t*  ptrRxData;
 extern volatile txData_t*  ptrTxData;
+extern volatile DMA_RxBuffer_t* ptrRxDMABuffer;
+
 extern volatile int32_t*   ptrTxHeader;  
 extern volatile bool*      ptrPRUreset;
 extern volatile int32_t*   ptrJointFreqCmd[JOINTS];
@@ -37,6 +40,7 @@ extern volatile float*     ptrProcessVariable[VARIABLES];
 extern volatile uint16_t*  ptrInputs;
 extern volatile uint16_t*  ptrOutputs;
 
+/*
 // ping pong buffers
 extern RxPingPongBuffer rxPingPongBuffer;
 extern TxPingPongBuffer txPingPongBuffer;
@@ -54,5 +58,6 @@ extern rxData_t* getCurrentRxBuffer(RxPingPongBuffer* buffer);
 extern txData_t* getCurrentTxBuffer(TxPingPongBuffer* buffer);
 extern rxData_t* getAltRxBuffer(RxPingPongBuffer* buffer);
 extern txData_t* getAltTxBuffer(TxPingPongBuffer* buffer);
+*/
 
 #endif
