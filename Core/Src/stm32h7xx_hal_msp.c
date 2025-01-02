@@ -182,7 +182,6 @@ void HAL_SD_MspDeInit(SD_HandleTypeDef* hsd)
 
 }
 
-
 /**
 * @brief SPI MSP De-Initialization
 * This function freeze the hardware resources used in this example

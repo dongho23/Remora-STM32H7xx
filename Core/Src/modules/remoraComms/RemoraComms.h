@@ -20,6 +20,12 @@ typedef struct
   __IO uint32_t IFCR;  /*!< DMA interrupt flag clear register */
 } DMA_Base_Registers;
 
+typedef enum {
+    DMA_HALF_TRANSFER = 1,   // Half-transfer completed
+    DMA_TRANSFER_COMPLETE = 2, // Full transfer completed
+    DMA_OTHERWISE = 3        // Other or error status
+} DMA_TransferStatus_t;
+
 
 class RemoraComms : public Module
 {
@@ -29,29 +35,37 @@ class RemoraComms : public Module
 
 		Pin					*pin1, *pin2, *pin3, *pin4;		// debugging pins
 
-        SPI_TypeDef*        spiType;
+        volatile rxData_t*  		ptrRxData;
+        volatile txData_t*  		ptrTxData;
+        volatile DMA_RxBuffer_t* 	ptrRxDMABuffer;
+        SPI_TypeDef*        		spiType;
+
+        uint8_t						RxDMAmemoryIdx;
+        uint8_t						RXbufferIdx;
+        bool						copyRXbuffer;
+
 
         txData_t* 			txBuffer;
         rxData_t* 			rxBuffer[2];
         uint32_t			rxBufferAddress[2];			// array of RX buffer addresses
-        uint8_t				RXbufferIdx;
         uint8_t				nextRXbufferIdx;
 
-		ModuleInterrupt*	NssInterrupt;
-        ModuleInterrupt*	dmaTxInterrupt;
-		ModuleInterrupt*	dmaRxInterrupt;
-		IRQn_Type			irqNss;
-		IRQn_Type			irqDMArx;
-		IRQn_Type			irqDMAtx;
+		ModuleInterrupt*			NssInterrupt;
+        ModuleInterrupt*			dmaTxInterrupt;
+		ModuleInterrupt*			dmaRxInterrupt;
+		IRQn_Type					irqNss;
+		IRQn_Type					irqDMArx;
+		IRQn_Type					irqDMAtx;
 
-        SPI_HandleTypeDef   spiHandle;
-        DMA_HandleTypeDef   hdma_spi_tx;
-        DMA_HandleTypeDef   hdma_spi_rx;
-        HAL_StatusTypeDef   status;
+        SPI_HandleTypeDef   		spiHandle;
+        DMA_HandleTypeDef   		hdma_spi_tx;
+        DMA_HandleTypeDef   		hdma_spi_rx;
+        DMA_HandleTypeDef   		hdma_memtomem;
+        HAL_StatusTypeDef   		status;
 
         uint8_t				interruptType;
         uint8_t				dmaStatus;
-        uint8_t				RxDMAmemoryIdx;
+
         uint8_t				RXnextDMAmemoryIdx;
 
         //uint8_t				rxDMAbuffer;
@@ -59,7 +73,7 @@ class RemoraComms : public Module
         uint32_t			RxDMAaddress[2];
 
         uint32_t			RxCount;
-        bool				swapRX;
+
 
         rxData_t            spiRxBuffer;
         uint8_t             rejectCnt;
@@ -74,7 +88,6 @@ class RemoraComms : public Module
 
 		HAL_StatusTypeDef startMultiBufferDMASPI(uint8_t*, uint8_t*, uint8_t*, uint8_t*, uint16_t);
 		int getActiveDMAmemory(DMA_HandleTypeDef*);
-		HAL_StatusTypeDef changeDMAAddress(DMA_HandleTypeDef*, uint32_t, int);
 
 		int DMA_IRQHandler(DMA_HandleTypeDef *);
 		void handleRxInterrupt(void);
@@ -84,7 +97,7 @@ class RemoraComms : public Module
 
     public:
 
-        RemoraComms(SPI_TypeDef*);
+        RemoraComms(volatile rxData_t*, volatile txData_t*, volatile DMA_RxBuffer_t*, SPI_TypeDef*);
 		virtual void update(void);
 
         void init(void);

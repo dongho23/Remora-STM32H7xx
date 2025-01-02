@@ -1,7 +1,7 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-#define PRU_BASEFREQ    	36000 //24000   // PRU Base thread ISR update frequency (hz)
+#define PRU_BASEFREQ    	40000 //24000   // PRU Base thread ISR update frequency (hz)
 #define PRU_SERVOFREQ       1000            // PRU Servo thread ISR update freqency (hz)
 #define OVERSAMPLE          3
 #define SWBAUDRATE          19200           // Software serial baud rate
@@ -21,6 +21,13 @@
 #define PRU_ESTOP           0x65737470      // "estp" SPI payload
 #define PRU_ACKNOWLEDGE		0x61636b6e	    // "ackn" payload
 #define PRU_ERR		        0x6572726f	    // "erro" payload
+
+#define BASE_THREAD_IRQ_PRIORITY   	1
+#define SERVO_THREAD_IRQ_PRIORITY  	2
+#define COMMS_THREAD_IRQ_PRIORITY  	3
+#define SPI_DMA_TX_IRQ_PRIORITY 	4
+#define SPI_DMA_RX_IRQ_PRIORITY 	5
+#define SPI_NSS_IRQ_PRIORITY 		6
 
 
 // Serial configuration

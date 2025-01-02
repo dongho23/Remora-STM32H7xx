@@ -19,14 +19,17 @@
  * @brief Constructs a new RemoraComms object.
  * @param spiType Pointer to the SPI instance.
  */
-RemoraComms::RemoraComms(SPI_TypeDef* spiType) :
-    spiType(spiType)
+RemoraComms::RemoraComms(volatile rxData_t* ptrRxData, volatile txData_t* ptrTxData, volatile DMA_RxBuffer_t* ptrRxDMABuffer, SPI_TypeDef* spiType) :
+	ptrRxData(ptrRxData),
+	ptrTxData(ptrTxData),
+	ptrRxDMABuffer(ptrRxDMABuffer),
+	spiType(spiType)
 {
     this->spiHandle.Instance = this->spiType;
 
-    this->irqNss = EXTI4_IRQn;
-    this->irqDMAtx = DMA1_Stream0_IRQn;
-    this->irqDMArx = DMA1_Stream1_IRQn;
+    this->irqNss = 		EXTI4_IRQn;
+    this->irqDMAtx = 	DMA1_Stream0_IRQn;
+    this->irqDMArx = 	DMA1_Stream1_IRQn;
 
     // Note: Avoid performing complex initialization here as this constructor is called before DMA and cache setup.
 
@@ -107,6 +110,20 @@ void RemoraComms::init()
 
         printf("	Initialising DMA for SPI\n");
 
+        this->hdma_spi_tx.Instance 					= DMA1_Stream0;
+        this->hdma_spi_tx.Init.Request 				= DMA_REQUEST_SPI1_TX;
+        this->hdma_spi_tx.Init.Direction 			= DMA_MEMORY_TO_PERIPH;
+        this->hdma_spi_tx.Init.PeriphInc 			= DMA_PINC_DISABLE;
+        this->hdma_spi_tx.Init.MemInc 				= DMA_MINC_ENABLE;
+        this->hdma_spi_tx.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_BYTE;
+        this->hdma_spi_tx.Init.MemDataAlignment 	= DMA_MDATAALIGN_BYTE;
+        this->hdma_spi_tx.Init.Mode 				= DMA_CIRCULAR;
+        this->hdma_spi_tx.Init.Priority 			= DMA_PRIORITY_LOW;
+        this->hdma_spi_tx.Init.FIFOMode 			= DMA_FIFOMODE_DISABLE;
+
+        HAL_DMA_Init(&this->hdma_spi_tx);
+        __HAL_LINKDMA(&this->spiHandle, hdmatx, this->hdma_spi_tx);
+
         this->hdma_spi_rx.Instance 					= DMA1_Stream1;
         this->hdma_spi_rx.Init.Request 				= DMA_REQUEST_SPI1_RX;
         this->hdma_spi_rx.Init.Direction 			= DMA_PERIPH_TO_MEMORY;
@@ -121,19 +138,23 @@ void RemoraComms::init()
         HAL_DMA_Init(&this->hdma_spi_rx);
         __HAL_LINKDMA(&this->spiHandle, hdmarx, this->hdma_spi_rx);
 
-        this->hdma_spi_tx.Instance 					= DMA1_Stream0;
-        this->hdma_spi_tx.Init.Request 				= DMA_REQUEST_SPI1_TX;
-        this->hdma_spi_tx.Init.Direction 			= DMA_MEMORY_TO_PERIPH;
-        this->hdma_spi_tx.Init.PeriphInc 			= DMA_PINC_DISABLE;
-        this->hdma_spi_tx.Init.MemInc 				= DMA_MINC_ENABLE;
-        this->hdma_spi_tx.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_BYTE;
-        this->hdma_spi_tx.Init.MemDataAlignment 	= DMA_MDATAALIGN_BYTE;
-        this->hdma_spi_tx.Init.Mode 				= DMA_CIRCULAR;
-        this->hdma_spi_tx.Init.Priority 			= DMA_PRIORITY_LOW;
-        this->hdma_spi_tx.Init.FIFOMode 			= DMA_FIFOMODE_DISABLE;
+        printf("	Initialising DMA for Memory to Memory transfer\n");
 
-        HAL_DMA_Init(&this->hdma_spi_tx);
-        __HAL_LINKDMA(&this->spiHandle, hdmatx, this->hdma_spi_tx);
+        this->hdma_memtomem.Instance 				= DMA1_Stream2;
+        this->hdma_memtomem.Init.Request 			= DMA_REQUEST_MEM2MEM;
+        this->hdma_memtomem.Init.Direction 			= DMA_MEMORY_TO_MEMORY;
+        this->hdma_memtomem.Init.PeriphInc 			= DMA_PINC_ENABLE;
+        this->hdma_memtomem.Init.MemInc 			= DMA_MINC_ENABLE;
+        this->hdma_memtomem.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+        this->hdma_memtomem.Init.MemDataAlignment 	= DMA_MDATAALIGN_BYTE;
+        this->hdma_memtomem.Init.Mode 				= DMA_NORMAL;
+        this->hdma_memtomem.Init.Priority 			= DMA_PRIORITY_LOW;
+        this->hdma_memtomem.Init.FIFOMode 			= DMA_FIFOMODE_ENABLE;
+        this->hdma_memtomem.Init.FIFOThreshold 		= DMA_FIFO_THRESHOLD_FULL;
+        this->hdma_memtomem.Init.MemBurst 			= DMA_MBURST_SINGLE;
+        this->hdma_memtomem.Init.PeriphBurst 		= DMA_PBURST_SINGLE;
+
+        HAL_DMA_Init(&this->hdma_memtomem);
     }
 }
 
@@ -143,53 +164,27 @@ void RemoraComms::init()
  */
 void RemoraComms::start()
 {
-    NssInterrupt = new ModuleInterrupt(this->irqNss, this, static_cast<void (Module::*)()>(&RemoraComms::handleNssInterrupt));
-	HAL_NVIC_SetPriority(this->irqNss, 6, 0);
-    HAL_NVIC_EnableIRQ(this->irqNss);
+	NssInterrupt = new ModuleInterrupt(this->irqNss, this, static_cast<void (Module::*)()>(&RemoraComms::handleNssInterrupt));
+	HAL_NVIC_SetPriority(this->irqNss, SPI_NSS_IRQ_PRIORITY, 0);
+	HAL_NVIC_EnableIRQ(this->irqNss);
 
-    dmaRxInterrupt = new ModuleInterrupt(this->irqDMArx, this, static_cast<void (Module::*)()>(&RemoraComms::handleRxInterrupt));
-	HAL_NVIC_SetPriority(this->irqDMArx, 5, 0);
-    HAL_NVIC_EnableIRQ(this->irqDMArx);
+	dmaRxInterrupt = new ModuleInterrupt(this->irqDMArx, this, static_cast<void (Module::*)()>(&RemoraComms::handleRxInterrupt));
+	HAL_NVIC_SetPriority(this->irqDMArx, SPI_DMA_RX_IRQ_PRIORITY, 0);
+	HAL_NVIC_EnableIRQ(this->irqDMArx);
 
-    dmaTxInterrupt = new ModuleInterrupt(this->irqDMAtx, this, static_cast<void (Module::*)()>(&RemoraComms::handleTxInterrupt));
-    HAL_NVIC_SetPriority(this->irqDMAtx, 4, 0);	// TX needs to be a higher priority than RX
-    HAL_NVIC_EnableIRQ(this->irqDMAtx);
+	dmaTxInterrupt = new ModuleInterrupt(this->irqDMAtx, this, static_cast<void (Module::*)()>(&RemoraComms::handleTxInterrupt));
+	HAL_NVIC_SetPriority(this->irqDMAtx, SPI_DMA_TX_IRQ_PRIORITY, 0);  // TX needs to be a higher priority than RX
+	HAL_NVIC_EnableIRQ(this->irqDMAtx);
 
-	// Initially use the alternate buffer for RX in multi-buffer mode
-    this->RXbufferIdx = 1;
-    this->swapRX = false;
+	this->ptrTxData->header = PRU_DATA;
 
-	// Set the current buffers
-	setCurrentTxBufferIndex(&txPingPongBuffer, 0);
-	setCurrentRxBufferIndex(&rxPingPongBuffer, 1 - this->RXbufferIdx);
-
-	// Use single buffer for TX
-	this->txBuffer = getCurrentTxBuffer(&txPingPongBuffer);
-
-	// Use multi-buffers for RX
-	this->rxBuffer[0] = getCurrentRxBuffer(&rxPingPongBuffer);	// this is the initial buffer being used by the Remora modules
-	this->rxBuffer[1] = getAltRxBuffer(&rxPingPongBuffer);	  	// this is the initial buffer being used by the SPI DMA
-
-	//this->rxBufferAddress[0] = (uint32_t)this->rxBuffer[0];
-	//this->rxBufferAddress[1] = (uint32_t)this->rxBuffer[1];
-
-	// keep track of what the DMA is using
-	this->RxDMAaddress[0] = (uint32_t)this->rxBuffer[this->RXbufferIdx];	// DMA MEMORY0 address
-	this->RxDMAaddress[1] = (uint32_t)this->rxBuffer[this->RXbufferIdx];	// DMA MEMORY1 address
-
-
-    //this->spiHandle.Lock = HAL_UNLOCKED;
-
-    // Start DMA in multi-buffer circular mode
-	//this->dmaStatus = this->startMultiBufferDMASPI((uint8_t *)txBuffer->txBuffer, (uint8_t *)txBuffer->txBuffer,
-	//											   (uint8_t *)RxDMAaddress[0], (uint8_t *)RxDMAaddress[1], SPI_BUFF_SIZE);
-
-
-	this->dmaStatus = this->startMultiBufferDMASPI((uint8_t *)txBuffer->txBuffer, (uint8_t *)txBuffer->txBuffer,
-												   (uint8_t *)rxBuffer[this->RXbufferIdx]->rxBuffer, (uint8_t *)rxBuffer[this->RXbufferIdx]->rxBuffer, SPI_BUFF_SIZE);
-
-
-	//this->dmaStatus = this->startMultiBufferDMASPI((uint8_t *)txBuffer->txBuffer, (uint8_t *)txBuffer->txBuffer, (uint8_t *)rxBuffer->rxBuffer, (uint8_t *)rxBuffer->rxBuffer, SPI_BUFF_SIZE);
+	this->dmaStatus = this->startMultiBufferDMASPI(
+													(uint8_t*)this->ptrTxData->txBuffer,
+													(uint8_t*)this->ptrTxData->txBuffer,
+													(uint8_t*)this->ptrRxDMABuffer->buffer[0].rxBuffer,
+													(uint8_t*)this->ptrRxDMABuffer->buffer[1].rxBuffer,
+													SPI_BUFF_SIZE
+												   );
 	if (this->dmaStatus != HAL_OK)
 	{
 		printf("DMA SPI error\n");
@@ -396,7 +391,7 @@ int RemoraComms::DMA_IRQHandler(DMA_HandleTypeDef *hdma)
 
         /* Update error code */
         hdma->ErrorCode |= HAL_DMA_ERROR_TE;
-        interrupt =  3;
+        interrupt =  DMA_OTHERWISE;
       }
     }
     /* FIFO Error Interrupt management ******************************************/
@@ -409,7 +404,7 @@ int RemoraComms::DMA_IRQHandler(DMA_HandleTypeDef *hdma)
 
         /* Update error code */
         hdma->ErrorCode |= HAL_DMA_ERROR_FE;
-        interrupt =  3;
+        interrupt =  DMA_OTHERWISE;
       }
     }
     /* Direct Mode Error Interrupt management ***********************************/
@@ -422,7 +417,7 @@ int RemoraComms::DMA_IRQHandler(DMA_HandleTypeDef *hdma)
 
         /* Update error code */
         hdma->ErrorCode |= HAL_DMA_ERROR_DME;
-        interrupt =  3;
+        interrupt =  DMA_OTHERWISE;
       }
     }
     /* Half Transfer Complete Interrupt management ******************************/
@@ -470,7 +465,7 @@ int RemoraComms::DMA_IRQHandler(DMA_HandleTypeDef *hdma)
             hdma->XferHalfCpltCallback(hdma);
           }
         }
-        interrupt = 1;
+        interrupt = DMA_HALF_TRANSFER;
       }
     }
     /* Transfer Complete Interrupt management ***********************************/
@@ -505,7 +500,7 @@ int RemoraComms::DMA_IRQHandler(DMA_HandleTypeDef *hdma)
           {
             hdma->XferAbortCallback(hdma);
           }
-          interrupt = 1;
+          interrupt = DMA_TRANSFER_COMPLETE;
         }
 
 
@@ -625,47 +620,6 @@ int RemoraComms::getActiveDMAmemory(DMA_HandleTypeDef *hdma)
 
 
 /**
- * @brief  Updates the memory address for a specified DMA buffer.
- *
- * This function sets the new memory address for either Memory 0 or Memory 1
- * of a DMA stream.
- *
- * @param  hdma Pointer to a DMA_HandleTypeDef structure that contains
- *              the configuration information for the specified DMA stream.
- * @param  Address New memory address to be set for the specified buffer.
- * @param  memory Specifies the target memory buffer:
- *                - MEMORY0: Updates the address for Memory 0.
- *                - MEMORY1: Updates the address for Memory 1.
- * @retval HAL_StatusTypeDef:
- *         - HAL_OK: Address successfully updated.
- *         - HAL_ERROR: Invalid parameters or memory type.
- */
-HAL_StatusTypeDef RemoraComms::changeDMAAddress(DMA_HandleTypeDef *hdma, uint32_t Address, int memory)
-{
-    if (hdma == NULL)
-    {
-        return HAL_ERROR; // Null pointer check
-    }
-
-    if (memory == MEMORY0)
-    {
-        ((DMA_Stream_TypeDef *)hdma->Instance)->M0AR = Address;
-    }
-    else if (memory == MEMORY1)
-    {
-        ((DMA_Stream_TypeDef *)hdma->Instance)->M1AR = Address;
-    }
-    else
-    {
-        return HAL_ERROR; // Invalid memory parameter
-    }
-
-    return HAL_OK;
-}
-
-
-
-/**
  * @brief  Handles the NSS (Slave Select) interrupt for the communication interface.
  *
  * This function checks if the `swapRx` flag is set, indicating that the
@@ -678,23 +632,30 @@ HAL_StatusTypeDef RemoraComms::changeDMAAddress(DMA_HandleTypeDef *hdma, uint32_
 void RemoraComms::handleNssInterrupt()
 {
 	this->pin3->set(1);
-	//this->pin4->set(0); // write header detection reset
 
-	if (this->swapRX == true)
+	if (this->copyRXbuffer == true)
     {
-        __disable_irq(); 													// Disable interrupts to ensure atomic buffer swapping
-        setCurrentRxBufferIndex(&rxPingPongBuffer, this->RXbufferIdx); 	// Set the current receive buffer to the buffer not being used by DMA
-        //this->activeRXbuffer = this->nextRXbuffer; 							// Swap the RX buffer
-        __enable_irq(); 													// Re-enable interrupts
-        this->swapRX = false; 												// Clear the swapRx flag
+	    uint8_t* srcBuffer = (uint8_t*)this->ptrRxDMABuffer->buffer[this->RXbufferIdx].rxBuffer;
+	    uint8_t* destBuffer = (uint8_t*)this->ptrRxData->rxBuffer;
 
-        //if (RxDMAaddress[0] != RxDMAaddress[1])
-        //{
-        //	printf("DMA address error\n");
-        //}
+	    this->status = HAL_DMA_Start(
+	    							&this->hdma_memtomem,
+									(uint32_t)srcBuffer,
+									(uint32_t)destBuffer,
+									SPI_BUFF_SIZE
+	    							);
+
+	    // Wait for transfer to complete
+	    if (this->status == HAL_OK) {
+	        this->status = HAL_DMA_PollForTransfer(&hdma_memtomem, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
+	    }
+
+	    // Stop the DMA if needed (optional for safety)
+	    HAL_DMA_Abort(&this->hdma_memtomem);
+
+		this->copyRXbuffer = false;
     }
 	this->pin3->set(0);
-	//this->pin1->set(this->activeRXbuffer);
 }
 
 
@@ -729,126 +690,49 @@ void RemoraComms::handleTxInterrupt()
  */
 void RemoraComms::handleRxInterrupt()
 {
-    // Handle the interrupt and determine the type of interrupt (1 = half-transfer, 2 = transfer complete, 0 = otherwise)
+    // Handle the interrupt and determine the type of interrupt
     this->interruptType = DMA_IRQHandler(&this->hdma_spi_rx);
 
-    this->RxDMAmemoryIdx = getActiveDMAmemory(&this->hdma_spi_rx);
+    this->pin1->set(1);
+
+    this->RxDMAmemoryIdx= getActiveDMAmemory(&this->hdma_spi_rx);
     this->pin2->set(this->RxDMAmemoryIdx);	// debug - active DMA memory
 
-    switch (this->interruptType)
+    if (this->interruptType == DMA_HALF_TRANSFER) // use the HTC interrupt to check the packet being received
     {
-        case 1: // Half-transfer complete
-
-        	this->pin1->set(1);
-
-        	// Check the header in the buffer
-            if (this->rxBuffer[this->RxDMAmemoryIdx]->header == PRU_WRITE)
-            {
-            	//this->pin3->set(1); // debug - HTC write header received
-
-            	// we are receiving a packet with a valid WRITE header
-            	// - update the activeRXbuffer, we'll point the Remora modules to this in the NSS handler
-            	// - point the next DMA transfer to the other RX buffer
-
-            	this->RXbufferIdx = this->RxDMAmemoryIdx;
-            	this->nextRXbufferIdx = 1 - this->RxDMAmemoryIdx;
-
-            	if (this->RxDMAmemoryIdx == 0)
-            	{
-            		//HAL_DMAEx_ChangeMemory(&this->hdma_spi_rx, (uint32_t)this->rxBuffer[this->nextRXbufferIdx], MEMORY0);
-            	}
-            	else if (this->RxDMAmemoryIdx == 1)
-            	{
-            		//HAL_DMAEx_ChangeMemory(&this->hdma_spi_rx, (uint32_t)this->rxBuffer[this->nextRXbufferIdx], MEMORY1);
-            	}
-            	else
-            	{
-            		printf("Rx buffer error\n");
-            	}
-
-            	//this->RXnextDMAmemory = 1 - this->RXactiveDMAmemory;
-
-            	// update the next DMA address
-            	//RxDMAaddress[this->RXnextDMAmemory] = rxBufferAddress[this->nextRXbuffer];
-            	//this->RxDMAaddress[this->RXnextDMAmemory] = (uint32_t)this->rxBuffer[this->nextRXbuffer];
-
-            	// change the next DMA address
-                //changeDMAAddress(&this->hdma_spi_rx, (uint32_t)this->rxBuffer[this->nextRXbuffer], this->RXnextDMAmemory);
-
-                // Flag the swap of RX buffers in NSS interrupt handler
-                this->swapRX = true;
-            }
-            this->pin1->set(0);
-            break;
-
-        case 2: // Transfer complete
-            // Check if header is valid
-        	this->RxCount++;
-        	this->pin1->set(1);
-
-            if (this->rxBuffer[this->RXbufferIdx]->header == PRU_WRITE)
-            {
-            	//this->pin4->set(1); // debug - TC write header received
-
-				// we've got a valid WRITE header
-				// - point the other DMA memory to the next buffer
-
-				this->nextRXbufferIdx = 1 - this->RxDMAmemoryIdx;
-
-
-				if (this->nextRXbufferIdx == 0)
-				{
-					//HAL_DMAEx_ChangeMemory(&this->hdma_spi_rx, (uint32_t)this->rxBuffer[this->nextRXbufferIdx], MEMORY0);
-				}
-				else if (this->nextRXbufferIdx == 1)
-				{
-					//HAL_DMAEx_ChangeMemory(&this->hdma_spi_rx, (uint32_t)this->rxBuffer[this->nextRXbufferIdx], MEMORY1);
-				}
-				else
-				{
-					printf("Rx buffer error\n");
-				}
-
+    	switch(this->ptrRxDMABuffer->buffer[RxDMAmemoryIdx].header)
+    	{
+        	case PRU_READ:
 				this->SPIdata = true;
-				this->rejectCnt = 0; // Reset reject counter on valid data
-				this->SPIdataError = false;
+				this->rejectCnt = 0;
+				// READ so do nothing with the received data
+				break;
 
+            case PRU_WRITE:
+            	this->SPIdata = true;
+            	this->rejectCnt = 0;
+            	// we've got a good WRITE header, move the data to rxData
 
-                	//this->RXnextDMAmemory = 1 - this->RXactiveDMAmemory;
+            	RXbufferIdx = RxDMAmemoryIdx;
+            	copyRXbuffer = true;			// DMA memory to memory copy will happen in the NSS interrupt handler
+            	break;
 
-                	// update the next DMA address
-                	//RxDMAaddress[this->RXnextDMAmemory] = rxBufferAddress[this->nextRXbuffer];
-                	//this->RxDMAaddress[this->RXnextDMAmemory] = (uint32_t)this->rxBuffer[this->nextRXbuffer];
-
-                	// change the next DMA address
-                	//changeDMAAddress(&this->hdma_spi_rx, this->rxBufferAddress[this->nextRXbuffer], this->RXnextDMAmemory);
-                	//changeDMAAddress(&this->hdma_spi_rx, (uint32_t)this->rxBuffer[this->nextRXbuffer], this->RXnextDMAmemory);
-            }
-            else if (this->rxBuffer[this->RXbufferIdx]->header == PRU_READ)
-            {
-                this->SPIdata = true;
-                this->rejectCnt = 0; // Reset reject counter on valid data
-                this->SPIdataError = false;
-            }
-            else
-            {
-                this->rejectCnt++;
-                if (this->rejectCnt > 5)
-                {
-                    this->SPIdataError = true; // Flag data error if rejects exceed threshold
-                }
-                // TODO: Implement SPI reset logic if required
-            }
-            this->pin1->set(0);
-            break;
-
-    	case 3:
-    		// Other interrupt
-    		printf("   DMA SPI Rx error\n");
-    		break;
-
-        default:
-            break;
+            default:
+            	this->rejectCnt++;
+            	if (this->rejectCnt > 5)
+            	{
+            		this->SPIdataError = true;
+            	}
+    	}
+    	this->pin1->set(0);
+    }
+    else if (this->interruptType == DMA_TRANSFER_COMPLETE) // TC interrupt
+    {
+    	this->pin1->set(0);
+    }
+    else // other iterrupt source
+    {
+    	printf("   DMA SPI Rx error\n");
     }
 
     HAL_NVIC_EnableIRQ(this->irqDMArx);

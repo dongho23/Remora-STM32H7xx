@@ -83,18 +83,21 @@ pruThread* servoThread;
 pruThread* baseThread;
 pruThread* commsThread;
 
-__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;
-__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;	// double buffer not used, but maybe needed in the future
+__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;	// TODO remove
+__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;	// TODO remove
 
 
-// unions for RX and TX data
-//__attribute__((aligned(32))) volatile rxData_t rxData;	// TODO: remove
-//__attribute__((aligned(32))) volatile txData_t txData;	// TODO: remove
+// unions for TX and RX data
+__attribute__((aligned(32))) volatile txData_t txData;
+__attribute__((aligned(32))) volatile rxData_t rxData;
+__attribute__((aligned(32))) volatile DMA_RxBuffer_t rxDMABuffer;	// DMA SPI double buffers
 
 // pointers to data
-rxData_t* pruRxData;
-//volatile rxData_t*  ptrRxData = &rxData;	// TODO: remove
-//volatile txData_t*  ptrTxData = &txData;	// TODO: remove
+//rxData_t* pruRxData;
+volatile txData_t*  ptrTxData = &txData;
+volatile rxData_t*  ptrRxData = &rxData;
+volatile DMA_RxBuffer_t* ptrRxDMABuffer = &rxDMABuffer;
+
 volatile int32_t* 	ptrTxHeader;
 volatile bool*    	ptrPRUreset;
 volatile int32_t* 	ptrJointFreqCmd[JOINTS];
@@ -116,7 +119,7 @@ JsonObject module;
         OBJECTS etc
 ************************************************************************/
 
-RemoraComms* comms = new RemoraComms(SPI1);
+RemoraComms* comms = new RemoraComms(ptrRxData, ptrTxData,ptrRxDMABuffer, SPI1);
 
 
 
@@ -411,20 +414,6 @@ int main(void)
 	MX_SDMMC1_SD_Init();		// uncomment line 62 #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in FATFT/Target/sd_diskio.c
 	MX_FATFS_Init();
 
-
-	// prepare DMA buffers
-	int n = sizeof(txPingPongBuffer.txBuffers[0].txBuffer);
-	while(n-- > 0)
-	{
-		txPingPongBuffer.txBuffers[0].txBuffer[n] = 0;
-		txPingPongBuffer.txBuffers[1].txBuffer[n] = 0;
-		rxPingPongBuffer.rxBuffers[0].rxBuffer[n] = 0;
-		rxPingPongBuffer.rxBuffers[1].rxBuffer[n] = 0;
-	}
-
-	txPingPongBuffer.txBuffers[0].header = PRU_DATA;
-	txPingPongBuffer.txBuffers[1].header = PRU_DATA;
-
 	enum State currentState;
 	enum State prevState;
 
@@ -492,9 +481,6 @@ int main(void)
 			                  printf("\n## Entering IDLE state\n");
 			              }
 			              prevState = currentState;
-
-				          txPingPongBuffer.txBuffers[0].header =  PRU_DATA;
-				          txPingPongBuffer.txBuffers[1].header =  PRU_DATA;
 
 			              //wait for data before changing to running state
 			              if (comms->getStatus())
@@ -568,19 +554,14 @@ int main(void)
 			              prevState = currentState;
 
 			              // set all of the rxData buffer to 0
-
-			              pruRxData = getCurrentRxBuffer(&rxPingPongBuffer);
-
 			              printf("   Resetting rxBuffer\n");
 			              {
-							  int n = sizeof(pruRxData->rxBuffer);
+							  int n = SPI_BUFF_SIZE;
 							  while(n-- > 0)
 							  {
-								  pruRxData->rxBuffer[n] = 0;
+								  ptrRxData->rxBuffer[n] = 0;
 							  }
 			              }
-			              txPingPongBuffer.txBuffers[0].header = 0;
-			              txPingPongBuffer.txBuffers[1].header = 0;
 
 			              currentState = ST_IDLE;
 			              break;

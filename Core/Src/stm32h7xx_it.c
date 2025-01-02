@@ -202,8 +202,6 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 
-
-
 /**
   * @brief This function handles SDMMC1 global interrupt.
   */

@@ -21,7 +21,7 @@ typedef union
   };
 }  __attribute__((aligned(32))) rxData_t;
 
-extern volatile rxData_t rxData;
+//extern volatile rxData_t rxData;
 
 
 typedef union
@@ -40,7 +40,15 @@ typedef union
   };
 } __attribute__((aligned(32))) txData_t;
 
-extern volatile txData_t txData;
+//extern volatile txData_t txData;
+
+
+typedef struct {
+    volatile rxData_t buffer[2]; // DMA RX buffers
+} DMA_RxBuffer_t;
+
+
+
 
 
 typedef struct {

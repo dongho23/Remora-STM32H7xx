@@ -16,10 +16,14 @@ class Stepgen : public Module
 {
   private:
 
-    int 	jointNumber;              		// LinuxCNC joint number
-    int 	mask;
+    int 				jointNumber;              		// LinuxCNC joint number
+    std::string 		enable, step, direction;		// physical pins connections
+    int32_t 			stepBit;                		// position in the DDS accumulator that triggers a step pulse
+    volatile int32_t 	*ptrFrequencyCommand; 			// pointer to the data source where to get the frequency command
+    volatile int32_t 	*ptrFeedback;       			// pointer where to put the feedback
+    volatile uint8_t 	*ptrJointEnable;				// pointer to the joint enables
 
-    std::string enable, step, direction;	// physical pins connections
+    int 	mask;
 
     bool 	isEnabled;        				// flag to enable the step generator
     bool 	isForward;        				// current direction
@@ -29,13 +33,8 @@ class Stepgen : public Module
     int32_t rawCount;             			// current position raw count - not currently used - mirrors original stepgen.c
     int32_t DDSaccumulator;       			// Direct Digital Synthesis (DDS) accumulator
     float   frequencyScale;		  	  		// frequency scale
-  	int32_t	DDSaddValue;		  	    	// DDS accumulator add value
-    int32_t stepBit;                		// position in the DDS accumulator that triggers a step pulse
+  	int32_t	DDSaddValue;		  	    	// DDS accumulator add vdd value
 
-    rxData_t* rxData;               		// pointer to ping-pong buffer
-	txData_t* txData;               		// pointer to ping-pong buffer
-
-    rxData_t* rxData2;               		// pointer to ping-pong buffer
 
     Pin *enablePin, *stepPin, *directionPin;
 
@@ -46,7 +45,7 @@ class Stepgen : public Module
 
   public:
 
-    Stepgen(int32_t, int, std::string, std::string, std::string, int);
+    Stepgen(int32_t, int, std::string, std::string, std::string, int, volatile int32_t&, volatile int32_t&, volatile uint8_t&);  // constructor
 
     virtual void update(void);           	// Module default interface
     virtual void updatePost(void);
