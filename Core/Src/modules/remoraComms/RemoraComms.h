@@ -23,7 +23,7 @@ typedef struct
 typedef enum {
     DMA_HALF_TRANSFER = 1,   // Half-transfer completed
     DMA_TRANSFER_COMPLETE = 2, // Full transfer completed
-    DMA_OTHERWISE = 3        // Other or error status
+    DMA_OTHER = 3        // Other or error status
 } DMA_TransferStatus_t;
 
 
@@ -32,8 +32,6 @@ class RemoraComms : public Module
 	friend class ModuleInterrupt;
 
     private:
-
-		Pin					*pin1, *pin2, *pin3, *pin4;		// debugging pins
 
         volatile rxData_t*  		ptrRxData;
         volatile txData_t*  		ptrTxData;
@@ -45,10 +43,10 @@ class RemoraComms : public Module
         bool						copyRXbuffer;
 
 
-        txData_t* 			txBuffer;
-        rxData_t* 			rxBuffer[2];
-        uint32_t			rxBufferAddress[2];			// array of RX buffer addresses
-        uint8_t				nextRXbufferIdx;
+        //txData_t* 			txBuffer;
+        //rxData_t* 			rxBuffer[2];
+        //uint32_t			rxBufferAddress[2];			// array of RX buffer addresses
+        //uint8_t				nextRXbufferIdx;
 
 		ModuleInterrupt*			NssInterrupt;
         ModuleInterrupt*			dmaTxInterrupt;
@@ -67,12 +65,6 @@ class RemoraComms : public Module
         uint8_t				dmaStatus;
 
         uint8_t				RXnextDMAmemoryIdx;
-
-        //uint8_t				rxDMAbuffer;
-
-        uint32_t			RxDMAaddress[2];
-
-        uint32_t			RxCount;
 
 
         rxData_t            spiRxBuffer;
