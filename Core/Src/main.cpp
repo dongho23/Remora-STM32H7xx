@@ -22,7 +22,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #define MINOR_VERSION	1
 #define PATCH			0
 
-
+#define DEBUG_THREADS	1
+#define BASE_PIN		"PE_9"
+#define SERVO_PIN 		"PE_10"
 
 #include "main.h"
 #include "fatfs.h"
@@ -35,7 +37,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "remora.h"
 
 // libraries
-#include "lib/ArduinoJson6/ArduinoJson.h"
+#include "lib/ArduinoJson7/ArduinoJson.h"
 
 // drivers
 #include "drivers/pin/pin.h"
@@ -49,7 +51,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "thread/createThreads.h"
 
 // modules
+#include "modules/blink/blink.h"
 #include "modules/debug/debug.h"
+#include "modules/motorPower/motorPower.h"
 #include "modules/remoraComms/RemoraComms.h"
 #include "modules/stepgen/stepgen.h"
 
@@ -69,9 +73,12 @@ enum State {
     ST_WDRESET
 };
 
-uint8_t resetCnt;
+//uint8_t resetCnt;
 uint32_t base_freq = PRU_BASEFREQ;
 uint32_t servo_freq = PRU_SERVOFREQ;
+uint8_t	baseCount;
+uint8_t	servoCount;
+uint8_t	commsCount;
 
 // boolean
 volatile bool PRUreset;
@@ -82,10 +89,6 @@ bool threadsRunning = false;
 pruThread* servoThread;
 pruThread* baseThread;
 pruThread* commsThread;
-
-//__attribute__((section(".DmaSection"))) RxPingPongBuffer rxPingPongBuffer;	// TODO remove
-//__attribute__((section(".DmaSection"))) TxPingPongBuffer txPingPongBuffer;	// TODO remove
-
 
 // unions for TX and RX data
 __attribute__((section(".DmaSection"))) volatile txData_t txData;
@@ -109,17 +112,18 @@ volatile uint16_t* 	ptrInputs;
 volatile uint16_t* 	ptrOutputs;
 
 // JSONconfig file stuff
-std::string strJson;
-DynamicJsonDocument doc(JSON_BUFF_SIZE);
-JsonObject thread;
-JsonObject module;
+std::string 		strJson;
+JsonDocument 		doc;
+JsonObject 			thread;
+JsonObject 			module;
+
 
 
 /***********************************************************************
         OBJECTS etc
 ************************************************************************/
 
-RemoraComms* comms = new RemoraComms(ptrRxData, ptrTxData,ptrRxDMABuffer, SPI1);
+RemoraComms* comms = new RemoraComms(ptrRxData, ptrTxData, ptrRxDMABuffer, SPI1);
 
 
 
@@ -192,7 +196,7 @@ void readJsonConfig()
 			    }
 
 			    // Remove comments from next line to print out the JSON config file
-			    //printf("\n%s\n", strJson.c_str());
+			    printf("\n%s\n", strJson.c_str());
 			}
 
 			f_close(&SDFile);
@@ -202,9 +206,9 @@ void readJsonConfig()
 
 void setup()
 {
-    printf("\n2. Setting up SPI DMA and threads\n");
+    printf("\n2. Starting up Remora communications\n");
 
-    // initialise the Remora comms
+    // initialise and start the Remora communications module
     comms->init();
     comms->start();
 }
@@ -243,11 +247,47 @@ void deserialiseJSON()
     }
 }
 
+
+void countModules()
+{
+    baseCount = 0;
+    servoCount = 0;
+
+    printf("\n4. Counting modules\n");
+
+    JsonArray Modules = doc["Modules"];
+    for (JsonArray::iterator it = Modules.begin(); it != Modules.end(); ++it) {
+        JsonObject module = *it;
+
+        const char* thread = module["Thread"];
+        if (thread) {
+            if (!strcmp(thread, "Base")) {
+                ++baseCount;
+            } else if (!strcmp(thread, "Servo")) {
+                ++servoCount;
+            }
+        }
+    }
+
+    // add the communication monitoring module to the servo thread count
+    ++servoCount;
+
+    if (DEBUG_THREADS)
+    {
+    	baseCount = baseCount + 2;
+    	servoCount = servoCount + 2;
+    }
+
+    printf("	Base thread modules: %d\n", baseCount);
+    printf("	Servo thread modules: %d\n", servoCount);
+}
+
+
 void configThreads()
 {
     if (configError) return;
 
-    printf("\n4. Configuring threads\n");
+    printf("\n5. Configuring threads\n");
 
     JsonArray Threads = doc["Threads"];
 
@@ -277,10 +317,10 @@ void loadModules()
 {
     if (configError) return;
 
-    printf("\n5. Loading modules\n");
+    printf("\n6. Loading modules\n");
 
-    // SPI communication monitoring
-    //servoThread->registerModule(comms);
+    // Communication monitoring
+    servoThread->registerModule(comms);
 
     JsonArray Modules = doc["Modules"];
 
@@ -323,7 +363,7 @@ void loadModules()
             }
             else if (!strcmp(type, "Blink"))
             {
-                //createBlink();
+                createBlink();
             }
             else if (!strcmp(type,"Digital Pin"))
             {
@@ -352,7 +392,7 @@ void loadModules()
 
             if (!strcmp(type,"Motor Power"))
             {
-                //createMotorPower();
+                createMotorPower();
             }
             else if (!strcmp(type,"TMC2208"))
             {
@@ -369,10 +409,10 @@ void loadModules()
 
 void debugThreadHigh()
 {
-    Module* debugOnB = new Debug("PE_9", 1);
+    Module* debugOnB = new Debug(BASE_PIN, 1);
     baseThread->registerModule(debugOnB);
 
-    Module* debugOnS = new Debug("PE_10", 1);
+    Module* debugOnS = new Debug(SERVO_PIN, 1);
     servoThread->registerModule(debugOnS);
 
     //Module* debugOnC = new Debug("PE_6", 1);
@@ -403,8 +443,8 @@ int main(void)
 	// Enable caches
 	SCB_InvalidateICache();
 	SCB_EnableICache();
-	SCB_InvalidateDCache();
-	SCB_EnableDCache();
+	//SCB_InvalidateDCache();
+	//SCB_EnableDCache();
 
 	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
@@ -420,9 +460,8 @@ int main(void)
 	currentState = ST_SETUP;
 	prevState = ST_RESET;
 
-    comms->setStatus(false);
-    comms->setError(false);
-    resetCnt = 0;
+    //comms->setStatus(false);
+    //resetCnt = 0;
 
 	printf("\nRemora version %d.%d.%d for %s starting\n\n", MAJOR_VERSION, MINOR_VERSION, PATCH, BOARD);
 
@@ -440,11 +479,12 @@ int main(void)
 			              readJsonConfig();
 			              setup();
 			              deserialiseJSON();
+			              countModules();
 			              configThreads();
 			              createThreads();
-			              debugThreadHigh();
+			              if (DEBUG_THREADS) debugThreadHigh();
 			              loadModules();
-			              debugThreadLow();
+			              if (DEBUG_THREADS) debugThreadLow();
 
 			              currentState = ST_START;
 			              break;
@@ -498,31 +538,8 @@ int main(void)
 			              }
 			              prevState = currentState;
 
-
-			              // check to see if there there has been SPI errors
-			              if (comms->getError())
+			              if (comms->getStatus() == false)
 			              {
-			                  printf("Communication data error\n");
-			                  comms->setError(false);
-			              }
-
-			              if (comms->getStatus())
-			              {
-			                  // SPI data received by DMA
-			                  resetCnt = 0;
-			                  comms->setStatus(false);
-			              }
-			              else
-			              {
-			                  // no data received by DMA
-			                  resetCnt++;
-			              }
-
-			              if (resetCnt > SPI_ERR_MAX)
-			              {
-			                  // reset threshold reached, reset the PRU
-			                  printf("   Communication data error limit reached, resetting\n");
-			                  resetCnt = 0;
 			                  currentState = ST_RESET;
 			              }
 
@@ -571,70 +588,9 @@ int main(void)
 			        	  HAL_NVIC_SystemReset();
 			              break;
 			  }
-		HAL_Delay(100);
 	}
 }
 
-/*
-
-void initRxPingPongBuffer(RxPingPongBuffer* buffer) {
-    buffer->currentRxBuffer = 0;
-}
-
-void initTxPingPongBuffer(TxPingPongBuffer* buffer) {
-    buffer->currentTxBuffer = 0;
-}
-
-void swapRxBuffers(RxPingPongBuffer* buffer) {
-    buffer->currentRxBuffer = 1 - buffer->currentRxBuffer;
-}
-
-void swapTxBuffers(TxPingPongBuffer* buffer) {
-    buffer->currentTxBuffer = 1 - buffer->currentTxBuffer;
-}
-
-void setCurrentRxBufferIndex(RxPingPongBuffer* buffer, int index)
-{
-	buffer->currentRxBuffer = index;
-}
-
-void setCurrentTxBufferIndex(TxPingPongBuffer* buffer, int index)
-{
-	buffer->currentTxBuffer = index;
-}
-
-
-int getCurrentRxBufferIndex(RxPingPongBuffer* buffer)
-{
-	return buffer->currentRxBuffer;
-}
-
-int getCurrentTxBufferIndex(TxPingPongBuffer* buffer)
-{
-	return buffer->currentTxBuffer;
-}
-
-rxData_t* getRxBuffer(RxPingPongBuffer* buffer, int index)
-{
-    return &buffer->rxBuffers[index];
-}
-
-rxData_t* getCurrentRxBuffer(RxPingPongBuffer* buffer) {
-    return &buffer->rxBuffers[buffer->currentRxBuffer];
-}
-
-txData_t* getCurrentTxBuffer(TxPingPongBuffer* buffer) {
-    return &buffer->txBuffers[buffer->currentTxBuffer];
-}
-
-rxData_t* getAltRxBuffer(RxPingPongBuffer* buffer) {
-    return &buffer->rxBuffers[1 - buffer->currentRxBuffer];
-}
-
-txData_t* getAltTxBuffer(TxPingPongBuffer* buffer) {
-    return &buffer->txBuffers[1 - buffer->currentTxBuffer];
-}
-*/
 
 
 /**

@@ -4,12 +4,15 @@
 #include "configuration.h"
 #include "remora.h"
 
-#include "../Src/lib/ArduinoJson6/ArduinoJson.h"
+#include "../Src/lib/ArduinoJson7/ArduinoJson.h"
 #include "../Src/thread/pruThread.h"
 
 
 extern uint32_t base_freq;
 extern uint32_t servo_freq;
+extern uint8_t	baseCount;
+extern uint8_t	servoCount;
+extern uint8_t	commsCount;
 
 extern JsonObject module;
 

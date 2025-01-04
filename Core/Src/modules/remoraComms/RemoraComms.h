@@ -42,12 +42,6 @@ class RemoraComms : public Module
         uint8_t						RXbufferIdx;
         bool						copyRXbuffer;
 
-
-        //txData_t* 			txBuffer;
-        //rxData_t* 			rxBuffer[2];
-        //uint32_t			rxBufferAddress[2];			// array of RX buffer addresses
-        //uint8_t				nextRXbufferIdx;
-
 		ModuleInterrupt*			NssInterrupt;
         ModuleInterrupt*			dmaTxInterrupt;
 		ModuleInterrupt*			dmaRxInterrupt;
@@ -59,20 +53,15 @@ class RemoraComms : public Module
         DMA_HandleTypeDef   		hdma_spi_tx;
         DMA_HandleTypeDef   		hdma_spi_rx;
         DMA_HandleTypeDef   		hdma_memtomem;
-        HAL_StatusTypeDef   		status;
+        HAL_StatusTypeDef   		HALstatus;
 
-        uint8_t				interruptType;
-        uint8_t				dmaStatus;
+        uint8_t						interruptType;
+        uint8_t						dmaStatus;
 
-        uint8_t				RXnextDMAmemoryIdx;
-
-
-        rxData_t            spiRxBuffer;
-        uint8_t             rejectCnt;
-        bool				dmaRx;
-        bool				dmaTx;
-        bool                SPIdata;
-        bool                SPIdataError;
+        bool						newData;
+        bool                		data;
+        bool                		status;
+        uint8_t						noDataCount;
 
         //PinName             interruptPin;
         //InterruptIn         slaveSelect;
@@ -96,9 +85,6 @@ class RemoraComms : public Module
         void start(void);
         bool getStatus(void);
         void setStatus(bool);
-        bool getError(void);
-        void setError(bool);
-
 };
 
 #endif

@@ -4,16 +4,10 @@
 #include "stm32h7xx_hal.h"
 #include "timer.h"
 
-// Standard Template Library (STL) includes
-#include <vector>
-
-using namespace std;
-
 class Module;
 
 class pruThread
 {
-
 	private:
 
 		pruTimer* 		    TimerPtr;
@@ -22,15 +16,18 @@ class pruThread
 		IRQn_Type 			irq;
 		uint32_t 			frequency;
 
-		bool hasThreadPost;		// run updatePost() vector
+	    Module** modules;       // Dynamic array for main modules
+	    Module** modulesPost;   // Dynamic array for post modules
+	    size_t maxModules;      // Maximum number of modules
+	    size_t moduleCount = 0; // Current count of main modules
+	    size_t modulePostCount = 0; // Current count of post modules
 
-		vector<Module*> vThread;		// vector containing pointers to Thread modules
-		vector<Module*> vThreadPost;		// vector containing pointers to Thread modules that run after the main vector modules
-		vector<Module*>::iterator iter;
+		bool hasThreadPost;		// run updatePost()
 
 	public:
 
-		pruThread(TIM_TypeDef* timer, IRQn_Type irq, uint32_t frequency);
+		pruThread(TIM_TypeDef* timer, IRQn_Type irq, uint32_t frequency, uint8_t maxModules);
+		~pruThread();
 
 		void registerModule(Module *module);
 		void registerModulePost(Module *module);
