@@ -26,12 +26,13 @@ RemoraComms::RemoraComms(volatile rxData_t* ptrRxData, volatile txData_t* ptrTxD
 	spiType(spiType)
 {
     this->spiHandle.Instance = this->spiType;
+    this->status = false;
 
     this->irqNss = 		EXTI4_IRQn;
     this->irqDMAtx = 	DMA1_Stream0_IRQn;
     this->irqDMArx = 	DMA1_Stream1_IRQn;
 
-    // Note: Avoid performing complex initialization here as this constructor is called before DMA and cache setup.
+    // Note: Avoid performing complex initialisation here as this constructor is called before DMA and cache setup.
 }
 
 
@@ -446,45 +447,15 @@ int RemoraComms::DMA_IRQHandler(DMA_HandleTypeDef *hdma)
         /* Clear the half transfer complete flag */
         regs_dma->IFCR = DMA_FLAG_HTIF0_4 << (hdma->StreamIndex & 0x1FU);
 
-        /* Multi_Buffering mode enabled */
-        if(((((DMA_Stream_TypeDef   *)hdma->Instance)->CR) & (uint32_t)(DMA_SxCR_DBM)) != 0U)
+        /* Disable the half transfer interrupt if the DMA mode is not CIRCULAR */
+        if((((DMA_Stream_TypeDef   *)hdma->Instance)->CR & DMA_SxCR_CIRC) == 0U)
         {
-          /* Current memory buffer used is Memory 0 */
-          if((((DMA_Stream_TypeDef   *)hdma->Instance)->CR & DMA_SxCR_CT) == 0U)
-          {
-            if(hdma->XferHalfCpltCallback != NULL)
-            {
-              /* Half transfer callback */
-              //hdma->XferHalfCpltCallback(hdma);
-            }
-          }
-          /* Current memory buffer used is Memory 1 */
-          else
-          {
-            if(hdma->XferM1HalfCpltCallback != NULL)
-            {
-              /* Half transfer callback */
-              //hdma->XferM1HalfCpltCallback(hdma);
-            }
-          }
+          /* Disable the half transfer interrupt */
+          ((DMA_Stream_TypeDef   *)hdma->Instance)->CR  &= ~(DMA_IT_HT);
         }
-        else
-        {
-          /* Disable the half transfer interrupt if the DMA mode is not CIRCULAR */
-          if((((DMA_Stream_TypeDef   *)hdma->Instance)->CR & DMA_SxCR_CIRC) == 0U)
-          {
-            /* Disable the half transfer interrupt */
-            ((DMA_Stream_TypeDef   *)hdma->Instance)->CR  &= ~(DMA_IT_HT);
-          }
 
-          if(hdma->XferHalfCpltCallback != NULL)
-          {
-            /* Half transfer callback */
-            hdma->XferHalfCpltCallback(hdma);
-          }
-        }
-        interrupt = DMA_HALF_TRANSFER;
       }
+      interrupt = DMA_HALF_TRANSFER;
     }
     /* Transfer Complete Interrupt management ***********************************/
     if ((tmpisr_dma & (DMA_FLAG_TCIF0_4 << (hdma->StreamIndex & 0x1FU))) != 0U)
@@ -514,60 +485,23 @@ int RemoraComms::DMA_IRQHandler(DMA_HandleTypeDef *hdma)
           /* Process Unlocked */
           __HAL_UNLOCK(hdma);
 
-          if(hdma->XferAbortCallback != NULL)
-          {
-            hdma->XferAbortCallback(hdma);
-          }
           interrupt = DMA_TRANSFER_COMPLETE;
         }
 
-
-        if(((((DMA_Stream_TypeDef   *)hdma->Instance)->CR) & (uint32_t)(DMA_SxCR_DBM)) != 0U)
+        if((((DMA_Stream_TypeDef   *)hdma->Instance)->CR & DMA_SxCR_CIRC) == 0U)
         {
-          /* Current memory buffer used is Memory 0 */
-          if((((DMA_Stream_TypeDef   *)hdma->Instance)->CR & DMA_SxCR_CT) == 0U)
-          {
-            if(hdma->XferM1CpltCallback != NULL)
-            {
-              /* Transfer complete Callback for memory1 */
-              //hdma->XferM1CpltCallback(hdma);
-            }
-          }
-          /* Current memory buffer used is Memory 1 */
-          else
-          {
-            if(hdma->XferCpltCallback != NULL)
-            {
-              /* Transfer complete Callback for memory0 */
-              //hdma->XferCpltCallback(hdma);
-            }
-          }
-        }
-        /* Disable the transfer complete interrupt if the DMA mode is not CIRCULAR */
-        else
-        {
-          if((((DMA_Stream_TypeDef   *)hdma->Instance)->CR & DMA_SxCR_CIRC) == 0U)
-          {
-            /* Disable the transfer complete interrupt */
-            ((DMA_Stream_TypeDef   *)hdma->Instance)->CR  &= ~(DMA_IT_TC);
+          /* Disable the transfer complete interrupt */
+          ((DMA_Stream_TypeDef   *)hdma->Instance)->CR  &= ~(DMA_IT_TC);
 
-            /* Change the DMA state */
-            hdma->State = HAL_DMA_STATE_READY;
+          /* Change the DMA state */
+          hdma->State = HAL_DMA_STATE_READY;
 
-            /* Process Unlocked */
-            __HAL_UNLOCK(hdma);
-          }
-
-          if(hdma->XferCpltCallback != NULL)
-          {
-            /* Transfer complete callback */
-            hdma->XferCpltCallback(hdma);
-          }
+          /* Process Unlocked */
+          __HAL_UNLOCK(hdma);
         }
         interrupt =  2;
       }
     }
-
   }
 
   return interrupt;
@@ -596,42 +530,24 @@ int RemoraComms::getActiveDMAmemory(DMA_HandleTypeDef *hdma)
 
 
 /**
- * @brief  Handles the NSS (Slave Select) interrupt for the communication interface.
+ * @brief  Handles the NSS (Slave Select) interrupt for SPI communication.
  *
- * This function checks if the `copyRXbuffer` flag is set, indicating that the receive
- * DMA buffer requires copying to the main Rx buffer. If the flag is set, the function:
- * 1. Starts a DMA memory-to-memory transfer to copy data from the DMA buffer to the main buffer.
- * 2. Waits for the transfer to complete.
- * 3. Aborts the DMA for safety once the transfer is complete.
+ * This function is triggered when an SPI packet has been fully received.
+ * It checks if new WRITE data has been received (`newData` flag) and sets
+ * the `copyRXbuffer` flag to indicate that the received data should be copied
+ * during the servo thread update.
  *
- * After completing these steps, the `copyRXbuffer` flag is cleared.
+ * @details
+ * - If the `newData` flag is set, the `copyRXbuffer` flag is marked as `true`.
+ *   The actual DMA-based buffer copy operation is deferred to the servo thread update.
  */
 void RemoraComms::handleNssInterrupt()
 {
-	if (this->copyRXbuffer == true)
-    {
-	    uint8_t* srcBuffer = (uint8_t*)this->ptrRxDMABuffer->buffer[this->RXbufferIdx].rxBuffer;
-	    uint8_t* destBuffer = (uint8_t*)this->ptrRxData->rxBuffer;
-
-	    this->status = HAL_DMA_Start(
-	    							&this->hdma_memtomem,
-									(uint32_t)srcBuffer,
-									(uint32_t)destBuffer,
-									SPI_BUFF_SIZE
-	    							);
-
-	    // Wait for transfer to complete
-	    if (this->status == HAL_OK) {
-	        this->status = HAL_DMA_PollForTransfer(&hdma_memtomem, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
-	    }
-
-	    // Stop the DMA if needed (optional for safety)
-	    HAL_DMA_Abort(&this->hdma_memtomem);
-
-		this->copyRXbuffer = false;
-    }
+	// SPI packet has been fully received
+	// Flag the copy the RX buffer if new WRITE data has been received
+	// DMA copy is performed during the servo thread update
+	if (this->newData) this->copyRXbuffer = true;
 }
-
 
 
 /**
@@ -648,19 +564,25 @@ void RemoraComms::handleTxInterrupt()
 
 
 /**
- * @brief Handles the SPI DMA receive (Rx) interrupt.
+ * @brief  Handles the receive DMA SPI (Rx) interrupt.
  *
- * This function processes the DMA interrupt for SPI receive operations and manages
- * DMA buffers, data validation, and error handling based on the type of interrupt:
- * - Half-transfer complete: Verifies the buffer header and flags valid PRU_READ or PRU_WRITE headers.
- * - Transfer complete: Currently a placeholder for further handling.
- * - Other interrupt sources: Prints an error message.
+ * This method processes the DMA SPI Rx interrupt and determines the type of interrupt
+ * (Half-Transfer Complete or Transfer Complete). Based on the interrupt type, it manages
+ * the received data and flags for further processing.
  *
  * @details
- * - Validates the data in the buffer headers.
- * - Manages buffer indices and sets the `copyRXbuffer` flag to trigger data transfer in
- *   the NSS interrupt handler for PRU_WRITE headers.
- * - Tracks consecutive invalid headers and sets the `SPIdataError` flag if errors exceed the threshold.
+ * - **Half-Transfer Complete (DMA_HALF_TRANSFER):**
+ *   - Checks the header of the received packet in the active DMA memory buffer.
+ *   - If the header indicates `PRU_READ`, it sets the `data` flag to `true` for further processing.
+ *   - If the header indicates `PRU_WRITE`, it sets the `newData` flag to `true` and prepares the
+ *     buffer for transfer in the `update` method.
+ *   - For unknown headers, the `data` flag is set to `false`.
+ *
+ * - **Transfer Complete (DMA_TRANSFER_COMPLETE):**
+ *   - Placeholder for future handling of the transfer complete interrupt.
+ *
+ * - **Other Interrupts:**
+ *   - Prints an error message to indicate an unexpected DMA SPI Rx error.
  */
 void RemoraComms::handleRxInterrupt()
 {
@@ -674,25 +596,18 @@ void RemoraComms::handleRxInterrupt()
         switch (this->ptrRxDMABuffer->buffer[RxDMAmemoryIdx].header)
         {
             case PRU_READ:
-                this->SPIdata = true;
-                this->rejectCnt = 0;
                 // No action needed for PRU_READ.
+                this->data = true;
                 break;
 
             case PRU_WRITE:
-                this->SPIdata = true;
-                this->rejectCnt = 0;
-                // Valid PRU_WRITE header, set up for data transfer.
+            	// Valid PRU_WRITE header, flag RX data transfer.
+            	this->newData = true;
                 RXbufferIdx = RxDMAmemoryIdx;
-                copyRXbuffer = true; // Trigger memory-to-memory copy in the NSS interrupt handler.
                 break;
 
             default:
-                this->rejectCnt++;
-                if (this->rejectCnt > 5)
-                {
-                    this->SPIdataError = true; // Flag an error if too many invalid headers are received.
-                }
+                this->data = false;
                 break;
         }
     }
@@ -709,28 +624,97 @@ void RemoraComms::handleRxInterrupt()
 }
 
 
-
+/**
+ * @brief  Retrieves the current status of the communication interface.
+ *
+ * @return The current status as a boolean value:
+ *         - `true`: Communication is operating correctly.
+ *         - `false`: Communication error detected.
+ */
 bool RemoraComms::getStatus(void)
 {
-    return this->SPIdata;
+    return this->status;
 }
 
+
+/**
+ * @brief  Sets the status of the communication interface.
+ *
+ * @param status  The new status to be set:
+ *                - `true`: Communication is operating correctly.
+ *                - `false`: Communication error detected.
+ */
 void RemoraComms::setStatus(bool status)
 {
-    this->SPIdata = status;
+    this->status = status;
 }
 
-bool RemoraComms::getError(void)
-{
-    return this->SPIdataError;
-}
 
-void RemoraComms::setError(bool error)
-{
-    this->SPIdataError = error;
-}
-
+/**
+ * @brief  Periodically updates the state and processes received SPI data.
+ *
+ * This method handles the processing of new SPI data, buffer copying, and status
+ * management. It uses DMA for efficient memory-to-memory copying of the received
+ * data when new data is flagged.
+ *
+ * @details
+ * - When `newData` is flagged:
+ *   - The received buffer is copied to the target buffer using DMA.
+ *   - Thread interrupts are disabled during the DMA operation for synchronization.
+ *   - After copying, the DMA transfer is stopped for safety, and `newData` is cleared.
+ *
+ * - Maintains a status flag (`status`) based on the presence of new data:
+ *   - If data is processed, `noDataCount` is reset, and the status is set to `true`.
+ *   - If no data is processed for a defined maximum period (`DATA_ERR_MAX`),
+ *     the status is set to `false`, and `noDataCount` is reset.
+ */
 void RemoraComms::update()
 {
-	// unused for RemoraComms
+	if (this->newData == true)
+    {
+	    uint8_t* srcBuffer = (uint8_t*)this->ptrRxDMABuffer->buffer[this->RXbufferIdx].rxBuffer;
+	    uint8_t* destBuffer = (uint8_t*)this->ptrRxData->rxBuffer;
+
+	    // disable thread interrupts
+	    __disable_irq();
+
+	    this->status = HAL_DMA_Start(
+	    							&this->hdma_memtomem,
+									(uint32_t)srcBuffer,
+									(uint32_t)destBuffer,
+									SPI_BUFF_SIZE
+	    							);
+
+	    // Wait for transfer to complete
+	    if (this->HALstatus == HAL_OK) {
+	        this->HALstatus = HAL_DMA_PollForTransfer(&hdma_memtomem, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
+	    }
+
+	    // re-enable thread interrupts
+	    __enable_irq();
+
+	    // Stop the DMA if needed (optional for safety)
+	    HAL_DMA_Abort(&this->hdma_memtomem);
+
+		this->newData = false;
+		this->data = true;
+    }
+
+	if (this->data)
+	{
+		this->noDataCount = 0;
+		this->status = true;
+	}
+	else
+	{
+		this->noDataCount++;
+	}
+
+	if (this->noDataCount > DATA_ERR_MAX)
+	{
+		this->noDataCount = 0;
+		this->status = false;
+	}
+
+	this->data = false;
 }

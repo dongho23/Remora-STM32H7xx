@@ -7,18 +7,38 @@
 using namespace std;
 
 // Thread constructor
-pruThread::pruThread(TIM_TypeDef* timer, IRQn_Type irq, uint32_t frequency) :
+pruThread::pruThread(TIM_TypeDef* timer, IRQn_Type irq, uint32_t frequency, uint8_t maxModules) :
 	timer(timer),
 	irq(irq),
-	frequency(frequency)
+	frequency(frequency),
+	maxModules(maxModules)
 {
-	printf("	Creating thread %lu\n", this->frequency);
+	 printf("    Creating thread %lu with max modules: %d\n", this->frequency, this->maxModules);
+
+	// Allocate memory for the arrays
+	modules = new Module*[maxModules];
+	modulesPost = new Module*[maxModules];
+
+	// Initialize arrays to nullptr
+	for (size_t i = 0; i < maxModules; ++i) {
+		modules[i] = nullptr;
+		modulesPost[i] = nullptr;
+	}
 }
+
+
+// Destructor
+pruThread::~pruThread() {
+    delete[] modules;
+    delete[] modulesPost;
+}
+
 
 void pruThread::startThread(void)
 {
 	TimerPtr = new pruTimer(this->timer, this->irq, this->frequency, this);
 }
+
 
 void pruThread::stopThread(void)
 {
@@ -28,25 +48,40 @@ void pruThread::stopThread(void)
 
 void pruThread::registerModule(Module* module)
 {
-	this->vThread.push_back(module);
+    if (moduleCount < maxModules) {
+        modules[moduleCount++] = module;
+    } else {
+        printf("Error: Maximum modules reached for thread.\n");
+    }
 }
 
 
 void pruThread::registerModulePost(Module* module)
 {
-	this->vThreadPost.push_back(module);
-	this->hasThreadPost = true;
+    if (modulePostCount < maxModules) {
+        modulesPost[modulePostCount++] = module;
+        hasThreadPost = true;
+    } else {
+        printf("Error: Maximum post modules reached for thread.\n");
+    }
 }
 
 
 void pruThread::run(void)
 {
-	// iterate over the Thread pointer vector to run all instances of Module::runModule()
-	for (iter = vThread.begin(); iter != vThread.end(); ++iter) (*iter)->runModule();
+    // Run all main modules
+    for (uint8_t i = 0; i < moduleCount; ++i) {
+        if (modules[i]) {
+            modules[i]->runModule();
+        }
+    }
 
-	// iterate over the second vector that contains module pointers to run after (post) the main vector
-	if (hasThreadPost)
-	{
-		for (iter = vThreadPost.begin(); iter != vThreadPost.end(); ++iter) (*iter)->runModulePost();
-	}
+    // Run all post modules if present
+    if (hasThreadPost) {
+        for (uint8_t i = 0; i < modulePostCount; ++i) {
+            if (modulesPost[i]) {
+                modulesPost[i]->runModulePost();
+            }
+        }
+    }
 }

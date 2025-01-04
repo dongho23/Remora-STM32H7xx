@@ -39,8 +39,9 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Core/Inc/configuration.h ../Core/Inc/remora.h ../Core/Inc/extern.h \
  ../Core/Inc/configuration.h ../Core/Inc/remora.h \
- ../Core/Inc/../Src/lib/ArduinoJson6/ArduinoJson.h \
- ../Core/Inc/../Src/lib/ArduinoJson6/ArduinoJson.hpp \
+ ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.h \
+ ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.hpp \
+ ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
  ../Core/Inc/../Src/thread/pruThread.h ../Core/Inc/../Src/thread/timer.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h \
@@ -89,8 +90,9 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
 ../Core/Inc/extern.h:
 ../Core/Inc/configuration.h:
 ../Core/Inc/remora.h:
-../Core/Inc/../Src/lib/ArduinoJson6/ArduinoJson.h:
-../Core/Inc/../Src/lib/ArduinoJson6/ArduinoJson.hpp:
+../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.h:
+../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.hpp:
+../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
 ../Core/Inc/../Src/thread/pruThread.h:
 ../Core/Inc/../Src/thread/timer.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h:

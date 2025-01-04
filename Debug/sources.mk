@@ -41,8 +41,10 @@ SUBDIRS := \
 Core/Src/drivers/pin \
 Core/Src/interrupt \
 Core/Src \
+Core/Src/modules/blink \
 Core/Src/modules/debug \
 Core/Src/modules \
+Core/Src/modules/motorPower \
 Core/Src/modules/remoraComms \
 Core/Src/modules/stepgen \
 Core/Src/thread \

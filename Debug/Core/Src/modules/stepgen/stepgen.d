@@ -40,8 +40,9 @@ Core/Src/modules/stepgen/stepgen.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  ../Core/Inc/extern.h ../Core/Inc/configuration.h ../Core/Inc/remora.h \
- ../Core/Inc/../Src/lib/ArduinoJson6/ArduinoJson.h \
- ../Core/Inc/../Src/lib/ArduinoJson6/ArduinoJson.hpp \
+ ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.h \
+ ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.hpp \
+ ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
  ../Core/Inc/../Src/thread/pruThread.h ../Core/Inc/../Src/thread/timer.h
 ../Core/Src/modules/stepgen/stepgen.h:
 ../Core/Src/modules/stepgen/../../modules/module.h:
@@ -85,7 +86,8 @@ Core/Src/modules/stepgen/stepgen.o: \
 ../Core/Inc/extern.h:
 ../Core/Inc/configuration.h:
 ../Core/Inc/remora.h:
-../Core/Inc/../Src/lib/ArduinoJson6/ArduinoJson.h:
-../Core/Inc/../Src/lib/ArduinoJson6/ArduinoJson.hpp:
+../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.h:
+../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.hpp:
+../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
 ../Core/Inc/../Src/thread/pruThread.h:
 ../Core/Inc/../Src/thread/timer.h:
