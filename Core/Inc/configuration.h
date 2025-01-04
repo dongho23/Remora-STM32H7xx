@@ -10,8 +10,6 @@
 #define STEPBIT     		22            	// bit location in DDS accum
 #define STEP_MASK   		(1L<<STEPBIT)
 
-#define JSON_BUFF_SIZE	    10000			// Jason dynamic buffer size
-
 #define JOINTS			    8				// Number of joints - set this the same as LinuxCNC HAL compenent. Max 8 joints
 #define VARIABLES           6             	// Number of command values - set this the same as the LinuxCNC HAL compenent
 
@@ -33,14 +31,9 @@
 // Serial configuration
 #define PC_BAUD             115200          // UART baudrate
 
-
-#define LOOP_TIME           0.1
-#define SPI_ERR_MAX         5
-// PRU reset will occur in SPI_ERR_MAX * LOOP_TIME = 0.5sec
+#define DATA_ERR_MAX        10
 
 // SPI configuration
 #define SPI_BUFF_SIZE 		64            	// Size of SPI recieve buffer - same as HAL component, 64
-#define BUFFER_ALIGNED_SIZE (((SPI_BUFF_SIZE+31)/32)*32)
-
 
 #endif
