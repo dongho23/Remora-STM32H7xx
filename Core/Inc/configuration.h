@@ -31,7 +31,7 @@
 // Serial configuration
 #define PC_BAUD             115200          // UART baudrate
 
-#define DATA_ERR_MAX        10
+#define DATA_ERR_MAX        100
 
 // SPI configuration
 #define SPI_BUFF_SIZE 		64            	// Size of SPI recieve buffer - same as HAL component, 64

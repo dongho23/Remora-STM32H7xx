@@ -153,13 +153,29 @@ extern "C" {
 }
 
 
+void initComms()
+{
+    printf("\n1. Starting up Remora communications\n");
+
+    // initialise and start the Remora communications module
+    comms->init();
+    comms->start();
+}
+
+
+void commsTasks()
+{
+	// check and process communications packets
+	comms->processPacket();
+}
+
 
 void readJsonConfig()
 {
 	uint32_t bytesread; // bytes read count
 
 
-    printf("\n1. Reading JSON configuration file\n");
+    printf("\n2. Reading JSON configuration file\n");
 
     // Try to mount the file system
     printf("	Mounting the file system... \n");
@@ -202,15 +218,6 @@ void readJsonConfig()
 			f_close(&SDFile);
 		}
     }
-}
-
-void setup()
-{
-    printf("\n2. Starting up Remora communications\n");
-
-    // initialise and start the Remora communications module
-    comms->init();
-    comms->start();
 }
 
 
@@ -460,8 +467,7 @@ int main(void)
 	currentState = ST_SETUP;
 	prevState = ST_RESET;
 
-    //comms->setStatus(false);
-    //resetCnt = 0;
+	initComms();
 
 	printf("\nRemora version %d.%d.%d for %s starting\n\n", MAJOR_VERSION, MINOR_VERSION, PATCH, BOARD);
 
@@ -477,7 +483,6 @@ int main(void)
 			              prevState = currentState;
 
 			              readJsonConfig();
-			              setup();
 			              deserialiseJSON();
 			              countModules();
 			              configThreads();
@@ -588,6 +593,7 @@ int main(void)
 			        	  HAL_NVIC_SystemReset();
 			              break;
 			  }
+		commsTasks();
 	}
 }
 

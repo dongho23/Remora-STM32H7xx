@@ -33,6 +33,9 @@ RemoraComms::RemoraComms(volatile rxData_t* ptrRxData, volatile txData_t* ptrTxD
     this->irqDMArx = 	DMA1_Stream1_IRQn;
 
     // Note: Avoid performing complex initialisation here as this constructor is called before DMA and cache setup.
+
+    pin1 = new Pin("PE_11", OUTPUT);
+    pin2 = new Pin("PE_12", OUTPUT);
 }
 
 
@@ -546,7 +549,11 @@ void RemoraComms::handleNssInterrupt()
 	// SPI packet has been fully received
 	// Flag the copy the RX buffer if new WRITE data has been received
 	// DMA copy is performed during the servo thread update
-	if (this->newData) this->copyRXbuffer = true;
+	if (this->newWriteData)
+	{
+		this->copyRXbuffer = true;
+		this->newWriteData = false;
+	}
 }
 
 
@@ -602,7 +609,8 @@ void RemoraComms::handleRxInterrupt()
 
             case PRU_WRITE:
             	// Valid PRU_WRITE header, flag RX data transfer.
-            	this->newData = true;
+            	this->data = true;
+            	this->newWriteData = true;
                 RXbufferIdx = RxDMAmemoryIdx;
                 break;
 
@@ -637,16 +645,34 @@ bool RemoraComms::getStatus(void)
 }
 
 
-/**
- * @brief  Sets the status of the communication interface.
- *
- * @param status  The new status to be set:
- *                - `true`: Communication is operating correctly.
- *                - `false`: Communication error detected.
- */
-void RemoraComms::setStatus(bool status)
+void RemoraComms::processPacket()
 {
-    this->status = status;
+	if (this->copyRXbuffer == true)
+    {
+		this->pin1->set(1);
+
+	    uint8_t* srcBuffer = (uint8_t*)this->ptrRxDMABuffer->buffer[this->RXbufferIdx].rxBuffer;
+	    uint8_t* destBuffer = (uint8_t*)this->ptrRxData->rxBuffer;
+
+	    this->dmaStatus = HAL_DMA_Start(
+	    							&this->hdma_memtomem,
+									(uint32_t)srcBuffer,
+									(uint32_t)destBuffer,
+									SPI_BUFF_SIZE
+	    							);
+
+	    // Wait for transfer to complete
+	    if (this->dmaStatus == HAL_OK) {
+	        this->dmaStatus = HAL_DMA_PollForTransfer(&hdma_memtomem, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
+	    }
+
+	    // Stop the DMA if needed (optional for safety)
+	    HAL_DMA_Abort(&this->hdma_memtomem);
+
+		this->copyRXbuffer = false;
+
+		this->pin1->set(0);
+    }
 }
 
 
@@ -670,35 +696,7 @@ void RemoraComms::setStatus(bool status)
  */
 void RemoraComms::update()
 {
-	if (this->newData == true)
-    {
-	    uint8_t* srcBuffer = (uint8_t*)this->ptrRxDMABuffer->buffer[this->RXbufferIdx].rxBuffer;
-	    uint8_t* destBuffer = (uint8_t*)this->ptrRxData->rxBuffer;
-
-	    // disable thread interrupts
-	    __disable_irq();
-
-	    this->status = HAL_DMA_Start(
-	    							&this->hdma_memtomem,
-									(uint32_t)srcBuffer,
-									(uint32_t)destBuffer,
-									SPI_BUFF_SIZE
-	    							);
-
-	    // Wait for transfer to complete
-	    if (this->HALstatus == HAL_OK) {
-	        this->HALstatus = HAL_DMA_PollForTransfer(&hdma_memtomem, HAL_DMA_FULL_TRANSFER, HAL_MAX_DELAY);
-	    }
-
-	    // re-enable thread interrupts
-	    __enable_irq();
-
-	    // Stop the DMA if needed (optional for safety)
-	    HAL_DMA_Abort(&this->hdma_memtomem);
-
-		this->newData = false;
-		this->data = true;
-    }
+	this->pin2->set(1);
 
 	if (this->data)
 	{
@@ -717,4 +715,6 @@ void RemoraComms::update()
 	}
 
 	this->data = false;
+
+	this->pin2->set(0);
 }

@@ -33,6 +33,8 @@ class RemoraComms : public Module
 
     private:
 
+		Pin							*pin1, *pin2;
+
         volatile rxData_t*  		ptrRxData;
         volatile txData_t*  		ptrTxData;
         volatile DMA_RxBuffer_t* 	ptrRxDMABuffer;
@@ -53,13 +55,12 @@ class RemoraComms : public Module
         DMA_HandleTypeDef   		hdma_spi_tx;
         DMA_HandleTypeDef   		hdma_spi_rx;
         DMA_HandleTypeDef   		hdma_memtomem;
-        HAL_StatusTypeDef   		HALstatus;
+        HAL_StatusTypeDef   		dmaStatus;
 
         uint8_t						interruptType;
-        uint8_t						dmaStatus;
 
-        bool						newData;
         bool                		data;
+        bool						newWriteData;
         bool                		status;
         uint8_t						noDataCount;
 
@@ -83,8 +84,8 @@ class RemoraComms : public Module
 
         void init(void);
         void start(void);
+        void processPacket(void);
         bool getStatus(void);
-        void setStatus(bool);
 };
 
 #endif
