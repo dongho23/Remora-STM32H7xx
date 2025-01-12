@@ -4,13 +4,11 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx_hal_dma.h"
 
-#include "configuration.h"
-#include "remora.h"
-#include "extern.h"
+#include "../../remora.h"
 #include "../../modules/module.h"
 #include "../../modules/moduleinterrupt.h"
 
-#include "../../drivers/pin/pin.h"
+#include "../../drivers/pin/pin.h" //TODO: remove
 
 
 typedef struct

@@ -4,40 +4,39 @@
                 MODULE CONFIGURATION AND CREATION FROM JSON     
 ************************************************************************/
 
-void createBlink()
-{
-    const char* pin = module["Pin"];
-    int frequency = module["Frequency"];
+unique_ptr<Module> createBlink(const JsonObject& config) {
+    const char* pin = config["Pin"];
+    int frequency = config["Frequency"];
+    uint32_t threadFreq = config["ThreadFreq"];
     
-    printf("Make Blink at pin %s\n", pin);
-        
-    Module* blink = new Blink(pin, PRU_SERVOFREQ, frequency);
-    servoThread->registerModule(blink);
+    printf("Creating Blink module on pin %s with frequency %d Hz\n", pin, frequency);
+	return std::make_unique<Blink>(pin, threadFreq, frequency);
 }
 
 
-/***********************************************************************
-                METHOD DEFINITIONS
-************************************************************************/
-
-Blink::Blink(std::string portAndPin, uint32_t threadFreq, uint32_t freq)
+/**
+ * @brief Constructs a Blink module.
+ * 
+ * Initializes the blink pin and sets up the toggle period based on the 
+ * servo thread frequency and desired blink frequency.
+ */
+Blink::Blink(std::string _portAndPin, uint32_t _threadFreq, uint32_t _freq) :
+	bState(false),
+    periodCount(_threadFreq / _freq),
+    blinkCount(0),
+    blinkPin(std::make_unique<Pin>(_portAndPin, OUTPUT))
 {
-
-	this->periodCount = threadFreq / freq;
-	this->blinkCount = 0;
-	this->bState = false;
-
-	this->blinkPin = new Pin(portAndPin, OUTPUT);
-	this->blinkPin->set(bState);
+	blinkPin->set(bState);
 }
 
 void Blink::update(void)
 {
-	++this->blinkCount;
-	if (this->blinkCount >= this->periodCount / 2)
+	++blinkCount;
+	if (blinkCount >= periodCount / 2)
 	{
-		this->blinkPin->set(this->bState=!this->bState);
-		this->blinkCount = 0;
+        bState = !bState;
+        blinkPin->set(bState);
+        blinkCount = 0;
 	}
 }
 

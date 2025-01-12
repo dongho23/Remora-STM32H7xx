@@ -171,7 +171,7 @@ void RemoraComms::start()
         this,
         static_cast<void (Module::*)()>(&RemoraComms::handleNssInterrupt)
     );
-    HAL_NVIC_SetPriority(this->irqNss, SPI_NSS_IRQ_PRIORITY, 0);
+    HAL_NVIC_SetPriority(this->irqNss, Config::SPI_NSS_IRQ_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(this->irqNss);
 
     // Register the DMA Rx interrupt
@@ -180,7 +180,7 @@ void RemoraComms::start()
         this,
         static_cast<void (Module::*)()>(&RemoraComms::handleRxInterrupt)
     );
-    HAL_NVIC_SetPriority(this->irqDMArx, SPI_DMA_RX_IRQ_PRIORITY, 0);
+    HAL_NVIC_SetPriority(this->irqDMArx, Config::SPI_DMA_RX_IRQ_PRIORITY, 0);
     HAL_NVIC_EnableIRQ(this->irqDMArx);
 
     // Register the DMA Tx interrupt
@@ -189,7 +189,7 @@ void RemoraComms::start()
         this,
         static_cast<void (Module::*)()>(&RemoraComms::handleTxInterrupt)
     );
-    HAL_NVIC_SetPriority(this->irqDMAtx, SPI_DMA_TX_IRQ_PRIORITY, 0); // TX needs higher priority than RX
+    HAL_NVIC_SetPriority(this->irqDMAtx, Config::SPI_DMA_TX_IRQ_PRIORITY, 0); // TX needs higher priority than RX
     HAL_NVIC_EnableIRQ(this->irqDMAtx);
 
     // Initialize the data buffers
@@ -197,7 +197,7 @@ void RemoraComms::start()
     memset((void*)this->ptrRxData->rxBuffer, 0, sizeof(this->ptrRxData->rxBuffer));
     memset((void*)this->ptrRxDMABuffer->buffer[0].rxBuffer, 0, sizeof(this->ptrRxDMABuffer->buffer[0].rxBuffer));
     memset((void*)this->ptrRxDMABuffer->buffer[1].rxBuffer, 0, sizeof(this->ptrRxDMABuffer->buffer[1].rxBuffer));
-    this->ptrTxData->header = PRU_DATA;
+    this->ptrTxData->header = Config::PRU_DATA;
 
     // Start the multi-buffer DMA SPI communication
     this->dmaStatus = this->startMultiBufferDMASPI(
@@ -205,7 +205,7 @@ void RemoraComms::start()
         (uint8_t*)this->ptrTxData->txBuffer,
         (uint8_t*)this->ptrRxDMABuffer->buffer[0].rxBuffer,
         (uint8_t*)this->ptrRxDMABuffer->buffer[1].rxBuffer,
-        SPI_BUFF_SIZE
+		Config::DATA_BUFF_SIZE
     );
 
     // Check for DMA initialization errors
@@ -602,12 +602,12 @@ void RemoraComms::handleRxInterrupt()
     {
         switch (this->ptrRxDMABuffer->buffer[RxDMAmemoryIdx].header)
         {
-            case PRU_READ:
+            case Config::PRU_READ:
                 // No action needed for PRU_READ.
                 this->data = true;
                 break;
 
-            case PRU_WRITE:
+            case Config::PRU_WRITE:
             	// Valid PRU_WRITE header, flag RX data transfer.
             	this->data = true;
             	this->newWriteData = true;
@@ -658,7 +658,7 @@ void RemoraComms::processPacket()
 	    							&this->hdma_memtomem,
 									(uint32_t)srcBuffer,
 									(uint32_t)destBuffer,
-									SPI_BUFF_SIZE
+									Config::DATA_BUFF_SIZE
 	    							);
 
 	    // Wait for transfer to complete
@@ -708,7 +708,7 @@ void RemoraComms::update()
 		this->noDataCount++;
 	}
 
-	if (this->noDataCount > DATA_ERR_MAX)
+	if (this->noDataCount > Config::DATA_ERR_MAX)
 	{
 		this->noDataCount = 0;
 		this->status = false;

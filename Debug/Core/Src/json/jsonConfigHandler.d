@@ -1,15 +1,8 @@
-Core/Src/modules/stepgen/stepgen.o: \
- ../Core/Src/modules/stepgen/stepgen.cpp \
- ../Core/Src/modules/stepgen/stepgen.h \
- ../Core/Src/modules/stepgen/../../remora.h \
- ../Core/Src/modules/stepgen/../../configuration.h \
- ../Core/Src/modules/stepgen/../../data.h \
- ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.h \
- ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.hpp \
- ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
- ../Core/Src/modules/stepgen/../../modules/moduleFactory.h \
- ../Core/Src/modules/stepgen/../../modules/module.h \
- ../Core/Src/modules/stepgen/../../modules/../JSON/jsonConfigHandler.h \
+Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
+ ../Core/Src/json/jsonConfigHandler.h \
+ ../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.h \
+ ../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.hpp \
+ ../Core/Src/json/../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
  ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
  ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
  ../Core/Inc/main.h ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
@@ -52,36 +45,35 @@ Core/Src/modules/stepgen/stepgen.o: \
  ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../Core/Src/modules/stepgen/../../modules/moduleList.h \
- ../Core/Src/modules/stepgen/../../modules/blink/blink.h \
- ../Core/Src/modules/stepgen/../../modules/blink/../../remora.h \
- ../Core/Src/modules/stepgen/../../modules/blink/../../modules/module.h \
- ../Core/Src/modules/stepgen/../../modules/blink/../../drivers/pin/pin.h \
- ../Core/Src/modules/stepgen/../../modules/debug/debug.h \
- ../Core/Src/modules/stepgen/../../modules/debug/../../modules/module.h \
- ../Core/Src/modules/stepgen/../../modules/debug/../../drivers/pin/pin.h \
- ../Core/Src/modules/stepgen/../../modules/remoraComms/remoraComms.h \
- ../Core/Src/modules/stepgen/../../modules/remoraComms/../../remora.h \
- ../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/module.h \
- ../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/moduleinterrupt.h \
- ../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/../interrupt/interrupt.h \
- ../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/module.h \
- ../Core/Src/modules/stepgen/../../modules/remoraComms/../../drivers/pin/pin.h \
- ../Core/Src/modules/stepgen/../../modules/stepgen/stepgen.h \
- ../Core/Src/modules/stepgen/../../thread/pruThread.h \
- ../Core/Src/modules/stepgen/../../thread/timer.h \
- ../Core/Src/modules/stepgen/../../modules/module.h \
- ../Core/Src/modules/stepgen/../../drivers/pin/pin.h
-../Core/Src/modules/stepgen/stepgen.h:
-../Core/Src/modules/stepgen/../../remora.h:
-../Core/Src/modules/stepgen/../../configuration.h:
-../Core/Src/modules/stepgen/../../data.h:
-../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.h:
-../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.hpp:
-../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
-../Core/Src/modules/stepgen/../../modules/moduleFactory.h:
-../Core/Src/modules/stepgen/../../modules/module.h:
-../Core/Src/modules/stepgen/../../modules/../JSON/jsonConfigHandler.h:
+ ../Core/Src/json/../remora.h ../Core/Src/json/../configuration.h \
+ ../Core/Src/json/../data.h ../Core/Src/json/../modules/moduleFactory.h \
+ ../Core/Src/json/../modules/module.h \
+ ../Core/Src/json/../modules/../JSON/jsonConfigHandler.h \
+ ../Core/Src/json/../modules/moduleList.h \
+ ../Core/Src/json/../modules/blink/blink.h \
+ ../Core/Src/json/../modules/blink/../../remora.h \
+ ../Core/Src/json/../modules/blink/../../modules/module.h \
+ ../Core/Src/json/../modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/json/../modules/debug/debug.h \
+ ../Core/Src/json/../modules/debug/../../modules/module.h \
+ ../Core/Src/json/../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/json/../modules/remoraComms/remoraComms.h \
+ ../Core/Src/json/../modules/remoraComms/../../remora.h \
+ ../Core/Src/json/../modules/remoraComms/../../modules/module.h \
+ ../Core/Src/json/../modules/remoraComms/../../modules/moduleinterrupt.h \
+ ../Core/Src/json/../modules/remoraComms/../../modules/../interrupt/interrupt.h \
+ ../Core/Src/json/../modules/remoraComms/../../modules/module.h \
+ ../Core/Src/json/../modules/remoraComms/../../drivers/pin/pin.h \
+ ../Core/Src/json/../modules/stepgen/stepgen.h \
+ ../Core/Src/json/../modules/stepgen/../../remora.h \
+ ../Core/Src/json/../modules/stepgen/../../modules/module.h \
+ ../Core/Src/json/../modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/json/../thread/pruThread.h \
+ ../Core/Src/json/../thread/timer.h
+../Core/Src/json/jsonConfigHandler.h:
+../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.h:
+../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.hpp:
+../Core/Src/json/../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
 ../FATFS/App/fatfs.h:
 ../Middlewares/Third_Party/FatFs/src/ff.h:
 ../Middlewares/Third_Party/FatFs/src/integer.h:
@@ -129,23 +121,30 @@ Core/Src/modules/stepgen/stepgen.o: \
 ../Middlewares/Third_Party/FatFs/src/diskio.h:
 ../Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/sd_diskio.h:
-../Core/Src/modules/stepgen/../../modules/moduleList.h:
-../Core/Src/modules/stepgen/../../modules/blink/blink.h:
-../Core/Src/modules/stepgen/../../modules/blink/../../remora.h:
-../Core/Src/modules/stepgen/../../modules/blink/../../modules/module.h:
-../Core/Src/modules/stepgen/../../modules/blink/../../drivers/pin/pin.h:
-../Core/Src/modules/stepgen/../../modules/debug/debug.h:
-../Core/Src/modules/stepgen/../../modules/debug/../../modules/module.h:
-../Core/Src/modules/stepgen/../../modules/debug/../../drivers/pin/pin.h:
-../Core/Src/modules/stepgen/../../modules/remoraComms/remoraComms.h:
-../Core/Src/modules/stepgen/../../modules/remoraComms/../../remora.h:
-../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/module.h:
-../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/moduleinterrupt.h:
-../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/../interrupt/interrupt.h:
-../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/module.h:
-../Core/Src/modules/stepgen/../../modules/remoraComms/../../drivers/pin/pin.h:
-../Core/Src/modules/stepgen/../../modules/stepgen/stepgen.h:
-../Core/Src/modules/stepgen/../../thread/pruThread.h:
-../Core/Src/modules/stepgen/../../thread/timer.h:
-../Core/Src/modules/stepgen/../../modules/module.h:
-../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/json/../remora.h:
+../Core/Src/json/../configuration.h:
+../Core/Src/json/../data.h:
+../Core/Src/json/../modules/moduleFactory.h:
+../Core/Src/json/../modules/module.h:
+../Core/Src/json/../modules/../JSON/jsonConfigHandler.h:
+../Core/Src/json/../modules/moduleList.h:
+../Core/Src/json/../modules/blink/blink.h:
+../Core/Src/json/../modules/blink/../../remora.h:
+../Core/Src/json/../modules/blink/../../modules/module.h:
+../Core/Src/json/../modules/blink/../../drivers/pin/pin.h:
+../Core/Src/json/../modules/debug/debug.h:
+../Core/Src/json/../modules/debug/../../modules/module.h:
+../Core/Src/json/../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/json/../modules/remoraComms/remoraComms.h:
+../Core/Src/json/../modules/remoraComms/../../remora.h:
+../Core/Src/json/../modules/remoraComms/../../modules/module.h:
+../Core/Src/json/../modules/remoraComms/../../modules/moduleinterrupt.h:
+../Core/Src/json/../modules/remoraComms/../../modules/../interrupt/interrupt.h:
+../Core/Src/json/../modules/remoraComms/../../modules/module.h:
+../Core/Src/json/../modules/remoraComms/../../drivers/pin/pin.h:
+../Core/Src/json/../modules/stepgen/stepgen.h:
+../Core/Src/json/../modules/stepgen/../../remora.h:
+../Core/Src/json/../modules/stepgen/../../modules/module.h:
+../Core/Src/json/../modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/json/../thread/pruThread.h:
+../Core/Src/json/../thread/timer.h:

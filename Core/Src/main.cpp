@@ -33,7 +33,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <cstring>
 #include <sys/errno.h>
 
-#include "configuration.h"
 #include "remora.h"
 
 // libraries
@@ -51,11 +50,11 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include "thread/createThreads.h"
 
 // modules
-#include "modules/blink/blink.h"
-#include "modules/debug/debug.h"
-#include "modules/motorPower/motorPower.h"
-#include "modules/remoraComms/RemoraComms.h"
-#include "modules/stepgen/stepgen.h"
+//#include "modules/blink/blink.h"
+//#include "modules/debug/debug.h"
+//#include "modules/motorPower/motorPower.h"
+//#include "modules/remoraComms/RemoraComms.h"
+//#include "modules/stepgen/stepgen.h"
 
 
 /***********************************************************************
@@ -74,14 +73,14 @@ enum State {
 };
 
 //uint8_t resetCnt;
-uint32_t base_freq = PRU_BASEFREQ;
-uint32_t servo_freq = PRU_SERVOFREQ;
+uint32_t baseFreq = Config::PRU_BASEFREQ;
+uint32_t servoFreq = Config::PRU_SERVOFREQ;
 uint8_t	baseCount;
 uint8_t	servoCount;
 uint8_t	commsCount;
 
 // boolean
-volatile bool PRUreset;
+//volatile bool PRUreset;
 bool configError = false;
 bool threadsRunning = false;
 
@@ -103,11 +102,11 @@ volatile DMA_RxBuffer_t* ptrRxDMABuffer = &rxDMABuffer;
 
 volatile int32_t* 	ptrTxHeader;
 volatile bool*    	ptrPRUreset;
-volatile int32_t* 	ptrJointFreqCmd[JOINTS];
-volatile int32_t* 	ptrJointFeedback[JOINTS];
+volatile int32_t* 	ptrJointFreqCmd[Config::JOINTS];
+volatile int32_t* 	ptrJointFeedback[Config::JOINTS];
 volatile uint8_t* 	ptrJointEnable;
-volatile float*   	ptrSetPoint[VARIABLES];
-volatile float*   	ptrProcessVariable[VARIABLES];
+volatile float*   	ptrSetPoint[Config::VARIABLES];
+volatile float*   	ptrProcessVariable[Config::VARIABLES];
 volatile uint16_t* 	ptrInputs;
 volatile uint16_t* 	ptrOutputs;
 
@@ -308,13 +307,13 @@ void configThreads()
 
         if (!strcmp(configor,"Base"))
         {
-            base_freq = freq;
-            printf("	Setting BASE thread frequency to %lu\n", base_freq);
+            baseFreq = freq;
+            printf("	Setting BASE thread frequency to %lu\n", baseFreq);
         }
         else if (!strcmp(configor,"Servo"))
         {
-            servo_freq = freq;
-            printf("	Setting SERVO thread frequency to %lu\n", servo_freq);
+            servoFreq = freq;
+            printf("	Setting SERVO thread frequency to %lu\n", servoFreq);
         }
     }
 }
@@ -327,7 +326,7 @@ void loadModules()
     printf("\n6. Loading modules\n");
 
     // Communication monitoring
-    servoThread->registerModule(comms);
+    //servoThread->registerModule(comms);
 
     JsonArray Modules = doc["Modules"];
 
@@ -345,7 +344,7 @@ void loadModules()
 
             if (!strcmp(type,"Stepgen"))
             {
-                createStepgen();
+                //createStepgen();
             }
             else if (!strcmp(type,"Encoder"))
             {
@@ -370,7 +369,7 @@ void loadModules()
             }
             else if (!strcmp(type, "Blink"))
             {
-                createBlink();
+                //createBlink();
             }
             else if (!strcmp(type,"Digital Pin"))
             {
@@ -399,7 +398,7 @@ void loadModules()
 
             if (!strcmp(type,"Motor Power"))
             {
-                createMotorPower();
+                //createMotorPower();
             }
             else if (!strcmp(type,"TMC2208"))
             {
@@ -417,10 +416,10 @@ void loadModules()
 void debugThreadHigh()
 {
     Module* debugOnB = new Debug(BASE_PIN, 1);
-    baseThread->registerModule(debugOnB);
+    //baseThread->registerModule(debugOnB);
 
     Module* debugOnS = new Debug(SERVO_PIN, 1);
-    servoThread->registerModule(debugOnS);
+    //servoThread->registerModule(debugOnS);
 
     //Module* debugOnC = new Debug("PE_6", 1);
     //commsThread->registerModule(debugOnC);
@@ -429,10 +428,10 @@ void debugThreadHigh()
 void debugThreadLow()
 {
     Module* debugOffB = new Debug("PE_9", 0);
-    baseThread->registerModule(debugOffB);
+    //baseThread->registerModule(debugOffB);
 
     Module* debugOffS = new Debug("PE_10", 0);
-    servoThread->registerModule(debugOffS);
+    //servoThread->registerModule(debugOffS);
 
     //commsThread->startThread();
     //Module* debugOffC = new Debug("PE_6", 0);
@@ -466,6 +465,8 @@ int main(void)
 
 	currentState = ST_SETUP;
 	prevState = ST_RESET;
+
+	Remora *remora = new Remora();
 
 	initComms();
 
@@ -578,7 +579,7 @@ int main(void)
 			              // set all of the rxData buffer to 0
 			              printf("   Resetting rxBuffer\n");
 			              {
-							  int n = SPI_BUFF_SIZE;
+							  int n = Config::DATA_BUFF_SIZE;
 							  while(n-- > 0)
 							  {
 								  ptrRxData->rxBuffer[n] = 0;
@@ -740,7 +741,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = PC_BAUD;
+  huart1.Init.BaudRate = Config::PC_BAUD;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;

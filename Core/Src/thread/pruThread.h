@@ -2,38 +2,58 @@
 #define PRUTHREAD_H
 
 #include "stm32h7xx_hal.h"
+#include <vector>
+#include <memory>
+#include <string>
+#include <atomic>
 #include "timer.h"
+
+using namespace std;
 
 class Module;
 
 class pruThread
 {
-	private:
+private:
 
-		pruTimer* 		    TimerPtr;
+	string threadName;
+	uint32_t frequency;
 	
-		TIM_TypeDef* 	    timer;
-		IRQn_Type 			irq;
-		uint32_t 			frequency;
+	atomic<bool> threadRunning{false};
+    atomic<bool> threadPaused{false};
 
-	    Module** modules;       // Dynamic array for main modules
-	    Module** modulesPost;   // Dynamic array for post modules
-	    size_t maxModules;      // Maximum number of modules
-	    size_t moduleCount = 0; // Current count of main modules
-	    size_t modulePostCount = 0; // Current count of post modules
+    vector<unique_ptr<Module>> modules;
+    vector<unique_ptr<Module>> modulesPost;
 
-		bool hasThreadPost;		// run updatePost()
+	pruTimer* timerPtr;
+	TIM_TypeDef* timer;
+	IRQn_Type irq;
 
-	public:
+	bool hasModulesPost;		// run updatePost()
 
-		pruThread(TIM_TypeDef* timer, IRQn_Type irq, uint32_t frequency, uint8_t maxModules);
-		~pruThread();
+    [[ nodiscard ]] void setThreadRunning(bool val) { threadRunning.store(val, std::memory_order_release); }
+    [[ nodiscard ]] void setThreadPaused(bool val) { threadPaused.store(val, std::memory_order_release); }
 
-		void registerModule(Module *module);
-		void registerModulePost(Module *module);
-		void startThread(void);
-        void stopThread(void);
-		void run(void);
+    bool executeModules();
+
+public:
+
+	pruThread(const string& _name, TIM_TypeDef *_timer, IRQn_Type _irq, uint32_t _freq, uint8_t _prio);
+
+	bool registerModule(unique_ptr<Module> module);
+	bool registerModulePost(unique_ptr<Module> module);
+
+    [[nodiscard]] bool isRunning() const { return threadRunning.load(std::memory_order_acquire);  }
+    [[nodiscard]] bool isPaused() const { return threadPaused.load(std::memory_order_acquire); }
+
+	bool startThread(void);
+	void stopThread(void);
+    bool update();
+    void pauseThread();
+    void resumeThread();
+    const string&getName() const;
+    uint32_t getFrequency() const;
+    size_t getModuleCount() const;;
 };
 
 #endif

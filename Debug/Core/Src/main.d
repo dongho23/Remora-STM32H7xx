@@ -41,33 +41,35 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../Core/Inc/configuration.h ../Core/Inc/remora.h \
+ ../Core/Src/remora.h ../Core/Src/configuration.h ../Core/Src/data.h \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson.h \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
- ../Core/Src/drivers/pin/pin.h ../Core/Src/interrupt/irqHandlers.h \
- ../Core/Src/interrupt/interrupt.h ../Core/Src/interrupt/interrupt.h \
- ../Core/Src/thread/pruThread.h ../Core/Src/thread/timer.h \
- ../Core/Src/thread/createThreads.h ../Core/Inc/extern.h \
- ../Core/Inc/configuration.h ../Core/Inc/remora.h \
- ../Core/Inc/../Src/thread/pruThread.h ../Core/Src/modules/blink/blink.h \
+ ../Core/Src/modules/moduleFactory.h ../Core/Src/modules/module.h \
+ ../Core/Src/modules/../JSON/jsonConfigHandler.h \
+ ../Core/Src/modules/moduleList.h ../Core/Src/modules/blink/blink.h \
+ ../Core/Src/modules/blink/../../remora.h \
  ../Core/Src/modules/blink/../../modules/module.h \
  ../Core/Src/modules/blink/../../drivers/pin/pin.h \
  ../Core/Src/modules/debug/debug.h \
  ../Core/Src/modules/debug/../../modules/module.h \
  ../Core/Src/modules/debug/../../drivers/pin/pin.h \
- ../Core/Src/modules/motorPower/motorPower.h \
- ../Core/Src/modules/motorPower/../../modules/module.h \
- ../Core/Src/modules/motorPower/../../drivers/pin/pin.h \
- ../Core/Src/modules/remoraComms/RemoraComms.h \
+ ../Core/Src/modules/remoraComms/remoraComms.h \
+ ../Core/Src/modules/remoraComms/../../remora.h \
  ../Core/Src/modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h \
  ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h \
  ../Core/Src/modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../../drivers/pin/pin.h \
  ../Core/Src/modules/stepgen/stepgen.h \
+ ../Core/Src/modules/stepgen/../../remora.h \
  ../Core/Src/modules/stepgen/../../modules/module.h \
- ../Core/Src/modules/stepgen/../../drivers/pin/pin.h
+ ../Core/Src/modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/thread/pruThread.h ../Core/Src/thread/timer.h \
+ ../Core/Src/drivers/pin/pin.h ../Core/Src/interrupt/irqHandlers.h \
+ ../Core/Src/interrupt/interrupt.h ../Core/Src/interrupt/interrupt.h \
+ ../Core/Src/thread/createThreads.h ../Core/Inc/extern.h \
+ ../Core/Inc/../Src/thread/pruThread.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -115,37 +117,40 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Middlewares/Third_Party/FatFs/src/diskio.h:
 ../Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/sd_diskio.h:
-../Core/Inc/configuration.h:
-../Core/Inc/remora.h:
+../Core/Src/remora.h:
+../Core/Src/configuration.h:
+../Core/Src/data.h:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson.h:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
-../Core/Src/drivers/pin/pin.h:
-../Core/Src/interrupt/irqHandlers.h:
-../Core/Src/interrupt/interrupt.h:
-../Core/Src/interrupt/interrupt.h:
-../Core/Src/thread/pruThread.h:
-../Core/Src/thread/timer.h:
-../Core/Src/thread/createThreads.h:
-../Core/Inc/extern.h:
-../Core/Inc/configuration.h:
-../Core/Inc/remora.h:
-../Core/Inc/../Src/thread/pruThread.h:
+../Core/Src/modules/moduleFactory.h:
+../Core/Src/modules/module.h:
+../Core/Src/modules/../JSON/jsonConfigHandler.h:
+../Core/Src/modules/moduleList.h:
 ../Core/Src/modules/blink/blink.h:
+../Core/Src/modules/blink/../../remora.h:
 ../Core/Src/modules/blink/../../modules/module.h:
 ../Core/Src/modules/blink/../../drivers/pin/pin.h:
 ../Core/Src/modules/debug/debug.h:
 ../Core/Src/modules/debug/../../modules/module.h:
 ../Core/Src/modules/debug/../../drivers/pin/pin.h:
-../Core/Src/modules/motorPower/motorPower.h:
-../Core/Src/modules/motorPower/../../modules/module.h:
-../Core/Src/modules/motorPower/../../drivers/pin/pin.h:
-../Core/Src/modules/remoraComms/RemoraComms.h:
+../Core/Src/modules/remoraComms/remoraComms.h:
+../Core/Src/modules/remoraComms/../../remora.h:
 ../Core/Src/modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h:
 ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../../drivers/pin/pin.h:
 ../Core/Src/modules/stepgen/stepgen.h:
+../Core/Src/modules/stepgen/../../remora.h:
 ../Core/Src/modules/stepgen/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/thread/pruThread.h:
+../Core/Src/thread/timer.h:
+../Core/Src/drivers/pin/pin.h:
+../Core/Src/interrupt/irqHandlers.h:
+../Core/Src/interrupt/interrupt.h:
+../Core/Src/interrupt/interrupt.h:
+../Core/Src/thread/createThreads.h:
+../Core/Inc/extern.h:
+../Core/Inc/../Src/thread/pruThread.h:

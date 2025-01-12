@@ -37,16 +37,40 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Core/Inc/configuration.h ../Core/Inc/remora.h ../Core/Inc/extern.h \
- ../Core/Inc/configuration.h ../Core/Inc/remora.h \
- ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.h \
- ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.hpp \
- ../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
- ../Core/Inc/../Src/thread/pruThread.h ../Core/Inc/../Src/thread/timer.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../remora.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../configuration.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../data.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.hpp \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleFactory.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../JSON/jsonConfigHandler.h \
+ ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
+ ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
+ ../Core/Inc/main.h ../FATFS/Target/bsp_driver_sd.h \
+ ../FATFS/Target/fatfs_platform.h \
+ ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
+ ../Middlewares/Third_Party/FatFs/src/diskio.h \
+ ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleList.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/blink.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../remora.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../modules/module.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/debug.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../modules/module.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/remoraComms/remoraComms.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/stepgen.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../remora.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../modules/module.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../thread/pruThread.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../thread/timer.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../interrupt/interrupt.h \
- ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../drivers/pin/pin.h
 ../Core/Src/modules/remoraComms/../remoraComms/RemoraComms.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
@@ -85,18 +109,42 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../Core/Inc/configuration.h:
-../Core/Inc/remora.h:
-../Core/Inc/extern.h:
-../Core/Inc/configuration.h:
-../Core/Inc/remora.h:
-../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.h:
-../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson.hpp:
-../Core/Inc/../Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
-../Core/Inc/../Src/thread/pruThread.h:
-../Core/Inc/../Src/thread/timer.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../remora.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../configuration.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../data.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.hpp:
+../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleFactory.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/../JSON/jsonConfigHandler.h:
+../FATFS/App/fatfs.h:
+../Middlewares/Third_Party/FatFs/src/ff.h:
+../Middlewares/Third_Party/FatFs/src/integer.h:
+../FATFS/Target/ffconf.h:
+../Core/Inc/main.h:
+../FATFS/Target/bsp_driver_sd.h:
+../FATFS/Target/fatfs_platform.h:
+../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
+../Middlewares/Third_Party/FatFs/src/diskio.h:
+../Middlewares/Third_Party/FatFs/src/ff.h:
+../FATFS/Target/sd_diskio.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleList.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/blink.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../remora.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../modules/module.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../drivers/pin/pin.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/debug.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../modules/module.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/remoraComms/remoraComms.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/stepgen.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../remora.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../modules/module.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../thread/pruThread.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../thread/timer.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../interrupt/interrupt.h:
-../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../drivers/pin/pin.h:

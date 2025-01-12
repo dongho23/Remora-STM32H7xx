@@ -18,10 +18,10 @@ RM := rm -rf
 -include Core/Src/thread/subdir.mk
 -include Core/Src/modules/stepgen/subdir.mk
 -include Core/Src/modules/remoraComms/subdir.mk
--include Core/Src/modules/motorPower/subdir.mk
 -include Core/Src/modules/debug/subdir.mk
 -include Core/Src/modules/blink/subdir.mk
 -include Core/Src/modules/subdir.mk
+-include Core/Src/json/subdir.mk
 -include Core/Src/interrupt/subdir.mk
 -include Core/Src/drivers/pin/subdir.mk
 -include Core/Src/subdir.mk

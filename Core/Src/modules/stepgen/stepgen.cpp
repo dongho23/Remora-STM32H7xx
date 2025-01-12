@@ -1,131 +1,165 @@
 #include "stepgen.h"
 
-
-/***********************************************************************
-                MODULE CONFIGURATION AND CREATION FROM JSON     
-************************************************************************/
-
-void createStepgen()
+/**
+ * @brief Creates a Stepgen module from a JSON configuration object.
+ * 
+ * This function extracts parameters such as the joint number, pin configurations,
+ * and other settings from the provided JSON object, then creates and returns a
+ * unique pointer to a Stepgen module configured with those parameters.
+ * 
+ * @param config The JSON object containing the configuration for the Stepgen.
+ * @return A unique pointer to the created Stepgen module.
+ */
+unique_ptr<Module> createStepgen(const JsonObject& config)
 {
-    const char* comment = module["Comment"];
-    printf("%s\n",comment);
+    const char* comment = config["Comment"];
+    printf("%s\n", comment);
 
-    int joint = module["Joint Number"];
-    const char* enable = module["Enable Pin"];
-    const char* step = module["Step Pin"];
-    const char* dir = module["Direction Pin"];
+    int joint = config["Joint Number"];
+    const char* enable = config["Enable Pin"];
+    const char* step = config["Step Pin"];
+    const char* dir = config["Direction Pin"];
 
-    // configure pointers to data source and feedback location
+    // Configure pointers to data source and feedback location
     ptrJointFreqCmd[joint] = &rxData.jointFreqCmd[joint];
     ptrJointFeedback[joint] = &txData.jointFeedback[joint];
     ptrJointEnable = &rxData.jointEnable;
 
-    // create the step generator, register it in the thread
-    Module* stepgen = new Stepgen(base_freq, joint, enable, step, dir, STEPBIT, *ptrJointFreqCmd[joint], *ptrJointFeedback[joint], *ptrJointEnable);
-    baseThread->registerModule(stepgen);
-    baseThread->registerModulePost(stepgen);
+    // Create the step generator and register it in the thread
+    return make_unique<Stepgen>(baseFreq, joint, enable, step, dir, Config::STEPBIT, *ptrJointFreqCmd[joint], *ptrJointFeedback[joint], *ptrJointEnable);
 }
 
-
-/***********************************************************************
-                METHOD DEFINITIONS
-************************************************************************/
-
-Stepgen::Stepgen(int32_t threadFreq, int jointNumber, std::string enable, std::string step, std::string direction, int stepBit, volatile int32_t &ptrFrequencyCommand, volatile int32_t &ptrFeedback, volatile uint8_t &ptrJointEnable) :
-	jointNumber(jointNumber),
-	enable(enable),
-	step(step),
-	direction(direction),
-	stepBit(stepBit),
-	ptrFrequencyCommand(&ptrFrequencyCommand),
-	ptrFeedback(&ptrFeedback),
-	ptrJointEnable(&ptrJointEnable)
+/**
+ * @brief Constructor for the Stepgen class.
+ * 
+ * Initializes the step generator with the provided configuration parameters
+ * and allocates the necessary pins for the step, direction, and enable signals.
+ * 
+ * @param _threadFreq The thread frequency used for scaling the frequency command.
+ * @param _jointNumber The joint number for which the step generator is configured.
+ * @param _enable The name of the pin used to enable the step generator.
+ * @param _step The name of the pin used for stepping.
+ * @param _direction The name of the pin used for direction.
+ * @param _stepBit The number of bits used for the step value.
+ * @param _ptrFrequencyCommand A reference to the frequency command data for the joint.
+ * @param _ptrFeedback A reference to the feedback data for the joint.
+ * @param _ptrJointEnable A reference to the joint enable data.
+ */
+Stepgen::Stepgen(int32_t _threadFreq, int _jointNumber, const char* _enable, const char* _step, const char* _direction, int _stepBit, volatile int32_t& _ptrFrequencyCommand, volatile int32_t& _ptrFeedback,  volatile uint8_t& _ptrJointEnable)
+    : jointNumber(_jointNumber),
+      enable(_enable),
+      step(_step),
+      direction(_direction),
+      stepBit(_stepBit),
+      ptrFrequencyCommand(&_ptrFrequencyCommand),
+      ptrFeedback(&_ptrFeedback),
+      ptrJointEnable(&_ptrJointEnable),
+      enablePin(_enable, OUTPUT),
+      stepPin(_step, OUTPUT),
+      directionPin(_direction, OUTPUT),
+      rawCount(0),
+      DDSaccumulator(0),
+      frequencyScale(1.0f * (1 << _stepBit) / _threadFreq),  // Frequency scaling without unnecessary cast
+      mask(1 << _jointNumber),  // Mask for checking the joint number
+      isEnabled(false),
+      isForward(false),
+      isStepping(false)
 {
-	this->enablePin = new Pin(this->enable, OUTPUT);			// create Pins
-	this->stepPin = new Pin(this->step, OUTPUT);
-	this->directionPin = new Pin(this->direction, OUTPUT);
-    this->rawCount = 0;
-	this->DDSaccumulator = 0;
-	this->frequencyScale = (float)(1 << this->stepBit) / (float)threadFreq;
-	this->mask = 1 << this->jointNumber;
-	this->isEnabled = false;
-	this->isForward = false;
 }
 
-
+/**
+ * @brief Updates the Stepgen by generating pulses.
+ * 
+ * This method generates pulses for stepping according to the current
+ * frequency command and direction.
+ */
 void Stepgen::update()
 {
-	// Use the standard Module interface to run makePulses()
-	this->makePulses();
+    makePulses();  // Generate pulses for stepping and direction
 }
 
+/**
+ * @brief Post-update method for the Stepgen.
+ * 
+ * This method stops any ongoing pulses after the update phase.
+ */
 void Stepgen::updatePost()
 {
-	this->stopPulses();
+    stopPulses();  // Stop pulse generation after update
 }
 
+/**
+ * @brief Performs a slow update (no operation in this case).
+ * 
+ * This is a placeholder for performing any slow or low-priority updates,
+ * though it currently does nothing.
+ */
 void Stepgen::slowUpdate()
 {
-	return;
+    // Currently no operation for slow update
 }
 
+/**
+ * @brief Generates pulses for step and direction.
+ * 
+ * This method calculates the next step and updates the step and direction
+ * pins accordingly. It uses the DDS (Direct Digital Synthesis) technique
+ * to generate precise frequency-based stepping.
+ */
 void Stepgen::makePulses()
 {
-	int32_t stepNow = 0;
+    isEnabled = ((*(ptrJointEnable) & mask) != 0);
+    if (!isEnabled)
+    {
+        enablePin.set(true);  	// Disable the driver if not enabled
+        return;  				// Exit early if the generator is disabled
+    }
 
-	this->isEnabled = ((*(this->ptrJointEnable) & this->mask) != 0);
+    enablePin.set(false); 		// Enable the driver
 
-	if (this->isEnabled == true)  												// this Step generator is enables so make the pulses
-	{
-		this->enablePin->set(false);                                			// Enable the driver - CHANGE THIS TO MAKE THE OUTPUT VALUE CONFIGURABLE???
+    // Get the current frequency command and scale it using the frequency scale
+    frequencyCommand = *ptrFrequencyCommand;
+    DDSaddValue = frequencyCommand * frequencyScale;
 
-		this->frequencyCommand = *(this->ptrFrequencyCommand); 					// Get the latest frequency command via pointer to the data source
-		this->DDSaddValue = this->frequencyCommand * this->frequencyScale;		// Scale the frequency command to get the DDS add value
-		stepNow = this->DDSaccumulator;                           				// Save the current DDS accumulator value
-		this->DDSaccumulator += this->DDSaddValue;           	  				// Update the DDS accumulator with the new add value
-		stepNow ^= this->DDSaccumulator;                          				// Test for changes in the low half of the DDS accumulator
-		stepNow &= (1L << this->stepBit);                         				// Check for the step bit
+    // Save the current DDS accumulator value and update it
+    int32_t stepNow = DDSaccumulator;
+    DDSaccumulator += DDSaddValue;
 
-		if (this->DDSaddValue > 0)												// The sign of the DDS add value indicates the desired direction
-		{
-			this->isForward = true;
-		}
-		else //if (this->DDSaddValue < 0)
-		{
-			this->isForward = false;
-		}
+    // Check for changes in the low half of the DDS accumulator
+    stepNow ^= DDSaccumulator;
+    stepNow &= (1L << stepBit);  // Check for the step bit
 
-		if (stepNow)
-		{
-			this->directionPin->set(this->isForward);             		    // Set direction pin
-			this->stepPin->set(true);
-            if (this->isForward)
-            {
-                ++this->rawCount;
-            }
-            else
-            {
-                --this->rawCount;
-            }
-            *(this->ptrFeedback) = this->rawCount;
-            this->isStepping = true;
-		}
-	}
-	else
-	{
-		this->enablePin->set(true);
-	}
+    // Determine direction based on the sign of DDSaddValue
+    isForward = DDSaddValue > 0;
 
+    // If a step is to be made, set the direction and step pins accordingly
+    if (stepNow)
+    {
+        directionPin.set(isForward);  // Set direction pin
+        stepPin.set(true);  // Set the step pin
+        rawCount += (isForward ? 1 : -1);  // Update rawCount based on direction
+        *ptrFeedback = rawCount;  // Update the feedback with the raw count
+        isStepping = true;  // Indicate that stepping is occurring
+    }
 }
 
+/**
+ * @brief Stops the pulse generation.
+ * 
+ * This method resets the step pin to low and stops any ongoing stepping.
+ */
 void Stepgen::stopPulses()
 {
-	this->stepPin->set(false);	// Reset step pin
-	this->isStepping = false;
+    stepPin.set(false);  // Reset step pin to low
+    isStepping = false;  // Indicate that stepping has stopped
 }
 
-
+/**
+ * @brief Enables or disables the Stepgen.
+ * 
+ * @param state The desired state of the Stepgen (true to enable, false to disable).
+ */
 void Stepgen::setEnabled(bool state)
 {
-	this->isEnabled = state;
+    isEnabled = state;
 }

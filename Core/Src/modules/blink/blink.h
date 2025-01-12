@@ -4,30 +4,42 @@
 #include <cstdint>
 #include <string>
 
+#include "../../remora.h"
 #include "../../modules/module.h"
 #include "../../drivers/pin/pin.h"
 
-#include "extern.h"
+/**
+ * @brief Factory function to create a Blink module from JSON configuration.
+ * 
+ * @param config JSON object containing configuration parameters for the Blink module.
+ * @return A unique pointer to the created Blink module.
+ */
+unique_ptr<Module> createBlink(const JsonObject& config);
 
-void createBlink(void);
-
+/**
+ * @class Blink
+ * @brief A module for toggling a pin at a specific frequency.
+ * 
+ * The Blink class controls a GPIO pin, toggling its state at a specified frequency.
+ */
 class Blink : public Module
 {
 
 	private:
 
-		bool 		bState;
-		uint32_t 	periodCount;
-		uint32_t 	blinkCount;
+		bool 					bState;
+		uint32_t 				periodCount;
+		uint32_t 				blinkCount;
 
-		Pin *blinkPin;	// class object members - Pin objects
+		std::unique_ptr<Pin> 	blinkPin;
 
 	public:
 
-		Blink(std::string, uint32_t, uint32_t);
+		Blink(std::string _portAndPin, uint32_t _threadFreq, uint32_t _freq);
 
 		virtual void update(void);
 		virtual void slowUpdate(void);
 };
 
 #endif
+
