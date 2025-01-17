@@ -4,7 +4,7 @@
                 MODULE CONFIGURATION AND CREATION FROM JSON     
 ************************************************************************/
 
-unique_ptr<Module> createBlink(const JsonObject& config) {
+shared_ptr<Module> createBlink(const JsonObject& config) {
     const char* pin = config["Pin"];
     int frequency = config["Frequency"];
     uint32_t threadFreq = config["ThreadFreq"];

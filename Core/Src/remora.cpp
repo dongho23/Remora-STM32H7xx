@@ -3,9 +3,9 @@
 
 
 Remora::Remora()
-	: baseFreq(Config::PRU_BASEFREQ),
-	  servoFreq(Config::PRU_SERVOFREQ),
-	  commsFreq(Config::PRU_COMMSFREQ)
+	: baseFreq(Config::pruBaseFreq),
+	  servoFreq(Config::pruServoFreq),
+	  commsFreq(Config::pruCommsFreq)
 {
 
 	this->configHandler = new JsonConfigHandler(this);
@@ -26,14 +26,14 @@ Remora::Remora()
 										TIM3,
 										TIM3_IRQn,
 										baseFreq,
-										Config::BASE_THREAD_IRQ_PRIORITY
+										Config::baseThreadIrqPriority
 										);
     servoThread = make_unique<pruThread>(
     									"Servo",
 										TIM2,
 										TIM2_IRQn,
 										servoFreq,
-										Config::SERVO_THREAD_IRQ_PRIORITY
+										Config::servoThreadIrqPriority
 										);
 
     loadModules();
@@ -65,11 +65,20 @@ void Remora::loadModules() {
             modules[i]["ThreadFreq"] = threadFreq;
 
             // Create module using factory
-            std::unique_ptr<Module> _mod = factory->createModule(threadName, moduleType, modules[i]);
-            if (strcmp(threadName, "Servo") == 0)
-                servoThread->registerModule(move(_mod));
-            else if (strcmp(threadName, "Base") == 0)
-                baseThread->registerModule(move(_mod));
+            std::shared_ptr<Module> _mod = factory->createModule(threadName, moduleType, modules[i]);
+            bool _modPost = _mod->getUsesModulePost();
+            if (strcmp(threadName, "Servo") == 0) {
+                servoThread->registerModule(_mod);
+            	if (_modPost) {
+            		servoThread->registerModulePost(_mod);
+            	}
+            }
+            else if (strcmp(threadName, "Base") == 0) {
+                baseThread->registerModule(_mod);
+            	if (_modPost) {
+            		servoThread->registerModulePost(_mod);
+            	}
+            }
             else {
                 //onLoad.push_back(move(_mod));
             }

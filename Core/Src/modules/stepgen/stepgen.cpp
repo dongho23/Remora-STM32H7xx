@@ -10,7 +10,7 @@
  * @param config The JSON object containing the configuration for the Stepgen.
  * @return A unique pointer to the created Stepgen module.
  */
-unique_ptr<Module> createStepgen(const JsonObject& config)
+shared_ptr<Module> createStepgen(const JsonObject& config)
 {
     const char* comment = config["Comment"];
     printf("%s\n", comment);
@@ -25,8 +25,10 @@ unique_ptr<Module> createStepgen(const JsonObject& config)
     ptrJointFeedback[joint] = &txData.jointFeedback[joint];
     ptrJointEnable = &rxData.jointEnable;
 
+    bool usesModulePost = true;		// stepgen uses the thread modulesPost vector
+
     // Create the step generator and register it in the thread
-    return make_unique<Stepgen>(baseFreq, joint, enable, step, dir, Config::STEPBIT, *ptrJointFreqCmd[joint], *ptrJointFeedback[joint], *ptrJointEnable);
+    return make_unique<Stepgen>(baseFreq, joint, enable, step, dir, Config::stepBit, *ptrJointFreqCmd[joint], *ptrJointFeedback[joint], *ptrJointEnable, usesModulePost);
 }
 
 /**
@@ -45,7 +47,7 @@ unique_ptr<Module> createStepgen(const JsonObject& config)
  * @param _ptrFeedback A reference to the feedback data for the joint.
  * @param _ptrJointEnable A reference to the joint enable data.
  */
-Stepgen::Stepgen(int32_t _threadFreq, int _jointNumber, const char* _enable, const char* _step, const char* _direction, int _stepBit, volatile int32_t& _ptrFrequencyCommand, volatile int32_t& _ptrFeedback,  volatile uint8_t& _ptrJointEnable)
+Stepgen::Stepgen(int32_t _threadFreq, int _jointNumber, const char* _enable, const char* _step, const char* _direction, int _stepBit, volatile int32_t& _ptrFrequencyCommand, volatile int32_t& _ptrFeedback,  volatile uint8_t& _ptrJointEnable, bool _usesModulePost)
     : jointNumber(_jointNumber),
       enable(_enable),
       step(_step),
@@ -54,7 +56,7 @@ Stepgen::Stepgen(int32_t _threadFreq, int _jointNumber, const char* _enable, con
       ptrFrequencyCommand(&_ptrFrequencyCommand),
       ptrFeedback(&_ptrFeedback),
       ptrJointEnable(&_ptrJointEnable),
-      enablePin(_enable, OUTPUT),
+	  enablePin(_enable, OUTPUT),
       stepPin(_step, OUTPUT),
       directionPin(_direction, OUTPUT),
       rawCount(0),
@@ -65,6 +67,7 @@ Stepgen::Stepgen(int32_t _threadFreq, int _jointNumber, const char* _enable, con
       isForward(false),
       isStepping(false)
 {
+	usesModulePost = _usesModulePost;
 }
 
 /**

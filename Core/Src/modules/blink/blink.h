@@ -14,7 +14,7 @@
  * @param config JSON object containing configuration parameters for the Blink module.
  * @return A unique pointer to the created Blink module.
  */
-unique_ptr<Module> createBlink(const JsonObject& config);
+shared_ptr<Module> createBlink(const JsonObject& config);
 
 /**
  * @class Blink

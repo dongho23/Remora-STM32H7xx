@@ -14,7 +14,7 @@ class Module
 		int32_t slowUpdateFreq;
 		int32_t updateCount;
 		int32_t counter;
-
+        bool usesModulePost = false;
 
 	public:
 
@@ -28,8 +28,8 @@ class Module
 		virtual void updatePost();
 		virtual void slowUpdate();	// the standard interface for the slow update - use for PID controller etc
         virtual void configure();   // the standard interface for one off configuration
-        virtual void handleInterrupt();
 
+        virtual bool getUsesModulePost() const { return usesModulePost; }
 };
 
 #endif

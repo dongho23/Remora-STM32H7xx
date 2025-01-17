@@ -12,7 +12,7 @@
 
 using namespace std;
 
-typedef  unique_ptr<Module> (*ModuleCreator)(const JsonObject&);
+typedef  shared_ptr<Module> (*ModuleCreator)(const JsonObject&);
 class ModuleFactory {
 private:
 
@@ -27,7 +27,7 @@ private:
 public:
     static ModuleFactory* getInstance();
     // Create module based on thread and type
-    std::unique_ptr<Module> createModule(const char* _tname, 
+    std::shared_ptr<Module> createModule(const char* _tname,
                                        const char* _ttype,
                                        const JsonVariant config);
 

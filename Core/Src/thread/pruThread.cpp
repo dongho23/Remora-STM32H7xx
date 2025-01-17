@@ -34,20 +34,20 @@ bool pruThread::executeModules() {
     return true;
 }
 
-bool pruThread::registerModule(unique_ptr<Module> module) {
+bool pruThread::registerModule(shared_ptr<Module> module) {
     if (!module) {
         return false;
     }
-    modules.push_back(move(module));
+    modules.push_back(module);
     return true;
 }
 
-bool pruThread::registerModulePost(unique_ptr<Module> module) {
+bool pruThread::registerModulePost(shared_ptr<Module> module) {
     if (!module) {
         return false;
     }
     hasModulesPost = true;
-    modulesPost.push_back(move(module));
+    modulesPost.push_back(module);
     return true;
 }
 

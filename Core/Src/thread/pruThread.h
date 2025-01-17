@@ -22,8 +22,8 @@ private:
 	atomic<bool> threadRunning{false};
     atomic<bool> threadPaused{false};
 
-    vector<unique_ptr<Module>> modules;
-    vector<unique_ptr<Module>> modulesPost;
+    vector<shared_ptr<Module>> modules;
+    vector<shared_ptr<Module>> modulesPost;
 
 	pruTimer* timerPtr;
 	TIM_TypeDef* timer;
@@ -40,8 +40,8 @@ public:
 
 	pruThread(const string& _name, TIM_TypeDef *_timer, IRQn_Type _irq, uint32_t _freq, uint8_t _prio);
 
-	bool registerModule(unique_ptr<Module> module);
-	bool registerModulePost(unique_ptr<Module> module);
+	bool registerModule(shared_ptr<Module> module);
+	bool registerModulePost(shared_ptr<Module> module);
 
     [[nodiscard]] bool isRunning() const { return threadRunning.load(std::memory_order_acquire);  }
     [[nodiscard]] bool isPaused() const { return threadPaused.load(std::memory_order_acquire); }

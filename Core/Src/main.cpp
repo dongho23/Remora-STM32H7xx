@@ -73,8 +73,8 @@ enum State {
 };
 
 //uint8_t resetCnt;
-uint32_t baseFreq = Config::PRU_BASEFREQ;
-uint32_t servoFreq = Config::PRU_SERVOFREQ;
+uint32_t baseFreq = Config::pruBaseFreq;
+uint32_t servoFreq = Config::pruServoFreq;
 uint8_t	baseCount;
 uint8_t	servoCount;
 uint8_t	commsCount;
@@ -102,11 +102,11 @@ volatile DMA_RxBuffer_t* ptrRxDMABuffer = &rxDMABuffer;
 
 volatile int32_t* 	ptrTxHeader;
 volatile bool*    	ptrPRUreset;
-volatile int32_t* 	ptrJointFreqCmd[Config::JOINTS];
-volatile int32_t* 	ptrJointFeedback[Config::JOINTS];
+volatile int32_t* 	ptrJointFreqCmd[Config::joints];
+volatile int32_t* 	ptrJointFeedback[Config::joints];
 volatile uint8_t* 	ptrJointEnable;
-volatile float*   	ptrSetPoint[Config::VARIABLES];
-volatile float*   	ptrProcessVariable[Config::VARIABLES];
+volatile float*   	ptrSetPoint[Config::variables];
+volatile float*   	ptrProcessVariable[Config::variables];
 volatile uint16_t* 	ptrInputs;
 volatile uint16_t* 	ptrOutputs;
 
@@ -579,7 +579,7 @@ int main(void)
 			              // set all of the rxData buffer to 0
 			              printf("   Resetting rxBuffer\n");
 			              {
-							  int n = Config::DATA_BUFF_SIZE;
+							  int n = Config::dataBuffSize;
 							  while(n-- > 0)
 							  {
 								  ptrRxData->rxBuffer[n] = 0;
@@ -741,7 +741,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = Config::PC_BAUD;
+  huart1.Init.BaudRate = Config::pcBaud;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;

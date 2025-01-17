@@ -10,13 +10,13 @@ typedef union rxData_t
   // this allow structured access to the incoming data without having to move it
   struct
   {
-    uint8_t rxBuffer[Config::DATA_BUFF_SIZE];
+    uint8_t rxBuffer[Config::dataBuffSize];
   };
   struct
   {
     int32_t header;
-    volatile int32_t jointFreqCmd[Config::JOINTS]; 	// Base thread commands ?? - basically motion
-    float setPoint[Config::VARIABLES];		  // Servo thread commands ?? - temperature SP, PWM etc
+    volatile int32_t jointFreqCmd[Config::joints]; 	// Base thread commands ?? - basically motion
+    float setPoint[Config::variables];		  // Servo thread commands ?? - temperature SP, PWM etc
     uint8_t jointEnable;
     uint16_t outputs;
     uint8_t spare0;
@@ -26,10 +26,10 @@ typedef union rxData_t
       header = 0;
       outputs = 0;
       jointEnable = 0;
-      for (int i=0;i<Config::JOINTS;i++) {
+      for (int i=0;i<Config::joints;i++) {
          jointFreqCmd[i] = 0;
       }
-      for (int i=0;i<Config::VARIABLES;i++) {
+      for (int i=0;i<Config::variables;i++) {
          setPoint[i] = 0.0;
      }
   }
@@ -41,23 +41,23 @@ typedef union txData_t
   // this allow structured access to the out going SPI data without having to move it
   struct
   {
-    uint8_t txBuffer[Config::DATA_BUFF_SIZE];
+    uint8_t txBuffer[Config::dataBuffSize];
   };
   struct
   {
     int32_t header;
-    int32_t jointFeedback[Config::JOINTS];	  // Base thread feedback ??
-    float processVariable[Config::VARIABLES];		     // Servo thread feedback ??
+    int32_t jointFeedback[Config::joints];	  // Base thread feedback ??
+    float processVariable[Config::variables];		     // Servo thread feedback ??
 	uint16_t inputs;
   };
 
   txData_t() {
       header = 0;
       inputs = 0;
-      for (int i=0;i<Config::JOINTS;i++) {
+      for (int i=0;i<Config::joints;i++) {
          jointFeedback[i] = 0;
       }
-      for (int i=0;i<Config::VARIABLES;i++) {
+      for (int i=0;i<Config::variables;i++) {
          processVariable[i] = 0.0;
      }
   }
@@ -89,11 +89,11 @@ extern volatile DMA_RxBuffer_t* ptrRxDMABuffer;
 
 extern volatile int32_t* 	ptrTxHeader;
 extern volatile bool*    	ptrPRUreset;
-extern volatile int32_t* 	ptrJointFreqCmd[Config::JOINTS];
-extern volatile int32_t* 	ptrJointFeedback[Config::JOINTS];
+extern volatile int32_t* 	ptrJointFreqCmd[Config::joints];
+extern volatile int32_t* 	ptrJointFeedback[Config::joints];
 extern volatile uint8_t* 	ptrJointEnable;
-extern volatile float*   	ptrSetPoint[Config::VARIABLES];
-extern volatile float*   	ptrProcessVariable[Config::VARIABLES];
+extern volatile float*   	ptrSetPoint[Config::variables];
+extern volatile float*   	ptrProcessVariable[Config::variables];
 extern volatile uint16_t* 	ptrInputs;
 extern volatile uint16_t* 	ptrOutputs;
 

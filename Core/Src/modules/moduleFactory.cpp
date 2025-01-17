@@ -71,7 +71,7 @@ ModuleCreator ModuleFactory::createOnLoadModule(const char* modN) {
 }
 
 // Create module based on thread and type
-std::unique_ptr<Module> ModuleFactory::createModule(const char* _tname,
+std::shared_ptr<Module> ModuleFactory::createModule(const char* _tname,
                                    const char* _mtype,
                                    const JsonVariant config) {
     if (strcmp(_tname,"Base") == 0)
