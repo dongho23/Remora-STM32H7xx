@@ -40,6 +40,9 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Core/Src/modules/remoraComms/../remoraComms/../../remora.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../configuration.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../data.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../comms/commsInterface.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../comms/SPIComms.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../comms/commsInterface.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
@@ -58,6 +61,9 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../remora.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/commsHandler.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/../../modules/module.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/../../comms/commsInterface.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/debug.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../drivers/pin/pin.h \
@@ -68,6 +74,7 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../drivers/pin/pin.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../thread/pruThread.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../thread/timer.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../interrupt/interrupt.h \
@@ -112,6 +119,9 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
 ../Core/Src/modules/remoraComms/../remoraComms/../../remora.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../configuration.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../data.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../comms/commsInterface.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../comms/SPIComms.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../comms/commsInterface.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
@@ -134,6 +144,9 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../remora.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/blink/../../drivers/pin/pin.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/commsHandler.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/../../modules/module.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/../../comms/commsInterface.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/debug.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../drivers/pin/pin.h:
@@ -144,6 +157,7 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../drivers/pin/pin.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../thread/pruThread.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../thread/timer.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../interrupt/interrupt.h:

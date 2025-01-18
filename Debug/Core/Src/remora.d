@@ -1,5 +1,7 @@
 Core/Src/remora.o: ../Core/Src/remora.cpp ../Core/Src/remora.h \
  ../Core/Src/configuration.h ../Core/Src/data.h \
+ ../Core/Src/comms/commsInterface.h ../Core/Src/comms/SPIComms.h \
+ ../Core/Src/comms/commsInterface.h \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson.h \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
@@ -51,6 +53,9 @@ Core/Src/remora.o: ../Core/Src/remora.cpp ../Core/Src/remora.h \
  ../Core/Src/modules/blink/../../remora.h \
  ../Core/Src/modules/blink/../../modules/module.h \
  ../Core/Src/modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/modules/comms/commsHandler.h \
+ ../Core/Src/modules/comms/../../modules/module.h \
+ ../Core/Src/modules/comms/../../comms/commsInterface.h \
  ../Core/Src/modules/debug/debug.h \
  ../Core/Src/modules/debug/../../modules/module.h \
  ../Core/Src/modules/debug/../../drivers/pin/pin.h \
@@ -66,10 +71,14 @@ Core/Src/remora.o: ../Core/Src/remora.cpp ../Core/Src/remora.h \
  ../Core/Src/modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../drivers/pin/pin.h \
  ../Core/Src/thread/pruThread.h ../Core/Src/thread/timer.h \
+ ../Core/Src/modules/comms/commsHandler.h \
  ../Core/Src/json/jsonConfigHandler.h
 ../Core/Src/remora.h:
 ../Core/Src/configuration.h:
 ../Core/Src/data.h:
+../Core/Src/comms/commsInterface.h:
+../Core/Src/comms/SPIComms.h:
+../Core/Src/comms/commsInterface.h:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson.h:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
@@ -128,6 +137,9 @@ Core/Src/remora.o: ../Core/Src/remora.cpp ../Core/Src/remora.h \
 ../Core/Src/modules/blink/../../remora.h:
 ../Core/Src/modules/blink/../../modules/module.h:
 ../Core/Src/modules/blink/../../drivers/pin/pin.h:
+../Core/Src/modules/comms/commsHandler.h:
+../Core/Src/modules/comms/../../modules/module.h:
+../Core/Src/modules/comms/../../comms/commsInterface.h:
 ../Core/Src/modules/debug/debug.h:
 ../Core/Src/modules/debug/../../modules/module.h:
 ../Core/Src/modules/debug/../../drivers/pin/pin.h:
@@ -144,4 +156,5 @@ Core/Src/remora.o: ../Core/Src/remora.cpp ../Core/Src/remora.h \
 ../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
 ../Core/Src/thread/pruThread.h:
 ../Core/Src/thread/timer.h:
+../Core/Src/modules/comms/commsHandler.h:
 ../Core/Src/json/jsonConfigHandler.h:

@@ -8,13 +8,13 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/atomic:76:15:constexpr std::atomic<bool>::atomic(bool)	16	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/atomic:103:5:void std::atomic<bool>::store(bool, std::memory_order)	24	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/atomic:111:5:bool std::atomic<bool>::load(std::memory_order) const	24	static
-../Core/Src/thread/pruThread.h:34:26:void pruThread::setThreadRunning(bool)	16	static
-../Core/Src/thread/pruThread.h:35:26:void pruThread::setThreadPaused(bool)	16	static
-../Core/Src/thread/pruThread.h:46:24:bool pruThread::isRunning() const	16	static
-../Core/Src/thread/pruThread.h:47:24:bool pruThread::isPaused() const	16	static
+../Core/Src/thread/pruThread.h:33:10:void pruThread::setThreadRunning(bool)	16	static
+../Core/Src/thread/pruThread.h:34:10:void pruThread::setThreadPaused(bool)	16	static
+../Core/Src/thread/pruThread.h:45:24:bool pruThread::isRunning() const	16	static
+../Core/Src/thread/pruThread.h:46:24:bool pruThread::isPaused() const	16	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_vector.h:312:7:std::_Vector_base<_Tp, _Alloc>::_Vector_base() [with _Tp = std::shared_ptr<Module>; _Alloc = std::allocator<std::shared_ptr<Module> >]	16	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/stl_vector.h:526:7:std::vector<_Tp, _Alloc>::vector() [with _Tp = std::shared_ptr<Module>; _Alloc = std::allocator<std::shared_ptr<Module> >]	16	static
-../Core/Src/thread/pruThread.cpp:7:1:pruThread::pruThread(const std::string&, TIM_TypeDef*, IRQn_Type, uint32_t, uint8_t)	48	static
+../Core/Src/thread/pruThread.cpp:7:1:pruThread::pruThread(const std::string&, TIM_TypeDef*, IRQn_Type, uint32_t, uint8_t)	24	static
 ../Core/Src/thread/pruThread.cpp:19:6:bool pruThread::executeModules()	48	static
 ../Core/Src/thread/pruThread.cpp:37:6:bool pruThread::registerModule(std::shared_ptr<Module>)	16	static
 ../Core/Src/thread/pruThread.cpp:45:6:bool pruThread::registerModulePost(std::shared_ptr<Module>)	16	static

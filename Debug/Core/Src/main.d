@@ -42,6 +42,8 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
  ../Core/Src/remora.h ../Core/Src/configuration.h ../Core/Src/data.h \
+ ../Core/Src/comms/commsInterface.h ../Core/Src/comms/SPIComms.h \
+ ../Core/Src/comms/commsInterface.h \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson.h \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
@@ -51,6 +53,9 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/modules/blink/../../remora.h \
  ../Core/Src/modules/blink/../../modules/module.h \
  ../Core/Src/modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/modules/comms/commsHandler.h \
+ ../Core/Src/modules/comms/../../modules/module.h \
+ ../Core/Src/modules/comms/../../comms/commsInterface.h \
  ../Core/Src/modules/debug/debug.h \
  ../Core/Src/modules/debug/../../modules/module.h \
  ../Core/Src/modules/debug/../../drivers/pin/pin.h \
@@ -66,10 +71,10 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../drivers/pin/pin.h \
  ../Core/Src/thread/pruThread.h ../Core/Src/thread/timer.h \
- ../Core/Src/drivers/pin/pin.h ../Core/Src/interrupt/irqHandlers.h \
- ../Core/Src/interrupt/interrupt.h ../Core/Src/interrupt/interrupt.h \
- ../Core/Src/thread/createThreads.h ../Core/Inc/extern.h \
- ../Core/Inc/../Src/thread/pruThread.h
+ ../Core/Src/modules/comms/commsHandler.h ../Core/Src/drivers/pin/pin.h \
+ ../Core/Src/interrupt/irqHandlers.h ../Core/Src/interrupt/interrupt.h \
+ ../Core/Src/interrupt/interrupt.h ../Core/Src/thread/createThreads.h \
+ ../Core/Inc/extern.h ../Core/Inc/../Src/thread/pruThread.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -120,6 +125,9 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Src/remora.h:
 ../Core/Src/configuration.h:
 ../Core/Src/data.h:
+../Core/Src/comms/commsInterface.h:
+../Core/Src/comms/SPIComms.h:
+../Core/Src/comms/commsInterface.h:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson.h:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
@@ -131,6 +139,9 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Src/modules/blink/../../remora.h:
 ../Core/Src/modules/blink/../../modules/module.h:
 ../Core/Src/modules/blink/../../drivers/pin/pin.h:
+../Core/Src/modules/comms/commsHandler.h:
+../Core/Src/modules/comms/../../modules/module.h:
+../Core/Src/modules/comms/../../comms/commsInterface.h:
 ../Core/Src/modules/debug/debug.h:
 ../Core/Src/modules/debug/../../modules/module.h:
 ../Core/Src/modules/debug/../../drivers/pin/pin.h:
@@ -147,6 +158,7 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
 ../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
 ../Core/Src/thread/pruThread.h:
 ../Core/Src/thread/timer.h:
+../Core/Src/modules/comms/commsHandler.h:
 ../Core/Src/drivers/pin/pin.h:
 ../Core/Src/interrupt/irqHandlers.h:
 ../Core/Src/interrupt/interrupt.h:

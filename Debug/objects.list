@@ -1,3 +1,4 @@
+"./Core/Src/comms/SPIComms.o"
 "./Core/Src/drivers/pin/pin.o"
 "./Core/Src/interrupt/interrupt.o"
 "./Core/Src/json/jsonConfigHandler.o"
@@ -9,6 +10,7 @@
 "./Core/Src/sysmem.o"
 "./Core/Src/system_stm32h7xx.o"
 "./Core/Src/modules/blink/blink.o"
+"./Core/Src/modules/comms/commsHandler.o"
 "./Core/Src/modules/debug/debug.o"
 "./Core/Src/modules/module.o"
 "./Core/Src/modules/moduleFactory.o"

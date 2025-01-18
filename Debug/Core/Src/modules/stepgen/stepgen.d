@@ -4,6 +4,9 @@ Core/Src/modules/stepgen/stepgen.o: \
  ../Core/Src/modules/stepgen/../../remora.h \
  ../Core/Src/modules/stepgen/../../configuration.h \
  ../Core/Src/modules/stepgen/../../data.h \
+ ../Core/Src/modules/stepgen/../../comms/commsInterface.h \
+ ../Core/Src/modules/stepgen/../../comms/SPIComms.h \
+ ../Core/Src/modules/stepgen/../../comms/commsInterface.h \
  ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.h \
  ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
@@ -57,6 +60,9 @@ Core/Src/modules/stepgen/stepgen.o: \
  ../Core/Src/modules/stepgen/../../modules/blink/../../remora.h \
  ../Core/Src/modules/stepgen/../../modules/blink/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/modules/stepgen/../../modules/comms/commsHandler.h \
+ ../Core/Src/modules/stepgen/../../modules/comms/../../modules/module.h \
+ ../Core/Src/modules/stepgen/../../modules/comms/../../comms/commsInterface.h \
  ../Core/Src/modules/stepgen/../../modules/debug/debug.h \
  ../Core/Src/modules/stepgen/../../modules/debug/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../modules/debug/../../drivers/pin/pin.h \
@@ -70,12 +76,16 @@ Core/Src/modules/stepgen/stepgen.o: \
  ../Core/Src/modules/stepgen/../../modules/stepgen/stepgen.h \
  ../Core/Src/modules/stepgen/../../thread/pruThread.h \
  ../Core/Src/modules/stepgen/../../thread/timer.h \
+ ../Core/Src/modules/stepgen/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../drivers/pin/pin.h
 ../Core/Src/modules/stepgen/stepgen.h:
 ../Core/Src/modules/stepgen/../../remora.h:
 ../Core/Src/modules/stepgen/../../configuration.h:
 ../Core/Src/modules/stepgen/../../data.h:
+../Core/Src/modules/stepgen/../../comms/commsInterface.h:
+../Core/Src/modules/stepgen/../../comms/SPIComms.h:
+../Core/Src/modules/stepgen/../../comms/commsInterface.h:
 ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.h:
 ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
@@ -134,6 +144,9 @@ Core/Src/modules/stepgen/stepgen.o: \
 ../Core/Src/modules/stepgen/../../modules/blink/../../remora.h:
 ../Core/Src/modules/stepgen/../../modules/blink/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../modules/blink/../../drivers/pin/pin.h:
+../Core/Src/modules/stepgen/../../modules/comms/commsHandler.h:
+../Core/Src/modules/stepgen/../../modules/comms/../../modules/module.h:
+../Core/Src/modules/stepgen/../../modules/comms/../../comms/commsInterface.h:
 ../Core/Src/modules/stepgen/../../modules/debug/debug.h:
 ../Core/Src/modules/stepgen/../../modules/debug/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../modules/debug/../../drivers/pin/pin.h:
@@ -147,5 +160,6 @@ Core/Src/modules/stepgen/stepgen.o: \
 ../Core/Src/modules/stepgen/../../modules/stepgen/stepgen.h:
 ../Core/Src/modules/stepgen/../../thread/pruThread.h:
 ../Core/Src/modules/stepgen/../../thread/timer.h:
+../Core/Src/modules/stepgen/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/stepgen/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../drivers/pin/pin.h:

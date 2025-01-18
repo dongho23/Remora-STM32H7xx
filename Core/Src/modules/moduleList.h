@@ -4,6 +4,7 @@
 // Include All modules
 #include "module.h"
 #include "blink/blink.h"
+#include "comms/commsHandler.h"
 #include "debug/debug.h"
 //#include "motorPower/motorPower.h"
 #include "remoraComms/remoraComms.h"

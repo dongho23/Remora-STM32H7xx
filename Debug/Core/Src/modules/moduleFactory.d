@@ -4,6 +4,9 @@ Core/Src/modules/moduleFactory.o: ../Core/Src/modules/moduleFactory.cpp \
  ../Core/Src/modules/blink/../../remora.h \
  ../Core/Src/modules/blink/../../configuration.h \
  ../Core/Src/modules/blink/../../data.h \
+ ../Core/Src/modules/blink/../../comms/commsInterface.h \
+ ../Core/Src/modules/blink/../../comms/SPIComms.h \
+ ../Core/Src/modules/blink/../../comms/commsInterface.h \
  ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.h \
  ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
@@ -55,8 +58,12 @@ Core/Src/modules/moduleFactory.o: ../Core/Src/modules/moduleFactory.cpp \
  ../Core/Src/modules/blink/../../modules/moduleList.h \
  ../Core/Src/modules/blink/../../thread/pruThread.h \
  ../Core/Src/modules/blink/../../thread/timer.h \
+ ../Core/Src/modules/blink/../../modules/comms/commsHandler.h \
+ ../Core/Src/modules/blink/../../modules/comms/../../modules/module.h \
+ ../Core/Src/modules/blink/../../modules/comms/../../comms/commsInterface.h \
  ../Core/Src/modules/blink/../../modules/module.h \
  ../Core/Src/modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/modules/comms/commsHandler.h \
  ../Core/Src/modules/debug/debug.h \
  ../Core/Src/modules/debug/../../modules/module.h \
  ../Core/Src/modules/debug/../../drivers/pin/pin.h \
@@ -78,6 +85,9 @@ Core/Src/modules/moduleFactory.o: ../Core/Src/modules/moduleFactory.cpp \
 ../Core/Src/modules/blink/../../remora.h:
 ../Core/Src/modules/blink/../../configuration.h:
 ../Core/Src/modules/blink/../../data.h:
+../Core/Src/modules/blink/../../comms/commsInterface.h:
+../Core/Src/modules/blink/../../comms/SPIComms.h:
+../Core/Src/modules/blink/../../comms/commsInterface.h:
 ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.h:
 ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
@@ -134,8 +144,12 @@ Core/Src/modules/moduleFactory.o: ../Core/Src/modules/moduleFactory.cpp \
 ../Core/Src/modules/blink/../../modules/moduleList.h:
 ../Core/Src/modules/blink/../../thread/pruThread.h:
 ../Core/Src/modules/blink/../../thread/timer.h:
+../Core/Src/modules/blink/../../modules/comms/commsHandler.h:
+../Core/Src/modules/blink/../../modules/comms/../../modules/module.h:
+../Core/Src/modules/blink/../../modules/comms/../../comms/commsInterface.h:
 ../Core/Src/modules/blink/../../modules/module.h:
 ../Core/Src/modules/blink/../../drivers/pin/pin.h:
+../Core/Src/modules/comms/commsHandler.h:
 ../Core/Src/modules/debug/debug.h:
 ../Core/Src/modules/debug/../../modules/module.h:
 ../Core/Src/modules/debug/../../drivers/pin/pin.h:

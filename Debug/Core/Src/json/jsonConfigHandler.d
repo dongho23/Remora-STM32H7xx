@@ -46,7 +46,10 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
  ../Core/Src/json/../remora.h ../Core/Src/json/../configuration.h \
- ../Core/Src/json/../data.h ../Core/Src/json/../modules/moduleFactory.h \
+ ../Core/Src/json/../data.h ../Core/Src/json/../comms/commsInterface.h \
+ ../Core/Src/json/../comms/SPIComms.h \
+ ../Core/Src/json/../comms/commsInterface.h \
+ ../Core/Src/json/../modules/moduleFactory.h \
  ../Core/Src/json/../modules/module.h \
  ../Core/Src/json/../modules/../JSON/jsonConfigHandler.h \
  ../Core/Src/json/../modules/moduleList.h \
@@ -54,6 +57,9 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../modules/blink/../../remora.h \
  ../Core/Src/json/../modules/blink/../../modules/module.h \
  ../Core/Src/json/../modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/json/../modules/comms/commsHandler.h \
+ ../Core/Src/json/../modules/comms/../../modules/module.h \
+ ../Core/Src/json/../modules/comms/../../comms/commsInterface.h \
  ../Core/Src/json/../modules/debug/debug.h \
  ../Core/Src/json/../modules/debug/../../modules/module.h \
  ../Core/Src/json/../modules/debug/../../drivers/pin/pin.h \
@@ -69,7 +75,8 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../modules/stepgen/../../modules/module.h \
  ../Core/Src/json/../modules/stepgen/../../drivers/pin/pin.h \
  ../Core/Src/json/../thread/pruThread.h \
- ../Core/Src/json/../thread/timer.h
+ ../Core/Src/json/../thread/timer.h \
+ ../Core/Src/json/../modules/comms/commsHandler.h
 ../Core/Src/json/jsonConfigHandler.h:
 ../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.h:
 ../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.hpp:
@@ -124,6 +131,9 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
 ../Core/Src/json/../remora.h:
 ../Core/Src/json/../configuration.h:
 ../Core/Src/json/../data.h:
+../Core/Src/json/../comms/commsInterface.h:
+../Core/Src/json/../comms/SPIComms.h:
+../Core/Src/json/../comms/commsInterface.h:
 ../Core/Src/json/../modules/moduleFactory.h:
 ../Core/Src/json/../modules/module.h:
 ../Core/Src/json/../modules/../JSON/jsonConfigHandler.h:
@@ -132,6 +142,9 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
 ../Core/Src/json/../modules/blink/../../remora.h:
 ../Core/Src/json/../modules/blink/../../modules/module.h:
 ../Core/Src/json/../modules/blink/../../drivers/pin/pin.h:
+../Core/Src/json/../modules/comms/commsHandler.h:
+../Core/Src/json/../modules/comms/../../modules/module.h:
+../Core/Src/json/../modules/comms/../../comms/commsInterface.h:
 ../Core/Src/json/../modules/debug/debug.h:
 ../Core/Src/json/../modules/debug/../../modules/module.h:
 ../Core/Src/json/../modules/debug/../../drivers/pin/pin.h:
@@ -148,3 +161,4 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
 ../Core/Src/json/../modules/stepgen/../../drivers/pin/pin.h:
 ../Core/Src/json/../thread/pruThread.h:
 ../Core/Src/json/../thread/timer.h:
+../Core/Src/json/../modules/comms/commsHandler.h:

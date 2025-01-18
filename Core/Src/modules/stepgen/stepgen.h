@@ -63,9 +63,9 @@ class Stepgen : public Module
 
 		Stepgen(int32_t _threadFreq, int _jointNumber, const char* _enable, const char* _step, const char* _direction, int _stepBit, volatile int32_t &_ptrFrequencyCommand, volatile int32_t &_ptrFeedback, volatile uint8_t &_ptrJointEnable, bool _usesModulePost);
 
-		virtual void update(void) override;
-		virtual void updatePost(void) override;
-		virtual void slowUpdate(void) override;
+		void update(void) override;
+		void updatePost(void) override;
+		void slowUpdate(void) override;
 		void setEnabled(bool state);
 };
 

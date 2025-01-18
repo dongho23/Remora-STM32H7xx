@@ -26,10 +26,10 @@ typedef union rxData_t
       header = 0;
       outputs = 0;
       jointEnable = 0;
-      for (int i=0;i<Config::joints;i++) {
+      for (uint8_t i=0;i<Config::joints;i++) {
          jointFreqCmd[i] = 0;
       }
-      for (int i=0;i<Config::variables;i++) {
+      for (uint8_t i=0;i<Config::variables;i++) {
          setPoint[i] = 0.0;
      }
   }
@@ -54,10 +54,10 @@ typedef union txData_t
   txData_t() {
       header = 0;
       inputs = 0;
-      for (int i=0;i<Config::joints;i++) {
+      for (uint8_t i=0;i<Config::joints;i++) {
          jointFeedback[i] = 0;
       }
-      for (int i=0;i<Config::variables;i++) {
+      for (uint8_t i=0;i<Config::variables;i++) {
          processVariable[i] = 0.0;
      }
   }

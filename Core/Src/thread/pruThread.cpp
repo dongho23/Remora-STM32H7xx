@@ -11,7 +11,7 @@ pruThread::pruThread(const string& _name, TIM_TypeDef *_timer, IRQn_Type _irq, u
       frequency(_freq),
 	  hasModulesPost(false)
 {
-	printf("Creating %s thread at %d hz\n", threadName, frequency);
+	printf("Creating %s thread at %lu hz\n", threadName.c_str(), (unsigned long)frequency);
     NVIC_SetPriority(irq, _prio);
 }
 

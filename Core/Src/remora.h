@@ -5,11 +5,15 @@
 
 #include "configuration.h"
 #include "data.h"
+#include "comms/commsInterface.h"
+#include "comms/SPIComms.h"
 #include "lib/ArduinoJson7/ArduinoJson.h"
 //#include "states.h"
 #include "modules/moduleFactory.h"
 #include "modules/moduleList.h"
 #include "thread/pruThread.h"
+
+#include "modules/comms/commsHandler.h"
 
 class JsonConfigHander; //forward declaration
 
@@ -18,6 +22,7 @@ class Remora {
 private:
 
 	JsonConfigHandler* configHandler;
+	CommsHandler* comms;
 
     std::unique_ptr<pruThread> baseThread;
     std::unique_ptr<pruThread> servoThread;

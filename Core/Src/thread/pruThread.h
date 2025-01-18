@@ -17,22 +17,21 @@ class pruThread
 private:
 
 	string threadName;
+	TIM_TypeDef* timer;
+	IRQn_Type irq;
 	uint32_t frequency;
 	
+	pruTimer* timerPtr;
+	bool hasModulesPost;		// run updatePost()
+
 	atomic<bool> threadRunning{false};
     atomic<bool> threadPaused{false};
 
     vector<shared_ptr<Module>> modules;
     vector<shared_ptr<Module>> modulesPost;
 
-	pruTimer* timerPtr;
-	TIM_TypeDef* timer;
-	IRQn_Type irq;
-
-	bool hasModulesPost;		// run updatePost()
-
-    [[ nodiscard ]] void setThreadRunning(bool val) { threadRunning.store(val, std::memory_order_release); }
-    [[ nodiscard ]] void setThreadPaused(bool val) { threadPaused.store(val, std::memory_order_release); }
+    void setThreadRunning(bool val) { threadRunning.store(val, std::memory_order_release); }
+    void setThreadPaused(bool val) { threadPaused.store(val, std::memory_order_release); }
 
     bool executeModules();
 
