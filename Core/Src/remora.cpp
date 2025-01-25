@@ -1,22 +1,34 @@
 #include "remora.h"
 #include "json/jsonConfigHandler.h"
+#include "comms/SPIComms.h"
+
+// unions for TX and RX data
+__attribute__((section(".DmaSection"))) volatile txData_t txData;
+__attribute__((section(".DmaSection"))) volatile rxData_t rxData;
 
 
-Remora::Remora()
-	: baseFreq(Config::pruBaseFreq),
-	  servoFreq(Config::pruServoFreq),
-	  commsFreq(Config::pruCommsFreq)
+Remora::Remora() :
+	baseFreq(Config::pruBaseFreq),
+	servoFreq(Config::pruServoFreq),
+	commsFreq(Config::pruCommsFreq)
 {
 
-	this->configHandler = new JsonConfigHandler(this);
+	configHandler = std::make_unique<JsonConfigHandler>(this);
+
+    ptrTxData = &txData;
+    ptrRxData = &rxData;
+
+	auto spiComms = std::make_unique<SPIComms>(ptrRxData, ptrTxData, SPI1);
+
+	comms = std::make_unique<CommsHandler>();
+	comms->setInterface(std::move(spiComms));
+	comms->init();
+	comms->start();
+
+
+
 
 	/*
-	baseThread = new pruThread(TIM3, TIM3_IRQn, baseFreq, baseCount);
-	NVIC_SetPriority(TIM3_IRQn, BASE_THREAD_IRQ_PRIORITY);
-
-	servoThread = new pruThread(TIM2, TIM2_IRQn, servoFreq, servoCount);
-	NVIC_SetPriority(TIM2_IRQn, SERVO_THREAD_IRQ_PRIORITY);
-
 	commsThread = new pruThread(TIM4, TIM4_IRQn, PRU_COMMSFREQ, commsCount);
 	NVIC_SetPriority(TIM4_IRQn, COMMS_THREAD_IRQ_PRIORITY);
 	*/
@@ -37,7 +49,9 @@ Remora::Remora()
 										);
 
     loadModules();
-    while (1);
+    while (1) {
+    	comms->tasks();
+    }
 }
 
 void Remora::loadModules() {

@@ -166,28 +166,28 @@ void RemoraComms::init()
 void RemoraComms::start()
 {
     // Register the NSS (slave select) interrupt
-    NssInterrupt = new ModuleInterrupt(
+    NssInterrupt = new ModuleInterrupt<RemoraComms>(
         this->irqNss,
         this,
-        static_cast<void (Module::*)()>(&RemoraComms::handleNssInterrupt)
+        &RemoraComms::handleNssInterrupt
     );
     HAL_NVIC_SetPriority(this->irqNss, Config::spiNssIrqPriority, 0);
     HAL_NVIC_EnableIRQ(this->irqNss);
 
     // Register the DMA Rx interrupt
-    dmaRxInterrupt = new ModuleInterrupt(
+    dmaRxInterrupt = new ModuleInterrupt<RemoraComms>(
         this->irqDMArx,
         this,
-        static_cast<void (Module::*)()>(&RemoraComms::handleRxInterrupt)
+        &RemoraComms::handleRxInterrupt
     );
     HAL_NVIC_SetPriority(this->irqDMArx, Config::spiDmaRxIrqPriority, 0);
     HAL_NVIC_EnableIRQ(this->irqDMArx);
 
     // Register the DMA Tx interrupt
-    dmaTxInterrupt = new ModuleInterrupt(
+    dmaTxInterrupt = new ModuleInterrupt<RemoraComms>(
         this->irqDMAtx,
         this,
-        static_cast<void (Module::*)()>(&RemoraComms::handleTxInterrupt)
+        &RemoraComms::handleTxInterrupt
     );
     HAL_NVIC_SetPriority(this->irqDMAtx, Config::spiDmaTxIrqPriority, 0); // TX needs higher priority than RX
     HAL_NVIC_EnableIRQ(this->irqDMAtx);

@@ -27,8 +27,6 @@ typedef enum {
 
 class RemoraComms : public Module
 {
-	friend class ModuleInterrupt;
-
     private:
 
 		Pin							*pin1, *pin2;
@@ -42,9 +40,9 @@ class RemoraComms : public Module
         uint8_t						RXbufferIdx;
         bool						copyRXbuffer;
 
-		ModuleInterrupt*			NssInterrupt;
-        ModuleInterrupt*			dmaTxInterrupt;
-		ModuleInterrupt*			dmaRxInterrupt;
+		ModuleInterrupt<RemoraComms>* NssInterrupt;
+        ModuleInterrupt<RemoraComms>* dmaTxInterrupt;
+		ModuleInterrupt<RemoraComms>* dmaRxInterrupt;
 		IRQn_Type					irqNss;
 		IRQn_Type					irqDMArx;
 		IRQn_Type					irqDMAtx;

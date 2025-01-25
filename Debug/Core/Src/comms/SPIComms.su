@@ -1,3 +1,0 @@
-../Core/Src/comms/SPIComms.cpp:10:1:SPIComms::SPIComms()	16	static
-../Core/Src/comms/SPIComms.cpp:15:1:SPIComms::~SPIComms()	16	static
-../Core/Src/comms/SPIComms.cpp:15:1:virtual SPIComms::~SPIComms()	16	static

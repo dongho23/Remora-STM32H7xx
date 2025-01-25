@@ -13,7 +13,7 @@
 #include "modules/moduleList.h"
 #include "thread/pruThread.h"
 
-#include "modules/comms/commsHandler.h"
+#include "modules/comms/commsHandler.h"  //TODO figure out why this is not being included from moduleList.h
 
 class JsonConfigHander; //forward declaration
 
@@ -21,11 +21,15 @@ class Remora {
 
 private:
 
-	JsonConfigHandler* configHandler;
-	CommsHandler* comms;
+	std::unique_ptr<JsonConfigHandler> configHandler;
+	std::unique_ptr<CommsHandler> comms;
 
     std::unique_ptr<pruThread> baseThread;
     std::unique_ptr<pruThread> servoThread;
+
+
+    volatile txData_t*  ptrTxData;
+    volatile rxData_t*  ptrRxData;
 
     uint32_t baseFreq;
     uint32_t servoFreq;

@@ -3,21 +3,13 @@ Core/Src/modules/comms/commsHandler.o: \
  ../Core/Src/modules/comms/commsHandler.h \
  ../Core/Src/modules/comms/../../modules/module.h \
  ../Core/Src/modules/comms/../../comms/commsInterface.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h \
  ../Core/Src/modules/comms/../../remora.h \
  ../Core/Src/modules/comms/../../configuration.h \
  ../Core/Src/modules/comms/../../data.h \
  ../Core/Src/modules/comms/../../comms/commsInterface.h \
  ../Core/Src/modules/comms/../../comms/SPIComms.h \
- ../Core/Src/modules/comms/../../comms/commsInterface.h \
- ../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson.h \
- ../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson.hpp \
- ../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
- ../Core/Src/modules/comms/../../modules/moduleFactory.h \
- ../Core/Src/modules/comms/../../modules/module.h \
- ../Core/Src/modules/comms/../../modules/../JSON/jsonConfigHandler.h \
- ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
- ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
- ../Core/Inc/main.h ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
+ ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h \
@@ -53,7 +45,21 @@ Core/Src/modules/comms/commsHandler.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../remora.h \
+ ../Core/Src/modules/comms/../../comms/commsInterface.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/../interrupt/interrupt.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h \
+ ../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson.h \
+ ../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson.hpp \
+ ../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
+ ../Core/Src/modules/comms/../../modules/moduleFactory.h \
+ ../Core/Src/modules/comms/../../modules/module.h \
+ ../Core/Src/modules/comms/../../modules/../JSON/jsonConfigHandler.h \
+ ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
+ ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
+ ../Core/Inc/main.h ../FATFS/Target/bsp_driver_sd.h \
+ ../FATFS/Target/fatfs_platform.h \
  ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
@@ -70,36 +76,24 @@ Core/Src/modules/comms/commsHandler.o: \
  ../Core/Src/modules/comms/../../modules/remoraComms/../../remora.h \
  ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/moduleinterrupt.h \
- ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/../interrupt/interrupt.h \
- ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/comms/../../modules/remoraComms/../../drivers/pin/pin.h \
  ../Core/Src/modules/comms/../../modules/stepgen/stepgen.h \
  ../Core/Src/modules/comms/../../modules/stepgen/../../remora.h \
  ../Core/Src/modules/comms/../../modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/comms/../../modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/modules/comms/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/comms/../../thread/pruThread.h \
  ../Core/Src/modules/comms/../../thread/timer.h \
  ../Core/Src/modules/comms/../../modules/comms/commsHandler.h
 ../Core/Src/modules/comms/commsHandler.h:
 ../Core/Src/modules/comms/../../modules/module.h:
 ../Core/Src/modules/comms/../../comms/commsInterface.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:
 ../Core/Src/modules/comms/../../remora.h:
 ../Core/Src/modules/comms/../../configuration.h:
 ../Core/Src/modules/comms/../../data.h:
 ../Core/Src/modules/comms/../../comms/commsInterface.h:
 ../Core/Src/modules/comms/../../comms/SPIComms.h:
-../Core/Src/modules/comms/../../comms/commsInterface.h:
-../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson.h:
-../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson.hpp:
-../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
-../Core/Src/modules/comms/../../modules/moduleFactory.h:
-../Core/Src/modules/comms/../../modules/module.h:
-../Core/Src/modules/comms/../../modules/../JSON/jsonConfigHandler.h:
-../FATFS/App/fatfs.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../Middlewares/Third_Party/FatFs/src/integer.h:
-../FATFS/Target/ffconf.h:
-../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
@@ -136,6 +130,22 @@ Core/Src/modules/comms/commsHandler.o: \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../remora.h:
+../Core/Src/modules/comms/../../comms/commsInterface.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/../interrupt/interrupt.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:
+../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson.h:
+../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson.hpp:
+../Core/Src/modules/comms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
+../Core/Src/modules/comms/../../modules/moduleFactory.h:
+../Core/Src/modules/comms/../../modules/module.h:
+../Core/Src/modules/comms/../../modules/../JSON/jsonConfigHandler.h:
+../FATFS/App/fatfs.h:
+../Middlewares/Third_Party/FatFs/src/ff.h:
+../Middlewares/Third_Party/FatFs/src/integer.h:
+../FATFS/Target/ffconf.h:
+../Core/Inc/main.h:
 ../FATFS/Target/bsp_driver_sd.h:
 ../FATFS/Target/fatfs_platform.h:
 ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
@@ -155,13 +165,12 @@ Core/Src/modules/comms/commsHandler.o: \
 ../Core/Src/modules/comms/../../modules/remoraComms/../../remora.h:
 ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/moduleinterrupt.h:
-../Core/Src/modules/comms/../../modules/remoraComms/../../modules/../interrupt/interrupt.h:
-../Core/Src/modules/comms/../../modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/comms/../../modules/remoraComms/../../drivers/pin/pin.h:
 ../Core/Src/modules/comms/../../modules/stepgen/stepgen.h:
 ../Core/Src/modules/comms/../../modules/stepgen/../../remora.h:
 ../Core/Src/modules/comms/../../modules/stepgen/../../modules/module.h:
 ../Core/Src/modules/comms/../../modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/modules/comms/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/comms/../../thread/pruThread.h:
 ../Core/Src/modules/comms/../../thread/timer.h:
 ../Core/Src/modules/comms/../../modules/comms/commsHandler.h:

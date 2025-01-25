@@ -90,9 +90,9 @@ pruThread* baseThread;
 pruThread* commsThread;
 
 // unions for TX and RX data
-__attribute__((section(".DmaSection"))) volatile txData_t txData;
-__attribute__((section(".DmaSection"))) volatile rxData_t rxData;
-__attribute__((section(".DmaSection"))) volatile DMA_RxBuffer_t rxDMABuffer;	// DMA SPI double buffers
+//__attribute__((section(".DmaSection"))) volatile txData_t txData;
+//__attribute__((section(".DmaSection"))) volatile rxData_t rxData;
+//__attribute__((section(".DmaSection"))) volatile DMA_RxBuffer_t rxDMABuffer;	// DMA SPI double buffers
 
 // pointers to data
 //rxData_t* pruRxData;

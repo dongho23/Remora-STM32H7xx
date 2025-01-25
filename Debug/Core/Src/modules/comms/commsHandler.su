@@ -1,9 +1,0 @@
-../Core/Src/modules/comms/../../modules/module.h:32:22:virtual bool Module::getUsesModulePost() const	16	static
-C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\arm-none-eabi\thumb\v7e-m+dp\hard\bits\gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	16	static
-F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Strings/Adapters/RamString.hpp:42:8:char ArduinoJson::V730HB22::detail::RamString::operator[](size_t) const	16	static
-../Core/Src/modules/comms/commsHandler.cpp:4:1:CommsHandler::CommsHandler()	16	static
-../Core/Src/modules/comms/commsHandler.cpp:8:1:CommsHandler::~CommsHandler()	16	static
-../Core/Src/modules/comms/commsHandler.cpp:8:1:virtual CommsHandler::~CommsHandler()	16	static
-../Core/Src/modules/comms/commsHandler.cpp:10:6:virtual void CommsHandler::update()	16	static
-../Core/Src/modules/comms/commsHandler.cpp:30:6:void CommsHandler::commsTasks()	16	static
-F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Strings/StringAdapters.hpp:65:13:void ArduinoJson::V730HB22::detail::stringGetChars(TAdaptedString, char*, size_t) [with TAdaptedString = RamString]	40	static

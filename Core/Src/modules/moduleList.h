@@ -10,4 +10,6 @@
 #include "remoraComms/remoraComms.h"
 #include "stepgen/stepgen.h"
 
+#include "moduleInterrupt.h"
+
 #endif

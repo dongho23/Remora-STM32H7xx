@@ -6,21 +6,26 @@
 
 // Derived class for module interrupts
 
-
+template <typename DerivedModule>
 class ModuleInterrupt : public Interrupt
 {
-	private:
-	    
-		Module* InterruptOwnerPtr;                                // Pointer to the owning module
-		void (Module::*InterruptHandler)();                       // Member function pointer for the ISR
-
+private:
+	DerivedModule* InterruptOwnerPtr;                                // Pointer to the owning module
+	void (DerivedModule::*InterruptHandler)();                       // Member function pointer for the ISR
 	
-	public:
+public:
+    ModuleInterrupt(IRQn_Type interruptNumber, DerivedModule* ownerPtr, void (DerivedModule::*handler)())
+        : InterruptOwnerPtr(ownerPtr), InterruptHandler(handler)
+    {
+        // Register the interrupt
+        Interrupt::Register(interruptNumber, this);
+    }
 
-		//ModuleInterrupt(int interruptNumber, Module* ownerptr);
-		ModuleInterrupt(IRQn_Type interruptNumber, Module* ownerptr, void (Module::*handler)());
-    
-		void ISR_Handler(void);
+    void ISR_Handler(void) {
+        if (this->InterruptOwnerPtr && this->InterruptHandler) {
+            (this->InterruptOwnerPtr->*InterruptHandler)(); // Call the member function of the owner
+        }
+    }
 };
 
 #endif

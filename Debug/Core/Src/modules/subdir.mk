@@ -6,18 +6,15 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../Core/Src/modules/module.cpp \
-../Core/Src/modules/moduleFactory.cpp \
-../Core/Src/modules/moduleInterrupt.cpp 
+../Core/Src/modules/moduleFactory.cpp 
 
 OBJS += \
 ./Core/Src/modules/module.o \
-./Core/Src/modules/moduleFactory.o \
-./Core/Src/modules/moduleInterrupt.o 
+./Core/Src/modules/moduleFactory.o 
 
 CPP_DEPS += \
 ./Core/Src/modules/module.d \
-./Core/Src/modules/moduleFactory.d \
-./Core/Src/modules/moduleInterrupt.d 
+./Core/Src/modules/moduleFactory.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -27,7 +24,7 @@ Core/Src/modules/%.o Core/Src/modules/%.su Core/Src/modules/%.cyclo: ../Core/Src
 clean: clean-Core-2f-Src-2f-modules
 
 clean-Core-2f-Src-2f-modules:
-	-$(RM) ./Core/Src/modules/module.cyclo ./Core/Src/modules/module.d ./Core/Src/modules/module.o ./Core/Src/modules/module.su ./Core/Src/modules/moduleFactory.cyclo ./Core/Src/modules/moduleFactory.d ./Core/Src/modules/moduleFactory.o ./Core/Src/modules/moduleFactory.su ./Core/Src/modules/moduleInterrupt.cyclo ./Core/Src/modules/moduleInterrupt.d ./Core/Src/modules/moduleInterrupt.o ./Core/Src/modules/moduleInterrupt.su
+	-$(RM) ./Core/Src/modules/module.cyclo ./Core/Src/modules/module.d ./Core/Src/modules/module.o ./Core/Src/modules/module.su ./Core/Src/modules/moduleFactory.cyclo ./Core/Src/modules/moduleFactory.d ./Core/Src/modules/moduleFactory.o ./Core/Src/modules/moduleFactory.su
 
 .PHONY: clean-Core-2f-Src-2f-modules
 

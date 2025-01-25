@@ -2,6 +2,7 @@
 #define COMMSHANDLER_H
 
 #include <cstdint>
+#include <memory>
 
 #include "../../modules/module.h"
 #include "../../comms/commsInterface.h"
@@ -18,7 +19,14 @@ public:
 	virtual ~CommsHandler();
 
 	void update(void) override;
-	void commsTasks();
+	void tasks();
+
+    void setInterface(std::unique_ptr<CommsInterface> commsInterface) {
+        interface = std::move(commsInterface);
+    }
+
+    void init();
+    void start();
 
     void setData(bool value) { data = value; }
     void setNoDataCount(int count) { noDataCount = count; }
