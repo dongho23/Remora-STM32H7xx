@@ -8,7 +8,8 @@ SPIComms::SPIComms(volatile rxData_t* _ptrRxData, volatile txData_t* _ptrTxData,
 	ptrTxData(_ptrTxData),
 	spiType(_spiType)
 {
-    spiHandle.Instance = this->spiType;
+    spiHandle.Instance = spiType;
+    ptrRxDMABuffer = &rxDMABuffer;
 
     irqNss = EXTI4_IRQn;
     irqDMAtx = DMA1_Stream0_IRQn;

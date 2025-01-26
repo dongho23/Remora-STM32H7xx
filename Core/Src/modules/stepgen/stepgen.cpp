@@ -13,6 +13,8 @@
 shared_ptr<Module> createStepgen(const JsonObject& config)
 {
     const char* comment = config["Comment"];
+    uint32_t threadFreq = config["ThreadFreq"];
+
     printf("%s\n", comment);
 
     int joint = config["Joint Number"];
@@ -28,7 +30,7 @@ shared_ptr<Module> createStepgen(const JsonObject& config)
     bool usesModulePost = true;		// stepgen uses the thread modulesPost vector
 
     // Create the step generator and register it in the thread
-    return make_unique<Stepgen>(baseFreq, joint, enable, step, dir, Config::stepBit, *ptrJointFreqCmd[joint], *ptrJointFeedback[joint], *ptrJointEnable, usesModulePost);
+    return make_unique<Stepgen>(threadFreq, joint, enable, step, dir, Config::stepBit, *ptrJointFreqCmd[joint], *ptrJointFeedback[joint], *ptrJointEnable, usesModulePost);
 }
 
 /**

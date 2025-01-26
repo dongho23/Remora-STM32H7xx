@@ -6,9 +6,7 @@
 #include "configuration.h"
 #include "data.h"
 #include "comms/commsInterface.h"
-#include "comms/SPIComms.h"
 #include "lib/ArduinoJson7/ArduinoJson.h"
-//#include "states.h"
 #include "modules/moduleFactory.h"
 #include "modules/moduleList.h"
 #include "thread/pruThread.h"
@@ -18,11 +16,23 @@
 class JsonConfigHander; //forward declaration
 
 class Remora {
-
 private:
 
+    enum State {
+        ST_SETUP = 0,
+        ST_START,
+        ST_IDLE,
+        ST_RUNNING,
+        ST_STOP,
+        ST_RESET,
+        ST_WDRESET
+    };
+
+    enum State currentState;
+    enum State prevState;
+
 	std::unique_ptr<JsonConfigHandler> configHandler;
-	std::unique_ptr<CommsHandler> comms;
+	std::shared_ptr<CommsHandler> comms;
 
     std::unique_ptr<pruThread> baseThread;
     std::unique_ptr<pruThread> servoThread;
@@ -35,11 +45,14 @@ private:
     uint32_t servoFreq;
     uint32_t commsFreq;
 
+    bool threadsRunning;
+
     void loadModules();
 
 public:
 
 	Remora();
+	void run();
     void setBaseFreq(uint32_t freq) { baseFreq = freq; }
     void setServoFreq(uint32_t freq) { servoFreq = freq; }
 };

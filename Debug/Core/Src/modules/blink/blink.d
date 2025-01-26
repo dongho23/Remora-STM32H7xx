@@ -5,8 +5,15 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Core/Src/modules/blink/../../data.h \
  ../Core/Src/modules/blink/../../comms/commsInterface.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h \
- ../Core/Src/modules/blink/../../comms/SPIComms.h \
- ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
+ ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.h \
+ ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.hpp \
+ ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
+ ../Core/Src/modules/blink/../../modules/moduleFactory.h \
+ ../Core/Src/modules/blink/../../modules/module.h \
+ ../Core/Src/modules/blink/../../modules/../JSON/jsonConfigHandler.h \
+ ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
+ ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
+ ../Core/Inc/main.h ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h \
@@ -42,21 +49,7 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../remora.h \
- ../Core/Src/modules/blink/../../comms/commsInterface.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/../interrupt/interrupt.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h \
- ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.h \
- ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.hpp \
- ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
- ../Core/Src/modules/blink/../../modules/moduleFactory.h \
- ../Core/Src/modules/blink/../../modules/module.h \
- ../Core/Src/modules/blink/../../modules/../JSON/jsonConfigHandler.h \
- ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
- ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
- ../Core/Inc/main.h ../FATFS/Target/bsp_driver_sd.h \
- ../FATFS/Target/fatfs_platform.h \
+ ../FATFS/Target/bsp_driver_sd.h ../FATFS/Target/fatfs_platform.h \
  ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
@@ -72,6 +65,8 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../remora.h \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/moduleinterrupt.h \
+ ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/../interrupt/interrupt.h \
+ ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../drivers/pin/pin.h \
  ../Core/Src/modules/blink/../../modules/stepgen/stepgen.h \
  ../Core/Src/modules/blink/../../modules/stepgen/../../remora.h \
@@ -89,7 +84,17 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
 ../Core/Src/modules/blink/../../data.h:
 ../Core/Src/modules/blink/../../comms/commsInterface.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:
-../Core/Src/modules/blink/../../comms/SPIComms.h:
+../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.h:
+../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.hpp:
+../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
+../Core/Src/modules/blink/../../modules/moduleFactory.h:
+../Core/Src/modules/blink/../../modules/module.h:
+../Core/Src/modules/blink/../../modules/../JSON/jsonConfigHandler.h:
+../FATFS/App/fatfs.h:
+../Middlewares/Third_Party/FatFs/src/ff.h:
+../Middlewares/Third_Party/FatFs/src/integer.h:
+../FATFS/Target/ffconf.h:
+../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
@@ -126,22 +131,6 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../remora.h:
-../Core/Src/modules/blink/../../comms/commsInterface.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/../interrupt/interrupt.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:
-../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.h:
-../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.hpp:
-../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
-../Core/Src/modules/blink/../../modules/moduleFactory.h:
-../Core/Src/modules/blink/../../modules/module.h:
-../Core/Src/modules/blink/../../modules/../JSON/jsonConfigHandler.h:
-../FATFS/App/fatfs.h:
-../Middlewares/Third_Party/FatFs/src/ff.h:
-../Middlewares/Third_Party/FatFs/src/integer.h:
-../FATFS/Target/ffconf.h:
-../Core/Inc/main.h:
 ../FATFS/Target/bsp_driver_sd.h:
 ../FATFS/Target/fatfs_platform.h:
 ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h:
@@ -160,6 +149,8 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/blink/../../modules/remoraComms/../../remora.h:
 ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/moduleinterrupt.h:
+../Core/Src/modules/blink/../../modules/remoraComms/../../modules/../interrupt/interrupt.h:
+../Core/Src/modules/blink/../../modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/blink/../../modules/remoraComms/../../drivers/pin/pin.h:
 ../Core/Src/modules/blink/../../modules/stepgen/stepgen.h:
 ../Core/Src/modules/blink/../../modules/stepgen/../../remora.h:

@@ -48,12 +48,6 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../remora.h ../Core/Src/json/../configuration.h \
  ../Core/Src/json/../data.h ../Core/Src/json/../comms/commsInterface.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h \
- ../Core/Src/json/../comms/SPIComms.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../remora.h \
- ../Core/Src/json/../comms/commsInterface.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/../interrupt/interrupt.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h \
  ../Core/Src/json/../modules/moduleFactory.h \
  ../Core/Src/json/../modules/module.h \
  ../Core/Src/json/../modules/../JSON/jsonConfigHandler.h \
@@ -72,6 +66,8 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../modules/remoraComms/../../remora.h \
  ../Core/Src/json/../modules/remoraComms/../../modules/module.h \
  ../Core/Src/json/../modules/remoraComms/../../modules/moduleinterrupt.h \
+ ../Core/Src/json/../modules/remoraComms/../../modules/../interrupt/interrupt.h \
+ ../Core/Src/json/../modules/remoraComms/../../modules/module.h \
  ../Core/Src/json/../modules/remoraComms/../../drivers/pin/pin.h \
  ../Core/Src/json/../modules/stepgen/stepgen.h \
  ../Core/Src/json/../modules/stepgen/../../remora.h \
@@ -137,12 +133,6 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
 ../Core/Src/json/../data.h:
 ../Core/Src/json/../comms/commsInterface.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:
-../Core/Src/json/../comms/SPIComms.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../remora.h:
-../Core/Src/json/../comms/commsInterface.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/../interrupt/interrupt.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:
 ../Core/Src/json/../modules/moduleFactory.h:
 ../Core/Src/json/../modules/module.h:
 ../Core/Src/json/../modules/../JSON/jsonConfigHandler.h:
@@ -161,6 +151,8 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/json/../modules/remoraComms/../../remora.h:
 ../Core/Src/json/../modules/remoraComms/../../modules/module.h:
 ../Core/Src/json/../modules/remoraComms/../../modules/moduleinterrupt.h:
+../Core/Src/json/../modules/remoraComms/../../modules/../interrupt/interrupt.h:
+../Core/Src/json/../modules/remoraComms/../../modules/module.h:
 ../Core/Src/json/../modules/remoraComms/../../drivers/pin/pin.h:
 ../Core/Src/json/../modules/stepgen/stepgen.h:
 ../Core/Src/json/../modules/stepgen/../../remora.h:

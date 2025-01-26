@@ -1,0 +1,34 @@
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\arm-none-eabi\thumb\v7e-m+dp\hard\bits\gthr-default.h:229:1:int __gthread_key_delete(__gthread_key_t)	1
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../data.h:25:3:rxData_t::rxData_t()	3
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\std_function.h:241:5:std::_Function_base::~_Function_base()	2
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\std_function.h:247:10:bool std::_Function_base::_M_empty() const	1
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:32:22:virtual bool Module::getUsesModulePost() const	1
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Strings/Adapters/RamString.hpp:42:8:char ArduinoJson::V730HB22::detail::RamString::operator[](size_t) const	1
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../data.h:69:3:DMA_RxBuffer_t::DMA_RxBuffer_t()	2
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\std_function.h:334:11:std::function<void(bool)>::~function()	1
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../comms/commsInterface.h:8:7:CommsInterface::~CommsInterface()	1
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../comms/commsInterface.h:8:7:virtual CommsInterface::~CommsInterface()	1
+../Core/Src/comms/SPIComms.cpp:6:1:SPIComms::SPIComms(volatile rxData_t*, volatile txData_t*, SPI_TypeDef*)	1
+../Core/Src/comms/SPIComms.cpp:19:1:SPIComms::~SPIComms()	1
+../Core/Src/comms/SPIComms.cpp:19:1:virtual SPIComms::~SPIComms()	1
+../Core/Src/comms/SPIComms.cpp:23:6:virtual void SPIComms::init()	2
+../Core/Src/comms/SPIComms.cpp:133:6:virtual void SPIComms::start()	2
+../Core/Src/comms/SPIComms.cpp:184:19:HAL_StatusTypeDef SPIComms::startMultiBufferDMASPI(uint8_t*, uint8_t*, uint8_t*, uint8_t*, uint16_t)	19
+../Core/Src/comms/SPIComms.cpp:317:5:int SPIComms::DMA_IRQHandler(DMA_HandleTypeDef*)	113
+../Core/Src/comms/SPIComms.cpp:439:5:int SPIComms::getActiveDMAmemory(DMA_HandleTypeDef*)	2
+../Core/Src/comms/SPIComms.cpp:446:6:void SPIComms::handleNssInterrupt()	2
+../Core/Src/comms/SPIComms.cpp:458:6:void SPIComms::handleTxInterrupt()	1
+../Core/Src/comms/SPIComms.cpp:464:6:void SPIComms::handleRxInterrupt()	5
+../Core/Src/comms/SPIComms.cpp:504:6:virtual void SPIComms::tasks()	3
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/remoraComms/../../modules/moduleinterrupt.h:17:5:ModuleInterrupt<DerivedModule>::ModuleInterrupt(IRQn_Type, DerivedModule*, void (DerivedModule::*)()) [with DerivedModule = SPIComms]	1
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\range_access.h:95:5:constexpr _Tp* std::begin(_Tp (&)[_Nm]) [with _Tp = volatile unsigned char; unsigned int _Nm = 64]	1
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\range_access.h:106:5:constexpr _Tp* std::end(_Tp (&)[_Nm]) [with _Tp = volatile unsigned char; unsigned int _Nm = 64]	1
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\stl_algobase.h:991:5:void std::fill(_ForwardIterator, _ForwardIterator, const _Tp&) [with _ForwardIterator = volatile unsigned char*; _Tp = int]	1
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\std_function.h:587:7:) const [with _Res = void; _ArgTypes = {bool}]	1
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/move.h:77:5:constexpr _Tp&& std::forward(typename remove_reference<_Tp>::type&) [with _Tp = bool]	1
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\stl_algobase.h:967:5:void std::__fill_a(_FIte, _FIte, const _Tp&) [with _FIte = volatile unsigned char*; _Tp = int]	1
+C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\stl_algobase.h:917:5:typename __gnu_cxx::__enable_if<std::__is_scalar<_Tp>::__value, void>::__type std::__fill_a1(_ForwardIterator, _ForwardIterator, const _Tp&) [with _ForwardIterator = volatile unsigned char*; _Tp = int]	2
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Strings/StringAdapters.hpp:65:13:void ArduinoJson::V730HB22::detail::stringGetChars(TAdaptedString, char*, size_t) [with TAdaptedString = RamString]	2
+../Core/Src/comms/SPIComms.cpp:528:1:void __static_initialization_and_destruction_0(int, int)	3
+F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/remoraComms/../../modules/moduleinterrupt.h:24:10:void ModuleInterrupt<DerivedModule>::ISR_Handler() [with DerivedModule = SPIComms]	6
+../Core/Src/comms/SPIComms.cpp:528:1:cpp)	1

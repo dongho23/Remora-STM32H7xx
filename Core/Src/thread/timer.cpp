@@ -8,22 +8,22 @@
 
 
 // Timer constructor
-pruTimer::pruTimer(TIM_TypeDef* timer, IRQn_Type irq, uint32_t frequency, pruThread* ownerPtr):
-	timer(timer),
-	irq(irq),
-	frequency(frequency),
-	timerOwnerPtr(ownerPtr)
+pruTimer::pruTimer(TIM_TypeDef* _timer, IRQn_Type _irq, uint32_t _frequency, pruThread* _ownerPtr):
+	timer(_timer),
+	irq(_irq),
+	frequency(_frequency),
+	timerOwnerPtr(_ownerPtr)
 {
-	interruptPtr = new TimerInterrupt(this->irq, this);	// Instantiate a new Timer Interrupt object and pass "this" pointer
+	interruptPtr = new TimerInterrupt(irq, this);	// Instantiate a new Timer Interrupt object and pass "this" pointer
 
-	this->startTimer();
+	startTimer();
 }
 
 
 void pruTimer::timerTick(void)
 {
 	//Do something here
-	this->timerOwnerPtr->update();
+	timerOwnerPtr->update();
 }
 
 
@@ -32,19 +32,19 @@ void pruTimer::startTimer(void)
 {
     uint32_t TIM_CLK;
 
-    if (this->timer == TIM2)
+    if (timer == TIM2)
     {
         printf("	power on Timer 2\n\r");
         __HAL_RCC_TIM2_CLK_ENABLE();
         TIM_CLK = APB1CLK;
     }
-    else if (this->timer == TIM3)
+    else if (timer == TIM3)
     {
         printf("	power on Timer 3\n\r");
         __HAL_RCC_TIM3_CLK_ENABLE();
         TIM_CLK = APB1CLK;
     }
-    else if (this->timer == TIM4)
+    else if (timer == TIM4)
     {
         printf("	power on Timer 4\n\r");
         __HAL_RCC_TIM4_CLK_ENABLE();
@@ -53,23 +53,23 @@ void pruTimer::startTimer(void)
 
     //timer update frequency = TIM_CLK/(TIM_PSC+1)/(TIM_ARR + 1)
 
-    this->timer->CR2 &= 0;                                            // UG used as trigg output
-    this->timer->PSC = TIM_PSC-1;                                     // prescaler
-    this->timer->ARR = ((TIM_CLK / TIM_PSC / this->frequency) - 1);   // period           
-    this->timer->EGR = TIM_EGR_UG;                                    // reinit the counter
-    this->timer->DIER = TIM_DIER_UIE;                                 // enable update interrupts
+    timer->CR2 &= 0;                                            // UG used as trigg output
+    timer->PSC = TIM_PSC-1;                                     // prescaler
+    timer->ARR = ((TIM_CLK / TIM_PSC / this->frequency) - 1);   // period
+    timer->EGR = TIM_EGR_UG;                                    // reinit the counter
+    timer->DIER = TIM_DIER_UIE;                                 // enable update interrupts
 
-    this->timer->CR1 |= TIM_CR1_CEN;                                  // enable timer
+    timer->CR1 |= TIM_CR1_CEN;                                  // enable timer
 
-    NVIC_EnableIRQ(this->irq);
+    NVIC_EnableIRQ(irq);
 
     printf("	timer started\n");
 }
 
 void pruTimer::stopTimer()
 {
-    NVIC_DisableIRQ(this->irq);
+    NVIC_DisableIRQ(irq);
 
     printf("	timer stop\n\r");
-    this->timer->CR1 &= (~(TIM_CR1_CEN));     // disable timer
+    timer->CR1 &= (~(TIM_CR1_CEN));     // disable timer
 }
