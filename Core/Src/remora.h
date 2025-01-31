@@ -47,6 +47,14 @@ private:
 
     bool threadsRunning;
 
+    void transitionToState(State);
+    void handleSetupState();
+    void handleStartState();
+    void handleIdleState();
+    void handleRunningState();
+    void handleResetState();
+    void startThread(const std::unique_ptr<pruThread>&, const char*);
+    void resetBuffer(volatile uint8_t*, size_t);
     void loadModules();
 
 public:

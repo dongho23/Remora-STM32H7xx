@@ -71,7 +71,6 @@ int main(void)
 	//SCB_InvalidateDCache();
 	//SCB_EnableDCache();
 
-	/* DMA controller clock enable */
     __HAL_RCC_DMA1_CLK_ENABLE();
 
 	MX_GPIO_Init(); 			// used for SD card detect

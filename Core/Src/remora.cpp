@@ -64,124 +64,108 @@ Remora::Remora() :
     servoThread->registerModule(comms);
 }
 
+void Remora::transitionToState(State newState) {
+    if (currentState != newState) {
+        printf("\n## Transitioning from state %d to state %d\n", currentState, newState);
+        prevState = currentState;
+        currentState = newState;
+    }
+}
+
+void Remora::handleSetupState() {
+    if (currentState != prevState) {
+        printf("\n## Entering SETUP state\n");
+    }
+    prevState = currentState;
+
+    loadModules();
+    transitionToState(ST_START);
+}
+
+void Remora::handleStartState() {
+    if (currentState != prevState) {
+        printf("\n## Entering START state\n");
+    }
+    prevState = currentState;
+
+    if (!threadsRunning) {
+        startThread(servoThread, "SERVO");
+        startThread(baseThread, "BASE");
+        threadsRunning = true;
+    }
+
+    transitionToState(ST_IDLE);
+}
+
+void Remora::handleIdleState() {
+    if (currentState != prevState) {
+        printf("\n## Entering IDLE state\n");
+    }
+    prevState = currentState;
+
+    if (comms->getStatus()) {
+        transitionToState(ST_RUNNING);
+    }
+}
+
+void Remora::handleRunningState() {
+    if (currentState != prevState) {
+        printf("\n## Entering RUNNING state\n");
+    }
+    prevState = currentState;
+
+    if (!comms->getStatus()) {
+        transitionToState(ST_RESET);
+    }
+}
+
+void Remora::handleResetState() {
+    if (currentState != prevState) {
+        printf("\n## Entering RESET state\n");
+    }
+    prevState = currentState;
+
+    printf("   Resetting rxBuffer\n");
+    resetBuffer(ptrRxData->rxBuffer, Config::dataBuffSize);
+    transitionToState(ST_IDLE);
+}
+
+void Remora::startThread(const std::unique_ptr<pruThread>& thread, const char* name) {
+    printf("Starting the %s thread\n", name);
+    thread->startThread();
+}
+
+void Remora::resetBuffer(volatile uint8_t* buffer, size_t size) {
+    memset((void*)buffer, 0, size);
+}
+
 void Remora::run() {
-	while (1)
-		{
-			switch(currentState){
-				          case ST_SETUP:
-				              // do setup tasks
-				              if (currentState != prevState)
-				              {
-				                  printf("\n## Entering SETUP state\n\n");
-				              }
-				              prevState = currentState;
-
-				              loadModules();
-
-				              currentState = ST_START;
-				              break;
-
-				          case ST_START:
-				              // do start tasks
-				              if (currentState != prevState)
-				              {
-				                  printf("\n## Entering START state\n");
-				              }
-				              prevState = currentState;
-
-				              if (!threadsRunning)
-				              {
-				                  // Start the threads
-				                  printf("\nStarting the SERVO thread\n");
-				                  servoThread->startThread();
-
-				                  printf("\nStarting the BASE thread\n");
-				                  baseThread->startThread();
-
-				                  threadsRunning = true;
-				              }
-
-				              currentState = ST_IDLE;
-
-				              break;
-
-
-				          case ST_IDLE:
-				              // do something when idle
-				              if (currentState != prevState)
-				              {
-				                  printf("\n## Entering IDLE state\n");
-				              }
-				              prevState = currentState;
-
-				              //wait for data before changing to running state
-				              if (comms->getStatus())
-				              {
-				                  currentState = ST_RUNNING;
-				              }
-
-				              break;
-
-				          case ST_RUNNING:
-				              // do running tasks
-				              if (currentState != prevState)
-				              {
-				                  printf("\n## Entering RUNNING state\n");
-				              }
-				              prevState = currentState;
-
-				              if (comms->getStatus() == false)
-				              {
-				                  currentState = ST_RESET;
-				              }
-
-				              if (PRUreset)
-				              {
-				                  currentState = ST_WDRESET;
-				              }
-
-				              break;
-
-				          case ST_STOP:
-				              // do stop tasks
-				              if (currentState != prevState)
-				              {
-				                  printf("\n## Entering STOP state\n");
-				              }
-				              prevState = currentState;
-
-
-				              currentState = ST_STOP;
-				              break;
-
-				          case ST_RESET:
-				              // do reset tasks
-				              if (currentState != prevState)
-				              {
-				                  printf("\n## Entering RESET state\n");
-				              }
-				              prevState = currentState;
-
-				              // set all of the rxData buffer to 0
-				              printf("   Resetting rxBuffer\n");
-				              {
-								  int n = Config::dataBuffSize;
-								  while(n-- > 0)
-								  {
-									  ptrRxData->rxBuffer[n] = 0;
-								  }
-				              }
-
-				              currentState = ST_IDLE;
-				              break;
-
-				          case ST_WDRESET:
-				        	  // force a reset
-				        	  HAL_NVIC_SystemReset();
-				              break;
-				  }
-			comms->tasks();
-		}
+    while (true) {
+        switch (currentState) {
+            case ST_SETUP:
+                handleSetupState();
+                break;
+            case ST_START:
+                handleStartState();
+                break;
+            case ST_IDLE:
+                handleIdleState();
+                break;
+            case ST_RUNNING:
+                handleRunningState();
+                break;
+            case ST_RESET:
+                handleResetState();
+                break;
+            case ST_WDRESET:
+                HAL_NVIC_SystemReset(); // Force system reset
+                break;
+            default:
+                printf("Error: Invalid state\n");
+                break;
+        }
+        comms->tasks();
+    }
 }
 
 void Remora::loadModules() {
