@@ -4,13 +4,11 @@
 #include "stm32h7xx_hal.h"
 #include "stm32h7xx_hal_dma.h"
 
-#include "configuration.h"
-#include "remora.h"
-#include "extern.h"
+#include "../../remora.h"
 #include "../../modules/module.h"
 #include "../../modules/moduleinterrupt.h"
 
-#include "../../drivers/pin/pin.h"
+#include "../../drivers/pin/pin.h" //TODO: remove
 
 
 typedef struct
@@ -29,8 +27,6 @@ typedef enum {
 
 class RemoraComms : public Module
 {
-	friend class ModuleInterrupt;
-
     private:
 
 		Pin							*pin1, *pin2;
@@ -44,9 +40,9 @@ class RemoraComms : public Module
         uint8_t						RXbufferIdx;
         bool						copyRXbuffer;
 
-		ModuleInterrupt*			NssInterrupt;
-        ModuleInterrupt*			dmaTxInterrupt;
-		ModuleInterrupt*			dmaRxInterrupt;
+		ModuleInterrupt<RemoraComms>* NssInterrupt;
+        ModuleInterrupt<RemoraComms>* dmaTxInterrupt;
+		ModuleInterrupt<RemoraComms>* dmaRxInterrupt;
 		IRQn_Type					irqNss;
 		IRQn_Type					irqDMArx;
 		IRQn_Type					irqDMAtx;

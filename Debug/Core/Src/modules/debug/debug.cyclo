@@ -1,3 +1,4 @@
+../Core/Src/modules/debug/../../modules/module.h:32:22:virtual bool Module::getUsesModulePost() const	1
 ../Core/Src/modules/debug/../../drivers/pin/pin.h:54:21:void Pin::set(bool)	2
 ../Core/Src/modules/debug/debug.cpp:4:1:Debug::Debug(std::string, bool)	1
 ../Core/Src/modules/debug/debug.cpp:10:6:virtual void Debug::update()	1
