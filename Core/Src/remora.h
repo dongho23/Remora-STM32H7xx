@@ -10,6 +10,8 @@
 #include "modules/moduleFactory.h"
 #include "modules/moduleList.h"
 #include "thread/pruThread.h"
+#include "drivers/pin/pin.h"
+#include "drivers/SoftwareSerial/SoftwareSerial.h"
 
 #include "modules/comms/commsHandler.h"  //TODO figure out why this is not being included from moduleList.h
 
@@ -46,6 +48,7 @@ private:
 
     std::unique_ptr<pruThread> baseThread;
     std::unique_ptr<pruThread> servoThread;
+    std::unique_ptr<pruThread> serialThread;
 
     uint32_t baseFreq;
     uint32_t servoFreq;

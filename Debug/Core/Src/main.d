@@ -60,6 +60,10 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/modules/debug/debug.h \
  ../Core/Src/modules/debug/../../modules/module.h \
  ../Core/Src/modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/modules/digitalPin/digitalPin.h \
+ ../Core/Src/modules/digitalPin/../../remora.h \
+ ../Core/Src/modules/digitalPin/../../modules/module.h \
+ ../Core/Src/modules/digitalPin/../../drivers/pin/pin.h \
  ../Core/Src/modules/resetPin/resetPin.h \
  ../Core/Src/modules/resetPin/../../remora.h \
  ../Core/Src/modules/resetPin/../../modules/module.h \
@@ -71,6 +75,10 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h \
  ../Core/Src/modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../../drivers/pin/pin.h \
+ ../Core/Src/modules/sigmaDelta/sigmaDelta.h \
+ ../Core/Src/modules/sigmaDelta/../../remora.h \
+ ../Core/Src/modules/sigmaDelta/../../modules/module.h \
+ ../Core/Src/modules/sigmaDelta/../../drivers/pin/pin.h \
  ../Core/Src/modules/stepgen/stepgen.h \
  ../Core/Src/modules/stepgen/../../remora.h \
  ../Core/Src/modules/stepgen/../../modules/module.h \
@@ -147,6 +155,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/debug/debug.h:
 ../Core/Src/modules/debug/../../modules/module.h:
 ../Core/Src/modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/digitalPin/digitalPin.h:
+../Core/Src/modules/digitalPin/../../remora.h:
+../Core/Src/modules/digitalPin/../../modules/module.h:
+../Core/Src/modules/digitalPin/../../drivers/pin/pin.h:
 ../Core/Src/modules/resetPin/resetPin.h:
 ../Core/Src/modules/resetPin/../../remora.h:
 ../Core/Src/modules/resetPin/../../modules/module.h:
@@ -158,6 +170,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../../drivers/pin/pin.h:
+../Core/Src/modules/sigmaDelta/sigmaDelta.h:
+../Core/Src/modules/sigmaDelta/../../remora.h:
+../Core/Src/modules/sigmaDelta/../../modules/module.h:
+../Core/Src/modules/sigmaDelta/../../drivers/pin/pin.h:
 ../Core/Src/modules/stepgen/stepgen.h:
 ../Core/Src/modules/stepgen/../../remora.h:
 ../Core/Src/modules/stepgen/../../modules/module.h:

@@ -12,7 +12,7 @@ __attribute__((section(".DmaSection"))) volatile rxData_t rxData;
 Remora::Remora() :
 	baseFreq(Config::pruBaseFreq),
 	servoFreq(Config::pruServoFreq),
-	commsFreq(Config::pruCommsFreq)
+	serialFreq(Config::pruSerialFreq)
 {
 	threadsRunning = false;
 	currentState = ST_SETUP;
@@ -44,12 +44,13 @@ Remora::Remora() :
 										servoFreq,
 										Config::servoThreadIrqPriority
 										);
-
-	/*
-	commsThread = new pruThread(TIM4, TIM4_IRQn, PRU_COMMSFREQ, commsCount);
-	NVIC_SetPriority(TIM4_IRQn, COMMS_THREAD_IRQ_PRIORITY);
-	*/
-
+    serialThread = make_unique<pruThread>(
+    									"Serial",
+										TIM4,
+										TIM4_IRQn,
+										commsFreq,
+										Config::commsThreadIrqPriority
+										);
 
     servoThread->registerModule(comms);
 }

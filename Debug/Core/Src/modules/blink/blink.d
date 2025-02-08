@@ -62,6 +62,10 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Core/Src/modules/blink/../../modules/debug/debug.h \
  ../Core/Src/modules/blink/../../modules/debug/../../modules/module.h \
  ../Core/Src/modules/blink/../../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/modules/blink/../../modules/digitalPin/digitalPin.h \
+ ../Core/Src/modules/blink/../../modules/digitalPin/../../remora.h \
+ ../Core/Src/modules/blink/../../modules/digitalPin/../../modules/module.h \
+ ../Core/Src/modules/blink/../../modules/digitalPin/../../drivers/pin/pin.h \
  ../Core/Src/modules/blink/../../modules/resetPin/resetPin.h \
  ../Core/Src/modules/blink/../../modules/resetPin/../../remora.h \
  ../Core/Src/modules/blink/../../modules/resetPin/../../modules/module.h \
@@ -73,13 +77,27 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/../interrupt/interrupt.h \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../drivers/pin/pin.h \
+ ../Core/Src/modules/blink/../../modules/sigmaDelta/sigmaDelta.h \
+ ../Core/Src/modules/blink/../../modules/sigmaDelta/../../remora.h \
+ ../Core/Src/modules/blink/../../modules/sigmaDelta/../../modules/module.h \
+ ../Core/Src/modules/blink/../../modules/sigmaDelta/../../drivers/pin/pin.h \
  ../Core/Src/modules/blink/../../modules/stepgen/stepgen.h \
  ../Core/Src/modules/blink/../../modules/stepgen/../../remora.h \
  ../Core/Src/modules/blink/../../modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/blink/../../modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/modules/blink/../../modules/tmc/tmc.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../remora.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../modules/module.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/../../remora.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/blink/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/blink/../../thread/pruThread.h \
  ../Core/Src/modules/blink/../../thread/timer.h \
+ ../Core/Src/modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/modules/blink/../../drivers/SoftwareSerial/SoftwareSerial.h \
+ ../Core/Src/modules/blink/../../drivers/SoftwareSerial/../../remora.h \
  ../Core/Src/modules/blink/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/blink/../../modules/module.h \
  ../Core/Src/modules/blink/../../drivers/pin/pin.h
@@ -151,6 +169,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/blink/../../modules/debug/debug.h:
 ../Core/Src/modules/blink/../../modules/debug/../../modules/module.h:
 ../Core/Src/modules/blink/../../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/blink/../../modules/digitalPin/digitalPin.h:
+../Core/Src/modules/blink/../../modules/digitalPin/../../remora.h:
+../Core/Src/modules/blink/../../modules/digitalPin/../../modules/module.h:
+../Core/Src/modules/blink/../../modules/digitalPin/../../drivers/pin/pin.h:
 ../Core/Src/modules/blink/../../modules/resetPin/resetPin.h:
 ../Core/Src/modules/blink/../../modules/resetPin/../../remora.h:
 ../Core/Src/modules/blink/../../modules/resetPin/../../modules/module.h:
@@ -162,13 +184,27 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/blink/../../modules/remoraComms/../../drivers/pin/pin.h:
+../Core/Src/modules/blink/../../modules/sigmaDelta/sigmaDelta.h:
+../Core/Src/modules/blink/../../modules/sigmaDelta/../../remora.h:
+../Core/Src/modules/blink/../../modules/sigmaDelta/../../modules/module.h:
+../Core/Src/modules/blink/../../modules/sigmaDelta/../../drivers/pin/pin.h:
 ../Core/Src/modules/blink/../../modules/stepgen/stepgen.h:
 ../Core/Src/modules/blink/../../modules/stepgen/../../remora.h:
 ../Core/Src/modules/blink/../../modules/stepgen/../../modules/module.h:
 ../Core/Src/modules/blink/../../modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/modules/blink/../../modules/tmc/tmc.h:
+../Core/Src/modules/blink/../../modules/tmc/../../remora.h:
+../Core/Src/modules/blink/../../modules/tmc/../../modules/module.h:
+../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
+../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/../../remora.h:
+../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
+../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/blink/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/blink/../../thread/pruThread.h:
 ../Core/Src/modules/blink/../../thread/timer.h:
+../Core/Src/modules/blink/../../drivers/pin/pin.h:
+../Core/Src/modules/blink/../../drivers/SoftwareSerial/SoftwareSerial.h:
+../Core/Src/modules/blink/../../drivers/SoftwareSerial/../../remora.h:
 ../Core/Src/modules/blink/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/blink/../../modules/module.h:
 ../Core/Src/modules/blink/../../drivers/pin/pin.h:

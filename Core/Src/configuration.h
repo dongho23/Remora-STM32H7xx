@@ -6,7 +6,7 @@ namespace Config {
     constexpr uint32_t pruServoFreq = 1000;        // PRU Servo thread ISR update frequency (hz)
     constexpr uint32_t oversample = 3;
     constexpr uint32_t swBaudRate = 19200;         // Software serial baud rate
-    constexpr uint32_t pruCommsFreq = swBaudRate * oversample;
+    constexpr uint32_t pruSerialFreq = swBaudRate * oversample;
 
     constexpr uint32_t stepBit = 22;               // Bit location in DDS accum
     constexpr uint32_t stepMask = (1L << stepBit);

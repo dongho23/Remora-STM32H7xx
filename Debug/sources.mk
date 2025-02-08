@@ -39,6 +39,8 @@ CPP_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Core/Src/comms \
+Core/Src/drivers/SoftwareSerial \
+Core/Src/drivers/TMCStepper \
 Core/Src/drivers/pin \
 Core/Src/interrupt \
 Core/Src/json \
@@ -46,10 +48,13 @@ Core/Src \
 Core/Src/modules/blink \
 Core/Src/modules/comms \
 Core/Src/modules/debug \
+Core/Src/modules/digitalPin \
 Core/Src/modules \
 Core/Src/modules/remoraComms \
 Core/Src/modules/resetPin \
+Core/Src/modules/sigmaDelta \
 Core/Src/modules/stepgen \
+Core/Src/modules/tmc \
 Core/Src/thread \
 Core/Startup \
 Drivers/STM32H7xx_HAL_Driver/Src \

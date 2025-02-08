@@ -66,6 +66,10 @@ Core/Src/modules/comms/commsHandler.o: \
  ../Core/Src/modules/comms/../../modules/debug/debug.h \
  ../Core/Src/modules/comms/../../modules/debug/../../modules/module.h \
  ../Core/Src/modules/comms/../../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/modules/comms/../../modules/digitalPin/digitalPin.h \
+ ../Core/Src/modules/comms/../../modules/digitalPin/../../remora.h \
+ ../Core/Src/modules/comms/../../modules/digitalPin/../../modules/module.h \
+ ../Core/Src/modules/comms/../../modules/digitalPin/../../drivers/pin/pin.h \
  ../Core/Src/modules/comms/../../modules/resetPin/resetPin.h \
  ../Core/Src/modules/comms/../../modules/resetPin/../../remora.h \
  ../Core/Src/modules/comms/../../modules/resetPin/../../modules/module.h \
@@ -77,13 +81,27 @@ Core/Src/modules/comms/commsHandler.o: \
  ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/../interrupt/interrupt.h \
  ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/module.h \
  ../Core/Src/modules/comms/../../modules/remoraComms/../../drivers/pin/pin.h \
+ ../Core/Src/modules/comms/../../modules/sigmaDelta/sigmaDelta.h \
+ ../Core/Src/modules/comms/../../modules/sigmaDelta/../../remora.h \
+ ../Core/Src/modules/comms/../../modules/sigmaDelta/../../modules/module.h \
+ ../Core/Src/modules/comms/../../modules/sigmaDelta/../../drivers/pin/pin.h \
  ../Core/Src/modules/comms/../../modules/stepgen/stepgen.h \
  ../Core/Src/modules/comms/../../modules/stepgen/../../remora.h \
  ../Core/Src/modules/comms/../../modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/comms/../../modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/modules/comms/../../modules/tmc/tmc.h \
+ ../Core/Src/modules/comms/../../modules/tmc/../../remora.h \
+ ../Core/Src/modules/comms/../../modules/tmc/../../modules/module.h \
+ ../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
+ ../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/../../remora.h \
+ ../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
+ ../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/comms/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/comms/../../thread/pruThread.h \
  ../Core/Src/modules/comms/../../thread/timer.h \
+ ../Core/Src/modules/comms/../../drivers/pin/pin.h \
+ ../Core/Src/modules/comms/../../drivers/SoftwareSerial/SoftwareSerial.h \
+ ../Core/Src/modules/comms/../../drivers/SoftwareSerial/../../remora.h \
  ../Core/Src/modules/comms/../../modules/comms/commsHandler.h
 ../Core/Src/modules/comms/commsHandler.h:
 ../Core/Src/modules/comms/../../modules/module.h:
@@ -156,6 +174,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/comms/../../modules/debug/debug.h:
 ../Core/Src/modules/comms/../../modules/debug/../../modules/module.h:
 ../Core/Src/modules/comms/../../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/comms/../../modules/digitalPin/digitalPin.h:
+../Core/Src/modules/comms/../../modules/digitalPin/../../remora.h:
+../Core/Src/modules/comms/../../modules/digitalPin/../../modules/module.h:
+../Core/Src/modules/comms/../../modules/digitalPin/../../drivers/pin/pin.h:
 ../Core/Src/modules/comms/../../modules/resetPin/resetPin.h:
 ../Core/Src/modules/comms/../../modules/resetPin/../../remora.h:
 ../Core/Src/modules/comms/../../modules/resetPin/../../modules/module.h:
@@ -167,11 +189,25 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/modules/comms/../../modules/remoraComms/../../modules/module.h:
 ../Core/Src/modules/comms/../../modules/remoraComms/../../drivers/pin/pin.h:
+../Core/Src/modules/comms/../../modules/sigmaDelta/sigmaDelta.h:
+../Core/Src/modules/comms/../../modules/sigmaDelta/../../remora.h:
+../Core/Src/modules/comms/../../modules/sigmaDelta/../../modules/module.h:
+../Core/Src/modules/comms/../../modules/sigmaDelta/../../drivers/pin/pin.h:
 ../Core/Src/modules/comms/../../modules/stepgen/stepgen.h:
 ../Core/Src/modules/comms/../../modules/stepgen/../../remora.h:
 ../Core/Src/modules/comms/../../modules/stepgen/../../modules/module.h:
 ../Core/Src/modules/comms/../../modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/modules/comms/../../modules/tmc/tmc.h:
+../Core/Src/modules/comms/../../modules/tmc/../../remora.h:
+../Core/Src/modules/comms/../../modules/tmc/../../modules/module.h:
+../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
+../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/../../remora.h:
+../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
+../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/comms/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/comms/../../thread/pruThread.h:
 ../Core/Src/modules/comms/../../thread/timer.h:
+../Core/Src/modules/comms/../../drivers/pin/pin.h:
+../Core/Src/modules/comms/../../drivers/SoftwareSerial/SoftwareSerial.h:
+../Core/Src/modules/comms/../../drivers/SoftwareSerial/../../remora.h:
 ../Core/Src/modules/comms/../../modules/comms/commsHandler.h:

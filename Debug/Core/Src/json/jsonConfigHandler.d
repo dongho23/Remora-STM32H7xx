@@ -63,6 +63,10 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../modules/debug/debug.h \
  ../Core/Src/json/../modules/debug/../../modules/module.h \
  ../Core/Src/json/../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/json/../modules/digitalPin/digitalPin.h \
+ ../Core/Src/json/../modules/digitalPin/../../remora.h \
+ ../Core/Src/json/../modules/digitalPin/../../modules/module.h \
+ ../Core/Src/json/../modules/digitalPin/../../drivers/pin/pin.h \
  ../Core/Src/json/../modules/resetPin/resetPin.h \
  ../Core/Src/json/../modules/resetPin/../../remora.h \
  ../Core/Src/json/../modules/resetPin/../../modules/module.h \
@@ -74,13 +78,26 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../modules/remoraComms/../../modules/../interrupt/interrupt.h \
  ../Core/Src/json/../modules/remoraComms/../../modules/module.h \
  ../Core/Src/json/../modules/remoraComms/../../drivers/pin/pin.h \
+ ../Core/Src/json/../modules/sigmaDelta/sigmaDelta.h \
+ ../Core/Src/json/../modules/sigmaDelta/../../remora.h \
+ ../Core/Src/json/../modules/sigmaDelta/../../modules/module.h \
+ ../Core/Src/json/../modules/sigmaDelta/../../drivers/pin/pin.h \
  ../Core/Src/json/../modules/stepgen/stepgen.h \
  ../Core/Src/json/../modules/stepgen/../../remora.h \
  ../Core/Src/json/../modules/stepgen/../../modules/module.h \
  ../Core/Src/json/../modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/json/../modules/tmc/tmc.h \
+ ../Core/Src/json/../modules/tmc/../../remora.h \
+ ../Core/Src/json/../modules/tmc/../../modules/module.h \
+ ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
+ ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../../remora.h \
+ ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
+ ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/json/../modules/moduleInterrupt.h \
  ../Core/Src/json/../thread/pruThread.h \
- ../Core/Src/json/../thread/timer.h \
+ ../Core/Src/json/../thread/timer.h ../Core/Src/json/../drivers/pin/pin.h \
+ ../Core/Src/json/../drivers/SoftwareSerial/SoftwareSerial.h \
+ ../Core/Src/json/../drivers/SoftwareSerial/../../remora.h \
  ../Core/Src/json/../modules/comms/commsHandler.h
 ../Core/Src/json/jsonConfigHandler.h:
 ../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.h:
@@ -153,6 +170,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/json/../modules/debug/debug.h:
 ../Core/Src/json/../modules/debug/../../modules/module.h:
 ../Core/Src/json/../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/json/../modules/digitalPin/digitalPin.h:
+../Core/Src/json/../modules/digitalPin/../../remora.h:
+../Core/Src/json/../modules/digitalPin/../../modules/module.h:
+../Core/Src/json/../modules/digitalPin/../../drivers/pin/pin.h:
 ../Core/Src/json/../modules/resetPin/resetPin.h:
 ../Core/Src/json/../modules/resetPin/../../remora.h:
 ../Core/Src/json/../modules/resetPin/../../modules/module.h:
@@ -164,11 +185,25 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/json/../modules/remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/json/../modules/remoraComms/../../modules/module.h:
 ../Core/Src/json/../modules/remoraComms/../../drivers/pin/pin.h:
+../Core/Src/json/../modules/sigmaDelta/sigmaDelta.h:
+../Core/Src/json/../modules/sigmaDelta/../../remora.h:
+../Core/Src/json/../modules/sigmaDelta/../../modules/module.h:
+../Core/Src/json/../modules/sigmaDelta/../../drivers/pin/pin.h:
 ../Core/Src/json/../modules/stepgen/stepgen.h:
 ../Core/Src/json/../modules/stepgen/../../remora.h:
 ../Core/Src/json/../modules/stepgen/../../modules/module.h:
 ../Core/Src/json/../modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/json/../modules/tmc/tmc.h:
+../Core/Src/json/../modules/tmc/../../remora.h:
+../Core/Src/json/../modules/tmc/../../modules/module.h:
+../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
+../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../../remora.h:
+../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
+../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/json/../modules/moduleInterrupt.h:
 ../Core/Src/json/../thread/pruThread.h:
 ../Core/Src/json/../thread/timer.h:
+../Core/Src/json/../drivers/pin/pin.h:
+../Core/Src/json/../drivers/SoftwareSerial/SoftwareSerial.h:
+../Core/Src/json/../drivers/SoftwareSerial/../../remora.h:
 ../Core/Src/json/../modules/comms/commsHandler.h:

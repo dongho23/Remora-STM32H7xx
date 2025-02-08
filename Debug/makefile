@@ -16,9 +16,12 @@ RM := rm -rf
 -include Drivers/STM32H7xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/thread/subdir.mk
+-include Core/Src/modules/tmc/subdir.mk
 -include Core/Src/modules/stepgen/subdir.mk
+-include Core/Src/modules/sigmaDelta/subdir.mk
 -include Core/Src/modules/resetPin/subdir.mk
 -include Core/Src/modules/remoraComms/subdir.mk
+-include Core/Src/modules/digitalPin/subdir.mk
 -include Core/Src/modules/debug/subdir.mk
 -include Core/Src/modules/comms/subdir.mk
 -include Core/Src/modules/blink/subdir.mk
@@ -26,6 +29,8 @@ RM := rm -rf
 -include Core/Src/json/subdir.mk
 -include Core/Src/interrupt/subdir.mk
 -include Core/Src/drivers/pin/subdir.mk
+-include Core/Src/drivers/TMCStepper/subdir.mk
+-include Core/Src/drivers/SoftwareSerial/subdir.mk
 -include Core/Src/comms/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
