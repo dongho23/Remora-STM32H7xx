@@ -150,8 +150,8 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:92:9:float ArduinoJson::V730HB22::detail::Number::asFloat() const	16	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:98:10:double ArduinoJson::V730HB22::detail::Number::asDouble() const	16	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:105:15:ArduinoJson::V730HB22::detail::Number ArduinoJson::V730HB22::detail::parseNumber(const char*)	184	static
-../Core/Src/json/../remora.h:64:10:void Remora::setBaseFreq(uint32_t)	16	static
-../Core/Src/json/../remora.h:65:10:void Remora::setServoFreq(uint32_t)	16	static
+../Core/Src/json/../remora.h:71:10:void Remora::setBaseFreq(uint32_t)	16	static
+../Core/Src/json/../remora.h:72:10:void Remora::setServoFreq(uint32_t)	16	static
 ../Core/Src/json/jsonConfigHandler.cpp:6:1:JsonConfigHandler::JsonConfigHandler(Remora*)	32	static
 ../Core/Src/json/jsonConfigHandler.cpp:14:6:bool JsonConfigHandler::loadConfiguration()	16	static
 ../Core/Src/json/jsonConfigHandler.cpp:28:6:void JsonConfigHandler::updateThreadFreq()	144	static

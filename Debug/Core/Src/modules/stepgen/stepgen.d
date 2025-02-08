@@ -10,6 +10,7 @@ Core/Src/modules/stepgen/stepgen.o: \
  ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
  ../Core/Src/modules/stepgen/../../modules/moduleFactory.h \
+ ../Core/Src/modules/stepgen/../../modules/../remora.h \
  ../Core/Src/modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../modules/../JSON/jsonConfigHandler.h \
  ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
@@ -65,6 +66,10 @@ Core/Src/modules/stepgen/stepgen.o: \
  ../Core/Src/modules/stepgen/../../modules/debug/debug.h \
  ../Core/Src/modules/stepgen/../../modules/debug/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/modules/stepgen/../../modules/resetPin/resetPin.h \
+ ../Core/Src/modules/stepgen/../../modules/resetPin/../../remora.h \
+ ../Core/Src/modules/stepgen/../../modules/resetPin/../../modules/module.h \
+ ../Core/Src/modules/stepgen/../../modules/resetPin/../../drivers/pin/pin.h \
  ../Core/Src/modules/stepgen/../../modules/remoraComms/remoraComms.h \
  ../Core/Src/modules/stepgen/../../modules/remoraComms/../../remora.h \
  ../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/module.h \
@@ -89,6 +94,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/modules/stepgen/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
 ../Core/Src/modules/stepgen/../../modules/moduleFactory.h:
+../Core/Src/modules/stepgen/../../modules/../remora.h:
 ../Core/Src/modules/stepgen/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../modules/../JSON/jsonConfigHandler.h:
 ../FATFS/App/fatfs.h:
@@ -149,6 +155,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/stepgen/../../modules/debug/debug.h:
 ../Core/Src/modules/stepgen/../../modules/debug/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/stepgen/../../modules/resetPin/resetPin.h:
+../Core/Src/modules/stepgen/../../modules/resetPin/../../remora.h:
+../Core/Src/modules/stepgen/../../modules/resetPin/../../modules/module.h:
+../Core/Src/modules/stepgen/../../modules/resetPin/../../drivers/pin/pin.h:
 ../Core/Src/modules/stepgen/../../modules/remoraComms/remoraComms.h:
 ../Core/Src/modules/stepgen/../../modules/remoraComms/../../remora.h:
 ../Core/Src/modules/stepgen/../../modules/remoraComms/../../modules/module.h:

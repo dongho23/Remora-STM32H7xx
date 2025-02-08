@@ -49,6 +49,7 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../data.h ../Core/Src/json/../comms/commsInterface.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h \
  ../Core/Src/json/../modules/moduleFactory.h \
+ ../Core/Src/json/../modules/../remora.h \
  ../Core/Src/json/../modules/module.h \
  ../Core/Src/json/../modules/../JSON/jsonConfigHandler.h \
  ../Core/Src/json/../modules/moduleList.h \
@@ -62,6 +63,10 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../modules/debug/debug.h \
  ../Core/Src/json/../modules/debug/../../modules/module.h \
  ../Core/Src/json/../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/json/../modules/resetPin/resetPin.h \
+ ../Core/Src/json/../modules/resetPin/../../remora.h \
+ ../Core/Src/json/../modules/resetPin/../../modules/module.h \
+ ../Core/Src/json/../modules/resetPin/../../drivers/pin/pin.h \
  ../Core/Src/json/../modules/remoraComms/remoraComms.h \
  ../Core/Src/json/../modules/remoraComms/../../remora.h \
  ../Core/Src/json/../modules/remoraComms/../../modules/module.h \
@@ -134,6 +139,7 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
 ../Core/Src/json/../comms/commsInterface.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:
 ../Core/Src/json/../modules/moduleFactory.h:
+../Core/Src/json/../modules/../remora.h:
 ../Core/Src/json/../modules/module.h:
 ../Core/Src/json/../modules/../JSON/jsonConfigHandler.h:
 ../Core/Src/json/../modules/moduleList.h:
@@ -147,6 +153,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/json/../modules/debug/debug.h:
 ../Core/Src/json/../modules/debug/../../modules/module.h:
 ../Core/Src/json/../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/json/../modules/resetPin/resetPin.h:
+../Core/Src/json/../modules/resetPin/../../remora.h:
+../Core/Src/json/../modules/resetPin/../../modules/module.h:
+../Core/Src/json/../modules/resetPin/../../drivers/pin/pin.h:
 ../Core/Src/json/../modules/remoraComms/remoraComms.h:
 ../Core/Src/json/../modules/remoraComms/../../remora.h:
 ../Core/Src/json/../modules/remoraComms/../../modules/module.h:

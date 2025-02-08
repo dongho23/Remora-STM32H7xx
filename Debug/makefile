@@ -17,6 +17,7 @@ RM := rm -rf
 -include Core/Startup/subdir.mk
 -include Core/Src/thread/subdir.mk
 -include Core/Src/modules/stepgen/subdir.mk
+-include Core/Src/modules/resetPin/subdir.mk
 -include Core/Src/modules/remoraComms/subdir.mk
 -include Core/Src/modules/debug/subdir.mk
 -include Core/Src/modules/comms/subdir.mk

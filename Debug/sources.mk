@@ -48,6 +48,7 @@ Core/Src/modules/comms \
 Core/Src/modules/debug \
 Core/Src/modules \
 Core/Src/modules/remoraComms \
+Core/Src/modules/resetPin \
 Core/Src/modules/stepgen \
 Core/Src/thread \
 Core/Startup \

@@ -4,22 +4,16 @@
 #include <algorithm>
 #include <functional>
 #include <memory>
-#include <unordered_map>
 #include <string>
 
+#include "../remora.h"
 #include "module.h"
 #include "../JSON/jsonConfigHandler.h"
 
-using namespace std;
+//using namespace std;
 
-typedef  shared_ptr<Module> (*ModuleCreator)(const JsonObject&);
 class ModuleFactory {
 private:
-
-    ModuleCreator createOnLoadModule(const char* modN);
-    ModuleCreator createServoModule(const char* modN);
-    ModuleCreator createBaseModule(const char* modN);
-    //unordered_map<const char*, unordered_map<const char*, ModuleCreator>> moduleCreators;
 
     // Private constructor for singleton
     ModuleFactory() {};
@@ -27,9 +21,7 @@ private:
 public:
     static ModuleFactory* getInstance();
     // Create module based on thread and type
-    std::shared_ptr<Module> createModule(const char* _tname,
-                                       const char* _ttype,
-                                       const JsonVariant config);
+    std::shared_ptr<Module> createModule(const char*, const char*, const JsonVariant, Remora*);
 
 };
 

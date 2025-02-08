@@ -5,7 +5,8 @@ Core/Src/remora.o: ../Core/Src/remora.cpp ../Core/Src/remora.h \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson.h \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
- ../Core/Src/modules/moduleFactory.h ../Core/Src/modules/module.h \
+ ../Core/Src/modules/moduleFactory.h ../Core/Src/modules/../remora.h \
+ ../Core/Src/modules/module.h \
  ../Core/Src/modules/../JSON/jsonConfigHandler.h ../FATFS/App/fatfs.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h \
  ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
@@ -59,6 +60,10 @@ Core/Src/remora.o: ../Core/Src/remora.cpp ../Core/Src/remora.h \
  ../Core/Src/modules/debug/debug.h \
  ../Core/Src/modules/debug/../../modules/module.h \
  ../Core/Src/modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/modules/resetPin/resetPin.h \
+ ../Core/Src/modules/resetPin/../../remora.h \
+ ../Core/Src/modules/resetPin/../../modules/module.h \
+ ../Core/Src/modules/resetPin/../../drivers/pin/pin.h \
  ../Core/Src/modules/remoraComms/remoraComms.h \
  ../Core/Src/modules/remoraComms/../../remora.h \
  ../Core/Src/modules/remoraComms/../../modules/module.h \
@@ -87,6 +92,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
 ../Core/Src/modules/moduleFactory.h:
+../Core/Src/modules/../remora.h:
 ../Core/Src/modules/module.h:
 ../Core/Src/modules/../JSON/jsonConfigHandler.h:
 ../FATFS/App/fatfs.h:
@@ -147,6 +153,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/debug/debug.h:
 ../Core/Src/modules/debug/../../modules/module.h:
 ../Core/Src/modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/resetPin/resetPin.h:
+../Core/Src/modules/resetPin/../../remora.h:
+../Core/Src/modules/resetPin/../../modules/module.h:
+../Core/Src/modules/resetPin/../../drivers/pin/pin.h:
 ../Core/Src/modules/remoraComms/remoraComms.h:
 ../Core/Src/modules/remoraComms/../../remora.h:
 ../Core/Src/modules/remoraComms/../../modules/module.h:

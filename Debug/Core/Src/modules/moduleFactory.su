@@ -7,12 +7,9 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Variant/JsonVariant.hpp:30:24:ArduinoJson::V730HB22::detail::VariantData* ArduinoJson::V730HB22::JsonVariant::getData() const	16	static
 ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Object/JsonObject.hpp:26:3:ArduinoJson::V730HB22::JsonObject::JsonObject(ArduinoJson::V730HB22::detail::ObjectData*, ArduinoJson::V730HB22::detail::ResourceManager*)	24	static
 ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Variant/ConverterImpl.hpp:394:21:static ArduinoJson::V730HB22::JsonObject ArduinoJson::V730HB22::Converter<ArduinoJson::V730HB22::JsonObject>::fromJson(ArduinoJson::V730HB22::JsonVariant)	32	static
-../Core/Src/modules/blink/../../modules/moduleFactory.h:25:5:ModuleFactory::ModuleFactory()	16	static
-../Core/Src/modules/moduleFactory.cpp:6:15:std::shared_ptr<Module> (* ModuleFactory::createBaseModule(const char*))(const ArduinoJson::V730HB22::JsonObject&)	16	static
-../Core/Src/modules/moduleFactory.cpp:22:15:std::shared_ptr<Module> (* ModuleFactory::createServoModule(const char*))(const ArduinoJson::V730HB22::JsonObject&)	16	static
-../Core/Src/modules/moduleFactory.cpp:52:15:std::shared_ptr<Module> (* ModuleFactory::createOnLoadModule(const char*))(const ArduinoJson::V730HB22::JsonObject&)	16	static
-../Core/Src/modules/moduleFactory.cpp:74:25:std::shared_ptr<Module> ModuleFactory::createModule(const char*, const char*, ArduinoJson::V730HB22::JsonVariant)	56	static
-../Core/Src/modules/moduleFactory.cpp:88:16:static ModuleFactory* ModuleFactory::getInstance()	16	static
+../Core/Src/modules/blink/../../modules/moduleFactory.h:19:5:ModuleFactory::ModuleFactory()	16	static
+../Core/Src/modules/moduleFactory.cpp:7:25:std::shared_ptr<Module> ModuleFactory::createModule(const char*, const char*, ArduinoJson::V730HB22::JsonVariant, Remora*)	48	static
+../Core/Src/modules/moduleFactory.cpp:29:16:static ModuleFactory* ModuleFactory::getInstance()	16	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Variant/VariantAttorney.hpp:25:15:getData()) ArduinoJson::V730HB22::detail::VariantAttorney::getData(TClient&) [with TClient = ArduinoJson::V730HB22::JsonVariant]	16	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Variant/VariantAttorney.hpp:19:15:getResourceManager()) ArduinoJson::V730HB22::detail::VariantAttorney::getResourceManager(TClient&) [with TClient = ArduinoJson::V730HB22::JsonVariant]	16	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Variant/VariantRefBase.hpp:52:3:ArduinoJson::V730HB22::detail::VariantRefBase<TDerived>::operator T() const [with T = ArduinoJson::V730HB22::JsonObject; typename ArduinoJson::V730HB22::detail::enable_if<(! ArduinoJson::V730HB22::detail::is_same<T, TDerived>::value), int>::type <anonymous> = 0; TDerived = ArduinoJson::V730HB22::JsonVariant]	16	static

@@ -7,6 +7,7 @@
 #include "comms/commsHandler.h"
 #include "debug/debug.h"
 //#include "motorPower/motorPower.h"
+#include "resetPin/resetPin.h"
 #include "remoraComms/remoraComms.h"
 #include "stepgen/stepgen.h"
 

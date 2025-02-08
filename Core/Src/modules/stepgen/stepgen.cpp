@@ -1,37 +1,28 @@
 #include "stepgen.h"
 
-/**
- * @brief Creates a Stepgen module from a JSON configuration object.
- * 
- * This function extracts parameters such as the joint number, pin configurations,
- * and other settings from the provided JSON object, then creates and returns a
- * unique pointer to a Stepgen module configured with those parameters.
- * 
- * @param config The JSON object containing the configuration for the Stepgen.
- * @return A unique pointer to the created Stepgen module.
- */
-shared_ptr<Module> createStepgen(const JsonObject& config)
-{
-    const char* comment = config["Comment"];
-    uint32_t threadFreq = config["ThreadFreq"];
 
-    printf("%s\n", comment);
+shared_ptr<Module> Stepgen::create(const JsonObject& config, Remora* instance)
+	{
+	    const char* comment = config["Comment"];
+	    uint32_t threadFreq = config["ThreadFreq"];
 
-    int joint = config["Joint Number"];
-    const char* enable = config["Enable Pin"];
-    const char* step = config["Step Pin"];
-    const char* dir = config["Direction Pin"];
+	    printf("%s\n", comment);
 
-    // Configure pointers to data source and feedback location
-    ptrJointFreqCmd[joint] = &rxData.jointFreqCmd[joint];
-    ptrJointFeedback[joint] = &txData.jointFeedback[joint];
-    ptrJointEnable = &rxData.jointEnable;
+	    int joint = config["Joint Number"];
+	    const char* enable = config["Enable Pin"];
+	    const char* step = config["Step Pin"];
+	    const char* dir = config["Direction Pin"];
 
-    bool usesModulePost = true;		// stepgen uses the thread modulesPost vector
+	    // Configure pointers to data source and feedback location
+	    volatile int32_t* ptrJointFreqCmd = &instance->getRxData()->jointFreqCmd[joint];
+	    volatile int32_t* ptrJointFeedback = &instance->getTxData()->jointFeedback[joint];
+	    volatile uint8_t* ptrJointEnable = &instance->getRxData()->jointEnable;
 
-    // Create the step generator and register it in the thread
-    return make_unique<Stepgen>(threadFreq, joint, enable, step, dir, Config::stepBit, *ptrJointFreqCmd[joint], *ptrJointFeedback[joint], *ptrJointEnable, usesModulePost);
-}
+	    bool usesModulePost = true;		// stepgen uses the thread modulesPost vector
+
+	    // Create the step generator and register it in the thread
+	    return make_unique<Stepgen>(threadFreq, joint, enable, step, dir, Config::stepBit, *ptrJointFreqCmd, *ptrJointFeedback, *ptrJointEnable, usesModulePost);
+	}
 
 /**
  * @brief Constructor for the Stepgen class.

@@ -16,6 +16,7 @@
 "./Core/Src/modules/module.o"
 "./Core/Src/modules/moduleFactory.o"
 "./Core/Src/modules/remoraComms/RemoraComms.o"
+"./Core/Src/modules/resetPin/resetPin.o"
 "./Core/Src/modules/stepgen/stepgen.o"
 "./Core/Src/thread/pruThread.o"
 "./Core/Src/thread/timer.o"

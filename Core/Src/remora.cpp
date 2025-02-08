@@ -9,16 +9,6 @@
 __attribute__((section(".DmaSection"))) volatile txData_t txData;
 __attribute__((section(".DmaSection"))) volatile rxData_t rxData;
 
-volatile bool*    	ptrPRUreset;
-volatile int32_t* 	ptrJointFreqCmd[Config::joints];
-volatile int32_t* 	ptrJointFeedback[Config::joints];
-volatile uint8_t* 	ptrJointEnable;
-volatile float*   	ptrSetPoint[Config::variables];
-volatile float*   	ptrProcessVariable[Config::variables];
-volatile uint16_t* 	ptrInputs;
-volatile uint16_t* 	ptrOutputs;
-
-
 Remora::Remora() :
 	baseFreq(Config::pruBaseFreq),
 	servoFreq(Config::pruServoFreq),
@@ -117,6 +107,10 @@ void Remora::handleRunningState() {
     if (!comms->getStatus()) {
         transitionToState(ST_RESET);
     }
+
+    if (reset) {
+    	transitionToState(ST_SYSRESET);
+    }
 }
 
 void Remora::handleResetState() {
@@ -128,6 +122,10 @@ void Remora::handleResetState() {
     printf("   Resetting rxBuffer\n");
     resetBuffer(ptrRxData->rxBuffer, Config::dataBuffSize);
     transitionToState(ST_IDLE);
+}
+
+void Remora::handleSysResetState() {
+	HAL_NVIC_SystemReset();
 }
 
 void Remora::startThread(const std::unique_ptr<pruThread>& thread, const char* name) {
@@ -157,8 +155,8 @@ void Remora::run() {
             case ST_RESET:
                 handleResetState();
                 break;
-            case ST_WDRESET:
-                HAL_NVIC_SystemReset(); // Force system reset
+            case ST_SYSRESET:
+                handleSysResetState();
                 break;
             default:
                 printf("Error: Invalid state\n");
@@ -193,7 +191,7 @@ void Remora::loadModules() {
             modules[i]["ThreadFreq"] = threadFreq;
 
             // Create module using factory
-            std::shared_ptr<Module> _mod = factory->createModule(threadName, moduleType, modules[i]);
+            std::shared_ptr<Module> _mod = factory->createModule(threadName, moduleType, modules[i], this);
 
             // Check if the module creation was successful
             if (!_mod) {

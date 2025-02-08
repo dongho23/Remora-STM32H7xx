@@ -17,14 +17,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#define BOARD 			"STM32H7xx"
-#define MAJOR_VERSION 	0
-#define MINOR_VERSION	1
-#define PATCH			0
 
-#define DEBUG_THREADS	1
-#define BASE_PIN		"PE_9"
-#define SERVO_PIN 		"PE_10"
 
 #include "main.h"
 #include "fatfs.h"

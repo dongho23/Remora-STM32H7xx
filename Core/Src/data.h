@@ -71,31 +71,10 @@ typedef struct {
 
 #pragma pack(pop)
 
-// boolean
-static volatile bool PRUreset;
-
-extern uint32_t baseFreq;
-extern uint32_t servoFreq;
-
 // Global Data Buffers
 extern __attribute__((section(".DmaSection"))) volatile txData_t txData;
 extern __attribute__((section(".DmaSection"))) volatile rxData_t rxData;
 extern __attribute__((section(".DmaSection"))) volatile DMA_RxBuffer_t rxDMABuffer;	// DMA SPI double buffers
-
-// pointers to data
-extern volatile txData_t*  ptrTxData;
-extern volatile rxData_t*  ptrRxData;
-extern volatile DMA_RxBuffer_t* ptrRxDMABuffer;
-
-extern volatile int32_t* 	ptrTxHeader;
-extern volatile bool*    	ptrPRUreset;
-extern volatile int32_t* 	ptrJointFreqCmd[Config::joints];
-extern volatile int32_t* 	ptrJointFeedback[Config::joints];
-extern volatile uint8_t* 	ptrJointEnable;
-extern volatile float*   	ptrSetPoint[Config::variables];
-extern volatile float*   	ptrProcessVariable[Config::variables];
-extern volatile uint16_t* 	ptrInputs;
-extern volatile uint16_t* 	ptrOutputs;
 
 
 #endif

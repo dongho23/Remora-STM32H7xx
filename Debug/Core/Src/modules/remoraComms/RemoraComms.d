@@ -46,6 +46,7 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleFactory.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../remora.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../JSON/jsonConfigHandler.h \
  ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
@@ -66,6 +67,10 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/debug.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/resetPin/resetPin.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/resetPin/../../remora.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/resetPin/../../modules/module.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../modules/resetPin/../../drivers/pin/pin.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/remoraComms/remoraComms.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/stepgen.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../remora.h \
@@ -125,6 +130,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/modules/remoraComms/../remoraComms/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleFactory.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/../remora.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../JSON/jsonConfigHandler.h:
 ../FATFS/App/fatfs.h:
@@ -149,6 +155,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/debug.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/resetPin/resetPin.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/resetPin/../../remora.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/resetPin/../../modules/module.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../modules/resetPin/../../drivers/pin/pin.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/remoraComms/remoraComms.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/stepgen.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/stepgen/../../remora.h:

@@ -9,6 +9,7 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.hpp \
  ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
  ../Core/Src/modules/blink/../../modules/moduleFactory.h \
+ ../Core/Src/modules/blink/../../modules/../remora.h \
  ../Core/Src/modules/blink/../../modules/module.h \
  ../Core/Src/modules/blink/../../modules/../JSON/jsonConfigHandler.h \
  ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
@@ -61,6 +62,10 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Core/Src/modules/blink/../../modules/debug/debug.h \
  ../Core/Src/modules/blink/../../modules/debug/../../modules/module.h \
  ../Core/Src/modules/blink/../../modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/modules/blink/../../modules/resetPin/resetPin.h \
+ ../Core/Src/modules/blink/../../modules/resetPin/../../remora.h \
+ ../Core/Src/modules/blink/../../modules/resetPin/../../modules/module.h \
+ ../Core/Src/modules/blink/../../modules/resetPin/../../drivers/pin/pin.h \
  ../Core/Src/modules/blink/../../modules/remoraComms/remoraComms.h \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../remora.h \
  ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/module.h \
@@ -88,6 +93,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson.hpp:
 ../Core/Src/modules/blink/../../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
 ../Core/Src/modules/blink/../../modules/moduleFactory.h:
+../Core/Src/modules/blink/../../modules/../remora.h:
 ../Core/Src/modules/blink/../../modules/module.h:
 ../Core/Src/modules/blink/../../modules/../JSON/jsonConfigHandler.h:
 ../FATFS/App/fatfs.h:
@@ -145,6 +151,10 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/blink/../../modules/debug/debug.h:
 ../Core/Src/modules/blink/../../modules/debug/../../modules/module.h:
 ../Core/Src/modules/blink/../../modules/debug/../../drivers/pin/pin.h:
+../Core/Src/modules/blink/../../modules/resetPin/resetPin.h:
+../Core/Src/modules/blink/../../modules/resetPin/../../remora.h:
+../Core/Src/modules/blink/../../modules/resetPin/../../modules/module.h:
+../Core/Src/modules/blink/../../modules/resetPin/../../drivers/pin/pin.h:
 ../Core/Src/modules/blink/../../modules/remoraComms/remoraComms.h:
 ../Core/Src/modules/blink/../../modules/remoraComms/../../remora.h:
 ../Core/Src/modules/blink/../../modules/remoraComms/../../modules/module.h:
