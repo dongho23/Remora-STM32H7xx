@@ -89,6 +89,15 @@ Core/Src/comms/SPIComms.o: ../Core/Src/comms/SPIComms.cpp \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/stepgen/../../remora.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/stepgen/../../modules/module.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/stepgen/../../drivers/pin/pin.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/tmc.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../remora.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../modules/module.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../thread/pruThread.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../thread/timer.h \
@@ -189,6 +198,15 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/stepgen/../../remora.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/stepgen/../../modules/module.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/stepgen/../../drivers/pin/pin.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/tmc.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../remora.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../modules/module.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../thread/pruThread.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../thread/timer.h:

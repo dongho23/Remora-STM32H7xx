@@ -13,16 +13,6 @@ TMC2208Stepper::TMC2208Stepper(std::string SWRXpin, std::string SWTXpin, float R
         SoftwareSerial *SWSerialObj = new SoftwareSerial(SWRXpin, SWTXpin);
         SWSerial = SWSerialObj;
         defaults();
-
-
-        #if defined TARGET_LPC176X
-        //this->debug1 = new DigitalOut(P1_30);
-        //this->debug2 = new DigitalOut(P0_28);
-        #elif defined TARGET_STM32F4
-        //this->debug1 = new DigitalOut(PE_5);
-        //this->debug2 = new DigitalOut(PE_4);
-        #endif
-
     }
 
 

@@ -51,6 +51,21 @@ bool pruThread::registerModulePost(shared_ptr<Module> module) {
     return true;
 }
 
+bool pruThread::unregisterModule(std::shared_ptr<Module> module) {
+    if (!module) {
+        return false;
+    }
+
+    // Use a lambda to compare the raw pointers inside the shared_ptrs
+    auto iter = std::remove_if(modules.begin(), modules.end(),
+        [&module](const std::shared_ptr<Module>& mod) {
+            return mod == module; // Compare shared_ptrs directly
+        });
+
+    modules.erase(iter, modules.end());
+    return true;
+}
+
 // For baremetal, this is just initialization
 bool pruThread::startThread() {
     if (isRunning()) {
@@ -89,10 +104,6 @@ void pruThread::pauseThread() {
 
 void pruThread::resumeThread() {
     setThreadPaused(false);
-}
-
-size_t pruThread::getModuleCount() const {
-    return modules.size();
 }
 
 const string& pruThread::getName() const {

@@ -1,0 +1,16 @@
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:20:10:virtual uint32_t TMC2208Stepper::DRV_STATUS()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:24:13:bool TMC2208Stepper::otpw()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:25:13:bool TMC2208Stepper::ot()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:26:13:bool TMC2208Stepper::s2ga()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:27:13:bool TMC2208Stepper::s2gb()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:28:13:bool TMC2208Stepper::s2vsa()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:29:13:bool TMC2208Stepper::s2vsb()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:30:13:bool TMC2208Stepper::ola()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:31:13:bool TMC2208Stepper::olb()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:32:13:bool TMC2208Stepper::t120()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:33:13:bool TMC2208Stepper::t143()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:34:13:bool TMC2208Stepper::t150()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:35:13:bool TMC2208Stepper::t157()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:36:13:uint16_t TMC2208Stepper::cs_actual()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:37:13:bool TMC2208Stepper::stealth()	1
+../Core/Src/drivers/TMCStepper/DRV_STATUS.cpp:38:13:bool TMC2208Stepper::stst()	1

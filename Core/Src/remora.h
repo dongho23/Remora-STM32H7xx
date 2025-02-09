@@ -10,8 +10,6 @@
 #include "modules/moduleFactory.h"
 #include "modules/moduleList.h"
 #include "thread/pruThread.h"
-#include "drivers/pin/pin.h"
-#include "drivers/SoftwareSerial/SoftwareSerial.h"
 
 #include "modules/comms/commsHandler.h"  //TODO figure out why this is not being included from moduleList.h
 
@@ -77,6 +75,7 @@ public:
     volatile txData_t* getTxData() { return &txData; }
     volatile rxData_t* getRxData() { return &rxData; }
     volatile bool* getReset() { return &reset; };
+    pruThread* getSerialThread() { return serialThread.get(); }
 };
 
 

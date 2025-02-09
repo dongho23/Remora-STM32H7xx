@@ -22,19 +22,17 @@ std::shared_ptr<Module> TMC2208::create(const JsonObject& config, Remora* instan
 
     // SW Serial pin, RSense, mA, microsteps, stealh
     // TMC2208(std::string, float, uint8_t, uint16_t, uint16_t, bool);
-    Module* tmc = new TMC2208(RxPin, RSense, current, microsteps, stealthchop);
+    auto tmc = std::make_shared<TMC2208>(RxPin, RSense, current, microsteps, stealthchop);
 
     printf("\nStarting the Serial thread\n");
-    serialThread->startThread();
-    serialThread->registerModule(tmc);
+    instance->getSerialThread()->startThread();
+    instance->getSerialThread()->registerModule(tmc);
 
     tmc->configure();
 
     printf("\nStopping the Serial thread\n");
-    serialThread->stopThread();
-    serialThread->unregisterModule(tmc);
-
-    delete tmc;
+    instance->getSerialThread()->stopThread();
+    instance->getSerialThread()->unregisterModule(tmc);
 }
 
 

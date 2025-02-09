@@ -83,6 +83,14 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/modules/stepgen/../../remora.h \
  ../Core/Src/modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/modules/tmc/tmc.h ../Core/Src/modules/tmc/../../remora.h \
+ ../Core/Src/modules/tmc/../../modules/module.h \
+ ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
+ ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
+ ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
+ ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
+ ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
+ ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/moduleInterrupt.h ../Core/Src/thread/pruThread.h \
  ../Core/Src/thread/timer.h ../Core/Src/modules/comms/commsHandler.h
 ../Core/Inc/main.h:
@@ -178,6 +186,15 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/stepgen/../../remora.h:
 ../Core/Src/modules/stepgen/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/modules/tmc/tmc.h:
+../Core/Src/modules/tmc/../../remora.h:
+../Core/Src/modules/tmc/../../modules/module.h:
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
+../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
+../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
+../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/moduleInterrupt.h:
 ../Core/Src/thread/pruThread.h:
 ../Core/Src/thread/timer.h:

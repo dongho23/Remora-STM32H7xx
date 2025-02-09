@@ -4,6 +4,7 @@
 #include "stm32h7xx_hal.h"
 #include <vector>
 #include <memory>
+#include <algorithm>
 #include <string>
 #include <atomic>
 #include "timer.h"
@@ -41,6 +42,7 @@ public:
 
 	bool registerModule(shared_ptr<Module> module);
 	bool registerModulePost(shared_ptr<Module> module);
+	bool unregisterModule(shared_ptr<Module> module);
 
     [[nodiscard]] bool isRunning() const { return threadRunning.load(std::memory_order_acquire);  }
     [[nodiscard]] bool isPaused() const { return threadPaused.load(std::memory_order_acquire); }
@@ -52,7 +54,7 @@ public:
     void resumeThread();
     const string&getName() const;
     uint32_t getFrequency() const;
-    size_t getModuleCount() const;;
+
 };
 
 #endif

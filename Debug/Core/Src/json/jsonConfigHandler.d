@@ -90,14 +90,14 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../modules/tmc/../../remora.h \
  ../Core/Src/json/../modules/tmc/../../modules/module.h \
  ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
- ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../../remora.h \
+ ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
+ ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
+ ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
  ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
  ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/json/../modules/moduleInterrupt.h \
  ../Core/Src/json/../thread/pruThread.h \
- ../Core/Src/json/../thread/timer.h ../Core/Src/json/../drivers/pin/pin.h \
- ../Core/Src/json/../drivers/SoftwareSerial/SoftwareSerial.h \
- ../Core/Src/json/../drivers/SoftwareSerial/../../remora.h \
+ ../Core/Src/json/../thread/timer.h \
  ../Core/Src/json/../modules/comms/commsHandler.h
 ../Core/Src/json/jsonConfigHandler.h:
 ../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.h:
@@ -197,13 +197,12 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/json/../modules/tmc/../../remora.h:
 ../Core/Src/json/../modules/tmc/../../modules/module.h:
 ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
-../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../../remora.h:
+../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
+../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
+../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
 ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
 ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/json/../modules/moduleInterrupt.h:
 ../Core/Src/json/../thread/pruThread.h:
 ../Core/Src/json/../thread/timer.h:
-../Core/Src/json/../drivers/pin/pin.h:
-../Core/Src/json/../drivers/SoftwareSerial/SoftwareSerial.h:
-../Core/Src/json/../drivers/SoftwareSerial/../../remora.h:
 ../Core/Src/json/../modules/comms/commsHandler.h:

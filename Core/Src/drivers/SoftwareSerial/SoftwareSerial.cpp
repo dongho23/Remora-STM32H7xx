@@ -65,7 +65,7 @@ void SoftwareSerial::setRX(void)
 {
 
     this->rxpin->setAsInput();
-    this->rxpin->pull_up();
+    this->rxpin->setPullUp();
 }
 
 void SoftwareSerial::setRXTX(bool input)
@@ -119,7 +119,7 @@ void SoftwareSerial::send(void)
         {
             this->txpin->set(txBuffer & 0x01);   // set output equal to the LSB in txBuffer
             txBuffer >>= 1;                     // shift txBuffer to right
-            txTickCnt = OVERSAMPLE;             // reset the tick counter
+            txTickCnt = Config::oversample;     // reset the tick counter
         }
         else    // transmit finished, stay active or wait for a period before swapping to Rx mode if half duplex mode
         {
@@ -128,7 +128,7 @@ void SoftwareSerial::send(void)
             {
                 activeTx = false;    // output pending allow new byte to be written to txBuffer from write()
             }
-            else if (txBitCnt > 10 + OVERSAMPLE*5)
+            else if (txBitCnt > 10 + Config::oversample*5)
             {
                 if (halfDuplex)
                 {
@@ -151,7 +151,7 @@ void SoftwareSerial::receive()
             {
                 // got a start bit
                 rxBitCnt = 0;
-                rxTickCnt = OVERSAMPLE + 1;
+                rxTickCnt = Config::oversample + 1;
                 rxBuffer = 0;
             }
             else
@@ -176,7 +176,7 @@ void SoftwareSerial::receive()
             rxBuffer >>= 1;
             if (inbit)  rxBuffer |= 0x80;
             rxBitCnt++;
-            rxTickCnt = OVERSAMPLE;
+            rxTickCnt = Config::oversample;
         }
     }
 }
@@ -208,7 +208,7 @@ void SoftwareSerial::write(int b)
     }
     txBuffer =      (b << 1) | 0x200;   // add start and stop bits
     txBitCnt =      0;
-    txTickCnt =     OVERSAMPLE;
+    txTickCnt =     Config::oversample;
     if (halfDuplex) setRXTX(false);
     outputPending = false;
     activeTx =      true;

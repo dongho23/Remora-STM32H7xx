@@ -1,5 +1,5 @@
 #include <cstdint>
-#include "../../remora.h"
+#include "../SoftwareSerial/softwareSerial.h"
 
 //#include "TMC2130_bitfields.h"
 //#include "TMC2160_bitfields.h"
@@ -112,7 +112,7 @@ class TMC2208Stepper : public TMCStepper {
                 TMC2208Stepper(SWRXpin, SWTXpin, RS, TMC2208_SLAVE_ADDR)
                 {}
 
-        SoftwareSerial* SWSerial = nullptr;
+        SoftwareSerial* SWSerial;
 
         void defaults();
         void push();

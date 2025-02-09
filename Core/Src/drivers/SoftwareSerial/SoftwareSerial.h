@@ -2,8 +2,10 @@
 #define SOFTWARESERIAL_H
 
 #include <cstdint>
-#include <string>
-#include "../../remora.h"
+#include <cstring>
+#include "../../configuration.h"
+#include "../pin/pin.h"
+
 
 #define FORCE_BAUD_RATE 19600 //9600
 #define IN_BUF_SIZE     64

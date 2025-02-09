@@ -90,15 +90,14 @@ Core/Src/modules/stepgen/stepgen.o: \
  ../Core/Src/modules/stepgen/../../modules/tmc/../../remora.h \
  ../Core/Src/modules/stepgen/../../modules/tmc/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
- ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/../../remora.h \
+ ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
+ ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
+ ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
  ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
  ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/stepgen/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/stepgen/../../thread/pruThread.h \
  ../Core/Src/modules/stepgen/../../thread/timer.h \
- ../Core/Src/modules/stepgen/../../drivers/pin/pin.h \
- ../Core/Src/modules/stepgen/../../drivers/SoftwareSerial/SoftwareSerial.h \
- ../Core/Src/modules/stepgen/../../drivers/SoftwareSerial/../../remora.h \
  ../Core/Src/modules/stepgen/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/stepgen/../../modules/module.h \
  ../Core/Src/modules/stepgen/../../drivers/pin/pin.h
@@ -197,15 +196,14 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/stepgen/../../modules/tmc/../../remora.h:
 ../Core/Src/modules/stepgen/../../modules/tmc/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
-../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/../../remora.h:
+../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
+../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
+../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
 ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
 ../Core/Src/modules/stepgen/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/stepgen/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/stepgen/../../thread/pruThread.h:
 ../Core/Src/modules/stepgen/../../thread/timer.h:
-../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
-../Core/Src/modules/stepgen/../../drivers/SoftwareSerial/SoftwareSerial.h:
-../Core/Src/modules/stepgen/../../drivers/SoftwareSerial/../../remora.h:
 ../Core/Src/modules/stepgen/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/stepgen/../../modules/module.h:
 ../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
