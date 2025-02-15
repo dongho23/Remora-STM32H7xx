@@ -48,7 +48,7 @@ Remora::Remora() :
     									"Serial",
 										TIM4,
 										TIM4_IRQn,
-										commsFreq,
+										serialFreq,
 										Config::commsThreadIrqPriority
 										);
 
@@ -78,6 +78,12 @@ void Remora::handleStartState() {
         printf("\n## Entering START state\n");
     }
     prevState = currentState;
+
+    for (const auto& module : onLoad) {
+        if (module) {
+            module->configure();
+        }
+    }
 
     if (!threadsRunning) {
         startThread(servoThread, "SERVO");
@@ -216,7 +222,7 @@ void Remora::loadModules() {
             	}
             }
             else {
-                //onLoad.push_back(move(_mod));
+                onLoad.push_back(move(_mod));
             }
         }
     }

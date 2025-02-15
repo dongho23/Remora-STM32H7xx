@@ -28,7 +28,7 @@ void TMC2208Stepper::begin() {
     pdn_disable(true);
     mstep_reg_select(true);
     //Wait to initialize
-    wait_ms(replyDelay);
+    HAL_Delay(replyDelay);
 
 }
 
@@ -155,15 +155,12 @@ void TMC2208Stepper::write(uint8_t addr, uint32_t regVal) {
 
     //delay(replyDelay);
     //ThisThread::sleep_for(150);
-    wait_ms(5);
+    HAL_Delay(5);
 }
 
 uint64_t TMC2208Stepper::_sendDatagram(uint8_t datagram[], const uint8_t len, uint16_t timeout) {
 	
     while (available() > 0) serial_read(); // Flush
-
-    tmcTimer.reset();
-    tmcTimer.start(); 
 
     preWriteCommunication();
 	for(int i=0; i<=len; i++)
@@ -175,12 +172,12 @@ uint64_t TMC2208Stepper::_sendDatagram(uint8_t datagram[], const uint8_t len, ui
     postWriteCommunication();
 
 	// scan for the rx frame and read it
-	uint32_t ms = tmcTimer.read_ms();
+	uint32_t ms = HAL_GetTick();
 	uint32_t sync_target = (static_cast<uint32_t>(datagram[0])<<16) | 0xFF00 | datagram[2];
 	uint32_t sync = 0;
 
 	do {
-		uint32_t ms2 = tmcTimer.read_ms();
+		uint32_t ms2 = HAL_GetTick();
 		if (ms2 != ms) {
 			// 1ms tick
 			ms = ms2;
@@ -198,11 +195,11 @@ uint64_t TMC2208Stepper::_sendDatagram(uint8_t datagram[], const uint8_t len, ui
 	} while (sync != sync_target);
 
 	uint64_t out = sync;
-	ms = tmcTimer.read_ms();
+	ms = HAL_GetTick();
 	timeout = this->abort_window;
 		 
 	for(uint8_t i=0; i<5;) {
-		uint32_t ms2 = tmcTimer.read_ms();
+		uint32_t ms2 = HAL_GetTick();
 		if (ms2 != ms) {
 			// 1ms tick
 			ms = ms2;
@@ -218,8 +215,6 @@ uint64_t TMC2208Stepper::_sendDatagram(uint8_t datagram[], const uint8_t len, ui
 		i++;
 	}
 
-    tmcTimer.stop();
-		
 	while (available() > 0) serial_read(); // Flush
 
 	return out;
@@ -239,7 +234,7 @@ uint32_t TMC2208Stepper::read(uint8_t addr) {
 
 //        delay(replyDelay);
         //ThisThread::sleep_for(replyDelay);
-        wait_ms(5);
+        HAL_Delay(5);
 
         CRCerror = false;
         uint8_t out_datagram[] = {

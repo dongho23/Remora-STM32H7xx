@@ -10,8 +10,6 @@
 #include "module.h"
 #include "../JSON/jsonConfigHandler.h"
 
-//using namespace std;
-
 class ModuleFactory {
 private:
 

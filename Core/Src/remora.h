@@ -2,6 +2,7 @@
 #define REMORA_H
 
 #include <memory>
+#include <vector>
 
 #include "configuration.h"
 #include "data.h"
@@ -47,10 +48,11 @@ private:
     std::unique_ptr<pruThread> baseThread;
     std::unique_ptr<pruThread> servoThread;
     std::unique_ptr<pruThread> serialThread;
+    vector<shared_ptr<Module>> onLoad;
 
     uint32_t baseFreq;
     uint32_t servoFreq;
-    uint32_t commsFreq;
+    uint32_t serialFreq;
 
     bool threadsRunning;
 

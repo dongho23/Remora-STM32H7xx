@@ -23,7 +23,11 @@ std::shared_ptr<Module> ModuleFactory::createModule(const char* _tname,
             return SigmaDelta::create(config, instance);
         }
     } else if (strcmp(_tname, "On load") == 0) {
-        // Future on-load modules can follow the same pattern
+    	if (strcmp(_mtype, "TMC2208") == 0) {
+   	        return TMC2208::create(config, instance);
+   	    } else if (strcmp(_mtype, "TMC2209") == 0) {
+    		return TMC2209::create(config, instance);
+    	}
     } else {
         printf("Error: Unknown thread type '%s' or module type '%s'\n", _tname, _mtype);
     }
