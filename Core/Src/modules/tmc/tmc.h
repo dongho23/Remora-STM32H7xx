@@ -8,65 +8,69 @@
 #include "../../modules/module.h"
 #include "../../drivers/TMCStepper/TMCStepper.h"
 
-class TMC : public Module
+class TMC : public Module, public std::enable_shared_from_this<TMC>
 {
-  protected:
+protected:
 
-    float       Rsense;
+	Remora* 	instance;
+	float       Rsense;
 
-  public:
+public:
 
-    virtual void update(void) = 0;           // Module default interface
-    virtual void configure(void) = 0;
+	TMC(Remora* _instance, float _Rsense) : instance(_instance), Rsense(_Rsense) {}
+
+	virtual void update(void) = 0;           // Module default interface
+	virtual void configure(void) = 0;
+
+    std::shared_ptr<TMC> getShared() {
+        return shared_from_this();
+    }
 };
 
 
 class TMC2208 : public TMC
 {
-  protected:
+protected:
 
-    std::string rxtxPin;     // default to half duplex
-    uint16_t    mA;
-    uint16_t    microsteps;
-    bool        stealth;
+	std::string rxtxPin;     // default to half duplex
+	uint16_t    mA;
+	uint16_t    microsteps;
+	bool        stealth;
 
-    TMC2208Stepper* driver;
+	std::unique_ptr<TMC2208Stepper> driver;
 
-  public:
+public:
 
-    // SW Serial pin, Rsense, mA, microsteps, stealh
-    TMC2208(std::string, float, uint16_t, uint16_t, bool);
-    static std::shared_ptr<Module> create(const JsonObject& config, Remora* instance);
-    ~TMC2208();
+	TMC2208(std::string, float, uint16_t, uint16_t, bool, Remora*);
+	static std::shared_ptr<Module> create(const JsonObject& config, Remora* instance);
+	~TMC2208() = default;
 
-    void update(void);           // Module default interface
-    void configure(void);
+    void update(void) override;
+    void configure(void) override;
 };
 
 
 class TMC2209 : public TMC
 {
-  protected:
+protected:
 
-    std::string rxtxPin;     // default to half duplex
-    uint16_t    mA;
-    uint16_t    microsteps;
-    bool        stealth;
-    uint8_t     addr;
-    uint16_t    stall;
+	std::string rxtxPin;     // default to half duplex
+	uint8_t     addr;
+	uint16_t    mA;
+	uint16_t    microsteps;
+	bool        stealth;
+	uint16_t    stall;
 
-    TMC2209Stepper* driver;
+	std::unique_ptr<TMC2209Stepper> driver;
 
-  public:
+public:
 
-    // SW Serial pin, Rsense, addr, mA, microsteps, stealh, hybrid, stall
-    // TMC2209(std::string, float, uint8_t, uint16_t, uint16_t, bool, uint16_t);
-    TMC2209(std::string, float, uint8_t, uint16_t, uint16_t, bool, uint16_t);
-    static std::shared_ptr<Module> create(const JsonObject& config, Remora* instance);
-    ~TMC2209();
+	TMC2209(std::string, float, uint8_t, uint16_t, uint16_t, bool, uint16_t, Remora*);
+	static std::shared_ptr<Module> create(const JsonObject& config, Remora* instance);
+	~TMC2209() = default;
 
-    void update(void);           // Module default interface
-    void configure(void);
+    void update(void) override;
+    void configure(void) override;
 };
 
 
