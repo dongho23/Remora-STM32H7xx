@@ -40,7 +40,11 @@ Core/Src/drivers/TMCStepper/COOLCONF.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
+ ../Core/Src/drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h \
+ ../Core/Src/drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h \
+ ../Core/Src/drivers/TMCStepper/../pin/pin.h \
  ../Core/Src/drivers/TMCStepper/TMC2130_bitfields.h \
+ ../Core/Src/drivers/TMCStepper/TMC2160_bitfields.h \
  ../Core/Src/drivers/TMCStepper/TMC5130_bitfields.h \
  ../Core/Src/drivers/TMCStepper/TMC5160_bitfields.h \
  ../Core/Src/drivers/TMCStepper/TMC2208_bitfields.h \
@@ -86,7 +90,11 @@ Core/Src/drivers/TMCStepper/COOLCONF.o: \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
+../Core/Src/drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h:
+../Core/Src/drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h:
+../Core/Src/drivers/TMCStepper/../pin/pin.h:
 ../Core/Src/drivers/TMCStepper/TMC2130_bitfields.h:
+../Core/Src/drivers/TMCStepper/TMC2160_bitfields.h:
 ../Core/Src/drivers/TMCStepper/TMC5130_bitfields.h:
 ../Core/Src/drivers/TMCStepper/TMC5160_bitfields.h:
 ../Core/Src/drivers/TMCStepper/TMC2208_bitfields.h:

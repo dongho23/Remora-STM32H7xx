@@ -1,6 +1,6 @@
-../Core/Src/drivers/softwareSPI/softwareSPI.cpp:3:1:softwareSPI::softwareSPI(const std::string&, const std::string&, const std::string&)	1
-../Core/Src/drivers/softwareSPI/softwareSPI.cpp:6:6:void softwareSPI::init()	1
-../Core/Src/drivers/softwareSPI/softwareSPI.cpp:10:6:void softwareSPI::begin()	1
-../Core/Src/drivers/softwareSPI/softwareSPI.cpp:12:9:uint8_t softwareSPI::transfer(uint8_t)	3
-../Core/Src/drivers/softwareSPI/softwareSPI.cpp:27:10:uint16_t softwareSPI::transfer16(uint16_t)	1
-../Core/Src/drivers/softwareSPI/softwareSPI.cpp:34:6:void softwareSPI::endTransaction()	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:3:1:SoftwareSPI::SoftwareSPI(const std::string&, const std::string&, const std::string&)	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:6:6:void SoftwareSPI::init()	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:10:6:void SoftwareSPI::begin()	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:12:9:uint8_t SoftwareSPI::transfer(uint8_t)	3
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:27:10:uint16_t SoftwareSPI::transfer16(uint16_t)	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:34:6:void SoftwareSPI::endTransaction()	1

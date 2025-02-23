@@ -1,0 +1,51 @@
+../Core/Src/drivers/TMCStepper/TMCStepper.h:86:9:TMCStepper::TMCStepper(float)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:7:1:TMC2130Stepper::TMC2130Stepper(const std::string&, const std::string&, const std::string&, const std::string&, int8_t)	40	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:20:1:TMC2130Stepper::TMC2130Stepper(const std::string&, float, const std::string&, const std::string&, const std::string&, int8_t)	48	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:33:6:void TMC2130Stepper::defaults()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:47:6:void TMC2130Stepper::setSPISpeed(uint32_t)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:52:6:void TMC2130Stepper::switchCSpin(bool)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:57:6:void TMC2130Stepper::beginTransaction()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:63:6:void TMC2130Stepper::endTransaction()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:70:9:uint8_t TMC2130Stepper::transfer(uint8_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:81:6:void TMC2130Stepper::transferEmptyBytes(uint8_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:88:10:virtual uint32_t TMC2130Stepper::read(uint8_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:130:6:virtual void TMC2130Stepper::write(uint8_t, uint32_t)	32	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:153:6:void TMC2130Stepper::begin()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:173:6:bool TMC2130Stepper::isEnabled()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:175:6:void TMC2130Stepper::push()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:193:11:uint32_t TMC2130Stepper::IOIN()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:194:6:bool TMC2130Stepper::step()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:195:6:bool TMC2130Stepper::dir()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:196:6:bool TMC2130Stepper::dcen_cfg4()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:197:6:bool TMC2130Stepper::dcin_cfg5()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:198:6:bool TMC2130Stepper::drv_enn_cfg6()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:199:6:bool TMC2130Stepper::dco()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:200:9:uint8_t TMC2130Stepper::version()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:203:10:uint32_t TMC2130Stepper::TCOOLTHRS()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:204:6:void TMC2130Stepper::TCOOLTHRS(uint32_t)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:210:10:uint32_t TMC2130Stepper::THIGH()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:211:6:void TMC2130Stepper::THIGH(uint32_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:217:10:uint32_t TMC2130Stepper::XDIRECT()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:220:6:void TMC2130Stepper::XDIRECT(uint32_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:224:6:void TMC2130Stepper::coil_A(int16_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:225:6:void TMC2130Stepper::coil_B(int16_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:226:9:int16_t TMC2130Stepper::coil_A()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:227:9:int16_t TMC2130Stepper::coil_B()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:230:10:uint32_t TMC2130Stepper::VDCMIN()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:231:6:void TMC2130Stepper::VDCMIN(uint32_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:237:6:void TMC2130Stepper::DCCTRL(uint32_t)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:241:6:void TMC2130Stepper::dc_time(uint16_t)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:245:6:void TMC2130Stepper::dc_sg(uint8_t)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:250:10:uint32_t TMC2130Stepper::DCCTRL()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:253:10:uint16_t TMC2130Stepper::dc_time()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:258:9:uint8_t TMC2130Stepper::dc_sg()	24	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:265:9:uint8_t TMC2130Stepper::PWM_SCALE()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:268:9:uint8_t TMC2130Stepper::ENCM_CTRL()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:269:6:void TMC2130Stepper::ENCM_CTRL(uint8_t)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:273:6:void TMC2130Stepper::inv(bool)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:274:6:void TMC2130Stepper::maxspeed(bool)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:275:6:bool TMC2130Stepper::inv()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:276:6:bool TMC2130Stepper::maxspeed()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:279:10:uint32_t TMC2130Stepper::LOST_STEPS()	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:281:6:void TMC2130Stepper::sg_current_decrease(uint8_t)	16	static
+../Core/Src/drivers/TMCStepper/TMC2130Stepper.cpp:289:9:uint8_t TMC2130Stepper::sg_current_decrease()	16	static

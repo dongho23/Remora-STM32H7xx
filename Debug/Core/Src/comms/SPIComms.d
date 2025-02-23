@@ -96,7 +96,11 @@ Core/Src/comms/SPIComms.o: ../Core/Src/comms/SPIComms.cpp \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../pin/pin.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h \
+ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2160_bitfields.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC5160_bitfields.h \
  F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
@@ -208,7 +212,11 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/../pin/pin.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h:
+F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2160_bitfields.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC5160_bitfields.h:
 F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:

@@ -5,9 +5,9 @@
 #include <string>
 #include "../../drivers/pin/pin.h"
 
-class softwareSPI {
+class SoftwareSPI {
 public:
-    softwareSPI(const std::string& mosi, const std::string& miso, const std::string& sck);
+    SoftwareSPI(const std::string& mosi, const std::string& miso, const std::string& sck);
 
     void init();
     void begin();

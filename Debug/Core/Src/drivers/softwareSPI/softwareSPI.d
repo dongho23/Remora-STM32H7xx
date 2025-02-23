@@ -1,7 +1,7 @@
-Core/Src/drivers/softwareSPI/softwareSPI.o: \
- ../Core/Src/drivers/softwareSPI/softwareSPI.cpp \
- ../Core/Src/drivers/softwareSPI/softwareSPI.h \
- ../Core/Src/drivers/softwareSPI/../../drivers/pin/pin.h \
+Core/Src/drivers/SoftwareSPI/SoftwareSPI.o: \
+ ../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp \
+ ../Core/Src/drivers/SoftwareSPI/SoftwareSPI.h \
+ ../Core/Src/drivers/SoftwareSPI/../../drivers/pin/pin.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
@@ -38,8 +38,8 @@ Core/Src/drivers/softwareSPI/softwareSPI.o: \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h
-../Core/Src/drivers/softwareSPI/softwareSPI.h:
-../Core/Src/drivers/softwareSPI/../../drivers/pin/pin.h:
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.h:
+../Core/Src/drivers/SoftwareSPI/../../drivers/pin/pin.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:

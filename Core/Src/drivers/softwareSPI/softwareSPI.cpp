@@ -1,15 +1,15 @@
-#include "softwareSPI.h"
+#include "SoftwareSPI.h"
 
-softwareSPI::softwareSPI(const std::string& mosi, const std::string& miso, const std::string& sck)
+SoftwareSPI::SoftwareSPI(const std::string& mosi, const std::string& miso, const std::string& sck)
     : mosi_pin(mosi, OUTPUT), miso_pin(miso, INPUT, PULLUP), sck_pin(sck, OUTPUT) {}
 
-void softwareSPI::init() {
+void SoftwareSPI::init() {
     sck_pin.set(true); // Ensure clock starts high
 }
 
-void softwareSPI::begin() {}
+void SoftwareSPI::begin() {}
 
-uint8_t softwareSPI::transfer(uint8_t ulVal) {
+uint8_t SoftwareSPI::transfer(uint8_t ulVal) {
     uint8_t value = 0;
     sck_pin.set(false);
 
@@ -24,11 +24,11 @@ uint8_t softwareSPI::transfer(uint8_t ulVal) {
     return value;
 }
 
-uint16_t softwareSPI::transfer16(uint16_t data) {
+uint16_t SoftwareSPI::transfer16(uint16_t data) {
     uint16_t returnVal = 0;
     returnVal |= transfer((data >> 8) & 0xFF) << 8;
     returnVal |= transfer(data & 0xFF);
     return returnVal;
 }
 
-void softwareSPI::endTransaction() {}
+void SoftwareSPI::endTransaction() {}

@@ -39,10 +39,10 @@ CPP_DEPS :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 Core/Src/comms \
+Core/Src/drivers/SoftwareSPI \
 Core/Src/drivers/SoftwareSerial \
 Core/Src/drivers/TMCStepper \
 Core/Src/drivers/pin \
-Core/Src/drivers/softwareSPI \
 Core/Src/interrupt \
 Core/Src/json \
 Core/Src \

@@ -1,0 +1,11 @@
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:4:1:TMC5160Stepper::TMC5160Stepper(const std::string&, float, const std::string&, const std::string&, const std::string&, int8_t)	40	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:8:1:TMC5160Stepper::TMC5160Stepper(const std::string&, const std::string&, const std::string&, const std::string&, int8_t)	32	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:12:6:void TMC5160Stepper::defaults()	16	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:40:6:void TMC5160Stepper::push()	16	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:77:9:uint8_t TMC5160Stepper::ENC_STATUS()	16	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:78:6:void TMC5160Stepper::ENC_STATUS(uint8_t)	16	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:83:10:uint32_t TMC5160Stepper::ENC_DEVIATION()	16	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:84:6:void TMC5160Stepper::ENC_DEVIATION(uint32_t)	24	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:90:10:uint32_t TMC5160Stepper::PWM_AUTO()	16	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:93:9:uint8_t TMC5160Stepper::pwm_ofs_auto()	24	static
+../Core/Src/drivers/TMCStepper/TMC5160Stepper.cpp:94:9:uint8_t TMC5160Stepper::pwm_grad_auto()	24	static
