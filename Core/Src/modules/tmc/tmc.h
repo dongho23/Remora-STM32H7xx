@@ -73,5 +73,30 @@ public:
     void configure(void) override;
 };
 
+class TMC5160 : public TMC
+{
+protected:
+
+	std::string pinCS;
+	std::string pinMOSI;
+	std::string pinMISO;
+	std::string pinSCK;
+	uint8_t     addr;
+	uint16_t    mA;
+	uint16_t    microsteps;
+	bool        stealth;
+	uint16_t    stall;
+
+	std::unique_ptr<TMC5160Stepper> driver;
+
+public:
+
+	TMC5160(std::string, std::string, std::string, std::string, float, uint8_t, uint16_t, uint16_t, bool, uint16_t, Remora*);
+	static std::shared_ptr<Module> create(const JsonObject& config, Remora* instance);
+	~TMC5160() = default;
+
+    void update(void) override;
+    void configure(void) override;
+};
 
 #endif

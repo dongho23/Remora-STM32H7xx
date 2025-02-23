@@ -6,15 +6,18 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
 ../Core/Src/modules/tmc/tmc2208.cpp \
-../Core/Src/modules/tmc/tmc2209.cpp 
+../Core/Src/modules/tmc/tmc2209.cpp \
+../Core/Src/modules/tmc/tmc5160.cpp 
 
 OBJS += \
 ./Core/Src/modules/tmc/tmc2208.o \
-./Core/Src/modules/tmc/tmc2209.o 
+./Core/Src/modules/tmc/tmc2209.o \
+./Core/Src/modules/tmc/tmc5160.o 
 
 CPP_DEPS += \
 ./Core/Src/modules/tmc/tmc2208.d \
-./Core/Src/modules/tmc/tmc2209.d 
+./Core/Src/modules/tmc/tmc2209.d \
+./Core/Src/modules/tmc/tmc5160.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -24,7 +27,7 @@ Core/Src/modules/tmc/%.o Core/Src/modules/tmc/%.su Core/Src/modules/tmc/%.cyclo:
 clean: clean-Core-2f-Src-2f-modules-2f-tmc
 
 clean-Core-2f-Src-2f-modules-2f-tmc:
-	-$(RM) ./Core/Src/modules/tmc/tmc2208.cyclo ./Core/Src/modules/tmc/tmc2208.d ./Core/Src/modules/tmc/tmc2208.o ./Core/Src/modules/tmc/tmc2208.su ./Core/Src/modules/tmc/tmc2209.cyclo ./Core/Src/modules/tmc/tmc2209.d ./Core/Src/modules/tmc/tmc2209.o ./Core/Src/modules/tmc/tmc2209.su
+	-$(RM) ./Core/Src/modules/tmc/tmc2208.cyclo ./Core/Src/modules/tmc/tmc2208.d ./Core/Src/modules/tmc/tmc2208.o ./Core/Src/modules/tmc/tmc2208.su ./Core/Src/modules/tmc/tmc2209.cyclo ./Core/Src/modules/tmc/tmc2209.d ./Core/Src/modules/tmc/tmc2209.o ./Core/Src/modules/tmc/tmc2209.su ./Core/Src/modules/tmc/tmc5160.cyclo ./Core/Src/modules/tmc/tmc5160.d ./Core/Src/modules/tmc/tmc5160.o ./Core/Src/modules/tmc/tmc5160.su
 
 .PHONY: clean-Core-2f-Src-2f-modules-2f-tmc
 

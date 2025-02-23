@@ -37,6 +37,7 @@
 "./Core/Src/modules/stepgen/stepgen.o"
 "./Core/Src/modules/tmc/tmc2208.o"
 "./Core/Src/modules/tmc/tmc2209.o"
+"./Core/Src/modules/tmc/tmc5160.o"
 "./Core/Src/thread/pruThread.o"
 "./Core/Src/thread/timer.o"
 "./Core/Src/thread/timerInterrupt.o"
