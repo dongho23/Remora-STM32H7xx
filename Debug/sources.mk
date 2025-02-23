@@ -42,6 +42,7 @@ Core/Src/comms \
 Core/Src/drivers/SoftwareSerial \
 Core/Src/drivers/TMCStepper \
 Core/Src/drivers/pin \
+Core/Src/drivers/softwareSPI \
 Core/Src/interrupt \
 Core/Src/json \
 Core/Src \

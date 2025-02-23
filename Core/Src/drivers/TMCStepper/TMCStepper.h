@@ -1,10 +1,10 @@
 #include <cstdint>
 #include "../SoftwareSerial/softwareSerial.h"
 
-//#include "TMC2130_bitfields.h"
+#include "TMC2130_bitfields.h"
 //#include "TMC2160_bitfields.h"
-//#include "TMC5130_bitfields.h"
-//#include "TMC5160_bitfields.h"
+#include "TMC5130_bitfields.h"
+#include "TMC5160_bitfields.h"
 #include "TMC2208_bitfields.h"
 #include "TMC2209_bitfields.h"
 //#include "TMC2660_bitfields.h"
@@ -258,8 +258,8 @@ class TMC2208Stepper : public TMCStepper {
         float Rsense = 0.11;
         bool CRCerror = false;
     protected:
-        INIT2208_REGISTER(GCONF)            {{.sr=0}};
-        INIT_REGISTER(SLAVECONF)            {{.sr=0}};
+        INIT2208_REGISTER(GCONF)        {{.sr=0}};
+        INIT_REGISTER(SLAVECONF)        {{.sr=0}};
         INIT_REGISTER(FACTORY_CONF)     {{.sr=0}};
         INIT2208_REGISTER(VACTUAL)      {.sr=0};
         INIT2208_REGISTER(CHOPCONF)     {{.sr=0}};

@@ -92,6 +92,9 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
  ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
  ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h \
+ ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC5160_bitfields.h \
  ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
  ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/blink/../../modules/moduleInterrupt.h \
@@ -198,6 +201,9 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
 ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
 ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
+../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h:
+../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h:
+../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC5160_bitfields.h:
 ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
 ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/blink/../../modules/moduleInterrupt.h:

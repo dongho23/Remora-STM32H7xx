@@ -28,6 +28,7 @@ RM := rm -rf
 -include Core/Src/modules/subdir.mk
 -include Core/Src/json/subdir.mk
 -include Core/Src/interrupt/subdir.mk
+-include Core/Src/drivers/softwareSPI/subdir.mk
 -include Core/Src/drivers/pin/subdir.mk
 -include Core/Src/drivers/TMCStepper/subdir.mk
 -include Core/Src/drivers/SoftwareSerial/subdir.mk
