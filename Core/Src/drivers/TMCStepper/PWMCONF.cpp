@@ -5,7 +5,7 @@
 #define GET_REG(SETTING) return PWMCONF_register.SETTING
 
 // PWMCONF
-/*
+
 uint32_t TMC2130Stepper::PWMCONF() { return PWMCONF_register.sr; }
 void TMC2130Stepper::PWMCONF(uint32_t input) {
 	PWMCONF_register.sr = input;
@@ -51,7 +51,7 @@ bool 	TMC2160Stepper::pwm_autograd()	{ return PWMCONF_register.pwm_autograd;	}
 uint8_t TMC2160Stepper::freewheel()		{ return PWMCONF_register.freewheel;	}
 uint8_t TMC2160Stepper::pwm_reg()		{ return PWMCONF_register.pwm_reg;		}
 uint8_t TMC2160Stepper::pwm_lim()		{ return PWMCONF_register.pwm_lim;		}
-*/
+
 uint32_t TMC2208Stepper::PWMCONF() {
 	return read(PWMCONF_register.address);
 }

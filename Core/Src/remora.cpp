@@ -56,8 +56,14 @@ Remora::Remora() :
 }
 
 void Remora::transitionToState(State newState) {
+
     if (currentState != newState) {
-        printf("\n## Transitioning from state %d to state %d\n", currentState, newState);
+        const char* stateNames[] = {
+            "Setup", "Start", "Idle", "Running", "Stop", "Reset", "System Reset"
+        };
+        printf("\n## Transitioning from %s state to %s state\n",
+               stateNames[currentState], stateNames[newState]);
+
         prevState = currentState;
         currentState = newState;
     }

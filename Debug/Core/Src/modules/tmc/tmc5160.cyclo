@@ -60,7 +60,7 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:55:3:ArduinoJson::V730HB22::detail::Number::Number(ArduinoJson::V730HB22::JsonUInt)	1
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:57:3:ArduinoJson::V730HB22::detail::Number::Number(double)	1
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:105:15:ArduinoJson::V730HB22::detail::Number ArduinoJson::V730HB22::detail::parseNumber(const char*)	34
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:687:8:void TMC5160Stepper::rms_current(uint16_t)	1
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:688:8:void TMC5160Stepper::rms_current(uint16_t)	1
 ../Core/Src/modules/tmc/tmc.h:20:2:TMC::TMC(Remora*, float)	1
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\shared_ptr_base.h:1524:7:std::__shared_ptr<_Tp, _Lp>::~__shared_ptr() [with _Tp = TMC5160; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	1
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/shared_ptr.h:175:11:std::shared_ptr<TMC5160>::~shared_ptr()	1
@@ -149,9 +149,9 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/move.h:104:5:constexpr typename std::remove_reference<_Tp>::type&& std::move(_Tp&&) [with _Tp = TMC5160Stepper*&]	1
 ../Core/Src/modules/tmc/../../modules/blink/../../drivers/pin/pin.h:17:7:Pin::~Pin()	1
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:115:7:TMC2130Stepper::~TMC2130Stepper()	1
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:341:7:TMC2160Stepper::~TMC2160Stepper()	1
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:440:7:TMC5130Stepper::~TMC5130Stepper()	1
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:682:7:TMC5160Stepper::~TMC5160Stepper()	1
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:342:7:TMC2160Stepper::~TMC2160Stepper()	1
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:441:7:TMC5130Stepper::~TMC5130Stepper()	1
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:683:7:TMC5160Stepper::~TMC5160Stepper()	1
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/unique_ptr.h:89:7:void std::default_delete<_Tp>::operator()(_Tp*) const [with _Tp = TMC5160Stepper]	2
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/unique_ptr.h:461:7:std::unique_ptr<_Tp, _Dp>::pointer std::unique_ptr<_Tp, _Dp>::get() const [with _Tp = TMC5160Stepper; _Dp = std::default_delete<TMC5160Stepper>]	1
 ../Core/Src/modules/tmc/../../lib/ArduinoJson7/ArduinoJson/Object/ObjectImpl.hpp:14:21:ArduinoJson::V730HB22::detail::VariantData* ArduinoJson::V730HB22::detail::ObjectData::getMember(TAdaptedString, const ArduinoJson::V730HB22::detail::ResourceManager*) const [with TAdaptedString = ArduinoJson::V730HB22::detail::RamString]	2

@@ -4,7 +4,7 @@
 #define SET_REG(SETTING) GCONF_register.SETTING = B; write(GCONF_register.address, GCONF_register.sr)
 
 // GCONF
-/*
+
 uint32_t TMC2130Stepper::GCONF() {
     return read(GCONF_register.address);
 }
@@ -48,7 +48,7 @@ bool TMC2130Stepper::diag1_pushpull()               { GCONF_t r{0}; r.sr = GCONF
 bool TMC2130Stepper::small_hysteresis()             { GCONF_t r{0}; r.sr = GCONF(); return r.small_hysteresis;      }
 bool TMC2130Stepper::stop_enable()                  { GCONF_t r{0}; r.sr = GCONF(); return r.stop_enable;           }
 bool TMC2130Stepper::direct_mode()                  { GCONF_t r{0}; r.sr = GCONF(); return r.direct_mode;           }
-*/
+
 /*
 bit 18 not implemented:
 test_mode 0:
@@ -57,14 +57,14 @@ Enable analog test output on pin DCO. IHOLD[1..0] selects the function of DCO:
 0…2: T120, DAC, VDDH Attention:
 Not for user, set to 0 for normal operation!
 */
-/*
+
 void TMC5160Stepper::recalibrate(bool B)            { SET_REG(recalibrate);             }
 void TMC5160Stepper::faststandstill(bool B)         { SET_REG(faststandstill);          }
 void TMC5160Stepper::multistep_filt(bool B)         { SET_REG(multistep_filt);          }
 bool TMC5160Stepper::recalibrate()                  { GCONF_t r{0}; r.sr = GCONF(); return r.recalibrate;   }
 bool TMC5160Stepper::faststandstill()               { GCONF_t r{0}; r.sr = GCONF(); return r.faststandstill;    }
 bool TMC5160Stepper::multistep_filt()               { GCONF_t r{0}; r.sr = GCONF(); return r.multistep_filt;    }
-*/
+
 uint32_t TMC2208Stepper::GCONF() {
     return read(GCONF_register.address);
 }

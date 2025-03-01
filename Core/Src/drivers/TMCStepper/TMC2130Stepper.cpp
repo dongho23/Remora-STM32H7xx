@@ -2,6 +2,7 @@
 #include "TMC_MACROS.h"
 
 // only software SPI supported
+
 int8_t TMC2130Stepper::chain_length = 0;
 
 TMC2130Stepper::TMC2130Stepper(const std::string& pinCS, const std::string& pinMOSI, const std::string& pinMISO, const std::string& pinSCK, int8_t link) :
@@ -12,6 +13,9 @@ TMC2130Stepper::TMC2130Stepper(const std::string& pinCS, const std::string& pinM
     SoftwareSPI* SW_SPI_Obj = new SoftwareSPI(pinMOSI, pinMISO, pinSCK);
     TMC_SW_SPI = SW_SPI_Obj;
     defaults();
+
+    switchCSpin(HIGH);
+    TMC_SW_SPI->init();
 
     if (link > chain_length)
       chain_length = link;
@@ -25,6 +29,9 @@ TMC2130Stepper::TMC2130Stepper(const std::string& pinCS, float RS, const std::st
 	SoftwareSPI* SW_SPI_Obj = new SoftwareSPI(pinMOSI, pinMISO, pinSCK);
     TMC_SW_SPI = SW_SPI_Obj;
     defaults();
+
+    switchCSpin(HIGH);
+    TMC_SW_SPI->init();
 
     if (link > chain_length)
       chain_length = link;

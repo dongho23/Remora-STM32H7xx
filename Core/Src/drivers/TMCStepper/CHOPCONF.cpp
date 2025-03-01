@@ -4,7 +4,7 @@
 #define SET_REG(SETTING) CHOPCONF_register.SETTING = B; write(CHOPCONF_register.address, CHOPCONF_register.sr)
 
 // CHOPCONF
-/*
+
 uint32_t TMC2130Stepper::CHOPCONF() {
     return read(CHOPCONF_register.address);
 }
@@ -51,7 +51,7 @@ void TMC5160Stepper::diss2vs(bool B){ SET_REG(diss2vs); }
 void TMC5160Stepper::tpfd(uint8_t B){ SET_REG(tpfd);    }
 bool TMC5160Stepper::diss2vs()      { CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.diss2vs; }
 uint8_t TMC5160Stepper::tpfd()      { CHOPCONF_t r{0}; r.sr = CHOPCONF(); return r.tpfd;    }
-*/
+
 void TMC2208Stepper::CHOPCONF(uint32_t input) {
     CHOPCONF_register.sr = input;
     write(CHOPCONF_register.address, CHOPCONF_register.sr);

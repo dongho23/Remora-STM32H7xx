@@ -13,14 +13,21 @@ uint8_t SoftwareSPI::transfer(uint8_t ulVal) {
     uint8_t value = 0;
     sck_pin.set(false);
 
-    for (int i = 7; i >= 0; i--) {
-        mosi_pin.set(ulVal & (1 << i));
+    for (int i = 7; i >= 1; i--) {
+    	// Write bit
+        !!(ulVal & (1 << i)) ? mosi_pin.set(true) : mosi_pin.set(false);
+        // Start clock pulse
         sck_pin.set(true);
-        if (miso_pin.get()) {
-            value |= (1 << i);
-        }
+        // Read bit
+        value |= ( miso_pin.get() ? 1 : 0) << i;
+        // Stop clock pulse
         sck_pin.set(false);
     }
+
+    !!(ulVal & (1 << 0)) ? mosi_pin.set(true) : mosi_pin.set(false);
+    sck_pin.set(true);
+    value |= ( miso_pin.get() ? 1 : 0) << 0;
+
     return value;
 }
 
