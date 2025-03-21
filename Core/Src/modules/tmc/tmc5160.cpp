@@ -34,7 +34,7 @@ TMC5160::TMC5160(std::string _pinCS, std::string _pinMOSI, std::string _pinMISO,
       microsteps(_microsteps),
       stealth(_stealth),
       stall(_stall),
-      driver(std::make_unique<TMC5160Stepper>(pinCS, _Rsense, pinMISO, pinMOSI, pinSCK)) {}
+      driver(std::make_unique<TMC5160Stepper>(pinCS, _Rsense, pinMOSI, pinMISO, pinSCK)) {}
 
 
 void TMC5160::configure()

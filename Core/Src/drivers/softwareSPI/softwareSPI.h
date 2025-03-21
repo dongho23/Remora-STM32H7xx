@@ -19,6 +19,14 @@ private:
     Pin mosi_pin;
     Pin miso_pin;
     Pin sck_pin;
+
+    uint32_t delayTicks;
+
+    void delay() {
+        for (volatile uint32_t i = 0; i < delayTicks; i++) {
+            __asm volatile("nop");
+        }
+    }
 };
 
 #endif

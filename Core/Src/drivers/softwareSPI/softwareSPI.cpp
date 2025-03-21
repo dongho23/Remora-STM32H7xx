@@ -1,34 +1,33 @@
 #include "SoftwareSPI.h"
 
 SoftwareSPI::SoftwareSPI(const std::string& mosi, const std::string& miso, const std::string& sck)
-    : mosi_pin(mosi, OUTPUT), miso_pin(miso, INPUT, PULLUP), sck_pin(sck, OUTPUT) {}
+    : mosi_pin(mosi, OUTPUT), miso_pin(miso, INPUT, PULLUP), sck_pin(sck, OUTPUT), delayTicks(2) {
+}
 
-void SoftwareSPI::init() {
-    sck_pin.set(true); // Ensure clock starts high
+void SoftwareSPI::init()
+{
+	sck_pin.set(true);
 }
 
 void SoftwareSPI::begin() {}
 
-uint8_t SoftwareSPI::transfer(uint8_t ulVal) {
-    uint8_t value = 0;
+uint8_t SoftwareSPI::transfer(uint8_t data) {
+    uint8_t received = 0;
+
     sck_pin.set(false);
 
-    for (int i = 7; i >= 1; i--) {
-    	// Write bit
-        !!(ulVal & (1 << i)) ? mosi_pin.set(true) : mosi_pin.set(false);
-        // Start clock pulse
-        sck_pin.set(true);
-        // Read bit
-        value |= ( miso_pin.get() ? 1 : 0) << i;
-        // Stop clock pulse
-        sck_pin.set(false);
+    for (uint8_t i = 7; i >=1; i--) {
+    	!!(data & (1<<i))? mosi_pin.set(true) : mosi_pin.set(false);
+    	sck_pin.set(true);
+    	received |= (miso_pin.get() ? 1 : 0) << i;
+    	sck_pin.set(false);
     }
 
-    !!(ulVal & (1 << 0)) ? mosi_pin.set(true) : mosi_pin.set(false);
+    !!(data & (1<<0))? mosi_pin.set(true) : mosi_pin.set(false);
     sck_pin.set(true);
-    value |= ( miso_pin.get() ? 1 : 0) << 0;
+    received |= (miso_pin.get() ? 1 : 0) << 0;
 
-    return value;
+    return received;
 }
 
 uint16_t SoftwareSPI::transfer16(uint16_t data) {

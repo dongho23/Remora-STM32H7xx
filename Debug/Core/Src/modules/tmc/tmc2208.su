@@ -64,8 +64,8 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:57:3:ArduinoJson::V730HB22::detail::Number::Number(double)	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:105:15:ArduinoJson::V730HB22::detail::Number ArduinoJson::V730HB22::detail::parseNumber(const char*)	184	static
 ../Core/Src/modules/tmc/../../remora.h:80:16:pruThread* Remora::getSerialThread()	16	static
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:776:7:TMC2208Stepper::~TMC2208Stepper()	16	static
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:779:9:TMC2208Stepper::TMC2208Stepper(std::string, std::string, float)	72	static
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:775:7:TMC2208Stepper::~TMC2208Stepper()	16	static
+../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:778:9:TMC2208Stepper::TMC2208Stepper(std::string, std::string, float)	72	static
 ../Core/Src/modules/tmc/tmc.h:20:2:TMC::TMC(Remora*, float)	24	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\shared_ptr_base.h:1524:7:std::__shared_ptr<_Tp, _Lp>::~__shared_ptr() [with _Tp = TMC; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/shared_ptr.h:175:11:std::shared_ptr<TMC>::~shared_ptr()	16	static

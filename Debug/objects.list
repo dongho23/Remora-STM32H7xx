@@ -1,6 +1,6 @@
 "./Core/Src/comms/SPIComms.o"
 "./Core/Src/comms/commsInterface.o"
-"./Core/Src/drivers/SoftwareSPI/SoftwareSPI.o"
+"./Core/Src/drivers/SoftwareSPI/softwareSPI.o"
 "./Core/Src/drivers/SoftwareSerial/SoftwareSerial.o"
 "./Core/Src/drivers/TMCStepper/CHOPCONF.o"
 "./Core/Src/drivers/TMCStepper/COOLCONF.o"
