@@ -1,6 +1,10 @@
-../Core/Src/drivers/SoftwareSPI/softwareSPI.cpp:3:1:SoftwareSPI::SoftwareSPI(const std::string&, const std::string&, const std::string&)	1
-../Core/Src/drivers/SoftwareSPI/softwareSPI.cpp:7:6:void SoftwareSPI::init()	1
-../Core/Src/drivers/SoftwareSPI/softwareSPI.cpp:12:6:void SoftwareSPI::begin()	1
-../Core/Src/drivers/SoftwareSPI/softwareSPI.cpp:14:9:uint8_t SoftwareSPI::transfer(uint8_t)	6
-../Core/Src/drivers/SoftwareSPI/softwareSPI.cpp:33:10:uint16_t SoftwareSPI::transfer16(uint16_t)	1
-../Core/Src/drivers/SoftwareSPI/softwareSPI.cpp:40:6:void SoftwareSPI::endTransaction()	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:3:6:void SoftwareSPI::delay()	2
+../Core/Src/drivers/SoftwareSPI/../../drivers/pin/pin.h:17:7:Pin::~Pin()	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:11:1:SoftwareSPI::SoftwareSPI(const std::string&, const std::string&, const std::string&, uint8_t, BitOrder, ByteOrder)	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:24:1:SoftwareSPI::SoftwareSPI(const std::string&, const std::string&, const std::string&, const std::string&, uint8_t, BitOrder, ByteOrder)	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:38:1:SoftwareSPI::~SoftwareSPI()	3
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:44:6:void SoftwareSPI::begin()	2
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:52:6:void SoftwareSPI::end()	2
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:59:6:void SoftwareSPI::setClockDivider(uint32_t)	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:63:6:void SoftwareSPI::setSPIMode(uint8_t)	1
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp:68:6:void SoftwareSPI::transfer(uint8_t*, size_t)	11

@@ -1,7 +1,7 @@
 #include <cstdint>
 #include "../SoftwareSerial/softwareSerial.h"
-#include "../SoftwareSPI/SoftwareSPI.h"
 #include "../pin/pin.h"
+#include "../SoftwareSPI/SoftwareSPI.h"
 
 #include "TMC2130_bitfields.h"
 #include "TMC2160_bitfields.h"
@@ -330,7 +330,7 @@ class TMC2130Stepper : public TMCStepper {
 		struct DRV_STATUS_t { constexpr static uint8_t address = 0X6F; };
 
 		static uint32_t spi_speed; // Default 2MHz
-		Pin _pinCS;
+		Pin* cs;
 		SoftwareSPI * TMC_SW_SPI = nullptr;
 		static constexpr float default_RS = 0.11;
 

@@ -89,9 +89,9 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
+ ../Core/Src/modules/tmc/../../drivers/TMCStepper/../pin/pin.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/../pin/pin.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2160_bitfields.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h \
@@ -200,9 +200,9 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
+../Core/Src/modules/tmc/../../drivers/TMCStepper/../pin/pin.h:
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h:
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/../pin/pin.h:
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h:
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2160_bitfields.h:
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h:

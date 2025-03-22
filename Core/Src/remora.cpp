@@ -187,7 +187,6 @@ void Remora::loadModules() {
     }
 
     for (size_t i = 0; i < modules.size(); i++) {
-        //if (modules[i].containsKey("Thread") && modules[i].containsKey("Type")) {
     	if (modules[i]["Thread"].is<const char*>() && modules[i]["Type"].is<const char*>()) {
             const char* threadName = modules[i]["Thread"];
             const char* moduleType = modules[i]["Type"];
@@ -224,7 +223,7 @@ void Remora::loadModules() {
             else if (strcmp(threadName, "Base") == 0) {
                 baseThread->registerModule(_mod);
             	if (_modPost) {
-            		servoThread->registerModulePost(_mod);
+            		baseThread->registerModulePost(_mod);
             	}
             }
             else {

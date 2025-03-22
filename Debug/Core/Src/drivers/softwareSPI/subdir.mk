@@ -5,13 +5,13 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../Core/Src/drivers/SoftwareSPI/softwareSPI.cpp 
+../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp 
 
 OBJS += \
-./Core/Src/drivers/SoftwareSPI/softwareSPI.o 
+./Core/Src/drivers/SoftwareSPI/SoftwareSPI.o 
 
 CPP_DEPS += \
-./Core/Src/drivers/SoftwareSPI/softwareSPI.d 
+./Core/Src/drivers/SoftwareSPI/SoftwareSPI.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -21,7 +21,7 @@ Core/Src/drivers/SoftwareSPI/%.o Core/Src/drivers/SoftwareSPI/%.su Core/Src/driv
 clean: clean-Core-2f-Src-2f-drivers-2f-SoftwareSPI
 
 clean-Core-2f-Src-2f-drivers-2f-SoftwareSPI:
-	-$(RM) ./Core/Src/drivers/SoftwareSPI/softwareSPI.cyclo ./Core/Src/drivers/SoftwareSPI/softwareSPI.d ./Core/Src/drivers/SoftwareSPI/softwareSPI.o ./Core/Src/drivers/SoftwareSPI/softwareSPI.su
+	-$(RM) ./Core/Src/drivers/SoftwareSPI/SoftwareSPI.cyclo ./Core/Src/drivers/SoftwareSPI/SoftwareSPI.d ./Core/Src/drivers/SoftwareSPI/SoftwareSPI.o ./Core/Src/drivers/SoftwareSPI/SoftwareSPI.su
 
 .PHONY: clean-Core-2f-Src-2f-drivers-2f-SoftwareSPI
 

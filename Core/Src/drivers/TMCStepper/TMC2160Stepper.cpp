@@ -14,7 +14,7 @@ void TMC2160Stepper::begin() {
   //set pins
   switchCSpin(HIGH);
 
-  if (TMC_SW_SPI != nullptr) TMC_SW_SPI->init();
+  if (TMC_SW_SPI != nullptr) TMC_SW_SPI->begin();
 
   GCONF(GCONF_register.sr);
   CHOPCONF(CHOPCONF_register.sr);

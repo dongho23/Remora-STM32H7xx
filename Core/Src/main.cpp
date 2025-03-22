@@ -53,7 +53,6 @@ extern "C" {
 int main(void)
 {
 	MPU_Config();
-	//SCB->VTOR = 0x08000000;
 	HAL_Init();
 	SystemClock_Config();
 	PeriphCommonClock_Config();

@@ -1,5 +1,5 @@
-Core/Src/drivers/SoftwareSPI/softwareSPI.o: \
- ../Core/Src/drivers/SoftwareSPI/softwareSPI.cpp \
+Core/Src/drivers/SoftwareSPI/SoftwareSPI.o: \
+ ../Core/Src/drivers/SoftwareSPI/SoftwareSPI.cpp \
  ../Core/Src/drivers/SoftwareSPI/SoftwareSPI.h \
  ../Core/Src/drivers/SoftwareSPI/../../drivers/pin/pin.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \

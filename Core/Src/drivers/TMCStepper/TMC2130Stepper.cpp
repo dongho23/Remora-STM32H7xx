@@ -5,33 +5,37 @@
 
 int8_t TMC2130Stepper::chain_length = 0;
 
-TMC2130Stepper::TMC2130Stepper(const std::string& pinCS, const std::string& pinMOSI, const std::string& pinMISO, const std::string& pinSCK, int8_t link) :
-		TMCStepper(default_RS),
-		_pinCS(pinCS, OUTPUT),
-		link_index(link)
-  {
-    SoftwareSPI* SW_SPI_Obj = new SoftwareSPI(pinMOSI, pinMISO, pinSCK);
-    TMC_SW_SPI = SW_SPI_Obj;
+TMC2130Stepper::TMC2130Stepper(const std::string& pinCS, float RS, const std::string& pinMOSI, const std::string& pinMISO, const std::string& pinSCK, int8_t link)
+    : TMCStepper(RS),
+      cs(nullptr),
+      link_index(link) {
+
+	cs = new Pin(pinCS, OUTPUT);
+
+    TMC_SW_SPI = new SoftwareSPI(pinMOSI, pinMISO, pinSCK, pinCS, SPI_MODE_3, MSB_FIRST, MSB_FIRST_BYTE);
+
     defaults();
 
     switchCSpin(HIGH);
-    TMC_SW_SPI->init();
+    TMC_SW_SPI->begin();
 
     if (link > chain_length)
       chain_length = link;
   }
 
-TMC2130Stepper::TMC2130Stepper(const std::string& pinCS, float RS, const std::string& pinMOSI, const std::string& pinMISO, const std::string& pinSCK, int8_t link) :
-  TMCStepper(RS),
-  _pinCS(pinCS, OUTPUT),
-  link_index(link)
-  {
-	SoftwareSPI* SW_SPI_Obj = new SoftwareSPI(pinMOSI, pinMISO, pinSCK);
-    TMC_SW_SPI = SW_SPI_Obj;
+TMC2130Stepper::TMC2130Stepper(const std::string& pinCS, const std::string& pinMOSI, const std::string& pinMISO, const std::string& pinSCK, int8_t link)
+    : TMCStepper(default_RS),
+      cs(nullptr),
+      link_index(link) {
+
+	cs = new Pin(pinCS, OUTPUT);
+
+    TMC_SW_SPI = new SoftwareSPI(pinMOSI, pinMISO, pinSCK, pinCS, SPI_MODE_3, MSB_FIRST, MSB_FIRST_BYTE);
+
     defaults();
 
     switchCSpin(HIGH);
-    TMC_SW_SPI->init();
+    TMC_SW_SPI->begin();
 
     if (link > chain_length)
       chain_length = link;
@@ -57,7 +61,7 @@ void TMC2130Stepper::setSPISpeed(uint32_t speed) {
 
 __attribute__((weak))
 void TMC2130Stepper::switchCSpin(bool state) {
-  _pinCS.set(state);
+  cs->set(state);
 }
 
 __attribute__((weak))
@@ -77,7 +81,7 @@ __attribute__((weak))
 uint8_t TMC2130Stepper::transfer(const uint8_t data) {
   uint8_t out = 0;
   if (TMC_SW_SPI != nullptr) {
-    out = TMC_SW_SPI->transfer(data);
+    //out = TMC_SW_SPI->transfer(data);
   }
   else {
     //out = SPI.transfer(data);
@@ -93,75 +97,71 @@ void TMC2130Stepper::transferEmptyBytes(const uint8_t n) {
 
 __attribute__((weak))
 uint32_t TMC2130Stepper::read(uint8_t addressByte) {
-  uint32_t out = 0UL;
-  int8_t i = 1;
+    uint32_t out = 0;
+    int8_t i = 1;
 
-  beginTransaction();
-  switchCSpin(LOW);
-  transfer(addressByte);
-  // Clear SPI
-  transferEmptyBytes(4);
+    if (!TMC_SW_SPI) return 0; // Ensure SPI instance is valid
 
-  // Shift the written data to the correct driver in chain
-  // Default link_index = -1 and no shifting happens
-  while(i < link_index) {
-    transferEmptyBytes(5);
-    i++;
-  }
+    beginTransaction();
+    if (cs) cs->set(false); // Pull CS low
 
-  switchCSpin(HIGH);
-  switchCSpin(LOW);
+    uint8_t datagram[5] = { addressByte, 0, 0, 0, 0 };
+    TMC_SW_SPI->transfer(datagram, 5); // Send address and receive response
 
-  // Shift data from target link into the last one...
-  while(i < chain_length) {
-    transferEmptyBytes(5);
-    i++;
-  }
+    while (i < link_index) {
+        uint8_t empty[5] = { 0 };
+        TMC_SW_SPI->transfer(empty, 5); // Shift data for multi-driver chains
+        i++;
+    }
 
-  // ...and once more to MCU
-  status_response = transfer(addressByte); // Send the address byte again
-  out  = transfer(0x00);
-  out <<= 8;
-  out |= transfer(0x00);
-  out <<= 8;
-  out |= transfer(0x00);
-  out <<= 8;
-  out |= transfer(0x00);
+    if (cs) cs->set(true); // Pull CS high
+    if (cs) cs->set(false); // Pull CS low again
 
-  endTransaction();
-  switchCSpin(HIGH);
-  return out;
+    while (i < chain_length) {
+        uint8_t empty[5] = { 0 };
+        TMC_SW_SPI->transfer(empty, 5);
+        i++;
+    }
+
+    uint8_t response[5] = { addressByte, 0, 0, 0, 0 };
+    TMC_SW_SPI->transfer(response, 5); // Read response
+
+    out = (response[1] << 24) | (response[2] << 16) | (response[3] << 8) | response[4];
+
+    endTransaction();
+    if (cs) cs->set(true); // Pull CS high
+
+    return out;
 }
 
 __attribute__((weak))
 void TMC2130Stepper::write(uint8_t addressByte, uint32_t config) {
-  addressByte |= TMC_WRITE;
-  int8_t i = 1;
+    addressByte |= TMC_WRITE;
+    int8_t i = 1;
 
-  beginTransaction();
-  switchCSpin(LOW);
-  status_response = transfer(addressByte);
-  transfer(config>>24);
-  transfer(config>>16);
-  transfer(config>>8);
-  transfer(config);
+    if (!TMC_SW_SPI) return; // Ensure SPI instance is valid
 
-  // Shift the written data to the correct driver in chain
-  // Default link_index = -1 and no shifting happens
-  while(i < link_index) {
-    transferEmptyBytes(5);
-    i++;
-  }
+    beginTransaction();
+    if (cs) cs->set(false); // Pull CS low
 
-  endTransaction();
-  switchCSpin(HIGH);
+    uint8_t datagram[5] = { addressByte, (uint8_t)(config >> 24), (uint8_t)(config >> 16), (uint8_t)(config >> 8), (uint8_t)config };
+    TMC_SW_SPI->transfer(datagram, 5); // Send data
+
+    while (i < link_index) {
+        uint8_t empty[5] = { 0 };
+        TMC_SW_SPI->transfer(empty, 5);
+        i++;
+    }
+
+    endTransaction();
+    if (cs) cs->set(true); // Pull CS high
 }
 
 void TMC2130Stepper::begin() {
   //set pins
   switchCSpin(HIGH);
 
-  if (TMC_SW_SPI != nullptr) TMC_SW_SPI->init();
+  if (TMC_SW_SPI != nullptr) TMC_SW_SPI->begin();
 
   GCONF(GCONF_register.sr);
   CHOPCONF(CHOPCONF_register.sr);

@@ -2,11 +2,11 @@ C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.external
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Strings/Adapters/RamString.hpp:42:8:char ArduinoJson::V730HB22::detail::RamString::operator[](size_t) const	1
 ../Core/Src/main.cpp:46:6:int __io_putchar(int)	1
 ../Core/Src/main.cpp:53:5:int main()	2
-../Core/Src/main.cpp:84:6:void SystemClock_Config()	5
-../Core/Src/main.cpp:151:6:void PeriphCommonClock_Config()	2
-../Core/Src/main.cpp:180:13:void MX_SDMMC1_SD_Init()	2
-../Core/Src/main.cpp:210:13:void MX_USART1_UART_Init()	5
-../Core/Src/main.cpp:258:13:void MX_GPIO_Init()	1
-../Core/Src/main.cpp:280:6:void MPU_Config()	1
-../Core/Src/main.cpp:329:6:void Error_Handler()	1
+../Core/Src/main.cpp:83:6:void SystemClock_Config()	5
+../Core/Src/main.cpp:150:6:void PeriphCommonClock_Config()	2
+../Core/Src/main.cpp:179:13:void MX_SDMMC1_SD_Init()	2
+../Core/Src/main.cpp:209:13:void MX_USART1_UART_Init()	5
+../Core/Src/main.cpp:257:13:void MX_GPIO_Init()	1
+../Core/Src/main.cpp:279:6:void MPU_Config()	1
+../Core/Src/main.cpp:328:6:void Error_Handler()	1
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Strings/StringAdapters.hpp:65:13:void ArduinoJson::V730HB22::detail::stringGetChars(TAdaptedString, char*, size_t) [with TAdaptedString = RamString]	2

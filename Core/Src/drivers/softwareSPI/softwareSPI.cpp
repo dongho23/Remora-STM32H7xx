@@ -1,40 +1,102 @@
 #include "SoftwareSPI.h"
 
-SoftwareSPI::SoftwareSPI(const std::string& mosi, const std::string& miso, const std::string& sck)
-    : mosi_pin(mosi, OUTPUT), miso_pin(miso, INPUT, PULLUP), sck_pin(sck, OUTPUT), delayTicks(2) {
+void SoftwareSPI::delay() {
+    for (volatile uint32_t i = 0; i < delayTicks; i++) {
+        __asm volatile("nop");
+    }
 }
 
-void SoftwareSPI::init()
+
+// Constructor WITHOUT chip select (CS handled externally)
+SoftwareSPI::SoftwareSPI(const std::string& mosiPin, const std::string& misoPin, const std::string& clkPin,
+		uint8_t mode = 0, BitOrder bitOrder, ByteOrder byteOrder)
+    : mosi(mosiPin, OUTPUT),
+      miso(misoPin, INPUT),
+      clk(clkPin, OUTPUT),
+      cs(nullptr),
+      delayTicks(2),
+      bitOrder(bitOrder),
+      byteOrder(byteOrder) {
+	setSPIMode(mode);
+}
+
+// Constructor WITH chip select
+SoftwareSPI::SoftwareSPI(const std::string& mosiPin, const std::string& misoPin, const std::string& clkPin, const std::string& csPin,
+		uint8_t mode = 0, BitOrder bitOrder, ByteOrder byteOrder)
+    : mosi(mosiPin, OUTPUT),
+      miso(misoPin, INPUT, PULLUP),
+      clk(clkPin, OUTPUT),
+      cs(new Pin(csPin, OUTPUT)), // Dynamically allocate CS pin
+      delayTicks(2),
+      bitOrder(bitOrder),
+      byteOrder(byteOrder)
 {
-	sck_pin.set(true);
+	setSPIMode(mode);
+	cs->set(true); // Set CS high (inactive state)
 }
 
-void SoftwareSPI::begin() {}
+SoftwareSPI::~SoftwareSPI() {
+    if (cs) {
+        delete cs; // Clean up CS pin if used
+    }
+}
 
-uint8_t SoftwareSPI::transfer(uint8_t data) {
-    uint8_t received = 0;
+void SoftwareSPI::begin() {
+    mosi.setAsOutput();
+    miso.setAsInput();
+    clk.setAsOutput();
+    clk.set(cpol); // Set clock idle state
+    if (cs) cs->set(true); // Ensure CS starts high
+}
 
-    sck_pin.set(false);
+void SoftwareSPI::end() {
+    mosi.setAsInput();
+    miso.setAsInput();
+    clk.setAsInput();
+    if (cs) cs->set(true); // Set CS high when stopping
+}
 
-    for (uint8_t i = 7; i >=1; i--) {
-    	!!(data & (1<<i))? mosi_pin.set(true) : mosi_pin.set(false);
-    	sck_pin.set(true);
-    	received |= (miso_pin.get() ? 1 : 0) << i;
-    	sck_pin.set(false);
+void SoftwareSPI::setClockDivider(uint32_t div) {
+    delayTicks = div;
+}
+
+void SoftwareSPI::setSPIMode(uint8_t mode) {
+    cpol = (mode & 0x02) != 0; // CPOL is bit 1
+    cpha = (mode & 0x01) != 0; // CPHA is bit 0
+}
+
+void SoftwareSPI::transfer(uint8_t* data, size_t length) {
+    if (cs) cs->set(false); // Pull CS low to start transaction
+
+    for (size_t byteIdx = 0; byteIdx < length; byteIdx++) {
+        size_t index = (byteOrder == MSB_FIRST_BYTE) ? byteIdx : (length - 1 - byteIdx);
+        uint8_t received = 0;
+        uint8_t byteToSend = data[index];
+
+        for (uint8_t i = 0; i < 8; i++) {
+            uint8_t bitPos = (bitOrder == MSB_FIRST) ? (7 - i) : i;
+
+            clk.set(!cpol); // Start clock low if CPOL=0, high if CPOL=1
+            delay();
+            mosi.set((byteToSend & (1 << bitPos)) ? true : false); // Set data bit
+
+            clk.set(cpol); // Generate clock edge
+            delay();
+
+            if (cpha) { // Read on second clock edge if CPHA=1
+                received |= (miso.get() ? 1 : 0) << bitPos;
+            }
+            clk.set(!cpol);
+            delay();
+
+            if (!cpha) { // Read on first clock edge if CPHA=0
+                received |= (miso.get() ? 1 : 0) << bitPos;
+            }
+        }
+        clk.set(cpol);
+
+        data[index] = received;
     }
 
-    !!(data & (1<<0))? mosi_pin.set(true) : mosi_pin.set(false);
-    sck_pin.set(true);
-    received |= (miso_pin.get() ? 1 : 0) << 0;
-
-    return received;
+    if (cs) cs->set(true); // Pull CS high to end transaction
 }
-
-uint16_t SoftwareSPI::transfer16(uint16_t data) {
-    uint16_t returnVal = 0;
-    returnVal |= transfer((data >> 8) & 0xFF) << 8;
-    returnVal |= transfer(data & 0xFF);
-    return returnVal;
-}
-
-void SoftwareSPI::endTransaction() {}
