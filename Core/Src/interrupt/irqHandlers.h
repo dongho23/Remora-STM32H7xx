@@ -1,59 +1,47 @@
+#ifndef IRQ_HANDLERS_H
+#define IRQ_HANDLERS_H
+
 #include "interrupt.h"
+#include "stm32h7xx_hal.h"
 
 extern "C" {
 
-	void EXTI4_IRQHandler()
-	{
-		// Chip select pin is PA_4 (EXTI4 PIN 4)
-		if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_4) != RESET)
-		{
-		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_4);
-		Interrupt::EXTI4_Wrapper();
-		}
-	}
+    void EXTI4_IRQHandler() {
+        if (__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_4) != RESET) {
+            __HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_4);
+            Interrupt::InvokeHandler(EXTI4_IRQn);
+        }
+    }
 
-	void DMA1_Stream0_IRQHandler()
-	{
-		// DMA interrupt management in the moduelInterrupt handleInterrupt() routine
-		Interrupt::DMA1_Stream0_Wrapper();
-	}
+    void DMA1_Stream0_IRQHandler() {
+        Interrupt::InvokeHandler(DMA1_Stream0_IRQn);
+    }
 
-	void DMA1_Stream1_IRQHandler()
-	{
-		// DMA interrupt management in the moduelInterrupt handleInterrupt() routine
-		Interrupt::DMA1_Stream1_Wrapper();
-	}
+    void DMA1_Stream1_IRQHandler() {
+        Interrupt::InvokeHandler(DMA1_Stream1_IRQn);
+    }
 
+    void TIM2_IRQHandler() {
+        if (TIM2->SR & TIM_SR_UIF) {
+            TIM2->SR &= ~TIM_SR_UIF;
+            Interrupt::InvokeHandler(TIM2_IRQn);
+        }
+    }
 
-	void TIM2_IRQHandler()
-	{
-	  if(TIM2->SR & TIM_SR_UIF) // if UIF flag is set
-	  {
-		TIM2->SR &= ~TIM_SR_UIF; // clear UIF flag
+    void TIM3_IRQHandler() {
+        if (TIM3->SR & TIM_SR_UIF) {
+            TIM3->SR &= ~TIM_SR_UIF;
+            Interrupt::InvokeHandler(TIM3_IRQn);
+        }
+    }
 
-		Interrupt::TIM2_Wrapper();
-	  }
-	}
+    void TIM4_IRQHandler() {
+        if (TIM4->SR & TIM_SR_UIF) {
+            TIM4->SR &= ~TIM_SR_UIF;
+            Interrupt::InvokeHandler(TIM4_IRQn);
+        }
+    }
 
+} // extern "C"
 
-	void TIM3_IRQHandler()
-	{
-	  if(TIM3->SR & TIM_SR_UIF) // if UIF flag is set
-	  {
-		TIM3->SR &= ~TIM_SR_UIF; // clear UIF flag
-
-		Interrupt::TIM3_Wrapper();
-	  }
-	}
-
-	void TIM4_IRQHandler()
-	{
-	  if(TIM4->SR & TIM_SR_UIF) // if UIF flag is set
-	  {
-		TIM4->SR &= ~TIM_SR_UIF; // clear UIF flag
-
-		Interrupt::TIM4_Wrapper();
-	  }
-	}
-}
-
+#endif // IRQ_HANDLERS_H

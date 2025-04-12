@@ -1,8 +1,2 @@
-../Core/Src/interrupt/interrupt.cpp:9:1:Interrupt::Interrupt()	1
-../Core/Src/interrupt/interrupt.cpp:14:6:static void Interrupt::Register(int, Interrupt*)	1
-../Core/Src/interrupt/interrupt.cpp:20:6:static void Interrupt::EXTI4_Wrapper()	1
-../Core/Src/interrupt/interrupt.cpp:25:6:static void Interrupt::DMA1_Stream0_Wrapper()	1
-../Core/Src/interrupt/interrupt.cpp:30:6:static void Interrupt::DMA1_Stream1_Wrapper()	1
-../Core/Src/interrupt/interrupt.cpp:36:6:static void Interrupt::TIM2_Wrapper()	1
-../Core/Src/interrupt/interrupt.cpp:41:6:static void Interrupt::TIM3_Wrapper()	1
-../Core/Src/interrupt/interrupt.cpp:46:6:static void Interrupt::TIM4_Wrapper()	1
+../Core/Src/interrupt/interrupt.cpp:8:6:static void Interrupt::Register(uint32_t, Interrupt*)	2
+../Core/Src/interrupt/interrupt.cpp:16:6:static void Interrupt::InvokeHandler(uint32_t)	3

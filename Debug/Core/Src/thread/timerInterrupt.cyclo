@@ -1,2 +1,7 @@
+../Core/Src/thread/../interrupt/interrupt.h:11:5:constexpr Interrupt::Interrupt()	1
+../Core/Src/thread/../interrupt/interrupt.h:12:13:Interrupt::~Interrupt()	1
+../Core/Src/thread/../interrupt/interrupt.h:12:13:virtual Interrupt::~Interrupt()	1
 ../Core/Src/thread/timerInterrupt.cpp:6:1:TimerInterrupt::TimerInterrupt(int, pruTimer*)	1
 ../Core/Src/thread/timerInterrupt.cpp:17:6:virtual void TimerInterrupt::ISR_Handler()	1
+../Core/Src/thread/timerInterrupt.h:8:7:TimerInterrupt::~TimerInterrupt()	1
+../Core/Src/thread/timerInterrupt.h:8:7:virtual TimerInterrupt::~TimerInterrupt()	1
