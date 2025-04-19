@@ -1,7 +1,0 @@
-../Core/Src/thread/../interrupt/interrupt.h:11:5:constexpr Interrupt::Interrupt()	16	static
-../Core/Src/thread/../interrupt/interrupt.h:12:13:Interrupt::~Interrupt()	16	static
-../Core/Src/thread/../interrupt/interrupt.h:12:13:virtual Interrupt::~Interrupt()	16	static
-../Core/Src/thread/timerInterrupt.cpp:6:1:TimerInterrupt::TimerInterrupt(int, pruTimer*)	24	static
-../Core/Src/thread/timerInterrupt.cpp:17:6:virtual void TimerInterrupt::ISR_Handler()	16	static
-../Core/Src/thread/timerInterrupt.h:8:7:TimerInterrupt::~TimerInterrupt()	16	static
-../Core/Src/thread/timerInterrupt.h:8:7:virtual TimerInterrupt::~TimerInterrupt()	16	static

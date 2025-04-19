@@ -5,15 +5,12 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../Core/Src/comms/SPIComms.cpp \
 ../Core/Src/comms/commsInterface.cpp 
 
 OBJS += \
-./Core/Src/comms/SPIComms.o \
 ./Core/Src/comms/commsInterface.o 
 
 CPP_DEPS += \
-./Core/Src/comms/SPIComms.d \
 ./Core/Src/comms/commsInterface.d 
 
 
@@ -24,7 +21,7 @@ Core/Src/comms/%.o Core/Src/comms/%.su Core/Src/comms/%.cyclo: ../Core/Src/comms
 clean: clean-Core-2f-Src-2f-comms
 
 clean-Core-2f-Src-2f-comms:
-	-$(RM) ./Core/Src/comms/SPIComms.cyclo ./Core/Src/comms/SPIComms.d ./Core/Src/comms/SPIComms.o ./Core/Src/comms/SPIComms.su ./Core/Src/comms/commsInterface.cyclo ./Core/Src/comms/commsInterface.d ./Core/Src/comms/commsInterface.o ./Core/Src/comms/commsInterface.su
+	-$(RM) ./Core/Src/comms/commsInterface.cyclo ./Core/Src/comms/commsInterface.d ./Core/Src/comms/commsInterface.o ./Core/Src/comms/commsInterface.su
 
 .PHONY: clean-Core-2f-Src-2f-comms
 

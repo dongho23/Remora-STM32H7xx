@@ -1,7 +1,7 @@
 #include "blink.h"
 
 
-shared_ptr<Module> Blink::create(const JsonObject& config, Remora* instance) {
+std::shared_ptr<Module> Blink::create(const JsonObject& config, Remora* instance) {
     const char* pin = config["Pin"];
     int frequency = config["Frequency"];
     uint32_t threadFreq = config["ThreadFreq"];

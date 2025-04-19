@@ -103,7 +103,7 @@ Core/Src/modules/blink/blink.o: ../Core/Src/modules/blink/blink.cpp \
  ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/blink/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/blink/../../thread/pruThread.h \
- ../Core/Src/modules/blink/../../thread/timer.h \
+ ../Core/Src/modules/blink/../../thread/pruTimer.h \
  ../Core/Src/modules/blink/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/blink/../../modules/module.h \
  ../Core/Src/modules/blink/../../drivers/pin/pin.h
@@ -216,7 +216,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/blink/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/blink/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/blink/../../thread/pruThread.h:
-../Core/Src/modules/blink/../../thread/timer.h:
+../Core/Src/modules/blink/../../thread/pruTimer.h:
 ../Core/Src/modules/blink/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/blink/../../modules/module.h:
 ../Core/Src/modules/blink/../../drivers/pin/pin.h:

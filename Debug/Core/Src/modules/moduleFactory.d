@@ -57,7 +57,7 @@ Core/Src/modules/moduleFactory.o: ../Core/Src/modules/moduleFactory.cpp \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
  ../Core/Src/modules/blink/../../modules/moduleList.h \
  ../Core/Src/modules/blink/../../thread/pruThread.h \
- ../Core/Src/modules/blink/../../thread/timer.h \
+ ../Core/Src/modules/blink/../../thread/pruTimer.h \
  ../Core/Src/modules/blink/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/blink/../../modules/comms/../../modules/module.h \
  ../Core/Src/modules/blink/../../modules/comms/../../comms/commsInterface.h \
@@ -171,7 +171,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../FATFS/Target/sd_diskio.h:
 ../Core/Src/modules/blink/../../modules/moduleList.h:
 ../Core/Src/modules/blink/../../thread/pruThread.h:
-../Core/Src/modules/blink/../../thread/timer.h:
+../Core/Src/modules/blink/../../thread/pruTimer.h:
 ../Core/Src/modules/blink/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/blink/../../modules/comms/../../modules/module.h:
 ../Core/Src/modules/blink/../../modules/comms/../../comms/commsInterface.h:

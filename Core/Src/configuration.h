@@ -24,7 +24,7 @@ namespace Config {
     // IRQ priorities
     constexpr uint32_t baseThreadIrqPriority = 1;
     constexpr uint32_t servoThreadIrqPriority = 2;
-    constexpr uint32_t commsThreadIrqPriority = 3;
+    constexpr uint32_t serialThreadIrqPriority = 3;
     constexpr uint32_t spiDmaTxIrqPriority = 4;
     constexpr uint32_t spiDmaRxIrqPriority = 5;
     constexpr uint32_t spiNssIrqPriority = 6;

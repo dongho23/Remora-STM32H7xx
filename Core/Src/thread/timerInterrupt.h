@@ -1,21 +1,18 @@
 #ifndef TIMERINTERRUPT_H
 #define TIMERINTERRUPT_H
 
-// Derived class for timer interrupts
+#include "../interrupt/interrupt.h"
 
-class pruTimer; // forward declaration
+class pruTimer;
 
 class TimerInterrupt : public Interrupt
 {
-	private:
-	    
-		pruTimer* InterruptOwnerPtr;
-	
-	public:
+private:
+    pruTimer* interruptOwnerPtr;
 
-		TimerInterrupt(int interruptNumber, pruTimer* ownerptr);
-    
-		void ISR_Handler(void);
+public:
+    TimerInterrupt(int interruptNumber, pruTimer* ownerptr);
+    void ISR_Handler(void);
 };
 
 #endif

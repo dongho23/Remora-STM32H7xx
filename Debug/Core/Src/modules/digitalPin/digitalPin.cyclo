@@ -49,8 +49,8 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:55:3:ArduinoJson::V730HB22::detail::Number::Number(ArduinoJson::V730HB22::JsonUInt)	1
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:57:3:ArduinoJson::V730HB22::detail::Number::Number(double)	1
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:105:15:ArduinoJson::V730HB22::detail::Number ArduinoJson::V730HB22::detail::parseNumber(const char*)	34
-../Core/Src/modules/digitalPin/../../remora.h:77:24:volatile txData_t* Remora::getTxData()	1
-../Core/Src/modules/digitalPin/../../remora.h:78:24:volatile rxData_t* Remora::getRxData()	1
+../Core/Src/modules/digitalPin/../../remora.h:83:24:volatile txData_t* Remora::getTxData()	1
+../Core/Src/modules/digitalPin/../../remora.h:84:24:volatile rxData_t* Remora::getRxData()	1
 ../Core/Src/modules/digitalPin/digitalPin.cpp:3:25:static std::shared_ptr<Module> DigitalPin::create(const ArduinoJson::V730HB22::JsonObject&, Remora*)	7
 ../Core/Src/modules/digitalPin/digitalPin.cpp:33:1:DigitalPin::DigitalPin(volatile uint16_t&, int, std::string, int, bool, int)	1
 ../Core/Src/modules/digitalPin/digitalPin.cpp:46:6:virtual void DigitalPin::update()	5

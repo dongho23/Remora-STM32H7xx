@@ -90,7 +90,7 @@ Core/Src/modules/tmc/tmc5160.o: ../Core/Src/modules/tmc/tmc5160.cpp \
  ../Core/Src/modules/tmc/../../modules/tmc/tmc.h \
  ../Core/Src/modules/tmc/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/tmc/../../thread/pruThread.h \
- ../Core/Src/modules/tmc/../../thread/timer.h \
+ ../Core/Src/modules/tmc/../../thread/pruTimer.h \
  ../Core/Src/modules/tmc/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/tmc/../../modules/module.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
@@ -203,7 +203,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/tmc/../../modules/tmc/tmc.h:
 ../Core/Src/modules/tmc/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/tmc/../../thread/pruThread.h:
-../Core/Src/modules/tmc/../../thread/timer.h:
+../Core/Src/modules/tmc/../../thread/pruTimer.h:
 ../Core/Src/modules/tmc/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/tmc/../../modules/module.h:
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:

@@ -14,13 +14,13 @@
 
 #include "modules/comms/commsHandler.h"  //TODO figure out why this is not being included from moduleList.h
 
-
 #define MAJOR_VERSION 	2
 #define MINOR_VERSION	0
 #define PATCH			0
 
 
-class JsonConfigHander; //forward declaration
+
+class JsonConfigHandler;
 
 class Remora {
 private:
@@ -35,28 +35,29 @@ private:
         ST_SYSRESET
     };
 
-    enum State currentState;
-    enum State prevState;
+    State currentState;
+    State prevState;
 
     volatile txData_t*  ptrTxData;
     volatile rxData_t*  ptrRxData;
-    volatile bool reset;
+    bool reset = false;
 
-	std::unique_ptr<JsonConfigHandler> configHandler;
-	std::shared_ptr<CommsHandler> comms;
+    std::unique_ptr<JsonConfigHandler> configHandler;
+    std::shared_ptr<CommsHandler> comms;
 
     std::unique_ptr<pruThread> baseThread;
     std::unique_ptr<pruThread> servoThread;
     std::unique_ptr<pruThread> serialThread;
-    vector<shared_ptr<Module>> onLoad;
+    std::vector<std::shared_ptr<Module>> onLoad;
 
     uint32_t baseFreq;
     uint32_t servoFreq;
     uint32_t serialFreq;
 
-    bool threadsRunning;
+    bool threadsRunning = false;
 
     void transitionToState(State);
+	void printStateEntry(State);
     void handleSetupState();
     void handleStartState();
     void handleIdleState();
@@ -69,16 +70,20 @@ private:
 
 public:
 
-	Remora();
-	void run();
+    Remora(std::shared_ptr<CommsHandler> commsHandler,
+           std::unique_ptr<pruTimer> baseTimer,
+           std::unique_ptr<pruTimer> servoTimer,
+           std::unique_ptr<pruTimer> serialTimer = nullptr);
+
+    void run();
+	
     void setBaseFreq(uint32_t freq) { baseFreq = freq; }
     void setServoFreq(uint32_t freq) { servoFreq = freq; }
 
     volatile txData_t* getTxData() { return &txData; }
     volatile rxData_t* getRxData() { return &rxData; }
-    volatile bool* getReset() { return &reset; };
+    volatile bool* getReset() { return &reset; }
     pruThread* getSerialThread() { return serialThread.get(); }
 };
-
 
 #endif

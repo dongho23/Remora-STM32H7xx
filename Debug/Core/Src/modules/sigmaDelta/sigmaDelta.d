@@ -104,7 +104,7 @@ Core/Src/modules/sigmaDelta/sigmaDelta.o: \
  ../Core/Src/modules/sigmaDelta/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/sigmaDelta/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/sigmaDelta/../../thread/pruThread.h \
- ../Core/Src/modules/sigmaDelta/../../thread/timer.h \
+ ../Core/Src/modules/sigmaDelta/../../thread/pruTimer.h \
  ../Core/Src/modules/sigmaDelta/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/sigmaDelta/../../modules/module.h \
  ../Core/Src/modules/sigmaDelta/../../drivers/pin/pin.h
@@ -217,7 +217,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/sigmaDelta/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/sigmaDelta/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/sigmaDelta/../../thread/pruThread.h:
-../Core/Src/modules/sigmaDelta/../../thread/timer.h:
+../Core/Src/modules/sigmaDelta/../../thread/pruTimer.h:
 ../Core/Src/modules/sigmaDelta/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/sigmaDelta/../../modules/module.h:
 ../Core/Src/modules/sigmaDelta/../../drivers/pin/pin.h:

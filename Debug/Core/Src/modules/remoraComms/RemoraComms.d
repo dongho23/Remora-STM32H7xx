@@ -103,7 +103,7 @@ Core/Src/modules/remoraComms/RemoraComms.o: \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../interrupt/interrupt.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../thread/pruThread.h \
- ../Core/Src/modules/remoraComms/../remoraComms/../../thread/timer.h \
+ ../Core/Src/modules/remoraComms/../remoraComms/../../thread/pruTimer.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h \
  ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h \
@@ -215,7 +215,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/../interrupt/interrupt.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../thread/pruThread.h:
-../Core/Src/modules/remoraComms/../remoraComms/../../thread/timer.h:
+../Core/Src/modules/remoraComms/../remoraComms/../../thread/pruTimer.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/module.h:
 ../Core/Src/modules/remoraComms/../remoraComms/../../modules/moduleinterrupt.h:

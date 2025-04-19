@@ -63,7 +63,7 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:55:3:ArduinoJson::V730HB22::detail::Number::Number(ArduinoJson::V730HB22::JsonUInt)	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:57:3:ArduinoJson::V730HB22::detail::Number::Number(double)	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:105:15:ArduinoJson::V730HB22::detail::Number ArduinoJson::V730HB22::detail::parseNumber(const char*)	184	static
-../Core/Src/modules/tmc/../../remora.h:80:16:pruThread* Remora::getSerialThread()	16	static
+../Core/Src/modules/tmc/../../remora.h:86:16:pruThread* Remora::getSerialThread()	16	static
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:775:7:TMC2208Stepper::~TMC2208Stepper()	16	static
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:778:9:TMC2208Stepper::TMC2208Stepper(std::string, std::string, float)	72	static
 ../Core/Src/modules/tmc/tmc.h:20:2:TMC::TMC(Remora*, float)	24	static

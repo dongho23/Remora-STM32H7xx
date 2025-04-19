@@ -1,6 +1,5 @@
-Core/Src/thread/timer.o: ../Core/Src/thread/timer.cpp \
- ../Core/Src/thread/../interrupt/interrupt.h \
- ../Core/Src/thread/timerInterrupt.h ../Core/Src/thread/timer.h \
+Core/Src/STM32timer.o: ../Core/Src/STM32timer.cpp \
+ ../Core/Src/STM32timer.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  ../Core/Inc/stm32h7xx_hal_conf.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
@@ -37,10 +36,10 @@ Core/Src/thread/timer.o: ../Core/Src/thread/timer.cpp \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Core/Src/thread/pruThread.h
-../Core/Src/thread/../interrupt/interrupt.h:
-../Core/Src/thread/timerInterrupt.h:
-../Core/Src/thread/timer.h:
+ ../Core/Src/thread/pruTimer.h ../Core/Src/thread/timerInterrupt.h \
+ ../Core/Src/thread/../interrupt/interrupt.h \
+ ../Core/Src/thread/pruThread.h ../Core/Src/thread/pruTimer.h
+../Core/Src/STM32timer.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h:
@@ -77,4 +76,8 @@ Core/Src/thread/timer.o: ../Core/Src/thread/timer.cpp \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
+../Core/Src/thread/pruTimer.h:
+../Core/Src/thread/timerInterrupt.h:
+../Core/Src/thread/../interrupt/interrupt.h:
 ../Core/Src/thread/pruThread.h:
+../Core/Src/thread/pruTimer.h:

@@ -1,7 +1,7 @@
 #include "stepgen.h"
 
 
-shared_ptr<Module> Stepgen::create(const JsonObject& config, Remora* instance)
+std::shared_ptr<Module> Stepgen::create(const JsonObject& config, Remora* instance)
 	{
 	    const char* comment = config["Comment"];
 	    uint32_t threadFreq = config["ThreadFreq"];
@@ -21,7 +21,7 @@ shared_ptr<Module> Stepgen::create(const JsonObject& config, Remora* instance)
 	    bool usesModulePost = true;		// stepgen uses the thread modulesPost vector
 
 	    // Create the step generator and register it in the thread
-	    return make_unique<Stepgen>(threadFreq, joint, enable, step, dir, Config::stepBit, *ptrJointFreqCmd, *ptrJointFeedback, *ptrJointEnable, usesModulePost);
+	    return std::make_unique<Stepgen>(threadFreq, joint, enable, step, dir, Config::stepBit, *ptrJointFreqCmd, *ptrJointFeedback, *ptrJointEnable, usesModulePost);
 	}
 
 /**

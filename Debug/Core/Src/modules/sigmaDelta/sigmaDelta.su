@@ -49,7 +49,7 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:55:3:ArduinoJson::V730HB22::detail::Number::Number(ArduinoJson::V730HB22::JsonUInt)	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:57:3:ArduinoJson::V730HB22::detail::Number::Number(double)	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:105:15:ArduinoJson::V730HB22::detail::Number ArduinoJson::V730HB22::detail::parseNumber(const char*)	184	static
-../Core/Src/modules/sigmaDelta/../../remora.h:78:24:volatile rxData_t* Remora::getRxData()	16	static
+../Core/Src/modules/sigmaDelta/../../remora.h:84:24:volatile rxData_t* Remora::getRxData()	16	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\shared_ptr_base.h:1524:7:std::__shared_ptr<_Tp, _Lp>::~__shared_ptr() [with _Tp = SigmaDelta; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_single]	16	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\bin/../lib/gcc/arm-none-eabi/12.3.1/../../../../arm-none-eabi/include/c++/12.3.1/bits/shared_ptr.h:175:11:std::shared_ptr<SigmaDelta>::~shared_ptr()	16	static
 ../Core/Src/modules/sigmaDelta/sigmaDelta.cpp:8:25:static std::shared_ptr<Module> SigmaDelta::create(const ArduinoJson::V730HB22::JsonObject&, Remora*)	208	static

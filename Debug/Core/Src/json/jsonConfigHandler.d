@@ -104,7 +104,7 @@ Core/Src/json/jsonConfigHandler.o: ../Core/Src/json/jsonConfigHandler.cpp \
  ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/json/../modules/moduleInterrupt.h \
  ../Core/Src/json/../thread/pruThread.h \
- ../Core/Src/json/../thread/timer.h \
+ ../Core/Src/json/../thread/pruTimer.h \
  ../Core/Src/json/../modules/comms/commsHandler.h
 ../Core/Src/json/jsonConfigHandler.h:
 ../Core/Src/json/../lib/ArduinoJson7/ArduinoJson.h:
@@ -218,5 +218,5 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/json/../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/json/../modules/moduleInterrupt.h:
 ../Core/Src/json/../thread/pruThread.h:
-../Core/Src/json/../thread/timer.h:
+../Core/Src/json/../thread/pruTimer.h:
 ../Core/Src/json/../modules/comms/commsHandler.h:

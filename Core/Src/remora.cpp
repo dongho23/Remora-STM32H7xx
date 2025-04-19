@@ -1,90 +1,78 @@
 #include "remora.h"
-#include "interrupt/irqHandlers.h"
+#include "irqHandlers.h"
 #include "interrupt/interrupt.h"
 #include "json/jsonConfigHandler.h"
-#include "comms/SPIComms.h"
-
 
 // unions for TX and RX data
 __attribute__((section(".DmaSection"))) volatile txData_t txData;
 __attribute__((section(".DmaSection"))) volatile rxData_t rxData;
 
-Remora::Remora() :
-	baseFreq(Config::pruBaseFreq),
-	servoFreq(Config::pruServoFreq),
-	serialFreq(Config::pruSerialFreq)
+Remora::Remora(std::shared_ptr<CommsHandler> commsHandler,
+               std::unique_ptr<pruTimer> baseTimer,
+               std::unique_ptr<pruTimer> servoTimer,
+               std::unique_ptr<pruTimer> serialTimer)
+	: currentState(ST_SETUP),
+	  prevState(ST_SETUP),
+	  ptrTxData(&txData),
+	  ptrRxData(&rxData),
+	  reset(false),
+	  configHandler(nullptr),
+	  comms(std::move(commsHandler)),
+	  baseThread(nullptr),
+	  servoThread(nullptr),
+	  serialThread(nullptr),
+	  onLoad(),
+	  baseFreq(baseTimer->getFrequency()),
+	  servoFreq(servoTimer->getFrequency()),
+	  serialFreq(serialTimer ? serialTimer->getFrequency() : 0),
+	  threadsRunning(false)
 {
-	threadsRunning = false;
-	currentState = ST_SETUP;
-	prevState = ST_RESET;
-
 	configHandler = std::make_unique<JsonConfigHandler>(this);
+    comms->init();
+    comms->start();
 
-    ptrTxData = &txData;
-    ptrRxData = &rxData;
+    baseThread = std::make_unique<pruThread>("BaseThread");
+    baseTimer->setOwner(baseThread.get());
+    baseThread->setTimer(std::move(baseTimer));
 
-	auto spiComms = std::make_unique<SPIComms>(ptrRxData, ptrTxData, SPI1);
+    servoThread = std::make_unique<pruThread>("ServoThread");
+    servoTimer->setOwner(servoThread.get());
+    servoThread->setTimer(std::move(servoTimer));
 
-	comms = std::make_shared<CommsHandler>();
-	comms->setInterface(std::move(spiComms));
-	comms->init();
-	comms->start();
-
-    baseThread = make_unique<pruThread>(
-    									"Base",
-										TIM3,
-										TIM3_IRQn,
-										baseFreq,
-										Config::baseThreadIrqPriority
-										);
-    servoThread = make_unique<pruThread>(
-    									"Servo",
-										TIM2,
-										TIM2_IRQn,
-										servoFreq,
-										Config::servoThreadIrqPriority
-										);
-    serialThread = make_unique<pruThread>(
-    									"Serial",
-										TIM4,
-										TIM4_IRQn,
-										serialFreq,
-										Config::commsThreadIrqPriority
-										);
+    if (serialTimer) {
+        serialThread = std::make_unique<pruThread>("SerialThread");
+        serialThread->setTimer(std::move(serialTimer));
+        serialTimer->setOwner(serialThread.get());
+    }
 
     servoThread->registerModule(comms);
 }
 
-void Remora::transitionToState(State newState) {
-
+void Remora::transitionToState(State newState)
+{
     if (currentState != newState) {
-        const char* stateNames[] = {
-            "Setup", "Start", "Idle", "Running", "Stop", "Reset", "System Reset"
-        };
-        printf("\n## Transitioning from %s state to %s state\n",
-               stateNames[currentState], stateNames[newState]);
-
+        printStateEntry(newState);
         prevState = currentState;
         currentState = newState;
     }
 }
 
-void Remora::handleSetupState() {
-    if (currentState != prevState) {
-        printf("\n## Entering SETUP state\n");
-    }
-    prevState = currentState;
+void Remora::printStateEntry(State state)
+{
+    const char* stateNames[] = {
+        "Setup", "Start", "Idle", "Running", "Stop", "Reset", "System Reset"
+    };
+    printf("\n## Transitioning to %s state\n", stateNames[state]);
+}
 
+void Remora::handleSetupState()
+{
     loadModules();
     transitionToState(ST_START);
 }
 
-void Remora::handleStartState() {
-    if (currentState != prevState) {
-        printf("\n## Entering START state\n");
-    }
-    prevState = currentState;
-
+void Remora::handleStartState()
+{
     for (const auto& module : onLoad) {
         if (module) {
             module->configure();
@@ -100,57 +88,49 @@ void Remora::handleStartState() {
     transitionToState(ST_IDLE);
 }
 
-void Remora::handleIdleState() {
-    if (currentState != prevState) {
-        printf("\n## Entering IDLE state\n");
-    }
-    prevState = currentState;
-
+void Remora::handleIdleState()
+{
     if (comms->getStatus()) {
         transitionToState(ST_RUNNING);
     }
 }
 
-void Remora::handleRunningState() {
-    if (currentState != prevState) {
-        printf("\n## Entering RUNNING state\n");
-    }
-    prevState = currentState;
-
+void Remora::handleRunningState()
+{
     if (!comms->getStatus()) {
         transitionToState(ST_RESET);
     }
 
     if (reset) {
-    	transitionToState(ST_SYSRESET);
+        transitionToState(ST_SYSRESET);
     }
 }
 
-void Remora::handleResetState() {
-    if (currentState != prevState) {
-        printf("\n## Entering RESET state\n");
-    }
-    prevState = currentState;
-
+void Remora::handleResetState()
+{
     printf("   Resetting rxBuffer\n");
     resetBuffer(ptrRxData->rxBuffer, Config::dataBuffSize);
     transitionToState(ST_IDLE);
 }
 
-void Remora::handleSysResetState() {
-	HAL_NVIC_SystemReset();
+void Remora::handleSysResetState()
+{
+    HAL_NVIC_SystemReset();
 }
 
-void Remora::startThread(const std::unique_ptr<pruThread>& thread, const char* name) {
+void Remora::startThread(const std::unique_ptr<pruThread>& thread, const char* name)
+{
     printf("Starting the %s thread\n", name);
     thread->startThread();
 }
 
-void Remora::resetBuffer(volatile uint8_t* buffer, size_t size) {
+void Remora::resetBuffer(volatile uint8_t* buffer, size_t size)
+{
     memset((void*)buffer, 0, size);
 }
 
-void Remora::run() {
+void Remora::run()
+{
     while (true) {
         switch (currentState) {
             case ST_SETUP:
@@ -179,15 +159,16 @@ void Remora::run() {
     }
 }
 
-void Remora::loadModules() {
+void Remora::loadModules()
+{
     ModuleFactory* factory = ModuleFactory::getInstance();
     JsonArray modules = configHandler->getModules();
     if (modules.isNull()) {
-      //printf something here
+      // Log something about missing modules or return early
     }
 
     for (size_t i = 0; i < modules.size(); i++) {
-    	if (modules[i]["Thread"].is<const char*>() && modules[i]["Type"].is<const char*>()) {
+        if (modules[i]["Thread"].is<const char*>() && modules[i]["Type"].is<const char*>()) {
             const char* threadName = modules[i]["Thread"];
             const char* moduleType = modules[i]["Type"];
             uint32_t threadFreq = 0;
@@ -207,30 +188,28 @@ void Remora::loadModules() {
 
             // Check if the module creation was successful
             if (!_mod) {
-            	printf("Error: Failed to create module of type '%s' for thread '%s'. Skipping registration.\n",
-						moduleType, threadName);
-				continue; // Skip to the next iteration
-			}
+                printf("Error: Failed to create module of type '%s' for thread '%s'. Skipping registration.\n",
+                        moduleType, threadName);
+                continue; // Skip to the next iteration
+            }
 
             bool _modPost = _mod->getUsesModulePost();
 
             if (strcmp(threadName, "Servo") == 0) {
                 servoThread->registerModule(_mod);
-            	if (_modPost) {
-            		servoThread->registerModulePost(_mod);
-            	}
+                if (_modPost) {
+                    servoThread->registerModulePost(_mod);
+                }
             }
             else if (strcmp(threadName, "Base") == 0) {
                 baseThread->registerModule(_mod);
-            	if (_modPost) {
-            		baseThread->registerModulePost(_mod);
-            	}
+                if (_modPost) {
+                    baseThread->registerModulePost(_mod);
+                }
             }
             else {
-                onLoad.push_back(move(_mod));
+                onLoad.push_back(std::move(_mod));
             }
         }
     }
-
 }
-

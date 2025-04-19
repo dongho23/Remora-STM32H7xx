@@ -1,115 +1,87 @@
 #include <cstdio>
-
+#include <algorithm>
 #include "pruThread.h"
 #include "../modules/module.h"
 
-
-pruThread::pruThread(const string& _name, TIM_TypeDef *_timer, IRQn_Type _irq, uint32_t _freq, uint8_t _prio)
-    : threadName(_name),
-      timer(_timer),
-      irq(_irq),
-      frequency(_freq),
-	  hasModulesPost(false)
+pruThread::pruThread(const std::string& _name)
+    : threadName(_name)
 {
-	printf("Creating %s thread at %lu hz\n", threadName.c_str(), (unsigned long)frequency);
-    NVIC_SetPriority(irq, _prio);
+
 }
 
+void pruThread::setTimer(std::unique_ptr<pruTimer> _timer)
+{
+	timerPtr = std::move(_timer);
+    timerPtr->setOwner(this);
+}
 
-bool pruThread::executeModules() {
-    for (const auto& module : modules) {
-        if (module) {
-            module->runModule();
-        }
-    }
-
-    if (hasModulesPost) {
-		for (const auto& module : modulesPost) {
-			if (module) {
-				module->runModule();
-			}
-		}
-    }
-
+bool pruThread::executeModules()
+{
+    for (const auto& module : modules) if (module) module->runModule();
+    if (hasModulesPost) for (const auto& module : modulesPost) if (module) module->runModule();
     return true;
 }
 
-bool pruThread::registerModule(shared_ptr<Module> module) {
-    if (!module) {
-        return false;
-    }
+bool pruThread::registerModule(std::shared_ptr<Module> module)
+{
+    if (!module) return false;
     modules.push_back(module);
     return true;
 }
 
-bool pruThread::registerModulePost(shared_ptr<Module> module) {
-    if (!module) {
-        return false;
-    }
+bool pruThread::registerModulePost(std::shared_ptr<Module> module)
+{
+    if (!module) return false;
     hasModulesPost = true;
     modulesPost.push_back(module);
     return true;
 }
 
-bool pruThread::unregisterModule(std::shared_ptr<Module> module) {
-    if (!module) {
-        return false;
-    }
+bool pruThread::unregisterModule(std::shared_ptr<Module> module)
+{
+    if (!module) return false;
 
-    // Use a lambda to compare the raw pointers inside the shared_ptrs
     auto iter = std::remove_if(modules.begin(), modules.end(),
         [&module](const std::shared_ptr<Module>& mod) {
-            return mod == module; // Compare shared_ptrs directly
+            return mod == module;
         });
-
     modules.erase(iter, modules.end());
+
+    auto postIter = std::remove_if(modulesPost.begin(), modulesPost.end(),
+        [&module](const std::shared_ptr<Module>& mod) {
+            return mod == module;
+        });
+    modulesPost.erase(postIter, modulesPost.end());
+
+    hasModulesPost = !modulesPost.empty();
+
     return true;
 }
 
-// For baremetal, this is just initialization
-bool pruThread::startThread() {
-    if (isRunning()) {
-        return true;
-    }
-
+bool pruThread::startThread()
+{
+    if (isRunning()) return true;
     setThreadRunning(true);
     setThreadPaused(false);
-
-    timerPtr = new pruTimer(timer, irq, frequency, this);
+	timerPtr->configTimer();
+    timerPtr->startTimer();
     return true;
 }
 
-void pruThread::stopThread() {
+void pruThread::stopThread()
+{
     setThreadRunning(false);
     setThreadPaused(false);
+    timerPtr->stopTimer();
 }
 
-// This is the main function that should be called periodically
-bool pruThread::update() {
-    if (!isRunning() || isPaused()) {
-        return true;
-    }
-
-    // Execute all modules
-    if (!executeModules()) {
-        return false;
-    }
-
-    return true;
+bool pruThread::update()
+{
+    if (!isRunning() || isPaused()) return true;
+    return executeModules();
 }
 
-void pruThread::pauseThread() {
-    setThreadPaused(true);
-}
-
-void pruThread::resumeThread() {
-    setThreadPaused(false);
-}
-
-const string& pruThread::getName() const {
-    return threadName;
-}
-
-uint32_t pruThread::getFrequency() const {
-    return frequency;
-}
+void pruThread::pauseThread() { setThreadPaused(true); }
+void pruThread::resumeThread() { setThreadPaused(false); }
+const std::string& pruThread::getName() const { return threadName; }
+uint32_t pruThread::getFrequency() const { return timerPtr ? timerPtr->getFrequency() : 0; }

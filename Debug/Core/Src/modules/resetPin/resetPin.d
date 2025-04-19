@@ -104,7 +104,7 @@ Core/Src/modules/resetPin/resetPin.o: \
  ../Core/Src/modules/resetPin/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/resetPin/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/resetPin/../../thread/pruThread.h \
- ../Core/Src/modules/resetPin/../../thread/timer.h \
+ ../Core/Src/modules/resetPin/../../thread/pruTimer.h \
  ../Core/Src/modules/resetPin/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/resetPin/../../modules/module.h \
  ../Core/Src/modules/resetPin/../../drivers/pin/pin.h
@@ -217,7 +217,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/resetPin/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/resetPin/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/resetPin/../../thread/pruThread.h:
-../Core/Src/modules/resetPin/../../thread/timer.h:
+../Core/Src/modules/resetPin/../../thread/pruTimer.h:
 ../Core/Src/modules/resetPin/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/resetPin/../../modules/module.h:
 ../Core/Src/modules/resetPin/../../drivers/pin/pin.h:

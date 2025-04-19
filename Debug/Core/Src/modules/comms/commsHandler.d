@@ -107,7 +107,7 @@ Core/Src/modules/comms/commsHandler.o: \
  ../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/comms/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/comms/../../thread/pruThread.h \
- ../Core/Src/modules/comms/../../thread/timer.h \
+ ../Core/Src/modules/comms/../../thread/pruTimer.h \
  ../Core/Src/modules/comms/../../modules/comms/commsHandler.h
 ../Core/Src/modules/comms/commsHandler.h:
 ../Core/Src/modules/comms/../../modules/module.h:
@@ -221,5 +221,5 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/comms/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/comms/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/comms/../../thread/pruThread.h:
-../Core/Src/modules/comms/../../thread/timer.h:
+../Core/Src/modules/comms/../../thread/pruTimer.h:
 ../Core/Src/modules/comms/../../modules/comms/commsHandler.h:

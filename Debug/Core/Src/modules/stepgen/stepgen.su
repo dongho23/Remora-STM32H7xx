@@ -49,9 +49,9 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:55:3:ArduinoJson::V730HB22::detail::Number::Number(ArduinoJson::V730HB22::JsonUInt)	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:57:3:ArduinoJson::V730HB22::detail::Number::Number(double)	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Numbers/parseNumber.hpp:105:15:ArduinoJson::V730HB22::detail::Number ArduinoJson::V730HB22::detail::parseNumber(const char*)	184	static
-../Core/Src/modules/stepgen/../../remora.h:77:24:volatile txData_t* Remora::getTxData()	16	static
-../Core/Src/modules/stepgen/../../remora.h:78:24:volatile rxData_t* Remora::getRxData()	16	static
-../Core/Src/modules/stepgen/stepgen.cpp:4:20:static std::shared_ptr<Module> Stepgen::create(const ArduinoJson::V730HB22::JsonObject&, Remora*)	256	static
+../Core/Src/modules/stepgen/../../remora.h:83:24:volatile txData_t* Remora::getTxData()	16	static
+../Core/Src/modules/stepgen/../../remora.h:84:24:volatile rxData_t* Remora::getRxData()	16	static
+../Core/Src/modules/stepgen/stepgen.cpp:4:25:static std::shared_ptr<Module> Stepgen::create(const ArduinoJson::V730HB22::JsonObject&, Remora*)	256	static
 ../Core/Src/modules/stepgen/../../modules/blink/../../drivers/pin/pin.h:17:7:Pin::~Pin()	16	static
 ../Core/Src/modules/stepgen/stepgen.cpp:43:1:Stepgen::Stepgen(int32_t, int, const char*, const char*, const char*, int, volatile int32_t&, volatile int32_t&, volatile uint8_t&, bool)	120	static
 ../Core/Src/modules/stepgen/stepgen.cpp:72:6:virtual void Stepgen::update()	16	static

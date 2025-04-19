@@ -27,6 +27,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 #include <sys/errno.h>
 
 #include "remora.h"
+#include "SPIComms.h"
+#include "STM32timer.h"
 
 
 SD_HandleTypeDef hsd1;
@@ -70,7 +72,21 @@ int main(void)
 	MX_SDMMC1_SD_Init();		// uncomment line 62 #define ENABLE_SD_DMA_CACHE_MAINTENANCE  1 in FATFT/Target/sd_diskio.c
 	MX_FATFS_Init();
 
-	Remora *remora = new Remora();
+	auto comms = std::make_unique<SPIComms>(&rxData, &txData, SPI1);
+	auto commsHandler = std::make_shared<CommsHandler>();
+	commsHandler->setInterface(std::move(comms));
+
+    auto baseTimer = std::make_unique<STM32timer>(TIM3, TIM3_IRQn, Config::pruBaseFreq, nullptr, Config::baseThreadIrqPriority);
+    auto servoTimer = std::make_unique<STM32timer>(TIM2, TIM2_IRQn, Config::pruServoFreq, nullptr, Config::servoThreadIrqPriority);
+    auto serialTimer = std::make_unique<STM32timer>(TIM4, TIM4_IRQn, Config::pruSerialFreq, nullptr, Config::serialThreadIrqPriority);
+
+    Remora* remora = new Remora(
+        commsHandler,
+        std::move(baseTimer),
+        std::move(servoTimer),
+        std::move(serialTimer)
+    );
+
 	remora->run();
 }
 

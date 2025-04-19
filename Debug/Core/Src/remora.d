@@ -99,13 +99,9 @@ Core/Src/remora.o: ../Core/Src/remora.cpp ../Core/Src/remora.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/moduleInterrupt.h ../Core/Src/thread/pruThread.h \
- ../Core/Src/thread/timer.h ../Core/Src/modules/comms/commsHandler.h \
- ../Core/Src/interrupt/irqHandlers.h ../Core/Src/interrupt/interrupt.h \
- ../Core/Src/interrupt/interrupt.h ../Core/Src/json/jsonConfigHandler.h \
- ../Core/Src/comms/SPIComms.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../remora.h \
- ../Core/Src/comms/commsInterface.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h
+ ../Core/Src/thread/pruTimer.h ../Core/Src/modules/comms/commsHandler.h \
+ ../Core/Src/irqHandlers.h ../Core/Src/interrupt/interrupt.h \
+ ../Core/Src/json/jsonConfigHandler.h
 ../Core/Src/remora.h:
 ../Core/Src/configuration.h:
 ../Core/Src/data.h:
@@ -217,13 +213,8 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/moduleInterrupt.h:
 ../Core/Src/thread/pruThread.h:
-../Core/Src/thread/timer.h:
+../Core/Src/thread/pruTimer.h:
 ../Core/Src/modules/comms/commsHandler.h:
-../Core/Src/interrupt/irqHandlers.h:
-../Core/Src/interrupt/interrupt.h:
+../Core/Src/irqHandlers.h:
 ../Core/Src/interrupt/interrupt.h:
 ../Core/Src/json/jsonConfigHandler.h:
-../Core/Src/comms/SPIComms.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../remora.h:
-../Core/Src/comms/commsInterface.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/moduleInterrupt.h:

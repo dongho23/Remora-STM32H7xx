@@ -104,7 +104,7 @@ Core/Src/modules/digitalPin/digitalPin.o: \
  ../Core/Src/modules/digitalPin/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/digitalPin/../../modules/moduleInterrupt.h \
  ../Core/Src/modules/digitalPin/../../thread/pruThread.h \
- ../Core/Src/modules/digitalPin/../../thread/timer.h \
+ ../Core/Src/modules/digitalPin/../../thread/pruTimer.h \
  ../Core/Src/modules/digitalPin/../../modules/comms/commsHandler.h \
  ../Core/Src/modules/digitalPin/../../modules/module.h \
  ../Core/Src/modules/digitalPin/../../drivers/pin/pin.h
@@ -217,7 +217,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/modules/digitalPin/../../modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
 ../Core/Src/modules/digitalPin/../../modules/moduleInterrupt.h:
 ../Core/Src/modules/digitalPin/../../thread/pruThread.h:
-../Core/Src/modules/digitalPin/../../thread/timer.h:
+../Core/Src/modules/digitalPin/../../thread/pruTimer.h:
 ../Core/Src/modules/digitalPin/../../modules/comms/commsHandler.h:
 ../Core/Src/modules/digitalPin/../../modules/module.h:
 ../Core/Src/modules/digitalPin/../../drivers/pin/pin.h:

@@ -38,6 +38,7 @@ CPP_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
+Core/Src \
 Core/Src/comms \
 Core/Src/drivers/SoftwareSPI \
 Core/Src/drivers/SoftwareSerial \
@@ -45,7 +46,6 @@ Core/Src/drivers/TMCStepper \
 Core/Src/drivers/pin \
 Core/Src/interrupt \
 Core/Src/json \
-Core/Src \
 Core/Src/modules/blink \
 Core/Src/modules/comms \
 Core/Src/modules/debug \

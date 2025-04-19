@@ -33,7 +33,7 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 ../Core/Src/modules/resetPin/../../lib/ArduinoJson7/ArduinoJson/Collection/CollectionImpl.hpp:28:33:ArduinoJson::V730HB22::detail::CollectionData::iterator ArduinoJson::V730HB22::detail::CollectionData::createIterator(const ArduinoJson::V730HB22::detail::ResourceManager*) const	1
 ../Core/Src/modules/resetPin/../../lib/ArduinoJson7/ArduinoJson/Memory/ResourceManagerImpl.hpp:28:21:ArduinoJson::V730HB22::detail::VariantData* ArduinoJson::V730HB22::detail::ResourceManager::getVariant(ArduinoJson::V730HB22::detail::SlotId) const	1
 ../Core/Src/modules/resetPin/../../lib/ArduinoJson7/ArduinoJson/Variant/ConverterImpl.hpp:161:22:static const char* ArduinoJson::V730HB22::Converter<const char*>::fromJson(ArduinoJson::V730HB22::JsonVariantConst)	2
-../Core/Src/modules/resetPin/../../remora.h:79:20:volatile bool* Remora::getReset()	1
+../Core/Src/modules/resetPin/../../remora.h:85:20:volatile bool* Remora::getReset()	1
 ../Core/Src/modules/resetPin/resetPin.cpp:4:25:static std::shared_ptr<Module> ResetPin::create(const ArduinoJson::V730HB22::JsonObject&, Remora*)	1
 ../Core/Src/modules/resetPin/resetPin.cpp:14:1:ResetPin::ResetPin(volatile bool*, const std::string&)	1
 ../Core/Src/modules/resetPin/resetPin.cpp:19:6:virtual void ResetPin::update()	1
