@@ -80,8 +80,8 @@ void Remora::handleStartState()
     }
 
     if (!threadsRunning) {
-        startThread(servoThread, "SERVO");
-        startThread(baseThread, "BASE");
+        startThread(servoThread, "Servo");
+        startThread(baseThread, "Base");
         threadsRunning = true;
     }
 
@@ -108,7 +108,7 @@ void Remora::handleRunningState()
 
 void Remora::handleResetState()
 {
-    printf("   Resetting rxBuffer\n");
+    printf("Resetting rxBuffer\n");
     resetBuffer(ptrRxData->rxBuffer, Config::dataBuffSize);
     transitionToState(ST_IDLE);
 }
@@ -120,7 +120,7 @@ void Remora::handleSysResetState()
 
 void Remora::startThread(const std::unique_ptr<pruThread>& thread, const char* name)
 {
-    printf("Starting the %s thread\n", name);
+    printf("\nStarting the %s thread\n", name);
     thread->startThread();
 }
 

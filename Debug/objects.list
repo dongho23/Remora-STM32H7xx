@@ -1,5 +1,5 @@
-"./Core/Src/SPIComms.o"
-"./Core/Src/STM32timer.o"
+"./Core/Src/STM32H7_SPIComms.o"
+"./Core/Src/STM32H7_timer.o"
 "./Core/Src/main.o"
 "./Core/Src/remora.o"
 "./Core/Src/stm32h7xx_hal_msp.o"

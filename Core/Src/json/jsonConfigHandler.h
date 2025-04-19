@@ -27,6 +27,5 @@ public:
 	void updateThreadFreq();
 	JsonArray getModules();
 	JsonObject getModuleConfig(const char* threadName, const char* moduleType);
-
 };
 #endif

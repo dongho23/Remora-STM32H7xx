@@ -100,8 +100,8 @@ Core/Src/main.o: ../Core/Src/main.cpp ../Core/Inc/main.h \
  ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
  ../Core/Src/modules/moduleInterrupt.h ../Core/Src/thread/pruThread.h \
  ../Core/Src/thread/pruTimer.h ../Core/Src/modules/comms/commsHandler.h \
- ../Core/Src/SPIComms.h ../Core/Src/modules/moduleInterrupt.h \
- ../Core/Src/STM32timer.h ../Core/Src/thread/pruTimer.h
+ ../Core/Src/STM32H7_SPIComms.h ../Core/Src/modules/moduleInterrupt.h \
+ ../Core/Src/STM32H7_timer.h ../Core/Src/thread/pruTimer.h
 ../Core/Inc/main.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -215,7 +215,7 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Core/Src/thread/pruThread.h:
 ../Core/Src/thread/pruTimer.h:
 ../Core/Src/modules/comms/commsHandler.h:
-../Core/Src/SPIComms.h:
+../Core/Src/STM32H7_SPIComms.h:
 ../Core/Src/modules/moduleInterrupt.h:
-../Core/Src/STM32timer.h:
+../Core/Src/STM32H7_timer.h:
 ../Core/Src/thread/pruTimer.h:

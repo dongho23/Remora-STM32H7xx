@@ -155,9 +155,9 @@ F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJ
 ../Core/Src/json/jsonConfigHandler.cpp:6:1:JsonConfigHandler::JsonConfigHandler(Remora*)	32	static
 ../Core/Src/json/jsonConfigHandler.cpp:14:6:bool JsonConfigHandler::loadConfiguration()	16	static
 ../Core/Src/json/jsonConfigHandler.cpp:28:6:void JsonConfigHandler::updateThreadFreq()	144	static
-../Core/Src/json/jsonConfigHandler.cpp:52:11:ArduinoJson::V730HB22::JsonArray JsonConfigHandler::getModules()	72	static
-../Core/Src/json/jsonConfigHandler.cpp:76:6:bool JsonConfigHandler::readFileContents()	112	dynamic
-../Core/Src/json/jsonConfigHandler.cpp:129:6:bool JsonConfigHandler::parseJson()	32	static
+../Core/Src/json/jsonConfigHandler.cpp:50:11:ArduinoJson::V730HB22::JsonArray JsonConfigHandler::getModules()	72	static
+../Core/Src/json/jsonConfigHandler.cpp:57:6:bool JsonConfigHandler::readFileContents()	112	dynamic
+../Core/Src/json/jsonConfigHandler.cpp:109:6:bool JsonConfigHandler::parseJson()	32	static
 C:\ST\STM32CubeIDE_1.16.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.12.3.rel1.win32_1.0.200.202406191623\tools\arm-none-eabi\include\c++\12.3.1\bits\char_traits.h:182:5:static constexpr std::size_t __gnu_cxx::char_traits<_CharT>::length(const char_type*) [with _CharT = char]	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Strings/JsonString.hpp:31:3:ArduinoJson::V730HB22::JsonString::JsonString(const char*, TSize, bool) [with TSize = short unsigned int; typename ArduinoJson::V730HB22::detail::enable_if<(ArduinoJson::V730HB22::detail::is_integral<T>::value && (! ArduinoJson::V730HB22::detail::is_same<TSize, bool>::value)), int>::type <anonymous> = 0]	24	static
 F:/Local Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/ArduinoJson/Memory/MemoryPoolList.hpp:117:8:void ArduinoJson::V730HB22::detail::MemoryPoolList<T>::clear(ArduinoJson::V730HB22::Allocator*) [with T = ArduinoJson::V730HB22::detail::ResourceManager::SlotData]	24	static

@@ -37,7 +37,6 @@ std::shared_ptr<Module> ModuleFactory::createModule(const char* _tname,
     return nullptr;
 }
 
-
 // Static instance accessor
 ModuleFactory* ModuleFactory::getInstance() {
     static ModuleFactory* instance = new ModuleFactory();

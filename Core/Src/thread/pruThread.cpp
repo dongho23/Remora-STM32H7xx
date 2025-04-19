@@ -5,9 +5,7 @@
 
 pruThread::pruThread(const std::string& _name)
     : threadName(_name)
-{
-
-}
+{}
 
 void pruThread::setTimer(std::unique_ptr<pruTimer> _timer)
 {
