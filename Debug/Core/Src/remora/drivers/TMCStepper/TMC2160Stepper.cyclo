@@ -1,0 +1,23 @@
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:5:1:TMC2160Stepper::TMC2160Stepper(const std::string&, float, const std::string&, const std::string&, const std::string&, int8_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:9:1:TMC2160Stepper::TMC2160Stepper(const std::string&, const std::string&, const std::string&, const std::string&, int8_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:13:6:void TMC2160Stepper::begin()	2
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:29:6:void TMC2160Stepper::defaults()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:66:6:void TMC2160Stepper::rms_current(uint16_t)	6
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:94:6:void TMC2160Stepper::rms_current(uint16_t, float)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:98:10:uint16_t TMC2160Stepper::cs2rms(uint8_t)	2
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:110:10:uint16_t TMC2160Stepper::rms_current()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:112:6:void TMC2160Stepper::push()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:132:11:uint32_t TMC2160Stepper::IOIN()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:135:9:bool TMC2160Stepper::refl_step()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:136:9:bool TMC2160Stepper::refr_dir()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:137:9:bool TMC2160Stepper::encb_dcen_cfg4()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:138:9:bool TMC2160Stepper::enca_dcin_cfg5()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:139:9:bool TMC2160Stepper::drv_enn()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:140:9:bool TMC2160Stepper::dco_cfg6()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:141:9:uint8_t TMC2160Stepper::version()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:144:9:uint8_t TMC2160Stepper::GLOBAL_SCALER()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:145:6:void TMC2160Stepper::GLOBAL_SCALER(uint8_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:151:10:uint16_t TMC2160Stepper::OFFSET_READ()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:154:10:uint32_t TMC2160Stepper::PWM_SCALE()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:157:9:uint8_t TMC2160Stepper::pwm_scale_sum()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2160Stepper.cpp:158:10:uint16_t TMC2160Stepper::pwm_scale_auto()	1

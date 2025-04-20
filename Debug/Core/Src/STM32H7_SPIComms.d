@@ -36,73 +36,79 @@ Core/Src/STM32H7_SPIComms.o: ../Core/Src/STM32H7_SPIComms.cpp \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
- ../Core/Src/remora.h ../Core/Src/configuration.h ../Core/Src/data.h \
- ../Core/Src/comms/commsInterface.h \
- F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h \
- ../Core/Src/lib/ArduinoJson7/ArduinoJson.h \
- ../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp \
- ../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
- ../Core/Src/modules/moduleFactory.h ../Core/Src/modules/../remora.h \
- ../Core/Src/modules/module.h \
- ../Core/Src/modules/../JSON/jsonConfigHandler.h ../FATFS/App/fatfs.h \
- ../Middlewares/Third_Party/FatFs/src/ff.h \
+ ../Core/Src/remora/remora.h ../Core/Src/remora/configuration.h \
+ ../Core/Src/remora/data.h ../Core/Src/remora/comms/commsInterface.h \
+ ../Core/Src/remora/comms/../modules/module.h \
+ ../Core/Src/remora/../lib/ArduinoJson7/ArduinoJson.h \
+ ../Core/Src/remora/../lib/ArduinoJson7/ArduinoJson.hpp \
+ ../Core/Src/remora/../lib/ArduinoJson7/ArduinoJson/Configuration.hpp \
+ ../Core/Src/remora/modules/moduleFactory.h \
+ ../Core/Src/remora/modules/../remora.h \
+ ../Core/Src/remora/modules/module.h \
+ ../Core/Src/remora/modules/../JSON/jsonConfigHandler.h \
+ ../FATFS/App/fatfs.h ../Middlewares/Third_Party/FatFs/src/ff.h \
  ../Middlewares/Third_Party/FatFs/src/integer.h ../FATFS/Target/ffconf.h \
  ../Core/Inc/main.h ../FATFS/Target/bsp_driver_sd.h \
  ../FATFS/Target/fatfs_platform.h \
  ../Middlewares/Third_Party/FatFs/src/ff_gen_drv.h \
  ../Middlewares/Third_Party/FatFs/src/diskio.h \
  ../Middlewares/Third_Party/FatFs/src/ff.h ../FATFS/Target/sd_diskio.h \
- ../Core/Src/modules/moduleList.h ../Core/Src/modules/blink/blink.h \
- ../Core/Src/modules/blink/../../remora.h \
- ../Core/Src/modules/blink/../../modules/module.h \
- ../Core/Src/modules/blink/../../drivers/pin/pin.h \
- ../Core/Src/modules/comms/commsHandler.h \
- ../Core/Src/modules/comms/../../modules/module.h \
- ../Core/Src/modules/comms/../../comms/commsInterface.h \
- ../Core/Src/modules/debug/debug.h \
- ../Core/Src/modules/debug/../../modules/module.h \
- ../Core/Src/modules/debug/../../drivers/pin/pin.h \
- ../Core/Src/modules/digitalPin/digitalPin.h \
- ../Core/Src/modules/digitalPin/../../remora.h \
- ../Core/Src/modules/digitalPin/../../modules/module.h \
- ../Core/Src/modules/digitalPin/../../drivers/pin/pin.h \
- ../Core/Src/modules/resetPin/resetPin.h \
- ../Core/Src/modules/resetPin/../../remora.h \
- ../Core/Src/modules/resetPin/../../modules/module.h \
- ../Core/Src/modules/resetPin/../../drivers/pin/pin.h \
- ../Core/Src/modules/remoraComms/remoraComms.h \
- ../Core/Src/modules/remoraComms/../../remora.h \
- ../Core/Src/modules/remoraComms/../../modules/module.h \
- ../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h \
- ../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h \
- ../Core/Src/modules/remoraComms/../../modules/module.h \
- ../Core/Src/modules/remoraComms/../../drivers/pin/pin.h \
- ../Core/Src/modules/sigmaDelta/sigmaDelta.h \
- ../Core/Src/modules/sigmaDelta/../../remora.h \
- ../Core/Src/modules/sigmaDelta/../../modules/module.h \
- ../Core/Src/modules/sigmaDelta/../../drivers/pin/pin.h \
- ../Core/Src/modules/stepgen/stepgen.h \
- ../Core/Src/modules/stepgen/../../remora.h \
- ../Core/Src/modules/stepgen/../../modules/module.h \
- ../Core/Src/modules/stepgen/../../drivers/pin/pin.h \
- ../Core/Src/modules/tmc/tmc.h ../Core/Src/modules/tmc/../../remora.h \
- ../Core/Src/modules/tmc/../../modules/module.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/../pin/pin.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2160_bitfields.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC5160_bitfields.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
- ../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
- ../Core/Src/modules/moduleInterrupt.h ../Core/Src/thread/pruThread.h \
- ../Core/Src/thread/pruTimer.h ../Core/Src/modules/comms/commsHandler.h \
- ../Core/Src/modules/moduleInterrupt.h
+ ../Core/Src/remora/modules/moduleList.h \
+ ../Core/Src/remora/modules/blink/blink.h \
+ ../Core/Src/remora/modules/blink/../../remora.h \
+ ../Core/Src/remora/modules/blink/../../modules/module.h \
+ ../Core/Src/remora/modules/blink/../../drivers/pin/pin.h \
+ ../Core/Src/remora/modules/comms/commsHandler.h \
+ ../Core/Src/remora/modules/comms/../../modules/module.h \
+ ../Core/Src/remora/modules/comms/../../comms/commsInterface.h \
+ ../Core/Src/remora/modules/debug/debug.h \
+ ../Core/Src/remora/modules/debug/../../modules/module.h \
+ ../Core/Src/remora/modules/debug/../../drivers/pin/pin.h \
+ ../Core/Src/remora/modules/digitalPin/digitalPin.h \
+ ../Core/Src/remora/modules/digitalPin/../../remora.h \
+ ../Core/Src/remora/modules/digitalPin/../../modules/module.h \
+ ../Core/Src/remora/modules/digitalPin/../../drivers/pin/pin.h \
+ ../Core/Src/remora/modules/resetPin/resetPin.h \
+ ../Core/Src/remora/modules/resetPin/../../remora.h \
+ ../Core/Src/remora/modules/resetPin/../../modules/module.h \
+ ../Core/Src/remora/modules/resetPin/../../drivers/pin/pin.h \
+ ../Core/Src/remora/modules/remoraComms/remoraComms.h \
+ ../Core/Src/remora/modules/remoraComms/../../remora.h \
+ ../Core/Src/remora/modules/remoraComms/../../modules/module.h \
+ ../Core/Src/remora/modules/remoraComms/../../modules/moduleinterrupt.h \
+ ../Core/Src/remora/modules/remoraComms/../../modules/../interrupt/interrupt.h \
+ ../Core/Src/remora/modules/remoraComms/../../modules/module.h \
+ ../Core/Src/remora/modules/remoraComms/../../drivers/pin/pin.h \
+ ../Core/Src/remora/modules/sigmaDelta/sigmaDelta.h \
+ ../Core/Src/remora/modules/sigmaDelta/../../remora.h \
+ ../Core/Src/remora/modules/sigmaDelta/../../modules/module.h \
+ ../Core/Src/remora/modules/sigmaDelta/../../drivers/pin/pin.h \
+ ../Core/Src/remora/modules/stepgen/stepgen.h \
+ ../Core/Src/remora/modules/stepgen/../../remora.h \
+ ../Core/Src/remora/modules/stepgen/../../modules/module.h \
+ ../Core/Src/remora/modules/stepgen/../../drivers/pin/pin.h \
+ ../Core/Src/remora/modules/tmc/tmc.h \
+ ../Core/Src/remora/modules/tmc/../../remora.h \
+ ../Core/Src/remora/modules/tmc/../../modules/module.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMCStepper.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../pin/pin.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC2160_bitfields.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC5160_bitfields.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h \
+ ../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h \
+ ../Core/Src/remora/modules/moduleInterrupt.h \
+ ../Core/Src/remora/thread/pruThread.h \
+ ../Core/Src/remora/thread/pruTimer.h \
+ ../Core/Src/remora/modules/comms/commsHandler.h \
+ ../Core/Src/remora/comms/commsInterface.h \
+ ../Core/Src/remora/modules/moduleInterrupt.h
 ../Core/Src/STM32H7_SPIComms.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 ../Core/Inc/stm32h7xx_hal_conf.h:
@@ -140,18 +146,18 @@ Core/Src/STM32H7_SPIComms.o: ../Core/Src/STM32H7_SPIComms.cpp \
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_spi_ex.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h:
 ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
-../Core/Src/remora.h:
-../Core/Src/configuration.h:
-../Core/Src/data.h:
-../Core/Src/comms/commsInterface.h:
-F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/ArduinoJson7/../../modules/module.h:
-../Core/Src/lib/ArduinoJson7/ArduinoJson.h:
-../Core/Src/lib/ArduinoJson7/ArduinoJson.hpp:
-../Core/Src/lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
-../Core/Src/modules/moduleFactory.h:
-../Core/Src/modules/../remora.h:
-../Core/Src/modules/module.h:
-../Core/Src/modules/../JSON/jsonConfigHandler.h:
+../Core/Src/remora/remora.h:
+../Core/Src/remora/configuration.h:
+../Core/Src/remora/data.h:
+../Core/Src/remora/comms/commsInterface.h:
+../Core/Src/remora/comms/../modules/module.h:
+../Core/Src/remora/../lib/ArduinoJson7/ArduinoJson.h:
+../Core/Src/remora/../lib/ArduinoJson7/ArduinoJson.hpp:
+../Core/Src/remora/../lib/ArduinoJson7/ArduinoJson/Configuration.hpp:
+../Core/Src/remora/modules/moduleFactory.h:
+../Core/Src/remora/modules/../remora.h:
+../Core/Src/remora/modules/module.h:
+../Core/Src/remora/modules/../JSON/jsonConfigHandler.h:
 ../FATFS/App/fatfs.h:
 ../Middlewares/Third_Party/FatFs/src/ff.h:
 ../Middlewares/Third_Party/FatFs/src/integer.h:
@@ -163,58 +169,59 @@ F:/Local\ Repositories/Remora-STM32CubeIDE/Remora-STM32H7xx/Core/Src/lib/Arduino
 ../Middlewares/Third_Party/FatFs/src/diskio.h:
 ../Middlewares/Third_Party/FatFs/src/ff.h:
 ../FATFS/Target/sd_diskio.h:
-../Core/Src/modules/moduleList.h:
-../Core/Src/modules/blink/blink.h:
-../Core/Src/modules/blink/../../remora.h:
-../Core/Src/modules/blink/../../modules/module.h:
-../Core/Src/modules/blink/../../drivers/pin/pin.h:
-../Core/Src/modules/comms/commsHandler.h:
-../Core/Src/modules/comms/../../modules/module.h:
-../Core/Src/modules/comms/../../comms/commsInterface.h:
-../Core/Src/modules/debug/debug.h:
-../Core/Src/modules/debug/../../modules/module.h:
-../Core/Src/modules/debug/../../drivers/pin/pin.h:
-../Core/Src/modules/digitalPin/digitalPin.h:
-../Core/Src/modules/digitalPin/../../remora.h:
-../Core/Src/modules/digitalPin/../../modules/module.h:
-../Core/Src/modules/digitalPin/../../drivers/pin/pin.h:
-../Core/Src/modules/resetPin/resetPin.h:
-../Core/Src/modules/resetPin/../../remora.h:
-../Core/Src/modules/resetPin/../../modules/module.h:
-../Core/Src/modules/resetPin/../../drivers/pin/pin.h:
-../Core/Src/modules/remoraComms/remoraComms.h:
-../Core/Src/modules/remoraComms/../../remora.h:
-../Core/Src/modules/remoraComms/../../modules/module.h:
-../Core/Src/modules/remoraComms/../../modules/moduleinterrupt.h:
-../Core/Src/modules/remoraComms/../../modules/../interrupt/interrupt.h:
-../Core/Src/modules/remoraComms/../../modules/module.h:
-../Core/Src/modules/remoraComms/../../drivers/pin/pin.h:
-../Core/Src/modules/sigmaDelta/sigmaDelta.h:
-../Core/Src/modules/sigmaDelta/../../remora.h:
-../Core/Src/modules/sigmaDelta/../../modules/module.h:
-../Core/Src/modules/sigmaDelta/../../drivers/pin/pin.h:
-../Core/Src/modules/stepgen/stepgen.h:
-../Core/Src/modules/stepgen/../../remora.h:
-../Core/Src/modules/stepgen/../../modules/module.h:
-../Core/Src/modules/stepgen/../../drivers/pin/pin.h:
-../Core/Src/modules/tmc/tmc.h:
-../Core/Src/modules/tmc/../../remora.h:
-../Core/Src/modules/tmc/../../modules/module.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/../pin/pin.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2160_bitfields.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC5160_bitfields.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
-../Core/Src/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
-../Core/Src/modules/moduleInterrupt.h:
-../Core/Src/thread/pruThread.h:
-../Core/Src/thread/pruTimer.h:
-../Core/Src/modules/comms/commsHandler.h:
-../Core/Src/modules/moduleInterrupt.h:
+../Core/Src/remora/modules/moduleList.h:
+../Core/Src/remora/modules/blink/blink.h:
+../Core/Src/remora/modules/blink/../../remora.h:
+../Core/Src/remora/modules/blink/../../modules/module.h:
+../Core/Src/remora/modules/blink/../../drivers/pin/pin.h:
+../Core/Src/remora/modules/comms/commsHandler.h:
+../Core/Src/remora/modules/comms/../../modules/module.h:
+../Core/Src/remora/modules/comms/../../comms/commsInterface.h:
+../Core/Src/remora/modules/debug/debug.h:
+../Core/Src/remora/modules/debug/../../modules/module.h:
+../Core/Src/remora/modules/debug/../../drivers/pin/pin.h:
+../Core/Src/remora/modules/digitalPin/digitalPin.h:
+../Core/Src/remora/modules/digitalPin/../../remora.h:
+../Core/Src/remora/modules/digitalPin/../../modules/module.h:
+../Core/Src/remora/modules/digitalPin/../../drivers/pin/pin.h:
+../Core/Src/remora/modules/resetPin/resetPin.h:
+../Core/Src/remora/modules/resetPin/../../remora.h:
+../Core/Src/remora/modules/resetPin/../../modules/module.h:
+../Core/Src/remora/modules/resetPin/../../drivers/pin/pin.h:
+../Core/Src/remora/modules/remoraComms/remoraComms.h:
+../Core/Src/remora/modules/remoraComms/../../remora.h:
+../Core/Src/remora/modules/remoraComms/../../modules/module.h:
+../Core/Src/remora/modules/remoraComms/../../modules/moduleinterrupt.h:
+../Core/Src/remora/modules/remoraComms/../../modules/../interrupt/interrupt.h:
+../Core/Src/remora/modules/remoraComms/../../modules/module.h:
+../Core/Src/remora/modules/remoraComms/../../drivers/pin/pin.h:
+../Core/Src/remora/modules/sigmaDelta/sigmaDelta.h:
+../Core/Src/remora/modules/sigmaDelta/../../remora.h:
+../Core/Src/remora/modules/sigmaDelta/../../modules/module.h:
+../Core/Src/remora/modules/sigmaDelta/../../drivers/pin/pin.h:
+../Core/Src/remora/modules/stepgen/stepgen.h:
+../Core/Src/remora/modules/stepgen/../../remora.h:
+../Core/Src/remora/modules/stepgen/../../modules/module.h:
+../Core/Src/remora/modules/stepgen/../../drivers/pin/pin.h:
+../Core/Src/remora/modules/tmc/tmc.h:
+../Core/Src/remora/modules/tmc/../../remora.h:
+../Core/Src/remora/modules/tmc/../../modules/module.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMCStepper.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/softwareSerial.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../../configuration.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSerial/../pin/pin.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../pin/pin.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/SoftwareSPI.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/../SoftwareSPI/../../drivers/pin/pin.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC2130_bitfields.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC2160_bitfields.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC5130_bitfields.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC5160_bitfields.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC2208_bitfields.h:
+../Core/Src/remora/modules/tmc/../../drivers/TMCStepper/TMC2209_bitfields.h:
+../Core/Src/remora/modules/moduleInterrupt.h:
+../Core/Src/remora/thread/pruThread.h:
+../Core/Src/remora/thread/pruTimer.h:
+../Core/Src/remora/modules/comms/commsHandler.h:
+../Core/Src/remora/comms/commsInterface.h:
+../Core/Src/remora/modules/moduleInterrupt.h:

@@ -1,0 +1,49 @@
+../Core/Src/remora/drivers/TMCStepper/TMCStepper.h:86:9:TMCStepper::TMCStepper(float)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:6:1:TMC2208Stepper::TMC2208Stepper(std::string, std::string, float, uint8_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:19:6:void TMC2208Stepper::beginSerial(uint32_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:25:6:void TMC2208Stepper::begin()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:35:6:void TMC2208Stepper::defaults()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:55:6:void TMC2208Stepper::push()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:66:6:bool TMC2208Stepper::isEnabled()	3
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:68:9:uint8_t TMC2208Stepper::calcCRC(uint8_t*, uint8_t)	4
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:86:5:int TMC2208Stepper::available()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:96:6:void TMC2208Stepper::preWriteCommunication()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:102:6:void TMC2208Stepper::preReadCommunication()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:110:6:void TMC2208Stepper::postWriteCommunication()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:116:6:void TMC2208Stepper::postReadCommunication()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:122:9:int16_t TMC2208Stepper::serial_read()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:131:9:uint8_t TMC2208Stepper::serial_write(uint8_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:140:6:virtual void TMC2208Stepper::write(uint8_t, uint32_t)	2
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:161:10:uint64_t TMC2208Stepper::_sendDatagram(uint8_t*, uint8_t, uint16_t)	12
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:223:10:virtual uint32_t TMC2208Stepper::read(uint8_t)	4
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:264:9:uint8_t TMC2208Stepper::IFCNT()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:268:6:void TMC2208Stepper::SLAVECONF(uint16_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:272:10:uint16_t TMC2208Stepper::SLAVECONF()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:275:6:void TMC2208Stepper::senddelay(uint8_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:276:9:uint8_t TMC2208Stepper::senddelay()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:278:6:void TMC2208Stepper::OTP_PROG(uint16_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:282:10:uint32_t TMC2208Stepper::OTP_READ()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:286:10:uint32_t TMC2208Stepper::IOIN()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:289:6:bool TMC2208Stepper::enn()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:290:6:bool TMC2208Stepper::ms1()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:291:6:bool TMC2208Stepper::ms2()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:292:6:bool TMC2208Stepper::diag()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:293:6:bool TMC2208Stepper::pdn_uart()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:294:6:bool TMC2208Stepper::step()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:295:6:bool TMC2208Stepper::sel_a()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:296:6:bool TMC2208Stepper::dir()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:297:9:uint8_t TMC2208Stepper::version()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:313:10:uint16_t TMC2208Stepper::FACTORY_CONF()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:316:6:void TMC2208Stepper::FACTORY_CONF(uint16_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:320:6:void TMC2208Stepper::fclktrim(uint8_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:321:6:void TMC2208Stepper::ottrim(uint8_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:322:9:uint8_t TMC2208Stepper::fclktrim()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:323:9:uint8_t TMC2208Stepper::ottrim()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:325:6:void TMC2208Stepper::VACTUAL(uint32_t)	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:329:10:uint32_t TMC2208Stepper::VACTUAL()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:333:10:uint32_t TMC2208Stepper::PWM_SCALE()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:336:9:uint8_t TMC2208Stepper::pwm_scale_sum()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:342:9:int16_t TMC2208Stepper::pwm_scale_auto()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:356:10:uint32_t TMC2208Stepper::PWM_AUTO()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:359:9:uint8_t TMC2208Stepper::pwm_ofs_auto()	1
+../Core/Src/remora/drivers/TMCStepper/TMC2208Stepper.cpp:360:9:uint8_t TMC2208Stepper::pwm_grad_auto()	1

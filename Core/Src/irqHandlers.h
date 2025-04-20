@@ -1,7 +1,7 @@
 #ifndef IRQ_HANDLERS_H
 #define IRQ_HANDLERS_H
 
-#include "interrupt/interrupt.h"
+#include "remora/interrupt/interrupt.h"
 #include "stm32h7xx_hal.h"
 
 extern "C" {

@@ -1,6 +1,0 @@
-../Core/Src/modules/debug/../../modules/module.h:32:22:virtual bool Module::getUsesModulePost() const	1
-../Core/Src/modules/debug/debug.cpp:4:1:Debug::Debug(std::string, bool)	1
-../Core/Src/modules/debug/debug.cpp:10:6:virtual void Debug::update()	1
-../Core/Src/modules/debug/debug.cpp:15:6:virtual void Debug::slowUpdate()	1
-../Core/Src/modules/debug/debug.h:10:7:Debug::~Debug()	1
-../Core/Src/modules/debug/debug.h:10:7:virtual Debug::~Debug()	1

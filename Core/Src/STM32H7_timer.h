@@ -5,7 +5,7 @@
 #include <stdint.h>
 #include <memory>
 
-#include "thread/pruTimer.h"
+#include "remora/thread/pruTimer.h"
 
 #define TIM_PSC 1
 #define APB1CLK SystemCoreClock/2

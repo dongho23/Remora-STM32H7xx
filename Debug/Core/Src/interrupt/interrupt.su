@@ -1,2 +1,0 @@
-../Core/Src/interrupt/interrupt.cpp:8:6:static void Interrupt::Register(uint32_t, Interrupt*)	16	static
-../Core/Src/interrupt/interrupt.cpp:16:6:static void Interrupt::InvokeHandler(uint32_t)	16	static

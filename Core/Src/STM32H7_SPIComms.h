@@ -7,10 +7,10 @@
 #include <memory>
 #include <algorithm>
 
-#include "remora.h"
-#include "comms/commsInterface.h"
+#include "remora/remora.h"
+#include "remora/comms/commsInterface.h"
 
-#include "modules/moduleInterrupt.h"
+#include "remora/modules/moduleInterrupt.h"
 
 class STM32H7_SPIComms : public CommsInterface {
 private:
